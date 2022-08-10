@@ -1,0 +1,38 @@
+@use "../../../shared/colors.scss" as *;
+@use "../../../shared/font.scss" as *;
+@use "../../../shared/common.module.scss" as *;
+
+.filter {
+  &:hover{
+    cursor: pointer;
+    path{
+      fill: black;
+    }
+  }
+}
+
+.downward {
+  &:hover{
+    cursor: pointer;
+    path{
+      fill: black;
+    }
+  }
+}
+
+.upward {
+  &:hover{
+    cursor: pointer;
+    path{
+      fill: black;
+    }
+  }
+}
+
+.cursor {
+  &:hover {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

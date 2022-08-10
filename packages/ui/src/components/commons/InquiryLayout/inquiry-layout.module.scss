@@ -1,0 +1,101 @@
+@use "../../../shared/colors.scss" as *;
+@use "../../../shared/font.scss" as *;
+@use "../../../shared/common.module.scss" as *;
+
+// 페이지 조회 박스 레이아웃
+.inquiryLayout {
+    margin-top: 24px;
+    display: flex;
+    gap: 24px;
+    .verticalLine {
+        border: solid 1px rgba(0, 0, 0, 0.38);
+        margin: 0px 48px;
+        height: 72px;
+    }
+}
+
+// 페이지 조회 박스 스타일
+.inquiryBox {
+    flex-direction: column;
+    display: flex;
+    height: 100%;
+    .calendar{
+        position: relative;
+    }
+    .noneDisplay{
+        display: none;
+    }
+    .description {
+        margin-bottom:8px;
+    }
+    .buttonBox {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+    }
+    .body{
+        display: flex;
+        
+        &.marginTop16 {
+            margin-top: 16px;
+        };
+
+        &.marginTop34 {
+            margin-top: 34px;
+        }
+        
+
+        .middle{
+            margin: 10px 8px 0px 8px;
+            font-size: 20px;
+
+        }
+
+        .label {
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 4px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .value {
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hoverValue {
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+
+        .selectedValue {
+            color: $primary-500;
+        }
+
+
+        .layoutValue{
+            height: 100%;
+            &:hover{
+                text-decoration: underline;
+            }
+            &.selected{
+                &:hover{
+                    text-decoration: none;
+                }
+                .label {
+                    color:$primary-500 !important;
+                    cursor: default;
+                }
+                .value {
+                    color:$primary-500 !important;
+                    cursor: default;
+                }
+            }
+        }
+    }
+}

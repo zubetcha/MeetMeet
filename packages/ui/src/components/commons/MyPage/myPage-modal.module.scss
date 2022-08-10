@@ -1,0 +1,21 @@
+@use "../../../shared/colors.scss" as *;
+@use "../../../shared/font.scss" as *;
+@use "../../../shared/common.module.scss" as *;
+
+
+.modalContainer {
+    .modalInnerBox {
+        padding: 40px 40px 24px;
+        background: #FFFFFF;
+        border-radius: 4px;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        .header{
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+    }
+}

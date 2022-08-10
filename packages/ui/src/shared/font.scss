@@ -1,0 +1,81 @@
+// $TODO: Header
+@mixin header1 {
+    font-size:48px;
+    font-weight: bold;
+}
+.header2 {
+    font-size: 32px;
+}
+@mixin header3 {
+    font-size:24px;
+}
+@mixin header4 {
+    font-size: 20px;
+}
+@mixin header5 {
+    font-size: 18px;
+}
+
+// $TODO: Body
+@mixin body1 {
+    font-size:16px;
+}
+@mixin body2 {
+    font-size:14px;
+}
+@mixin body3 {
+    font-size:12px;
+}
+
+// $TODO: Caption
+@mixin caption1 {
+    font-size:11px;
+}
+@mixin caption2 {
+    font-size:9px;
+}
+
+@mixin bold {
+    font-weight: bold;
+}
+
+// $TODO: Header
+.header1 {
+    font-size:48px;
+    font-weight: bold;
+}
+.header2 {
+    font-size: 32px;
+}
+.header3 {
+    font-size:24px;
+}
+.header4 {
+    font-size: 20px;
+}
+.header5 {
+    font-size: 18px;
+}
+
+// $TODO: Body
+.body1 {
+    font-size:16px;
+}
+.body2 {
+    font-size:14px;
+}
+.body3 {
+    font-size:12px;
+}
+
+// $TODO: Caption
+.caption1 {
+    font-size:11px;
+}
+.caption2 {
+    font-size:9px;
+}
+
+.bold {
+    font-weight: bold;
+}

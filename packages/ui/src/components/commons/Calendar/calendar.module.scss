@@ -1,0 +1,210 @@
+@use "../../../shared/colors.scss" as *;
+@use "../../../shared/font.scss" as *;
+@use "../../../shared/common.module.scss" as *;
+
+.calendar_outer_box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background-color: $dark-low;
+    cursor: pointer;
+}
+
+.calendar_container {
+    position: absolute;
+    top:10px;
+    left:0;
+    // transform: translate(-50%);
+    z-index: 1000;
+    padding: 40px 40px 24px 40px;
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+
+    &.singleDate {
+        position: fixed !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .calendar_body {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .calendar_description {
+        display: flex;
+        margin-bottom: 36px;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .calendar_header {
+        position: relative;
+        font-size: 20px;
+        .prevBtn{
+            position: absolute;
+            left: 60px;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+        .nextBtn{
+            position: absolute;
+            right: 60px;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+        
+    }
+
+    .startEnd_selectBox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 32px;
+        gap: 8px;
+    }
+
+    .calendar_header div:hover{
+        font-weight: bold;
+    }
+
+    .calendar_footer {
+        margin-top: 24px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 24px;
+    }
+}
+
+.calendar_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    .title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 214px;
+        margin-bottom: 24px;
+    }
+    
+    .calendar_layout {
+        .day_week {
+            // border: 1px solid #CACACC;
+            // border-collapse: collapse;
+            box-sizing: border-box;
+            display: flex;
+            margin-bottom: 12px;
+            // background: #EAEAEB;
+            .date{
+                width: 48px;
+                height: 48px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: 700;
+                .saturday {
+                    color : #46f1d0;
+                }
+                .sunday {
+                    color: #ff765a;
+                }
+            }
+            
+        }
+    
+        .week{
+            display: flex;
+            // border: 1px solid #CACACC;
+            border-top: none;
+            // border-collapse: collapse;
+            box-sizing: border-box;
+            .date {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                div {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    width: 48px;
+                    height: 48px;
+                    box-sizing:border-box;
+
+                    span {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+                
+            }
+            .date:last-child {
+                border-right: none ;
+            }
+            
+            .this {
+                cursor: pointer;
+                span{
+                    cursor: pointer;
+                }
+                &.startDate span, &.endDate span{
+                    background: #A0C5AF !important;
+                    border-radius: 4px;
+                    
+                    }
+                &.btwDates{
+                    background-color: #E7F0EB;
+                }
+                &.future {
+                    cursor: default;
+                    span {
+                        color: rgba(0, 0, 0, 0.38);
+                        cursor: default !important;
+                    }
+                } 
+                &.future:hover {
+                    background: none;
+                }
+
+                .hoverDate {
+                    background: rgba(0, 0, 0, 0.03) !important;
+                }
+            }
+            
+            
+            .other {
+                div {
+                    span {
+                        display: none;
+                    }
+                }
+
+            }
+            
+            .saturday {
+                color : #46f1d0;
+            }
+            
+            .sunday {
+                color: #ff765a;
+            }
+        }
+        
+    }
+    
+}

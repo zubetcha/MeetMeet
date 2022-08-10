@@ -1,0 +1,42 @@
+.base_line {
+  position: relative;
+  background-color: #dfdfe0;
+  margin: 0 auto;
+  width: 100%;
+  z-index: 0;
+  cursor: default !important;
+  * {
+    cursor: default !important;
+  }
+  // overflow: hidden;
+}
+
+.data_line {
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.first_line {
+  display: block;
+  height: 14px;
+  background-color: rgb(255, 198, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+.second_line {
+  display: block;
+  height: 14px;
+  position: absolute;
+  background-color: rgb(180, 139, 255);
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.historyChart_container {
+  width: auto;
+}
