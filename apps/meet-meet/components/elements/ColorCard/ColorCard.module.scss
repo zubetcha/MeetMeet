@@ -1,0 +1,95 @@
+.colorLayout {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 14px;
+  margin-top: 40px;
+
+  .card {
+    width: 216px;
+    height: 108px;
+    padding:10px;
+  }
+
+  .primary {
+    background-color: var(--color-primary);
+  } 
+  .onPrimary {
+    background-color: var(--color-onPrimary);
+  } 
+  .primaryContainer {
+    background-color: var(--color-primaryContainer);
+  } 
+  .onPrimaryContainer {
+    background-color: var(--color-onPrimaryContainer);
+  } 
+  .secondary {
+    background-color: var(--color-secondary);
+  } 
+  .onSecondary {
+    background-color: var(--color-onSecondary);
+  } 
+  .secondaryContainer {
+    background-color: var(--color-secondaryContainer);
+  } 
+  .onSecondaryContainer {
+    background-color: var(--color-onSecondaryContainer);
+  } 
+  .tertiary {
+    background-color: var(--color-tertiary);
+  } 
+  .onTertiary {
+    background-color: var(--color-onTertiary);
+  } 
+  .tertiaryContainer {
+    background-color: var(--color-tertiaryContainer);
+  } 
+  .onTertiaryContainer {
+    background-color: var(--color-onTertiaryContainer);
+  } 
+  .error {
+    background-color: var(--color-error);
+  } 
+  .onError {
+    background-color: var(--color-onError);
+  } 
+  .errorContainer {
+    background-color: var(--color-errorContainer);
+  } 
+  .onErrorContainer {
+    background-color: var(--color-onErrorContainer);
+  } 
+  .background {
+    background-color: var(--color-background);
+  } 
+  .onBackground {
+    background-color: var(--color-onBackground);
+  } 
+  .surface {
+    background-color: var(--color-surface);
+  } 
+  .onSurface {
+    background-color: var(--color-onSurface);
+  } 
+  .surfaceVariant {
+    background-color: var(--color-surfaceVariant);
+  } 
+  .onSurfaceVariant {
+    background-color: var(--color-onSurfaceVariant);
+  } 
+  .outline {
+    background-color: var(--color-outline);
+  } 
+  .warning {
+    background-color: var(--color-warning);
+  } 
+  .onWarning {
+    background-color: var(--color-onWarning);
+  } 
+  .warningContainer {
+    background-color: var(--color-warningContainer);
+  } 
+  .onWarningContainer {
+    background-color: var(--color-onWarningContainer);
+  } 
+  
+}
