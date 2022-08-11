@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { ApolloProvider } from "@apollo/client";
+import client from "../apollo-client";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -14,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>MeetMeet</title>
         <meta charSet="utf-8"></meta>
       </Head>
-      <Component {...pageProps} />
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
     </>
   );
 }
