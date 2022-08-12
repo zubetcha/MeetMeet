@@ -11556,7 +11556,7 @@ next-images@^1.8.4:
     file-loader "^6.2.0"
     url-loader "^4.1.0"
 
-next-pwa@^5.4.4:
+next-pwa@^5.5.5:
   version "5.5.5"
   resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.5.5.tgz#502165880fb52639b7b4ce7eca41e7797445f06a"
   integrity sha512-EdheDzxr3V7piAeW2qAeH0uJW5iouSt7s/Fzz6xuvkmRPgbyqQeRY/3ZOWbhfgbPBuzGjdbBWzVurWJPH8bY5w==
