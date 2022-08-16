@@ -6,7 +6,7 @@ export * from "./Input";
 export * from "./TextArea";
 export * from "./Modal";
 export * from "./Dialog";
-export * from "./Text";
+export * from "./Text/Text";
 export * from "./Checkbox";
 export * from "./Alert";
 export * from "./Select/Select";

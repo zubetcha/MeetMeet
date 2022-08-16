@@ -1,6 +1,6 @@
 import React from "react";
-import { TextProps } from "../../types/ui.types";
-import { colors, fonts, texts } from "../../shared/style";
+import { TextProps } from "../../../types/ui.types";
+import { colors, fonts, texts } from "../../../shared/style";
 
 /**
  *
