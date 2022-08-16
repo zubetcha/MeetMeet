@@ -1,0 +1,34 @@
+@import "./variables";
+
+// DESCRIBE 브라우저 크기별 반응형 분기점 mixins
+@mixin mobile {
+  @media (max-width: $mobile){
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: ($mobile+1)) and (max-width: $tablet){
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: ($tablet+1)) and (max-width: $laptop){
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop){
+    @content;
+  }
+}
+
+
+// DESCRIBE 자주 쓰는...!
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
