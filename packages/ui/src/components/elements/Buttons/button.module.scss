@@ -1,3 +1,5 @@
+@use "../../../styles/color.scss" as *;
+
 @mixin animate($animation,$duration,$method,$times){
     animation: $animation $duration $method $times;
 }
@@ -149,24 +151,42 @@
 .buttonContainer {
     &.filled {
         background-color:  var(--color-primary);
+        color: var(--color-onPrimary);
         &.negativeMood {
             background-color: var(--color-error);
         }
     };
-
     &.tonal {
-
+        background-color: var(--color-secondary);
+        color: var(--color-onSecondaryContainer);
+        &.negativeMood {
+            background-color: var(--color-errorContainer);
+        }
     };
-
     &.outlined {
-        
+        background-color: var(--color-outline);
+        color: var(--color-primary);
+        border: 1px solid #{$neutral-color-50};
+        &.negativeMood    {
+            background-color: var(--color-outline);
+            color: var(--color-error);
+        }
     };
-
     &.text {
-
+        background-color: transparent;
+        color: var(--color-primary);
+        &.negativeMood {
+            background-color: transparent;
+            color: var(--color-error);
+        }
     }
-
     &.textGray {
-
+        background-color: transparent;
+        color: var(--color-onSurfaceVariant);
     }
+    &.disable {
+        color: var(--color-onSurface) !important;
+    }
+
+
 }
