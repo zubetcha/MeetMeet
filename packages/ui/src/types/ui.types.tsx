@@ -32,16 +32,6 @@ export interface NavMenuProps {
   customer: string;
 }
 
-export interface TextProps {
-  text: string;
-  size?: string;
-  color?: string;
-  weight?: string;
-  type?: string;
-  cursor?: string;
-  height?: string;
-}
-
 export interface pageInfo {
   path: string;
   title: string;
