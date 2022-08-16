@@ -22,7 +22,7 @@ export interface navBarProps {
     }[];
   };
   shouldLogin: boolean;
-  userInfo: UserInfoType;
+  userInfo?: UserInfoType;
   setMyPageModal: Dispatch<SetStateAction<Boolean>>;
 }
 

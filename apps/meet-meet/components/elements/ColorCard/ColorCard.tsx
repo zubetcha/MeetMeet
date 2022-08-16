@@ -36,9 +36,9 @@ export const ColorCard = () => {
   
   return (
     <div className={classes.colorLayout} >
-      {colorTypes.map((color) => {
+      {colorTypes.map((color, idx) => {
         return (
-          <div className={classNames(classes[color], classes.card)} >
+          <div className={classNames(classes[color], classes.card)} key={`colorCard-${idx}`} >
             <span>{color}</span>
           </div>
         )
