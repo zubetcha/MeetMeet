@@ -8,12 +8,13 @@ import {
 } from "../components";
 
 const Home: NextPage = () => {
+  const onChange = (e: any) => {
+    console.log(e);
+  };
   return (
     <div>
       <DarkModeToggle />
-      {/* <ApolloRead />
-      <ApolloReadById /> */}
-      <Select defaultValue="test1" isSearch>
+      <Select defaultValue="test1" onChange={onChange} isSearch>
         <Option id="1" name="test1"></Option>
         <Option id="2" name="test2"></Option>
       </Select>

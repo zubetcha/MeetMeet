@@ -7,12 +7,14 @@ import { useOutsideAlerter } from "./hooks";
 interface SelectProps {
   isSearch?: boolean;
   defaultValue?: string;
+  onChange: (e: any) => void;
   children: React.ReactElement[];
 }
 
 export function Select({
   isSearch = false,
   defaultValue,
+  onChange,
   children,
 }: SelectProps) {
   const [selected, setSelected] = useState();
@@ -21,12 +23,14 @@ export function Select({
   const { ref } = useOutsideAlerter(() => setIsOpen(false));
 
   useEffect(() => {
-    console.log(selected);
+    onChange(selected);
   }, [selected]);
 
   useEffect(() => {
     console.log("searchResult", searchResult);
   }, [searchResult]);
+
+  const display = isOpen ? "block" : "none";
 
   return (
     <>
@@ -39,11 +43,9 @@ export function Select({
           <TriggerButton isOpen={isOpen} setIsOpen={setIsOpen} />
           {isOpen && isSearch && <SearchField />}
           {searchResult && searchResult.length === 0 ? (
-            <div style={{ display: isOpen ? "block" : "none" }}>
-              검색 결과 없음
-            </div>
+            <div style={{ display: display }}>검색 결과 없음</div>
           ) : (
-            <div style={{ display: isOpen ? "block" : "none" }}>{children}</div>
+            <div style={{ display: display }}>{children}</div>
           )}
         </span>
       </SelectProvider>
