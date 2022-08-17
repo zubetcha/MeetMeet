@@ -1,3 +1,4 @@
+@use "sass:map";
 @import "./variables";
 
 // DESCRIBE 브라우저 크기별 반응형 분기점 mixins
@@ -118,7 +119,7 @@
   letter-spacing: $body-small-letter;
 }
 
-@mixin font-style( $size, $color: false ) {
+@mixin font-style( $size, $color: false, $weight: 500 ) {
   @if ( $size == display-large ) {
     @include display-large;
   }
@@ -165,8 +166,12 @@
     @include body-small;
   }
 
-  @if ( type-of($color) == color ) {
-    color: $color;
+  @if ( type-of($color) != false ) {
+    color: map-get($map: $colors, $key: $color);
+  }
+
+  @if ( type-of($weight) == number ) {
+    font-weight: $weight;
   }
 }
 

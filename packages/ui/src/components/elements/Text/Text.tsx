@@ -1,14 +1,13 @@
-import React from "react";
 import classNames from "classnames";
 import classes from "./Text.module.scss";
 
 /**
  *
- * @param text text = 컴포넌트에 들어가는 text
- * @param type value = header | body | caption
- * @param color value from color 모듈
- * @param weight defaultValue = regular
- * @param cursor defaultValue = default
+ * @param text {string} 컴포넌트에 들어가는 text
+ * @param type {string} 텍스트 크기 타입 / defaultValue = label-large 
+ * @param color {string} 텍스트 컬러 / defaultValue = onBackground
+ * @param weight {string} font-weignt / defaultValue = 500
+ * @param cursor {string} defaultValue = default
  * @returns
  */
 
@@ -23,17 +22,14 @@ export const Text = ({
   return (
     <p
       className={classNames(classes["first-class"], classes[type], `${color}`)}
-      style={{
-        fontWeight: weight,
-        cursor: cursor,
-      }}
+      style={{ fontWeight: weight, cursor }}
     >
       {text}
     </p>
   );
 };
 
-export interface TextProps {
+interface TextProps {
   text: string;
   color?: string;
   weight?: string;

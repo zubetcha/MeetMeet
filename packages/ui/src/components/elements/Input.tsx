@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
-import { InputProps } from "../../types/ui.types";
 import { inputs } from "../../shared/style";
 import classes from "./elements.module.scss";
 import { Text } from ".";
