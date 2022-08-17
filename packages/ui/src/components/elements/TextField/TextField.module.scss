@@ -1,7 +1,7 @@
 @import "../../../styles/variables";
 @import "../../../styles/utils";
 
-.textField_container {
+.textField_wrapper {
   display: flex;
   flex-direction: column;
   row-gap: 2px;
@@ -78,11 +78,14 @@
     background-color: transparent;
     outline: none;
     color: var(--color-onSurface);
+  }
 
+  &.fixed::placeholder {
+    color: transparent;
   }
 }
 
-.unit_icon_wrapper {
+.children_wrapper {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

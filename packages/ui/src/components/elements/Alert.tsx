@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Modal } from "./Modal";
+import { Modal } from "./Dialog";
 import { Text } from "./Text/Text";
 import { SVG } from "./SVG/SVG";
 import { colors } from "../../shared/style";

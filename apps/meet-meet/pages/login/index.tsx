@@ -9,11 +9,13 @@ const Login = () => {
     setValue(value);
   }
 
+  const status = "default"
+
   return (
     <>
     <div style={{ width: "1200px" }}>
       <Text text="ㅎㅇ" />
-      <TextField
+      {/* <TextField
         type="text"
         name="username"
         labelText="ID"
@@ -37,7 +39,22 @@ const Login = () => {
         onChange={onChange}
         unitText="단위" 
         icon={<SVG name="dropdown" />}
-      />
+      /> */}
+      <TextField status={status} name="username">
+        <TextField.Label>ID</TextField.Label>
+        <TextField.Input
+          type="text"
+          placeholder="ID"
+          value={value}
+          onChange={onChange}
+        >
+          <TextField.Unit>단위</TextField.Unit>
+          <TextField.Icon>
+            <SVG name="dropdown" />
+          </TextField.Icon>
+        </TextField.Input>
+        <TextField.HelperText>ID</TextField.HelperText>
+      </TextField>
     </div>
     </>
   )
