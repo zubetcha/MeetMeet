@@ -4,6 +4,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html>
+        <title>MeetMeet</title>
         <Head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +14,6 @@ export default class MyDocument extends Document {
           />
           <meta name="description" content="Description" />
           <meta name="keywords" content="Keywords" />
-          <title>MeetMeet</title>
           <link rel="shortcut icon" href="/favicon_Factoroid_pov.ico" />
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icon-192x192.png"></link>
