@@ -1,4 +1,5 @@
 @use "../../../styles/color.scss" as *;
+@import '../../../styles/utils';
 
 @mixin animate($animation,$duration,$method,$times){
     animation: $animation $duration $method $times;
@@ -148,30 +149,57 @@
    
 }
 
+@mixin button-state-layer($color) {
+    .stateLayer{
+        border-radius: 4px;
+        @include state-layer($color);
+    }
+    &.focused{
+        .stateLayer{
+            @include state-layer($color, true);
+        }
+    }
+}
+
 .buttonContainer {
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+
+ //DESCRIBE configuration
+
     &.filled {
         background-color:  var(--color-primary);
         color: var(--color-onPrimary);
         &.negativeMood {
             background-color: var(--color-error);
         }
+        @include button-state-layer(on-primary);
     };
+
     &.tonal {
-        background-color: var(--color-secondary);
+        background-color: var(--color-secondaryContainer);
         color: var(--color-onSecondaryContainer);
         &.negativeMood {
             background-color: var(--color-errorContainer);
         }
+        @include button-state-layer(on-primary-container);
     };
+    
     &.outlined {
-        background-color: var(--color-outline);
+        background-color: transparent;
         color: var(--color-primary);
-        border: 1px solid #{$neutral-color-50};
+        border: 1px solid var(--color-outline);
         &.negativeMood    {
-            background-color: var(--color-outline);
+            background-color: transparent;
             color: var(--color-error);
         }
+        @include button-state-layer(primary);
     };
+
     &.text {
         background-color: transparent;
         color: var(--color-primary);
@@ -179,14 +207,45 @@
             background-color: transparent;
             color: var(--color-error);
         }
+        @include button-state-layer(primary);
     }
+
     &.textGray {
         background-color: transparent;
         color: var(--color-onSurfaceVariant);
+        @include button-state-layer(on-surface);
     }
+
+
+//DESCRIBE state
+
     &.disable {
         color: var(--color-onSurface) !important;
+        background-color: var(--color-onSurface-opacity-12) !important;
+        cursor: default;
     }
 
+    &.focused {
+        cursor: default;
+    }
 
+//DESCRIBE size 
+
+    &.large {
+        padding: 8px 16px;
+        gap: 8px;
+        @include font-style(label-large);
+    }
+
+    &.medium {
+        padding: 6px 12px;
+        gap: 4px;
+        @include font-style(label-large);
+    }
+
+    &.small {
+        padding: 4px 8px;
+        gap: 4px;
+        @include font-style(label-small);
+    }
 }
