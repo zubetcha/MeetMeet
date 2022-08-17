@@ -1,4 +1,5 @@
-@use "./themes.scss" as *;
+@use "ui/src/styles/themes.scss" as *;
+@use "ui/src/styles/color.scss" as *;
 
 html,
 body {
@@ -12,4 +13,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
+} 

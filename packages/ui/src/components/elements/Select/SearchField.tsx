@@ -5,11 +5,13 @@ export default function SearchField() {
   const { searchValue, onChange } = useSearch();
 
   return (
-    <input
-      id="select-search"
-      value={searchValue}
-      onChange={onChange}
-      placeholder="placeholder"
-    ></input>
+    <>
+      <input
+        id="select-search"
+        value={searchValue}
+        onChange={onChange}
+        placeholder="placeholder"
+      ></input>
+    </>
   );
 }

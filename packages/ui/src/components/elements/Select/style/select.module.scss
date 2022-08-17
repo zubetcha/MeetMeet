@@ -1,0 +1,27 @@
+.optionWrapper{
+  position: relative;
+  .optionList{
+    background-color: #fff;
+    position: absolute;
+    top:0;
+    left:0;
+    border: 1px solid var(--color-outline);
+    border-radius: 4px;
+  }
+}
+
+.option{
+    color: var(--color-onSurface);
+    background-color: var(--color-surface);
+    width: 200px;
+    padding: 8px 16px;
+
+    &.selected{
+      background-color: var(--color-onSurface-opacity-12);
+      color: var(--color-primary);
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: var(--color-onSurface-opacity-08);
+    }
+}

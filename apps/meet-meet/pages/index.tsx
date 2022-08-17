@@ -1,24 +1,36 @@
+import { Button, Select, Option } from "ui/src/components/elements";
 import type { NextPage } from "next";
-import {
-  DarkModeToggle,
-  ApolloRead,
-  ApolloReadById,
-  Select,
-  Option,
-} from "../components";
+import { DarkModeToggle, Layout } from "../components";
 
 const Home: NextPage = () => {
   const onChange = (e: any) => {
     console.log(e);
   };
   return (
-    <div>
+    <Layout>
       <DarkModeToggle />
-      <Select defaultValue="test1" onChange={onChange} isSearch>
-        <Option id="1" name="test1"></Option>
-        <Option id="2" name="test2"></Option>
+      {/* <ColorCard /> */}
+      <Select
+        defaultValue="test2"
+        onChange={(e: any) => console.log(e)}
+        isSearch
+      >
+        <Option id="1" name="test1" />
+        <Option id="2" name="test2" />
+        <Option id="3" name="test3" />
+        <Option id="4" name="test4" />
+        <Option id="5" name="test5" />
       </Select>
-    </div>
+      <Button
+        configuration="filled"
+        size="large"
+        state="default"
+        negativeMood={false}
+        showIcon={false}
+        label="Button label"
+        showRightIcon={false}
+      />
+    </Layout>
   );
 };
 

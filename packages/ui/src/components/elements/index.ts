@@ -6,7 +6,7 @@ export * from "./Input";
 export * from "./TextArea";
 export * from "./Modal";
 export * from "./Dialog";
-export * from "./Text";
+export * from "./Text/Text";
 export * from "./Checkbox";
 export * from "./Alert";
 export * from "./Select/Select";
@@ -19,3 +19,5 @@ export * from "./Radio";
 export * from "./LightSensor/LightSensor";
 
 export * from "./SVG/SVG";
+export * from "./Select/Select";
+export * from "./Select/Option";
