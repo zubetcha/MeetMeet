@@ -6,6 +6,7 @@ export const SelectContext = createContext({
   selected: undefined as any,
   setValues: (e: any) => {},
   setSelected: (e: any) => {},
+  defaultValue: undefined as any,
   setSearchResult: (e: any) => {},
 });
 
@@ -30,12 +31,14 @@ function reducer(state: any, action: any) {
 interface SelectProps {
   setValue: (e: any) => void;
   setSearchList: (e: any) => void;
+  defaultValue?: string;
   children: React.ReactElement[] | React.ReactElement | any;
 }
 
 export const SelectProvider = ({
   setValue,
   setSearchList,
+  defaultValue,
   children,
 }: SelectProps) => {
   const [state, dispatch] = useReducer(reducer, []);
@@ -65,6 +68,7 @@ export const SelectProvider = ({
               value: value,
             });
           },
+          defaultValue: defaultValue,
           setSelected: (value: any) => setSelected(value),
           setSearchResult: setSearchResult,
         }}

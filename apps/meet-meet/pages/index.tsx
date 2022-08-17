@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       <DarkModeToggle />
       {/* <ApolloRead />
       <ApolloReadById /> */}
-      <Select isSearch>
+      <Select defaultValue="test1" isSearch>
         <Option id="1" name="test1"></Option>
         <Option id="2" name="test2"></Option>
       </Select>

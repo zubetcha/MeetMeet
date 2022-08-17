@@ -8,7 +8,9 @@ interface Props {
 
 export function useOption({ id, name }: Props) {
   const [isShow, setIsShow] = useState(true);
-  const { searchResult, setValues, setSelected } = useSelect();
+  const [item, setItem] = useState({ id: id, name: name });
+  const { selected, defaultValue, searchResult, setValues, setSelected } =
+    useSelect();
 
   useEffect(() => {
     if (searchResult) {
@@ -21,14 +23,24 @@ export function useOption({ id, name }: Props) {
   }, [searchResult]);
 
   useEffect(() => {
-    setValues({ id: id, name: name });
+    setValues(item);
   }, []);
 
-  const onClick = () => setSelected({ id: id, name: name });
+  useEffect(() => {
+    if (defaultValue === name) {
+      setSelected(item);
+    }
+  }, [defaultValue]);
+
+  const onClick = () => setSelected(item);
+
   const isShowOption = isShow ? "block" : "none";
+
+  const isSelected = JSON.stringify(selected) === JSON.stringify(item);
 
   return {
     onClick,
+    isSelected,
     isShowOption,
   };
 }

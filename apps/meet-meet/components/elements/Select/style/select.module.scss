@@ -3,7 +3,9 @@
     background-color: #fff;
     width: 200px;
     padding: 8px 16px;
-
+    &.selected{
+      background-color: rgba(0, 0, 0, 0.05);
+    }
     &:hover {
       cursor: pointer;
       background-color: rgba(0, 0, 0, 0.03);

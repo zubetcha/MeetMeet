@@ -7,13 +7,17 @@ interface Props {
 }
 
 export default function TriggerButton({ isOpen, setIsOpen }: Props) {
-  const { selected } = useTriggerButton();
+  const { selected, defaultValue } = useTriggerButton();
 
   return (
     <button
       onClick={(e: React.MouseEvent<HTMLButtonElement>) => setIsOpen(!isOpen)}
     >
-      {selected ? selected.name : `트리거 버튼`}
+      {selected
+        ? selected.name
+        : defaultValue
+        ? `${defaultValue}`
+        : `트리거 버튼`}
     </button>
   );
 }

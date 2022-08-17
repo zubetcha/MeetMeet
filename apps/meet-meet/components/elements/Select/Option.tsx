@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useOption } from "./hooks";
-import classes from "./select.module.scss";
+import classes from "./style/select.module.scss";
+import classNames from "classnames";
 
 interface OptionProps {
   id: string;
@@ -8,14 +9,17 @@ interface OptionProps {
 }
 
 export function Option({ id, name }: OptionProps) {
-  const { onClick, isShowOption } = useOption({ id: id, name: name });
+  const { isSelected, onClick, isShowOption } = useOption({
+    id: id,
+    name: name,
+  });
 
   return (
     <li
       id={id}
       onClick={onClick}
       style={{ display: isShowOption }}
-      className={classes.option}
+      className={classNames(classes.option, isSelected ? classes.selected : "")}
     >
       {name}
     </li>
