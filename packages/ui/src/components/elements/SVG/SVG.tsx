@@ -54,6 +54,7 @@ import ZoomInIcon from "../../../assets/icons/zoom-in.svg";
 import MoreIcon from "../../../assets/icons/more.svg";
 
 import classes from "./SVG.module.scss";
+import classNames from 'classnames';
 import { colors } from '../../../shared/style'
 
 
@@ -68,8 +69,8 @@ interface SVGProps{
 export const SVG = ({name, width="24", height="24", color=colors.darkHigh, isHoverEffect=false}:SVGProps) => {
 
     const ui = { width, height, fill: color };
-    const propsCursor = { ...ui, className: isHoverEffect ? classes.cursor : ""  }
-    const propsElse = { ...ui, className: isHoverEffect ? classes[name] : ""  }
+    const propsCursor = { ...ui, className: classNames(isHoverEffect ? classes.cursor : "", classes[color] ) }
+    const propsElse = { ...ui, className: classNames(isHoverEffect ? classes[name] : "", classes[color] )  }
 
     
     const icons: {[name: string]: JSX.Element} = {
