@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { SelectProvider } from "./hooks/SelectContext";
-import TriggerButton from "./TriggerButton";
-import SearchField from "./SearchField";
-import OptionList from "./OptionList";
-import { useOutsideAlerter } from "./hooks";
+import { SelectProvider } from "../hooks/SelectContext";
+import { useOutsideAlerter } from "../hooks";
+import { Select } from "../index";
 
 interface SelectProps {
   isSearch?: boolean;
   defaultValue?: string;
   onChange: (e: any) => void;
+  style?: any;
   children: React.ReactElement[];
 }
 
-export function Select({
+export function SelectMain({
   isSearch = false,
   defaultValue,
   onChange,
+  style,
   children,
 }: SelectProps) {
   const [selected, setSelected] = useState();
@@ -35,15 +35,15 @@ export function Select({
         defaultValue={defaultValue}
         setIsOpen={setIsOpen}
       >
-        <span ref={ref}>
+        <div ref={ref} style={{ width: "200px" }}>
           {(!isOpen || (isOpen && !isSearch)) && (
-            <TriggerButton isOpen={isOpen} setIsOpen={setIsOpen} />
+            <Select.Trigger isOpen={isOpen} setIsOpen={setIsOpen} />
           )}
-          {isOpen && isSearch && <SearchField />}
-          <OptionList searchResult={searchResult} isShow={isOpen}>
+          {isOpen && isSearch && <Select.Search />}
+          <Select.List searchResult={searchResult} isShow={isOpen}>
             {children}
-          </OptionList>
-        </span>
+          </Select.List>
+        </div>
       </SelectProvider>
     </>
   );

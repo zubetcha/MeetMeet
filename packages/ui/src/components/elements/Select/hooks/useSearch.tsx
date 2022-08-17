@@ -7,15 +7,21 @@ export function useSearch() {
   const { values, setSearchResult } = useSelect();
 
   useEffect(() => {
-    if (searchValue.length > 0) {
-      const result = values.filter((value: any) =>
-        value.name.toLowerCase().includes(searchValue.toLowerCase())
-      );
-      if (result) setSearchResult(result);
-    } else {
+    if (searchValue.length === 0) {
       setSearchResult(undefined);
+      return;
     }
+
+    handleSearchResult(searchValue);
   }, [searchValue]);
+
+  const handleSearchResult = (searchValue: string) => {
+    const result = values.filter((value: any) =>
+      value.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    if (result) setSearchResult(result);
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);

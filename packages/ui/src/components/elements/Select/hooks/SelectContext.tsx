@@ -15,7 +15,7 @@ export const useSelect = () => {
   const context = React.useContext(SelectContext);
 
   if (context === undefined) {
-    throw new Error("useToggle must be used within a <Toggle />");
+    throw new Error("useSelect must be used within a <Select />");
   }
   return context;
 };
