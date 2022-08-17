@@ -33,7 +33,8 @@ export const Button = ({
 
   return (
     <button className={classNames(
-      classes.buttonContainer, 
+      classes.buttonContainer,
+      classes.button,
       state === 'focused' && classes.focused,
       state === 'disable' && classes.disable, 
       classes[size], 
