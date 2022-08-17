@@ -4,6 +4,7 @@ import Image from "next/image";
 import RotateIcon from "../../../assets/img/rotate-icon.png";
 import classes from "./button.module.scss";
 import classNames from "classnames";
+import { getSVGColorsByButtonStatus } from "../../../utils/getColors";
 import { SVG } from "..";
 interface ButtonProps {
   configuration: string;
@@ -39,9 +40,19 @@ export const Button = ({
       classes[configuration],
       negativeMood && classes.negativeMood
       )}>
-      {showIcon && <SVG name={icon}/>}
+      {showIcon && 
+        <SVG 
+          name={icon} 
+          color={getSVGColorsByButtonStatus(configuration, negativeMood, state === 'disable' ? true : false)} 
+        />}
+        
         {label}
-      {showRightIcon && <SVG name="downward"/>}
+      
+      {showRightIcon && 
+        <SVG 
+          name="downward" 
+          color={getSVGColorsByButtonStatus(configuration, negativeMood, state === 'disable' ? true : false)}
+        />}
       <div className={classes.stateLayer} ></div>
     </button>
   );

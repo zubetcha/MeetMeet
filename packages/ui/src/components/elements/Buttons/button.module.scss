@@ -149,11 +149,17 @@
    
 }
 
-@mixin button-state-layer($color) {
+@mixin button-state-layer($color, $negativeColor) {
     .stateLayer{
         border-radius: 4px;
         @include state-layer($color);
     }
+    &.negativeMood{
+        .stateLayer{
+            @include state-layer($negativeColor)
+        }
+    }
+
     &.focused{
         .stateLayer{
             @include state-layer($color, true);
@@ -177,7 +183,7 @@
         &.negativeMood {
             background-color: var(--color-error);
         }
-        @include button-state-layer(on-primary);
+        @include button-state-layer(on-primary, on-primary);
     };
 
     &.tonal {
@@ -186,7 +192,7 @@
         &.negativeMood {
             background-color: var(--color-errorContainer);
         }
-        @include button-state-layer(on-primary-container);
+        @include button-state-layer(on-primary-container, on-error-container);
     };
     
     &.outlined {
@@ -197,7 +203,7 @@
             background-color: transparent;
             color: var(--color-error);
         }
-        @include button-state-layer(primary);
+        @include button-state-layer(primary, error);
     };
 
     &.text {
@@ -207,13 +213,13 @@
             background-color: transparent;
             color: var(--color-error);
         }
-        @include button-state-layer(primary);
+        @include button-state-layer(primary, error);
     }
 
     &.textGray {
         background-color: transparent;
         color: var(--color-onSurfaceVariant);
-        @include button-state-layer(on-surface);
+        @include button-state-layer(on-surface, on-surface);
     }
 
 

@@ -23,81 +23,90 @@ const Home: NextPage = () => {
         size="large"
         state="disable"
         negativeMood={false}
-        showIcon={false}
+        showIcon={true}
         label="Button filled focused"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
       <Button
         configuration="tonal"
         size="large"
         state="default"
         negativeMood={false}
-        showIcon={false}
+        showIcon={true}
         label="Button filled"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
       <Button
         configuration="tonal"
         size="large"
         state="focused"
         negativeMood={false}
-        showIcon={false}
+        showIcon={true}
         label="Button filled focused"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
       <Button
         configuration="outlined"
         size="large"
         state="default"
         negativeMood={false}
-        showIcon={false}
+        showIcon={true}
         label="Button filled"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
       <Button
         configuration="outlined"
         size="large"
-        state="focused"
+        state="disable"
         negativeMood={false}
-        showIcon={false}
+        showIcon={true}
         label="Button filled focused"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
       <Button
         configuration="text"
         size="large"
         state="default"
         negativeMood={false}
-        showIcon={false}
+        showIcon={true}
         label="Button filled"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
       <Button
         configuration="text"
         size="large"
-        state="focused"
-        negativeMood={false}
-        showIcon={false}
+        state="default"
+        negativeMood={true}
+        showIcon={true}
         label="Button filled focused"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
       <Button
         configuration="textGray"
         size="large"
         state="default"
         negativeMood={false}
-        showIcon={false}
+        showIcon={true}
         label="Button filled"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
       <Button
         configuration="textGray"
         size="large"
         state="focused"
         negativeMood={false}
-        showIcon={false}
+        showIcon={true}
         label="Button filled focused"
-        showRightIcon={false}
+        showRightIcon={true}
+        icon="more"
       />
     </Layout>
   );
