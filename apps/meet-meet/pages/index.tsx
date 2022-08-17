@@ -1,10 +1,22 @@
 import type { NextPage } from "next";
-import { DarkModeToggle } from "../components";
+import {
+  DarkModeToggle,
+  ApolloRead,
+  ApolloReadById,
+  Select,
+  Option,
+} from "../components";
 
 const Home: NextPage = () => {
   return (
     <div>
       <DarkModeToggle />
+      {/* <ApolloRead />
+      <ApolloReadById /> */}
+      <Select isSearch>
+        <Option id="1" name="test1"></Option>
+        <Option id="2" name="test2"></Option>
+      </Select>
     </div>
   );
 };
