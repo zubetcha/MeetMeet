@@ -11,31 +11,6 @@
   &__input-box {
     position: relative;
 
-    &__state-layer {
-      &--default { 
-        @include state-layer(on-surface, false, false);
-        &.focused {
-          @include state-layer(on-surface, true, false);
-        }
-       }
-      &--nice { 
-        @include state-layer(on-surface, false, false);
-        .focused {
-          @include state-layer(on-primary-container, true, false);
-        }
-       } 
-      &--danger { 
-        @include state-layer(on-error-container false, false);
-        .focused {
-          @include state-layer(on-error-container true, false);
-        }
-       } 
-      &--disable { 
-       } 
-      &--fixed { 
-       }
-    }
-
     &__input {
       @include font-style(body-large);
       width: 100%;
@@ -47,7 +22,6 @@
       &::placeholder { color: var(--color-onSurface-opacity-38); }
 
       &:hover {
-        cursor: text;
       }
 
       &--default {
@@ -55,7 +29,13 @@
         outline: none;
         color: var(--color-onSurfaceVariant);
 
+        &:hover {
+          background: linear-gradient(to right, var(--color-onSurface-opacity-08), var(--color-onSurface-opacity-08)), var(--color-surfaceVariant) !important;
+          cursor: text;
+        }
+
         &.focused {
+          background: linear-gradient(to right, var(--color-onSurface-opacity-12), var(--color-onSurface-opacity-12)), var(--color-surfaceVariant) !important;
           outline: 1px solid var(--color-outline) !important;
           color: var(--color-onSurface) !important;   
         }
@@ -66,8 +46,13 @@
         outline: none;
         color: var(--color-onSurfaceVariant);
 
+        &:hover {
+          background: linear-gradient(to right, var(--color-onSurface-opacity-08), var(--color-onSurface-opacity-08)), var(--color-surfaceVariant) !important;
+          cursor: text;
+        }
+
         &.focused {
-          background-color: var(--color-primaryContainer) !important;
+          background: linear-gradient(to right, var(--color-onPrimaryContainer-opacity-12), var(--color-onPrimaryContainer-opacity-12)), var(--color-primaryContainer) !important;
           outline: 1px solid var(--color-primary) !important;
           color: var(--color-onPrimaryContainer) !important;   
         }
@@ -78,7 +63,13 @@
         outline: none;
         color: var(--color-onErrorContainer);
 
+        &:hover {
+          background: linear-gradient(to right, var(--color-onErrorContainer-opacity-08), var(--color-onErrorContainer-opacity-08)), var(--color-errorContainer) !important;
+          cursor: text;
+        }
+
         &.focused {
+          background: linear-gradient(to right, var(--color-onErrorContainer-opacity-12), var(--color-onErrorContainer-opacity-12)), var(--color-errorContainer) !important;
           outline: 1px solid var(--color-error) !important;
         }
       }
@@ -142,7 +133,7 @@
 
         &--disable {
           svg {
-            fill: var(--color-onSurface-opacity-12);
+            fill: var(--color-onSurface-opacity-38);
             cursor: default !important;
           }
         }

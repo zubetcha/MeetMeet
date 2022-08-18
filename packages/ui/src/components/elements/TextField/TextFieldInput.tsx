@@ -27,11 +27,6 @@ export const TextFieldInput = ({
   return (
     <>
       <div className={classes["wrapper__input-box"]}>
-        <span className={classNames(
-          classes["wrapper__input-box__state-layer"],
-          classes[`wrapper__input-box__state-layer--${status}`],
-          {[classes["focused"]]: isFocused},  
-        )}></span>
         <input
           className={classNames(
             classes["wrapper__input-box__input"],
