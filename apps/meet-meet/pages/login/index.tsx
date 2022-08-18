@@ -15,31 +15,6 @@ const Login = () => {
     <>
     <div style={{ width: "1200px" }}>
       <Text text="ㅎㅇ" />
-      {/* <TextField
-        type="text"
-        name="username"
-        labelText="ID"
-        status="default"
-        placeholder="ID"
-        helperText="ID"
-        value={value}
-        onChange={onChange}
-        unitText="단위" 
-        icon={<SVG name="dropdown" />}
-        autoFocus
-      />
-      <TextField
-        type="text"
-        name="username"
-        labelText="ID"
-        status="default"
-        placeholder="ID"
-        helperText="ID"
-        value={value}
-        onChange={onChange}
-        unitText="단위" 
-        icon={<SVG name="dropdown" />}
-      /> */}
       <TextField status={status} name="username">
         <TextField.Label>ID</TextField.Label>
         <TextField.Input

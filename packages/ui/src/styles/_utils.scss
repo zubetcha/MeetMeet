@@ -119,7 +119,7 @@
   letter-spacing: $body-small-letter;
 }
 
-@mixin font-style( $size, $color: false, $weight: 500 ) {
+@mixin font-style( $size, $color: false, $weight: 400 ) {
   @if ( $size == display-large ) {
     @include display-large;
   }

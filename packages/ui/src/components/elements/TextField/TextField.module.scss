@@ -9,7 +9,7 @@
 
 /* Label */
 .label {
-  @include font-style(label-medium, onSurfaceVariant);
+  @include font-style(label-medium, on-surface-variant);
 }
 
 
@@ -23,8 +23,7 @@
   border: none;
 
   &::placeholder {
-    color: var(--color-onSurface);
-    opacity: 0.38;
+    color: var(--color-onSurface-opacity-38);
   }
 
   &:hover {
@@ -67,9 +66,8 @@
   &.disable {
     cursor: default !important;
     background-color: transparent;
-    outline: 1px solid var(--color-onSurface);
-    color: var(--color-onSurface);
-    opacity: 0.38;
+    outline: 1px solid var(--color-onSurface-opacity-12);
+    color: var(--color-onSurface-opacity-38);
   }
 
   &.fixed {
@@ -117,8 +115,7 @@
     }
 
     &.disable {
-      color: var(--color-onSurface);
-      opacity: 0.38;
+      color: var(--color-onSurface-opacity-38);
     }
 
     &.fixed {
@@ -139,7 +136,7 @@
 
     &.disable {
       svg {
-        fill-opacity: 0.38;
+        fill: var(--color-onSurface-opacity-12);
         cursor: default !important;
       }
     }
@@ -175,8 +172,7 @@
   }
 
   &.disable {
-    color: var(--color-onSurfaceVariant);
-    opacity: 0.38;
+    color: var(--color-onSurface-opacity-38);
   }
 
   &.fixed {

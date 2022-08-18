@@ -1,0 +1,54 @@
+@import "../../../styles/variables";
+@import "../../../styles/utils";
+
+.modal-overlay {
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  background-color: var(--color-onBackground-opacity-08);
+  cursor: pointer;
+
+  .modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-surface);
+    width: fit-content;
+    height: fit-content;
+    border-radius: 4px;
+    z-index: 10001;
+    padding: 24px 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+  }
+}
+
+.modal-title {
+  @include font-style(title-medium, on-surface, 500);
+}
+
+.modal-description {
+  @include font-style(body-medium, on-surface-variant);
+}
+
+.modal-icon {
+  width: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.modal-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 16px;
+}
