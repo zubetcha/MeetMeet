@@ -1,40 +1,4 @@
 import React, {useEffect} from 'react'
-// import { DownwardIcon, UpwardIcon } from './ArrowIcon';
-// import { ForwardIcon, BackwardIcon, DropdownIcon } from './ChevronIcon';
-// import { FilterIcon } from './FilterIcon';
-// import { DocumentIcon, DownloadIcon, UploadIcon } from './DocumentIcon';
-// import { SearchIcon } from './SearchIcon';
-// import { ZoomInIcon } from './ZoomInIcon';
-// import { AddIcon } from './AddIcon';
-// import { DeleteIcon } from './DeleteIcon';
-// import { DoneIcon } from './DoneIcon';
-// import { ErrorIcon } from './ErrorIcon';
-// import { VisibilityOnIcon, VisibilityOffIcon } from './VisibilityIcon';
-// import { CheckedIcon, UncheckedIcon, IndeterminatedIcon, CheckDisabledIcon } from './CheckboxIcon';
-// import { HelpIcon } from './HelpIcon';
-// import { CloseIcon } from './CloseIcon';
-// import { AppsIcon } from './AppsIcon';
-// import { AutorenewIcon } from './AutoRenewIcon';
-// import { CalendarIcon } from './CalendarIcon';
-// import { CancelIcon } from './CancelIcon';
-// import { FullScreenIcon, ExitScreenIcon } from './ScreenIcon';
-// import { EletronicIcon } from './EletronicIcon';
-// import { LocationOnIcon } from './LocationOnIcon';
-// import { EmailIcon } from './EmailIcon';
-// import { GridIcon } from './GridIcon';
-// import { MapIcon } from './MapIcon';
-// import { MenuIcon } from './MenuIcon';
-// import { MoreIcon } from './MoreIcon';
-// import { NumberedListIcon } from './NumberedList';
-// import { SelectedRadioIcon, UnSelectedRadioIcon } from './RadioIcon';
-// import { RefreshIcon } from './RefreshIcon';
-// import { SettingsIcon } from './SettingsIcon';
-// import { SuperuserIcon } from './SuperuserIcon';
-// import { TuneIcon } from './TuneIcon';
-// import { UserIcon } from './UserIcon';
-// import { LightToggleOffDisabledIcon, DarkToggleOnIcon, LightToggleOnDisabledIcon, LightToggleOnIcon, DarkToggleOffIcon, LightToggleOffIcon } from './ToggleIcon';
-// import { EllipseIcon } from "./EllipseIcon";
-
 
 import AddIcon from "../../../assets/icons/add.svg";
 import AppsIcon from "../../../assets/icons/apps.svg";

@@ -1,7 +1,9 @@
 import React, {useRef, useState, useEffect} from "react";
-import classes from "./elements.module.scss";
+import classes from "./Dialog.module.scss";
 import classNames from "classnames";
-import {useKeyEscClose} from "../../hooks/useKeyEscClose";
+import {useKeyEscClose} from "../../../hooks/useKeyEscClose";
+
+
 interface ModalPropsType {
   children:JSX.Element[] |any;
   type?: string;
@@ -9,7 +11,7 @@ interface ModalPropsType {
   setIsOpen?:(e:any)=>void;
 }
 
-export function Modal({ children, type = "medium", setIsOpen }: ModalPropsType) {
+export const DialogMain = ({ children, type = "medium", setIsOpen }: ModalPropsType) => {
 
   useKeyEscClose(setIsOpen);
 
@@ -24,3 +26,4 @@ export function Modal({ children, type = "medium", setIsOpen }: ModalPropsType) 
     </>
   );
 }
+

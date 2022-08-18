@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Modal } from "./Modal";
+import { Modal } from "./Dialog";
 import { Button } from "./Buttons/Button";
 import { SVG } from "./SVG/SVG";
 import classes from "./elements.module.scss";

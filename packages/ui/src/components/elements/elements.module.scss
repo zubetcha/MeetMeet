@@ -442,26 +442,6 @@
   }
 }
 
-.input_icon {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
-  cursor: pointer;
-  img {
-    display: block !important;
-    cursor: pointer !important;
-  }
-}
-
-.input_unit {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
-  cursor: pointer;
-}
-
 .input {
   z-index: 10;
   &::placeholder {
