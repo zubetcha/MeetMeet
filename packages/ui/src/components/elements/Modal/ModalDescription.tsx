@@ -1,16 +1,18 @@
-import classes from "./Modal.module.scss";
+import { Text } from "../Text/Text";
 
-export const ModalDescription = ({children}: Props) => {
+export const ModalDescription = ({children, type = "body-medium", color = "on-surface-variant"}: Props) => {
 
   return (
     <>
-      <p className={classes["modal-description"]}>
+      <Text type={type} color={color}>
         {children}
-      </p>
+      </Text>
     </>
   )
 }
 
 interface Props {
   children: any;
+  type?: string;
+  color?: string;
 }

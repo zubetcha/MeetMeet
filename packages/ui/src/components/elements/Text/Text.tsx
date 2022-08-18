@@ -13,10 +13,10 @@ import classes from "./Text.module.scss";
 
 // global title 컴포넌트
 export const Text = ({
-  text,
+  children,
   type = "label-large",
-  color = "onBackground",
-  weight = "500",
+  color = "on-background",
+  weight = "400",
   cursor = "default",
 }: TextProps) => {
   return (
@@ -24,13 +24,13 @@ export const Text = ({
       className={classNames(classes["first-class"], classes[type], `${color}`)}
       style={{ fontWeight: weight, cursor }}
     >
-      {text}
+      {children}
     </p>
   );
 };
 
 interface TextProps {
-  text: string;
+  children: any;
   color?: string;
   weight?: string;
   type?: string;

@@ -2,10 +2,14 @@
 @import "../../../styles/utils";
 
 .modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 100vw;
   height: 100vh;
   z-index: 10000;
-  background-color: var(--color-onBackground-opacity-08);
+  background-color: var(--color-onBackground-opacity-16);
+  z-index: 10000;
   cursor: pointer;
 
   .modal-container {
@@ -18,26 +22,27 @@
     height: fit-content;
     border-radius: 4px;
     z-index: 10001;
-    padding: 24px 40px;
+    padding: $modal-container-padding;
     display: flex;
     flex-direction: column;
     row-gap: 32px;
+
+    &.toast {
+      padding: $toast-modal-container-padding;
+    }
   }
-}
-
-.modal-title {
-  @include font-style(title-medium, on-surface, 500);
-}
-
-.modal-description {
-  @include font-style(body-medium, on-surface-variant);
 }
 
 .modal-icon {
   width: 100%;
   display: flex;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .modal-contents {

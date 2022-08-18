@@ -1,10 +1,14 @@
-import { DialogMain } from "./ModalMain";
-import { DialogIcon } from "./ModalIcon";
-import { DialogTitle } from "./ModalTitle";
-import { DialogDescription } from "./ModalDescription";
+import { ModalMain } from "./ModalMain";
+import { ModalIcon } from "./ModalIcon";
+import { ModalTitle } from "./ModalTitle";
+import { ModalDescription } from "./ModalDescription";
+import { ModalButtons } from "./ModalButtons";
+import { ModalContents } from "./ModalContents";
 
-export const Dialog = Object.assign(DialogMain, {
-  Icon: DialogIcon,
-  Title: DialogTitle,
-  Description: DialogDescription,
+export const Modal = Object.assign(ModalMain, {
+  Icon: ModalIcon,
+  Title: ModalTitle,
+  Description: ModalDescription,
+  Contents: ModalContents,
+  Buttons: ModalButtons,
 })
