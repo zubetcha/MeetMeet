@@ -149,9 +149,10 @@
    
 }
 
+// DESCRIBE button-state-layer mixin
+
 @mixin button-state-layer($color, $negativeColor) {
     .stateLayer{
-        border-radius: 4px;
         @include state-layer($color);
     }
     &.negativeMood{
@@ -165,15 +166,69 @@
             @include state-layer($color, true);
         }
     }
+
+    &.disable{
+        .stateLayer{
+            @include state-layer($color, false, true);
+        }
+    }
 }
 
 .buttonContainer {
     border: none;
-    border-radius: 4px;
     display: flex;
     cursor: pointer;
     position: relative;
     align-items: center;
+    
+    &.button {
+        border-radius: 4px;
+        .stateLayer {
+            border-radius: 4px;
+        }
+
+        //DESCRIBE size 
+        &.large {
+            padding: 8px 16px;
+            gap: 8px;
+            @include font-style(label-large);
+        }
+
+        &.medium {
+            padding: 6px 12px;
+            gap: 4px;
+            @include font-style(label-large);
+        }
+
+        &.small {
+            padding: 4px 8px;
+            gap: 4px;
+            @include font-style(label-small);
+        }
+    }
+
+    &.iconButton {
+        border-radius: 50%;
+        justify-content: center;
+        width: fit-content;
+        .stateLayer{
+            border-radius: 50%;
+        }
+
+        //DESCRIBE size 
+        &.large {
+            padding: 10px;
+        }
+
+        &.medium {
+            padding: 7.67px;
+        }
+
+        &.small {
+            padding: 5.33px;
+        }
+
+    }
 
  //DESCRIBE configuration
 
@@ -226,7 +281,7 @@
 //DESCRIBE state
 
     &.disable {
-        color: var(--color-onSurface) !important;
+        color: var(--color-onSurface-opacity-38) !important;
         background-color: var(--color-onSurface-opacity-12) !important;
         cursor: default;
     }
@@ -235,23 +290,5 @@
         cursor: default;
     }
 
-//DESCRIBE size 
 
-    &.large {
-        padding: 8px 16px;
-        gap: 8px;
-        @include font-style(label-large);
-    }
-
-    &.medium {
-        padding: 6px 12px;
-        gap: 4px;
-        @include font-style(label-large);
-    }
-
-    &.small {
-        padding: 4px 8px;
-        gap: 4px;
-        @include font-style(label-small);
-    }
 }
