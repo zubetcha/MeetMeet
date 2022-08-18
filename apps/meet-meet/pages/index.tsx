@@ -1,9 +1,13 @@
-import { Button, IconButton } from "@components/ui";
+import { Button, ButtonGroup, Select, IconButton } from "ui/src/components/elements";
 import type { NextPage } from "next";
 import { DarkModeToggle, ColorCard, Layout } from "../components";
 
 
 const Home: NextPage = () => {
+  const onChange = (e: any) => {
+    console.log(e);
+  };
+
   return (
     <Layout>
       <DarkModeToggle />
@@ -17,7 +21,6 @@ const Home: NextPage = () => {
         <Button
           configuration="filled"
           size="medium"
-          state="default"
           negativeMood={false}
           showIcon={true}
           label="Button filled"
@@ -37,7 +40,6 @@ const Home: NextPage = () => {
         <Button
           configuration="tonal"
           size="large"
-          state="default"
           negativeMood={false}
           showIcon={true}
           label="Button filled"
@@ -57,7 +59,6 @@ const Home: NextPage = () => {
         <Button
           configuration="outlined"
           size="large"
-          state="default"
           negativeMood={false}
           showIcon={true}
           label="Button filled"
@@ -77,7 +78,6 @@ const Home: NextPage = () => {
         <Button
           configuration="text"
           size="large"
-          state="default"
           negativeMood={false}
           showIcon={true}
           label="Button filled"
@@ -87,7 +87,6 @@ const Home: NextPage = () => {
         <Button
           configuration="text"
           size="large"
-          state="default"
           negativeMood={true}
           showIcon={true}
           label="Button filled focused"
@@ -97,7 +96,6 @@ const Home: NextPage = () => {
         <Button
           configuration="textGray"
           size="large"
-          state="default"
           negativeMood={false}
           showIcon={true}
           label="Button filled"
@@ -144,6 +142,19 @@ const Home: NextPage = () => {
         />
       </div>
 
+      <ButtonGroup
+        configuration="outlined"
+        size="large"
+        defaultIndex={2}
+        onChange={(selectedIndex: number) =>
+          console.log("selectedIndex", selectedIndex)
+        }
+      >
+        <Button label="테스트"></Button>
+        <Button label="테스트"></Button>
+        <Button label="테스트"></Button>
+        <Button label="테스트"></Button>
+      </ButtonGroup>
     </Layout>
   );
 };
