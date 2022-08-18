@@ -1,0 +1,62 @@
+// navBar component 스타일
+.navbarContainer {
+    min-width: 248px;
+    min-height: 100%;
+    position: fixed;
+    transition: min-width 0.3s ease-out;
+    z-index: 50;
+
+    .headerContainer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        background-color:var(--color-surface);
+        opacity: 1;
+        transition: opacity 0.3s ease-out;
+        padding: 16px 12px;
+        .logoutBox {
+            width: fit-content;
+        };
+        .imageBox {
+            width: 200px;
+            margin : 32px 24px 0 24px;
+        };
+        .myPageBtn {
+            display: flex;
+            margin-top: 26px;
+            align-items: center;
+            padding-left: 26px;
+            gap: 10px;
+            width: fit-content;
+            .name{
+                color: #ffffff;
+                font-size: 16px;
+                vertical-align: middle;
+                font-weight: 700;
+            }
+        }
+        .menuBox {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-top:40px;
+            
+        };
+    }
+
+    .exitBox {
+        position: absolute;
+        left : 16px;
+        top: 16px;
+        z-index: 10;
+    }
+
+    &.close{
+        overflow: hidden;
+        min-width: 64px;
+        .headerContainer {
+            opacity: 0;
+        }
+    }
+}

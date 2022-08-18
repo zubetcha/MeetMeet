@@ -1,0 +1,273 @@
+@import "./variables";
+
+// DESCRIBE 브라우저 크기별 반응형 분기점 mixins
+@mixin mobile {
+  @media (max-width: $mobile){
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: ($mobile+1)) and (max-width: $tablet){
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: ($tablet+1)) and (max-width: $laptop){
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop){
+    @content;
+  }
+}
+
+// DESCRIBE Typography
+
+@mixin display-large() {
+  font-size: $display-large-font;
+  line-height: $display-large-line;
+  letter-spacing: $display-large-letter;
+
+}
+
+@mixin display-medium() {
+  font-size: $display-medium-font;
+  line-height: $display-medium-line;
+  letter-spacing: $display-medium-letter;
+}
+
+@mixin display-small() {                                                                     
+  font-size: $display-small-font;
+  line-height: $display-small-line;
+  letter-spacing: $display-small-letter;
+}
+
+@mixin headline-large() {
+  font-size: $headline-large-font;
+  line-height: $headline-large-line;
+  letter-spacing: $headline-large-letter;
+}
+
+@mixin headline-medium() {
+  font-size: $headline-medium-font;
+  line-height: $headline-medium-line;
+  letter-spacing: $headline-medium-letter;
+}
+
+@mixin headline-small() {
+  font-size: $headline-small-font;
+  line-height: $headline-small-line;
+  letter-spacing: $headline-small-letter;
+}
+
+@mixin title-large() {
+  font-size: $title-large-font;
+  line-height: $title-large-line;
+  letter-spacing: $title-large-letter;
+}
+
+@mixin title-medium() {
+  font-size: $title-medium-font;
+  line-height: $title-medium-line;
+  letter-spacing: $title-medium-letter;
+}
+
+@mixin title-small() {
+  font-size: $title-small-font;
+  line-height: $title-small-line;
+  letter-spacing: $title-small-letter;
+}
+
+@mixin label-large() {
+  font-size: $label-large-font;
+  line-height: $label-large-line;
+  letter-spacing: $label-large-letter;
+}
+
+@mixin label-medium() {
+  font-size: $label-medium-font;
+  line-height: $label-medium-line;
+  letter-spacing: $label-medium-letter;
+}
+
+@mixin label-small() {
+  font-size: $label-small-font;
+  line-height: $label-small-line;
+  letter-spacing: $label-small-letter;
+}
+
+@mixin body-large() {
+  font-size: $body-large-font;
+  line-height: $body-large-line;
+  letter-spacing: $body-large-letter;
+}
+
+@mixin body-medium() {
+  font-size: $body-medium-font;
+  line-height: $body-medium-line;
+  letter-spacing: $body-medium-letter;
+}
+
+@mixin body-small() {
+  font-size: $body-small-font;
+  line-height: $body-small-line;
+  letter-spacing: $body-small-letter;
+}
+
+@mixin font-style( $size, $color: false ) {
+  @if ( $size == display-large ) {
+    @include display-large;
+  }
+  @if ( $size == display-medium ) {
+    @include display-medium;
+  }
+  @if ( $size == display-small ) {
+    @include display-small;
+  }
+  @if ( $size == headline-large ) {
+    @include headline-large;
+  }
+  @if ( $size == headline-medium ) {
+    @include headline-medium;
+  }
+  @if ( $size == headline-small ) {
+    @include headline-small;
+  }
+  @if ( $size == title-large ) {
+    @include title-large;
+  }
+  @if ( $size == title-medium ) {
+    @include title-medium;
+  }
+  @if ( $size == title-small ) {
+    @include title-small;
+  }
+  @if ( $size == label-large ) {
+    @include label-large;
+  }
+  @if ( $size == label-medium ) {
+    @include label-medium;
+  }
+  @if ( $size == label-small ) {
+    @include label-small;
+  }
+  @if ( $size == body-large ) {
+    @include body-large;
+  }
+  @if ( $size == body-medium ) {
+    @include body-medium;
+  }
+  @if ( $size == body-small ) {
+    @include body-small;
+  }
+
+  @if ( type-of($color) == color ) {
+    color: $color;
+  }
+}
+
+
+// DESCRIBE Scroll
+
+
+// DESCRIBE 자주 쓰는...!
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+// DESCRIBE State Layer
+@mixin state-layer($color, $isFocused: false, $isDisable: false) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  
+  @if( $color == on-primary ) {
+    &:hover {
+      background-color: var(--color-onPrimary-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-onPrimary-opacity-12) !important;
+    }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+  }
+  @if( $color == on-error-container) {
+    &:hover {
+      background-color:  var(--color-onErrorContainer-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-onErrorContainer-opacity-12) !important;
+    }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+  }
+  @if( $color == on-primary-container) {
+    &:hover {
+      background-color:  var(--color-onPrimaryContainer-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-onPrimaryContainer-opacity-12) !important;
+    }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+  }
+  @if( $color == on-surface) {
+    &:hover {
+      background-color:  var(--color-onSurface-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-onSurface-opacity-12) !important;
+    }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+  }
+  @if( $color == primary) {
+    &:hover {
+      background-color:  var(--color-primary-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-primary-opacity-12) !important;
+    }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+  }
+  @if( $color == error) {
+    &:hover {
+      background-color:  var(--color-error-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-error-opacity-12) !important;
+    }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+  }
+}
+

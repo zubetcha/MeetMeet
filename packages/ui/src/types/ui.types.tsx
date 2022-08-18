@@ -22,7 +22,7 @@ export interface navBarProps {
     }[];
   };
   shouldLogin: boolean;
-  userInfo: UserInfoType;
+  userInfo?: UserInfoType;
   setMyPageModal: Dispatch<SetStateAction<Boolean>>;
 }
 
@@ -30,16 +30,6 @@ export interface NavMenuProps {
   page: pageInfo;
   key: number;
   customer: string;
-}
-
-export interface TextProps {
-  text: string;
-  size?: string;
-  color?: string;
-  weight?: string;
-  type?: string;
-  cursor?: string;
-  height?: string;
 }
 
 export interface pageInfo {

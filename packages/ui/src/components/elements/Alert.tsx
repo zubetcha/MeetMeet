@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Modal } from "./Modal";
-import { Text } from "./Text";
+import { Text } from "./Text/Text";
 import { SVG } from "./SVG/SVG";
 import { colors } from "../../shared/style";
 
