@@ -1,15 +1,15 @@
 import React from "react";
 import classes from "../style/select.module.scss";
 import classNames from "classnames";
+import { useOptionList } from "../hooks";
 
 interface Props {
-  searchResult: any[] | undefined;
-  isShow: boolean;
   children: any;
 }
 
-export function OptionList({ searchResult, isShow, children }: Props) {
-  const display = isShow ? "block" : "none";
+export function SelectOptionList({ children }: Props) {
+  const { isOpen, searchResult } = useOptionList();
+  const display = isOpen ? "block" : "none";
 
   return (
     <>

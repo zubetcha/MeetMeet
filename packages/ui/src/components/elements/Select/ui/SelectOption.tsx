@@ -8,7 +8,7 @@ interface OptionProps {
   name: string;
 }
 
-export function Option({ id, name }: OptionProps) {
+export function SelectOption({ id, name }: OptionProps) {
   const { isSelected, onClick, isShowOption } = useOption({
     id: id,
     name: name,

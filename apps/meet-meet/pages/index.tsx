@@ -9,7 +9,12 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <DarkModeToggle />
-      <Select defaultValue="투썸플레이스" onChange={onChange} isSearch>
+      <Select
+        defaultValue="투썸플레이스"
+        onChange={onChange}
+        style={{ width: "220px" }}
+        isSearch
+      >
         <Select.Option id="1" name="스타벅스" />
         <Select.Option id="2" name="투썸플레이스" />
         <Select.Option id="3" name="메가커피" />

@@ -19,7 +19,6 @@ export function SelectMain({
   children,
 }: SelectProps) {
   const [selected, setSelected] = useState();
-  const [searchResult, setSearchResult] = useState<any[]>();
   const [isOpen, setIsOpen] = useState(false);
   const { ref } = useOutsideAlerter(() => setIsOpen(false));
 
@@ -27,22 +26,21 @@ export function SelectMain({
     onChange(selected);
   }, [selected]);
 
+  const isShowTriggerButton = !isOpen || (isOpen && !isSearch);
+  const isShowSearchField = isOpen && isSearch;
+
   return (
     <>
       <SelectProvider
         setValue={setSelected}
-        setSearchList={setSearchResult}
         defaultValue={defaultValue}
         setIsOpen={setIsOpen}
+        isOpen={isOpen}
       >
         <div ref={ref} style={{ ...style }}>
-          {(!isOpen || (isOpen && !isSearch)) && (
-            <Select.Trigger isOpen={isOpen} setIsOpen={setIsOpen} />
-          )}
-          {isOpen && isSearch && <Select.Search />}
-          <Select.List searchResult={searchResult} isShow={isOpen}>
-            {children}
-          </Select.List>
+          {isShowTriggerButton && <Select.Trigger />}
+          {isShowSearchField && <Select.Search />}
+          <Select.List>{children}</Select.List>
         </div>
       </SelectProvider>
     </>

@@ -1,12 +1,12 @@
 import { SelectMain } from "./ui/SelectMain";
-import { Option } from "./ui/Option";
-import { TriggerButton } from "./ui/TriggerButton";
-import { SearchField } from "./ui/SearchField";
-import { OptionList } from "./ui/OptionList";
+import { SelectOption } from "./ui/SelectOption";
+import { SelectTriggerButton } from "./ui/SelectTriggerButton";
+import { SelectSearchField } from "./ui/SelectSearchField";
+import { SelectOptionList } from "./ui/SelectOptionList";
 
 export const Select = Object.assign(SelectMain, {
-  Option: Option,
-  Trigger: TriggerButton,
-  Search: SearchField,
-  List: OptionList,
+  Option: SelectOption,
+  Trigger: SelectTriggerButton,
+  Search: SelectSearchField,
+  List: SelectOptionList,
 });

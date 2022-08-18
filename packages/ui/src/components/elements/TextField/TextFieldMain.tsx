@@ -2,7 +2,7 @@ import { Children, cloneElement, useState } from "react";
 import classes from "./TextField.module.scss";
 import { TextFieldStatusUnion } from "./TextField.types";
 
-export const TextFieldMain = ({children, status, name}: Props) => {
+export const TextFieldMain = ({ children, status, name }: Props) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   return (
@@ -15,19 +15,18 @@ export const TextFieldMain = ({children, status, name}: Props) => {
                 isFocused,
                 setIsFocused,
                 status,
-                name
+                name,
               })}
             </>
-          )
+          );
         })}
       </div>
     </>
-  )
-}
+  );
+};
 
 interface Props {
   children: any;
   status: TextFieldStatusUnion;
   name: string;
-};
-
+}

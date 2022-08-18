@@ -4,9 +4,10 @@ export const SelectContext = createContext({
   values: [] as any,
   searchResult: [] as any,
   selected: undefined as any,
+  defaultValue: undefined as any,
+  isOpen: false,
   setValues: (e: any) => {},
   setSelected: (e: any) => {},
-  defaultValue: undefined as any,
   setSearchResult: (e: any) => {},
   setIsOpen: (e: boolean) => {},
 });
@@ -31,16 +32,16 @@ function reducer(state: any, action: any) {
 
 interface SelectProps {
   setValue: (e: any) => void;
-  setSearchList: (e: any) => void;
   defaultValue?: string;
+  isOpen: boolean;
   setIsOpen: (e: boolean) => void;
   children: React.ReactElement[] | React.ReactElement | any;
 }
 
 export const SelectProvider = ({
   setValue,
-  setSearchList,
   defaultValue,
+  isOpen,
   setIsOpen,
   children,
 }: SelectProps) => {
@@ -53,10 +54,6 @@ export const SelectProvider = ({
       setValue(selected);
     }
   }, [selected]);
-
-  useEffect(() => {
-    setSearchList(searchResult);
-  }, [searchResult]);
 
   return (
     <>
@@ -75,6 +72,7 @@ export const SelectProvider = ({
           setSelected: (value: any) => setSelected(value),
           setSearchResult: setSearchResult,
           setIsOpen: setIsOpen,
+          isOpen: isOpen,
         }}
       >
         {children}
