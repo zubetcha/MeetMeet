@@ -4,7 +4,7 @@ import Image from "next/image";
 import RotateIcon from "../../../assets/img/rotate-icon.png";
 import classes from "./button.module.scss";
 import classNames from "classnames";
-import { getSVGColorsByButtonStatus } from "../../../utils/getColors";
+import { getSVGColorsByButtonStatus } from "./Button.utils";
 import { SVG } from "..";
 interface ButtonProps {
   configuration: string;

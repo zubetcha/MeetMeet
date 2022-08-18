@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './button.module.scss';
 import classNames from 'classnames';
 import { SVG } from '..';
-import { getSVGColorsByButtonStatus } from '../../../utils/getColors';
+import { getSVGColorsByButtonStatus } from './Button.utils';
 
 
 interface Props {
