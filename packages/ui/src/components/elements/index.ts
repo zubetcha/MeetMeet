@@ -1,6 +1,7 @@
 export * from "./Buttons/Button";
 export * from "./Buttons/ButtonGroup";
 export * from "./Buttons/ExitBtn";
+export * from "./Buttons/IconButton";
 
 export * from "./TextArea";
 export * from "./Dialog/DialogMain";

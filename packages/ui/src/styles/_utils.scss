@@ -185,3 +185,63 @@
   align-items: center;
   justify-content: center;
 }
+
+
+// DESCRIBE State Layer
+@mixin state-layer($color, $isFocused: false) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  
+  @if( $color == on-primary ) {
+    &:hover {
+      background-color: var(--color-onPrimary-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-onPrimary-opacity-12) !important;
+    }
+  }
+  @if( $color == on-error-container) {
+    &:hover {
+      background-color:  var(--color-onErrorContainer-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-onErrorContainer-opacity-12) !important;
+    }
+  }
+  @if( $color == on-primary-container) {
+    &:hover {
+      background-color:  var(--color-onPrimaryContainer-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-onPrimaryContainer-opacity-12) !important;
+    }
+  }
+  @if( $color == on-surface) {
+    &:hover {
+      background-color:  var(--color-onSurface-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-onSurface-opacity-12) !important;
+    }
+  }
+  @if( $color == primary) {
+    &:hover {
+      background-color:  var(--color-primary-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-primary-opacity-12) !important;
+    }
+  }
+  @if( $color == error) {
+    &:hover {
+      background-color:  var(--color-error-opacity-08);
+    }
+    @if($isFocused == true) {
+      background-color: var(--color-error-opacity-12) !important;
+    }
+  }
+}
