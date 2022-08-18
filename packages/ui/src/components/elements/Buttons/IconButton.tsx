@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './button.module.scss';
 import classNames from 'classnames';
 import { SVG } from '..';
-import { getSVGColorsByButtonStatus } from '../../../utils/getColors';
+import { getSVGColorsByButtonStatus, getSVGSizeByButtonSize } from './Button.utils';
 
 
 interface Props {
@@ -23,6 +23,10 @@ export const IconButton = ({
   icon,
   onClick
 }:Props) => {
+
+  const { width: iconWidth, height: iconHeight } = getSVGSizeByButtonSize(size);
+  const iconColor = getSVGColorsByButtonStatus(configuration, negativeMood, state === 'disable' ? true : false);
+
   return(
     <div className={classNames(
       classes.buttonContainer,
@@ -34,8 +38,10 @@ export const IconButton = ({
       negativeMood && classes.negativeMood
     )} >
       <SVG
-        name={icon}
-        color={getSVGColorsByButtonStatus(configuration, negativeMood, state === 'disable' ? true : false)}
+        name={icon} 
+        color={iconColor} 
+        width={iconWidth}
+        height={iconHeight}
       />
       <div className={classes.stateLayer} ></div>
     </div>

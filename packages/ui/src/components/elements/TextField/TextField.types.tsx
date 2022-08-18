@@ -1,2 +1,6 @@
-
-export type TextFieldStatusUnion = "default" | "nice" | "danger" | "disable" | "fixed";
+export type TextFieldStatusUnion =
+  | "default"
+  | "nice"
+  | "danger"
+  | "disable"
+  | "fixed";

@@ -3,21 +3,19 @@ import classes from "./TextField.module.scss";
 import classNames from "classnames";
 import { TextFieldStatusUnion } from "./TextField.types";
 
-
 export const TextFieldInput = ({
-    type,
-    name,
-    status = "default",
-    value,
-    placeholder,
-    maxLength,
-    onChange,
-    autoFocus,
-    isFocused,
-    setIsFocused,
-    children,
-  }: Props
-) => {
+  type,
+  name,
+  status = "default",
+  value,
+  placeholder,
+  maxLength,
+  onChange,
+  autoFocus,
+  isFocused,
+  setIsFocused,
+  children,
+}: Props) => {
   const inputElement = useRef(null as any);
 
   useEffect(() => {
@@ -26,22 +24,23 @@ export const TextFieldInput = ({
     }
   }, []);
 
-
   return (
     <>
       <div style={{ position: "relative" }}>
         <input
-          className={classNames(classes.input, classes[status], {[classes.focused]: isFocused})}
+          className={classNames(classes.input, classes[status], {
+            [classes.focused]: isFocused,
+          })}
           type={type}
           name={name}
           value={value}
           onFocus={() => setIsFocused && setIsFocused(true)}
           onBlur={() => setIsFocused && setIsFocused(false)}
-          disabled={(status == "disable") || (status == "fixed")? true : false}
+          disabled={status == "disable" || status == "fixed" ? true : false}
           onChange={onChange}
           placeholder={isFocused ? "" : placeholder}
           maxLength={maxLength as number}
-          ref={inputElement}       
+          ref={inputElement}
           autoComplete="off"
         />
         <div className={classes.children_wrapper}>
@@ -53,18 +52,17 @@ export const TextFieldInput = ({
                   isFocused,
                 })}
               </>
-            )
+            );
           })}
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 interface Props {
   type: string;
   value: string;
-
   status?: TextFieldStatusUnion;
   isFocused?: boolean;
   setIsFocused?: (focused: boolean) => void;
