@@ -3,15 +3,17 @@ import classes from "./button.module.scss";
 import classNames from "classnames";
 import { getSVGColorsByButtonStatus } from "../../../utils/getColors";
 import { SVG } from "..";
+import { ConfigurationType, StateType } from "./types/button.types";
+
 interface ButtonProps {
-  configuration: string;
-  size: string;
-  state: "hover" | "focused" | "disable";
+  configuration?: ConfigurationType;
+  size?: string;
+  state?: StateType;
   negativeMood?: boolean;
-  showIcon: boolean;
+  showIcon?: boolean;
   icon?: string;
   label: string;
-  showRightIcon: boolean;
+  showRightIcon?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   style?: any;
 }
@@ -37,8 +39,8 @@ export const Button = ({
         classes.button,
         state === "focused" && classes.focused,
         state === "disable" && classes.disable,
-        classes[size],
-        classes[configuration],
+        classes[size as string],
+        classes[configuration as ConfigurationType],
         negativeMood && classes.negativeMood
       )}
       onClick={onClick}
@@ -48,7 +50,7 @@ export const Button = ({
         <SVG
           name={icon}
           color={getSVGColorsByButtonStatus(
-            configuration,
+            configuration as ConfigurationType,
             negativeMood,
             state === "disable" ? true : false
           )}
@@ -61,7 +63,7 @@ export const Button = ({
         <SVG
           name="downward"
           color={getSVGColorsByButtonStatus(
-            configuration,
+            configuration as ConfigurationType,
             negativeMood,
             state === "disable" ? true : false
           )}

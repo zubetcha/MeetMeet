@@ -16,7 +16,7 @@ export function SelectMain({
   isSearch = false,
   defaultValue,
   onChange,
-  style,
+  style = { width: "220px" },
   children,
 }: SelectProps) {
   const [selected, setSelected] = useState();
