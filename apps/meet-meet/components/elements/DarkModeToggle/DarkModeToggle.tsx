@@ -12,7 +12,7 @@ export function DarkModeToggle() {
       <div className={classes.toggle}>
         <input type="checkbox" id="switch" name="mode" onChange={onChange} />
         <label htmlFor="switch">Toggle</label>
-        <h1>다크모드 테스트 입니다.</h1>
+        {/* <h1>다크모드 테스트 입니다.</h1> */}
       </div>
     </>
   );

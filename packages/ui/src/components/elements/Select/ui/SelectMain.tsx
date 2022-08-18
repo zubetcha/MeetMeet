@@ -35,7 +35,7 @@ export function SelectMain({
         defaultValue={defaultValue}
         setIsOpen={setIsOpen}
       >
-        <div ref={ref} style={{ width: "200px" }}>
+        <div ref={ref} style={{ ...style }}>
           {(!isOpen || (isOpen && !isSearch)) && (
             <Select.Trigger isOpen={isOpen} setIsOpen={setIsOpen} />
           )}

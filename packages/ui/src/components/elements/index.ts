@@ -9,7 +9,7 @@ export * from "./Dialog";
 export * from "./Text/Text";
 export * from "./Checkbox";
 export * from "./Alert";
-export * from "./Select/Select";
+export * from "./Select";
 export * from "./MultiSelect/MultiSelect";
 export * from "./Sensor";
 export * from "./Loading";
@@ -19,5 +19,4 @@ export * from "./Radio";
 export * from "./LightSensor/LightSensor";
 
 export * from "./SVG/SVG";
-export * from "./Select/Select";
-export * from "./Select/Option";
+export * from "./Select";

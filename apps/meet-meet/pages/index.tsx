@@ -1,4 +1,4 @@
-import { Button, Select, Option } from "ui/src/components/elements";
+import { Button, Select } from "ui/src/components/elements";
 import type { NextPage } from "next";
 import { DarkModeToggle, Layout } from "../components";
 
@@ -9,19 +9,21 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <DarkModeToggle />
+
       {/* <ColorCard /> */}
       <Select
-        defaultValue="test2"
-        onChange={(e: any) => console.log(e)}
+        defaultValue="투썸플레이스"
+        onChange={onChange}
+        style={{ width: "200px" }}
         isSearch
       >
-        <Option id="1" name="test1" />
-        <Option id="2" name="test2" />
-        <Option id="3" name="test3" />
-        <Option id="4" name="test4" />
-        <Option id="5" name="test5" />
+        <Select.Option id="1" name="스타벅스" />
+        <Select.Option id="2" name="투썸플레이스" />
+        <Select.Option id="3" name="메가커피" />
+        <Select.Option id="4" name="스노우커피" />
+        <Select.Option id="5" name="엔제리너스" />
       </Select>
-      <Button
+      {/* <Button
         configuration="filled"
         size="large"
         state="default"
@@ -29,7 +31,7 @@ const Home: NextPage = () => {
         showIcon={false}
         label="Button label"
         showRightIcon={false}
-      />
+      /> */}
     </Layout>
   );
 };
