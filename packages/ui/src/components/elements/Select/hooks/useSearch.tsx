@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelect } from "./SelectContext";
+import { SelectItemType } from "../types/select.types";
 
 export function useSearch() {
   const [searchValue, setSearchValue] = useState("");
@@ -16,7 +17,7 @@ export function useSearch() {
   }, [searchValue]);
 
   const handleSearchResult = (searchValue: string) => {
-    const result = values.filter((value: any) =>
+    const result = values?.filter((value: SelectItemType) =>
       value.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 

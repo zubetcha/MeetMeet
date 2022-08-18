@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { SelectProvider } from "../hooks/SelectContext";
 import { useOutsideAlerter } from "../hooks";
 import { Select } from "../index";
+import { SelectItemType } from "../types/select.types";
 
 interface SelectProps {
   isSearch?: boolean;
   defaultValue?: string;
-  onChange: (e: any) => void;
+  onChange: (e: SelectItemType) => void;
   style?: any;
   children: React.ReactElement[];
 }
@@ -23,6 +24,8 @@ export function SelectMain({
   const { ref } = useOutsideAlerter(() => setIsOpen(false));
 
   useEffect(() => {
+    if (!selected) return;
+
     onChange(selected);
   }, [selected]);
 

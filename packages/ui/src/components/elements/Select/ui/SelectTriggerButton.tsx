@@ -1,6 +1,5 @@
 import React from "react";
 import { useTriggerButton } from "../hooks";
-import classes from "../style/button.module.scss";
 import { Button } from "../../Buttons/Button";
 
 export function SelectTriggerButton() {

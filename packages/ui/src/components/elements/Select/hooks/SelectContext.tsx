@@ -1,14 +1,15 @@
 import React, { createContext, useState, useReducer, useEffect } from "react";
+import { SelectItemType } from "../types/select.types";
 
 export const SelectContext = createContext({
-  values: [] as any,
-  searchResult: [] as any,
-  selected: undefined as any,
-  defaultValue: undefined as any,
+  values: [] as SelectItemType[] | undefined,
+  searchResult: [] as SelectItemType[] | undefined,
+  selected: undefined as SelectItemType | undefined,
+  defaultValue: undefined as string | undefined,
   isOpen: false,
-  setValues: (e: any) => {},
-  setSelected: (e: any) => {},
-  setSearchResult: (e: any) => {},
+  setValues: (e: SelectItemType) => {},
+  setSelected: (e: SelectItemType) => {},
+  setSearchResult: (e: SelectItemType[] | undefined) => {},
   setIsOpen: (e: boolean) => {},
 });
 
@@ -47,7 +48,7 @@ export const SelectProvider = ({
 }: SelectProps) => {
   const [state, dispatch] = useReducer(reducer, []);
   const [selected, setSelected] = useState();
-  const [searchResult, setSearchResult] = useState();
+  const [searchResult, setSearchResult] = useState<SelectItemType[]>();
 
   useEffect(() => {
     if (selected) {
@@ -70,7 +71,8 @@ export const SelectProvider = ({
           },
           defaultValue: defaultValue,
           setSelected: (value: any) => setSelected(value),
-          setSearchResult: setSearchResult,
+          setSearchResult: (e: SelectItemType[] | undefined) =>
+            setSearchResult(e),
           setIsOpen: setIsOpen,
           isOpen: isOpen,
         }}
