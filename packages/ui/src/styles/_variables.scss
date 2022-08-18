@@ -1,0 +1,187 @@
+
+// DESCRIBE 반응형 화면 크기
+$mobile: 0px;
+$tablet: 0px;
+$laptop: 0px;
+$desktop: 0px;
+
+
+// DESCRIBE Typography
+$display-large-font: 57px;
+$display-large-line: 64px;
+$display-large-letter: -0.01em;
+
+$display-medium-font: 45px;
+$display-medium-line: 52px;
+$display-medium-letter: -0.01em;
+
+$display-small-font: 36px;
+$display-small-line: 44px;
+$display-small-letter: -0.01em;
+
+$headline-large-font: 32px;
+$headline-large-line: 40px;
+$headline-large-letter: 0px;
+
+$headline-medium-font: 28px;
+$headline-medium-line: 36px;
+$headline-medium-letter: 0px;
+
+$headline-small-font: 24px;
+$headline-small-line: 32px;
+$headline-small-letter: 0px;
+
+$title-large-font: 22px;
+$title-large-line: 28px;
+$title-large-letter: 0px;
+
+$title-medium-font: 16px;
+$title-medium-line: 24px;
+$title-medium-letter: 0.1px;
+
+$title-small-font: 14px;
+$title-small-line: 20px;
+$title-small-letter: 0.1px;
+
+$label-large-font: 14px;
+$label-large-line: 20px;
+$label-large-letter: 0px;
+
+$label-medium-font: 12px;
+$label-medium-line: 16px;
+$label-medium-letter: 0px;
+
+$label-small-font: 11px;
+$label-small-line: 16px;
+$label-small-letter: 0px;
+
+$body-large-font: 16px;
+$body-large-line: 24px;
+$body-large-letter: 0px;
+
+$body-medium-font: 14px;
+$body-medium-line: 20px;
+$body-medium-letter: 0px;
+
+$body-small-font: 12px;
+$body-small-line: 16px;
+$body-small-letter: 0px;
+
+
+// DESCRIBE 
+$default-padding: 24px 24px 16px 24px;
+
+
+// DESCRIBE
+$colors: (
+  primary: var(--color-primary),
+  primary-08: var(--color-primary-opacity-08),
+  primary-12: var(--color-primary-opacity-12),
+  primary-16: var(--color-primary-opacity-16),
+  onPrimary: var(--color-onPrimary),
+  onPrimary-08: var(--color-onPrimary-opacity-08),
+  onPrimary-12: var(--color-onPrimary-opacity-12),
+  onPrimary-16: var(--color-onPrimary-opacity-16),
+  primaryContainer: var(--color-primaryContainer),
+  primaryContainer-08: var(--color-primaryContainer-opacity-08),
+  primaryContainer-12: var(--color-primaryContainer-opacity-12),
+  primaryContainer-16: var(--color-primaryContainer-opacity-16),
+  onPrimaryContainer: var(--color-onPrimaryContainer),
+  onPrimaryContainer-08: var(--color-onPrimaryContainer-opacity-08),
+  onPrimaryContainer-12: var(--color-onPrimaryContainer-opacity-12),
+  onPrimaryContainer-16: var(--color-onPrimaryContainer-opacity-16),
+  secondary: var(--color-secondary),
+  secondary-08: var(--color-secondary-opacity-08),
+  secondary-12: var(--color-secondary-opacity-12),
+  secondary-16: var(--color-secondary-opacity-16),
+  onSecondary: var(--color-onSecondary),
+  onSecondary-08: var(--color-onSecondary-opacity-08),
+  onSecondary-12: var(--color-onSecondary-opacity-12),
+  onSecondary-16: var(--color-onSecondary-opacity-16),
+  secondaryContainer: var(--color-secondaryContainer),
+  secondaryContainer-08: var(--color-secondaryContainer-opacity-08),
+  secondaryContainer-12: var(--color-secondaryContainer-opacity-12),
+  secondaryContainer-16: var(--color-secondaryContainer-opacity-16),
+  onSecondaryContainer: var(--color-onSecondaryContainer),
+  onSecondaryContainer-08: var(--color-onSecondaryContainer-opacity-08),
+  onSecondaryContainer-12: var(--color-onSecondaryContainer-opacity-12),
+  onSecondaryContainer-16: var(--color-onSecondaryContainer-opacity-16),
+  tertiary: var(--color-tertiary),
+  tertiary-08: var(--color-tertiary-opacity-08),
+  tertiary-12: var(--color-tertiary-opacity-12),
+  tertiary-16: var(--color-tertiary-opacity-16),
+  onTertiary: var(--color-onTertiary),
+  onTertiary-08: var(--color-onTertiary-opacity-08),
+  onTertiary-12: var(--color-onTertiary-opacity-12),
+  onTertiary-16: var(--color-onTertiary-opacity-16),
+  tertiaryContainer: var(--color-tertiaryContainer),
+  tertiaryContainer-08: var(--color-tertiaryContainer-opacity-08),
+  tertiaryContainer-12: var(--color-tertiaryContainer-opacity-12),
+  tertiaryContainer-16: var(--color-tertiaryContainer-opacity-16),
+  onTertiaryContainer: var(--color-onTertiaryContainer),
+  onTertiaryContainer-08: var(--color-onTertiaryContainer-opacity-08),
+  onTertiaryContainer-12: var(--color-onTertiaryContainer-opacity-12),
+  onTertiaryContainer-16: var(--color-onTertiaryContainer-opacity-16),
+  error: var(--color-error),
+  error-08: var(--color-error-opacity-08),
+  error-12: var(--color-error-opacity-12),
+  error-16: var(--color-error-opacity-16),
+  onError: var(--color-onError),
+  onError-08: var(--color-onError-opacity-08),
+  onError-12: var(--color-onError-opacity-12),
+  onError-16: var(--color-onError-opacity-16),
+  errorContainer: var(--color-errorContainer),
+  errorContainer-08: var(--color-errorContainer-opacity-08),
+  errorContainer-12: var(--color-errorContainer-opacity-12),
+  errorContainer-16: var(--color-errorContainer-opacity-16),
+  onErrorContainer: var(--color-onErrorContainer),
+  onErrorContainer-08: var(--color-onErrorContainer-opacity-08),
+  onErrorContainer-12: var(--color-onErrorContainer-opacity-12),
+  onErrorContainer-16: var(--color-onErrorContainer-opacity-16),
+  background: var(--color-background),
+  background-08: var(--color-background-opacity-08),
+  background-12: var(--color-background-opacity-12),
+  background-16: var(--color-background-opacity-16),
+  onBackground: var(--color-onBackground),
+  onBackground-08: var(--color-onBackground-opacity-08),
+  onBackground-12: var(--color-onBackground-opacity-12),
+  onBackground-16: var(--color-onBackground-opacity-16),
+  surface: var(--color-surface),
+  surface-08: var(--color-surface-opacity-08),
+  surface-12: var(--color-surface-opacity-12),
+  surface-16: var(--color-surface-opacity-16),
+  onSurface: var(--color-onSurface),
+  onSurface-08: var(--color-onSurface-opacity-08),
+  onSurface-12: var(--color-onSurface-opacity-12),
+  onSurface-16: var(--color-onSurface-opacity-16),
+  surfaceVariant: var(--color-surfaceVariant),
+  surfaceVariant-08: var(--color-surfaceVariant-opacity-08),
+  surfaceVariant-12: var(--color-surfaceVariant-opacity-12),
+  surfaceVariant-16: var(--color-surfaceVariant-opacity-16),
+  onSurfaceVariant: var(--color-onSurfaceVariant),
+  onSurfaceVariant-08: var(--color-onSurfaceVariant-opacity-08),
+  onSurfaceVariant-12: var(--color-onSurfaceVariant-opacity-12),
+  onSurfaceVariant-16: var(--color-onSurfaceVariant-opacity-16),
+  outline: var(--color-outline),
+  outline-08: var(--color-outline-opacity-08),
+  outline-12: var(--color-outline-opacity-12),
+  outline-16: var(--color-outline-opacity-16),
+  warning: var(--color-warning),
+  warning-08: var(--color-warning-opacity-08),
+  warning-12: var(--color-warning-opacity-12),
+  warning-16: var(--color-warning-opacity-16),
+  onWarning: var(--color-onWarning),
+  onWarning-08: var(--color-onWarning-opacity-08),
+  onWarning-12: var(--color-onWarning-opacity-12),
+  onWarning-16: var(--color-onWarning-opacity-16),
+  warningContainer: var(--color-warningContainer),
+  warningContainer-08: var(--color-warningContainer-opacity-08),
+  warningContainer-12: var(--color-warningContainer-opacity-12),
+  warningContainer-16: var(--color-warningContainer-opacity-16),
+  onWarningContainer: var(--color-onWarningContainer),
+  onWarningContainer-08: var(--color-onWarningContainer-opacity-08),
+  onWarningContainer-12: var(--color-onWarningContainer-opacity-12),
+  onWarningContainer-16: var(--color-onWarningContainer-opacity-16),
+  transparent: transparent,
+);
+

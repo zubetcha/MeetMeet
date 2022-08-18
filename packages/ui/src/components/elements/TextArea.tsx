@@ -22,7 +22,7 @@ import classNames from "classnames";
  * @param borderRadius input 태그 테두리 둥글기, 필요 시 px로 재할당
  * @param onChange Input value onChange 함수
  * @param onClick icon === true 일 때 icon onClick 함수
- * 
+ *
  * @returns
  */
 
@@ -37,14 +37,14 @@ export const TextArea = ({
   placeholder,
   size,
   icon,
-  iconMarginBottom="0px",
-  iconMarginRight="0px",
+  iconMarginBottom = "0px",
+  iconMarginRight = "0px",
   height,
   width = "100%",
   borderRadius = "4px",
   onClick,
-  isMargin= true,
-  isBoxShadow=false,
+  isMargin = true,
+  isBoxShadow = false,
 }: TextAreaProps) => {
   const [focused, setFocused] = useState<boolean>(false);
 
@@ -58,12 +58,11 @@ export const TextArea = ({
     setFocused(false);
   };
 
-  useEffect(()=>{
-    if(setIsFocused){
+  useEffect(() => {
+    if (setIsFocused) {
       setIsFocused(focused);
     }
-  },[focused])
-
+  }, [focused]);
 
   const handleColor = (): string => {
     if (status == "disable") {
@@ -102,64 +101,64 @@ export const TextArea = ({
         <div
           style={{
             position: "relative",
-            backgroundColor:"#fff"
+            backgroundColor: "#fff",
           }}
         >
-         
-        <span  
-          style={{
-            display:"block", 
-            boxShadow: isBoxShadow? "0px 4px 8px rgba(0, 0, 0, 0.16)": "none",
-            margin: isMargin ? inputs.size[size].margin : "none",
-            borderRadius: borderRadius,
-          }}
-          >
-          <textarea
-            className={classNames(classes.textArea,classes.hover)}
-            name={name}
-            value={value}
-            onFocus={handleOnFocus}
-            onBlur={handleOnBlur}
+          <span
             style={{
-              height: height,
-              width: width,
-              backgroundColor: focused
-                ? inputs[status].focused.backgroundColor
-                : inputs[status].default.backgroundColor,
+              display: "block",
+              boxShadow: isBoxShadow
+                ? "0px 4px 8px rgba(0, 0, 0, 0.16)"
+                : "none",
+              margin: isMargin ? inputs.size[size].margin : "none",
               borderRadius: borderRadius,
-              outline: focused
-                ? inputs[status].focused.outline
-                : inputs[status].default.outline,
-              fontSize: inputs.size[size].fontSize.mainText,
-              color: handleColor(),
-              cursor: focused
-                ? inputs[status].focused.cursor
-                : inputs[status].default.cursor,
-              padding: status === "disable" ?  '16px 0px'  : inputs.size[size].padding,
-              
-            }}
-            disabled={status == "disable" ? true : false}
-            onChange={onChange}
-            placeholder={focused ? "" : placeholder}
-          />
-        </span>
-        </div>
-          <p
-            style={{
-              height: inputs.size[size].height.helperText,
-              fontSize: inputs.size[size].fontSize.helperText,
-              color: helperText
-                ? inputs[status].default.color[status]
-                : inputs[status].default.color.white,
             }}
           >
-           {helperText&&
-              (status == "danger" || focused) || 
-              (status === "default" && focused) || 
-              (status === "nice"  && focused) 
-              ? helperText : ""
-           }
-          </p>
+            <textarea
+              className={classNames(classes.textArea, classes.hover)}
+              name={name}
+              value={value}
+              onFocus={handleOnFocus}
+              onBlur={handleOnBlur}
+              style={{
+                height: height,
+                width: width,
+                backgroundColor: focused
+                  ? inputs[status].focused.backgroundColor
+                  : inputs[status].default.backgroundColor,
+                borderRadius: borderRadius,
+                outline: focused
+                  ? inputs[status].focused.outline
+                  : inputs[status].default.outline,
+                fontSize: inputs.size[size].fontSize.mainText,
+                color: handleColor(),
+                cursor: focused
+                  ? inputs[status].focused.cursor
+                  : inputs[status].default.cursor,
+                padding:
+                  status === "disable" ? "16px 0px" : inputs.size[size].padding,
+              }}
+              disabled={status == "disable" ? true : false}
+              onChange={onChange}
+              placeholder={focused ? "" : placeholder}
+            />
+          </span>
+        </div>
+        <p
+          style={{
+            height: inputs.size[size].height.helperText,
+            fontSize: inputs.size[size].fontSize.helperText,
+            color: helperText
+              ? inputs[status].default.color[status]
+              : inputs[status].default.color.white,
+          }}
+        >
+          {(helperText && (status == "danger" || focused)) ||
+          (status === "default" && focused) ||
+          (status === "nice" && focused)
+            ? helperText
+            : ""}
+        </p>
       </div>
     </>
   );

@@ -1,6 +1,5 @@
-@use "../../../shared/colors.scss" as *;
-@use "../../../shared/font.scss" as *;
-@use "../../../shared/common.module.scss" as *;
+@use "../../../styles/color.scss" as *;
+@import '../../../styles/utils';
 
 @mixin animate($animation,$duration,$method,$times){
     animation: $animation $duration $method $times;
@@ -39,7 +38,7 @@
     
     width: 32px;
     height: 32px;
-    background-color: $primary-500;
+    background-color: var(--color-surface);
     border-radius: 4px;
 
     .exitBtn {
@@ -58,9 +57,9 @@
             cursor: pointer;
             display: block;
             position: absolute;
-            height: 2px;
+            height: 3px;
             width: 16px;
-            background: #ffffff;
+            background: var(--color-primary);
             opacity: 1;
             left: 50%;
             -webkit-transform: rotate(0deg) translate(-50%);
@@ -150,16 +149,138 @@
    
 }
 
-.button_icon {
-    height: 100%;
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@mixin button-state-layer($color, $negativeColor) {
+    .stateLayer{
+        @include state-layer($color);
+    }
+    &.negativeMood{
+        .stateLayer{
+            @include state-layer($negativeColor)
+        }
+    }
+
+    &.focused{
+        .stateLayer{
+            @include state-layer($color, true);
+        }
+    }
 }
 
-.hover {
-    &:hover {
-      box-shadow: inset 0 50px rgba(0, 0, 0, 0.03) !important;
+.buttonContainer {
+    border: none;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+    
+    &.button {
+        border-radius: 4px;
+        .stateLayer {
+            border-radius: 4px;
+        }
+
+        //DESCRIBE size 
+        &.large {
+            padding: 8px 16px;
+            gap: 8px;
+            @include font-style(label-large);
+        }
+
+        &.medium {
+            padding: 6px 12px;
+            gap: 4px;
+            @include font-style(label-large);
+        }
+
+        &.small {
+            padding: 4px 8px;
+            gap: 4px;
+            @include font-style(label-small);
+        }
     }
-  }
+
+    &.iconButton {
+        border-radius: 50%;
+        justify-content: center;
+        width: fit-content;
+        .stateLayer{
+            border-radius: 50%;
+        }
+
+        //DESCRIBE size 
+        &.large {
+            padding: 10px;
+        }
+
+        &.medium {
+            padding: 7.67px;
+        }
+
+        &.small {
+            padding: 5.33px;
+        }
+
+    }
+
+ //DESCRIBE configuration
+
+    &.filled {
+        background-color:  var(--color-primary);
+        color: var(--color-onPrimary);
+        &.negativeMood {
+            background-color: var(--color-error);
+        }
+        @include button-state-layer(on-primary, on-primary);
+    };
+
+    &.tonal {
+        background-color: var(--color-secondaryContainer);
+        color: var(--color-onSecondaryContainer);
+        &.negativeMood {
+            background-color: var(--color-errorContainer);
+        }
+        @include button-state-layer(on-primary-container, on-error-container);
+    };
+    
+    &.outlined {
+        background-color: transparent;
+        color: var(--color-primary);
+        border: 1px solid var(--color-outline);
+        &.negativeMood    {
+            background-color: transparent;
+            color: var(--color-error);
+        }
+        @include button-state-layer(primary, error);
+    };
+
+    &.text {
+        background-color: transparent;
+        color: var(--color-primary);
+        &.negativeMood {
+            background-color: transparent;
+            color: var(--color-error);
+        }
+        @include button-state-layer(primary, error);
+    }
+
+    &.textGray {
+        background-color: transparent;
+        color: var(--color-onSurfaceVariant);
+        @include button-state-layer(on-surface, on-surface);
+    }
+
+
+//DESCRIBE state
+
+    &.disable {
+        color: var(--color-onSurface) !important;
+        background-color: var(--color-onSurface-opacity-12) !important;
+        cursor: default;
+    }
+
+    &.focused {
+        cursor: default;
+    }
+
+
+}
