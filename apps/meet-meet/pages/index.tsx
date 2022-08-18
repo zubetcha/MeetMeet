@@ -16,7 +16,7 @@ const Home: NextPage = () => {
       }} >
         <Button
           configuration="filled"
-          size="large"
+          size="medium"
           state="default"
           negativeMood={false}
           showIcon={true}

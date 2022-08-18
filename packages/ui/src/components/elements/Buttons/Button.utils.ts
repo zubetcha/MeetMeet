@@ -19,8 +19,37 @@ export const getSVGColorsByButtonStatus = (configuration:string, isNegative:bool
       if(isNegative) return 'error'
       else return 'primary';
 
-    case 'textGary':
+    case 'textGray':
       return 'onSurfaceVariant'
   }
 
+}
+
+export const getSVGSizeByButtonSize = (size:string) => {
+  
+  switch(size){
+    case 'large':
+      return {
+        width: '24px',
+        height: '24px'
+      }
+    
+    case 'medium':
+      return {
+        width: '20px',
+        height: '20px'
+      }
+    
+    case 'small':
+      return {
+        width: '16px',
+        height: '16px'
+      }
+    
+    default: 
+      return {
+        width: '24px',
+        height: '24px'
+      }
+  }
 }
