@@ -4,7 +4,7 @@ export const TextFieldLabel = ({children, name}: Props) => {
 
   return (
     <>
-      <label htmlFor={name} className={classes.label} >
+      <label htmlFor={name} className={classes["wrapper__label"]} >
         {children}
       </label>
     </>

@@ -11,10 +11,12 @@ export const ModalMain = ({ children, setIsOpen, isToast = false }: Props) => {
     <>
     <div className={classes["modal-overlay"]} onClick={()=>setIsOpen && setIsOpen(false)}>
       <div className={classNames(classes["modal-container"], {[classes["toast"]]: isToast})}>
-        {Children.toArray(children).map((child: any) => {
+        {Children.toArray(children).map((child: any, i) => {
           return (
             <>
-              {cloneElement(child)}
+              {cloneElement(child, {
+                key: `modal-child-${i}`
+              })}
             </>
           )
         })}

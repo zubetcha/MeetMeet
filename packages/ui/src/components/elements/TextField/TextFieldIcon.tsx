@@ -6,7 +6,14 @@ export const TextFieldIcon = ({children, status = "default", isFocused, onClickI
 
   return (
     <>
-      <div className={classNames(classes.icon, classes[status], {[classes.focused]: isFocused})} onClick={onClickIcon}>
+      <div
+        className={classNames(
+          classes["wrapper__input-box__children__icon"], 
+          classes[`wrapper__input-box__children__icon--${status}`], 
+          {[classes.focused]: isFocused}
+        )}
+        onClick={onClickIcon}
+      >
         {children}
       </div>
     </>

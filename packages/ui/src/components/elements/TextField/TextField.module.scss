@@ -1,181 +1,178 @@
 @import "../../../styles/variables";
 @import "../../../styles/utils";
 
-.textField_wrapper {
+.wrapper {
   display: flex;
   flex-direction: column;
   row-gap: 2px;
-}
 
-/* Label */
-.label {
-  @include font-style(label-medium, on-surface-variant);
-}
+  &__label { @include font-style(label-medium, on-surface-variant); }
 
+  &__input-box {
+    position: relative;
 
-/* Input */
-.input {
-  @include font-style(body-large);
-  width: 100%;
-  height: 40px;
-  border-radius: 4px;
-  padding: 8px 16px;
-  border: none;
-
-  &::placeholder {
-    color: var(--color-onSurface-opacity-38);
-  }
-
-  &:hover {
-    cursor: text;
-  }
-
-  &.default {
-    background-color: var(--color-surfaceVariant);
-    outline: none;
-    color: var(--color-onSurfaceVariant);
-
-    &.focused {
-      outline: 1px solid var(--color-outline) !important;
-      color: var(--color-onSurface) !important;   
+    &__state-layer {
+      &--default { 
+        @include state-layer(on-surface, false, false);
+        &.focused {
+          @include state-layer(on-surface, true, false);
+        }
+       }
+      &--nice { 
+        @include state-layer(on-surface, false, false);
+        .focused {
+          @include state-layer(on-primary-container, true, false);
+        }
+       } 
+      &--danger { 
+        @include state-layer(on-error-container false, false);
+        .focused {
+          @include state-layer(on-error-container true, false);
+        }
+       } 
+      &--disable { 
+       } 
+      &--fixed { 
+       }
     }
-  }
 
-  &.nice {
-    background-color: var(--color-surfaceVariant);
-    outline: none;
-    color: var(--color-onSurfaceVariant);
+    &__input {
+      @include font-style(body-large);
+      width: 100%;
+      height: 40px;
+      border-radius: 4px;
+      padding: 8px 16px;
+      border: none;
 
-    &.focused {
-      background-color: var(--color-primaryContainer) !important;
-      outline: 1px solid var(--color-primary) !important;
-      color: var(--color-onPrimaryContainer) !important;   
-    }
-  }
+      &::placeholder { color: var(--color-onSurface-opacity-38); }
 
-  &.danger {
-    background-color: var(--color-errorContainer);
-    outline: none;
-    color: var(--color-onErrorContainer);
-
-    &.focused {
-      outline: 1px solid var(--color-error) !important;
-    }
-  }
-
-  &.disable {
-    cursor: default !important;
-    background-color: transparent;
-    outline: 1px solid var(--color-onSurface-opacity-12);
-    color: var(--color-onSurface-opacity-38);
-  }
-
-  &.fixed {
-    cursor: default !important;
-    padding: 8px 0 !important;
-    background-color: transparent;
-    outline: none;
-    color: var(--color-onSurface);
-  }
-
-  &.fixed::placeholder {
-    color: transparent;
-  }
-}
-
-.children_wrapper {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 16px;
-
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  column-gap: 8px;
-
-  /* Unit */
-  .unit {
-    @include font-style(body-large);
-    cursor: default;
-    
-    &.default {
-      color: var(--color-onSurfaceVariant);
-      &.focused {
-        color: var(--color-onSurface) !important;
+      &:hover {
+        cursor: text;
       }
-    }
 
-    &.nice {
-      color: var(--color-onPrimaryContainer);
-    }
+      &--default {
+        background-color: var(--color-surfaceVariant);
+        outline: none;
+        color: var(--color-onSurfaceVariant);
 
-    &.danger {
-      color: var(--color-onErrorContainer);
-    }
+        &.focused {
+          outline: 1px solid var(--color-outline) !important;
+          color: var(--color-onSurface) !important;   
+        }
+      }
 
-    &.disable {
-      color: var(--color-onSurface-opacity-38);
-    }
+      &--nice {
+        background-color: var(--color-surfaceVariant);
+        outline: none;
+        color: var(--color-onSurfaceVariant);
 
-    &.fixed {
-      color: var(--color-onSurface);
-    }
-  }
+        &.focused {
+          background-color: var(--color-primaryContainer) !important;
+          outline: 1px solid var(--color-primary) !important;
+          color: var(--color-onPrimaryContainer) !important;   
+        }
+      }
 
-  /* Icon */
-  .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    svg {
-      cursor: pointer !important;
-      fill: var(--color-onSurfaceVariant);
-    }
+      &--danger {
+        background-color: var(--color-errorContainer);
+        outline: none;
+        color: var(--color-onErrorContainer);
 
-    &.disable {
-      svg {
-        fill: var(--color-onSurface-opacity-12);
+        &.focused {
+          outline: 1px solid var(--color-error) !important;
+        }
+      }
+
+      &--disable {
         cursor: default !important;
+        background-color: transparent;
+        outline: 1px solid var(--color-onSurface-opacity-12);
+        color: var(--color-onSurface-opacity-38);
+      }
+
+      &--fixed {
+        cursor: default !important;
+        padding: 8px 0 !important;
+        background-color: transparent;
+        outline: none;
+        color: var(--color-onSurface);
+      }
+
+      &--fixed::placeholder { color: transparent; }
+    }
+
+    &__children {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 16px;
+
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      column-gap: 8px;
+
+      /* Unit */
+      &__unit {
+        @include font-style(body-large);
+        cursor: default;
+
+        &--default {
+          color: var(--color-onSurfaceVariant);
+          &.focused {
+            color: var(--color-onSurface) !important;
+          }
+        }
+        &--nice { color: var(--color-onPrimaryContainer); }
+        &--danger { color: var(--color-onErrorContainer); }
+        &--disable { color: var(--color-onSurface-opacity-38); }
+        &--fixed { color: var(--color-onSurface); }
+      }
+
+      &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        svg {
+          cursor: pointer !important;
+          fill: var(--color-onSurfaceVariant);
+        }
+
+        &--disable {
+          svg {
+            fill: var(--color-onSurface-opacity-12);
+            cursor: default !important;
+          }
+        }
+
+        &.focused {
+          svg {
+            fill: var(--color-onSurface) !important;
+          }
+        }
       }
     }
+  }
 
-    &.focused {
-      svg {
-        fill: var(--color-onSurface) !important;
+  &__helperText {
+    @include font-style(label-medium);
+
+    &--default {
+      color: transparent;
+      &.focused {
+        color: var(--color-outline) !important;
       }
     }
-  }
-}
-
-/* HelperText */
-.helperText {
-  @include font-style(label-medium);
-
-  &.default {
-    color: transparent;
-    &.focused {
-      color: var(--color-outline) !important;
+    &--nice {
+      color: transparent;
+      &.focused {
+        color: var(--color-primary) !important;
+      }
     }
-  }
-
-  &.nice {
-    color: transparent;
-    &.focused {
-      color: var(--color-primary) !important;
-    }
-  }
-
-  &.danger {
-    color: var(--color-error);
-  }
-
-  &.disable {
-    color: var(--color-onSurface-opacity-38);
-  }
-
-  &.fixed {
-    color: transparent;
+    &--danger { color: var(--color-error); }
+    &--disable { color: var(--color-onSurface-opacity-38); }
+    &--fixed { color: transparent; }
   }
 }

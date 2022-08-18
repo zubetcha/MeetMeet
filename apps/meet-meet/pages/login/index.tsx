@@ -30,7 +30,7 @@ const Login = () => {
         </TextField.Input>
         <TextField.HelperText>ID</TextField.HelperText>
       </TextField>
-      <Modal isToast>
+      {/* <Modal isToast>
         <Modal.Contents>
           <Modal.Icon>
             <SVG name="done" color="primary"/>
@@ -40,7 +40,7 @@ const Login = () => {
           <Modal.Description>모달 디스크립션2: 부가 설명 문단이 필요할때 사용</Modal.Description>
           <Modal.Description>모달 디스크립션3: 부가 설명 문단이 필요할때 사용</Modal.Description>
         </Modal.Contents>
-      </Modal>
+      </Modal> */}
     </div>
     </>
   )
