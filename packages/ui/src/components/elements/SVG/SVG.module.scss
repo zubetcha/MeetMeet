@@ -47,7 +47,7 @@
 }
 
 .onSurface{
-  @include path-fill(var(--color-onSurface));
+  @include path-fill(var(--color-onSurface-opacity-38));
 }
 
 .onSuraceVariant{

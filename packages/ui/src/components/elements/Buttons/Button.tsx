@@ -15,6 +15,7 @@ interface ButtonProps {
   icon?: string;
   label: string;
   showRightIcon: boolean;
+  onClick?: () => void;
 }
 
 
@@ -26,21 +27,25 @@ export const Button = ({
   negativeMood = false,
   showIcon,
   icon="",
-  showRightIcon,          
+  showRightIcon,
+  onClick
 }:ButtonProps) => {
 
   const [btnState, setbtnState] = useState(state);
 
   return (
-    <button className={classNames(
-      classes.buttonContainer,
-      classes.button,
-      state === 'focused' && classes.focused,
-      state === 'disable' && classes.disable, 
-      classes[size], 
-      classes[configuration],
-      negativeMood && classes.negativeMood
-      )}>
+    <button 
+      className={classNames(
+        classes.buttonContainer,
+        classes.button,
+        state === 'focused' && classes.focused,
+        state === 'disable' && classes.disable, 
+        classes[size], 
+        classes[configuration],
+        negativeMood && classes.negativeMood
+      )}
+      onClick={onClick}
+    >
       {showIcon && 
         <SVG 
           name={icon} 

@@ -138,7 +138,7 @@ const Home: NextPage = () => {
         <IconButton
           configuration="filled"
           size="large"
-          state="default"
+          state="disable"
           negativeMood={false}
           icon="more"
         />

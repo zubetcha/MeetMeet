@@ -183,7 +183,7 @@
 
 
 // DESCRIBE State Layer
-@mixin state-layer($color, $isFocused: false) {
+@mixin state-layer($color, $isFocused: false, $isDisable: false) {
   position: absolute;
   top: 0;
   left: 0;
@@ -198,6 +198,11 @@
     @if($isFocused == true) {
       background-color: var(--color-onPrimary-opacity-12) !important;
     }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
   }
   @if( $color == on-error-container) {
     &:hover {
@@ -205,6 +210,11 @@
     }
     @if($isFocused == true) {
       background-color: var(--color-onErrorContainer-opacity-12) !important;
+    }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
     }
   }
   @if( $color == on-primary-container) {
@@ -214,6 +224,11 @@
     @if($isFocused == true) {
       background-color: var(--color-onPrimaryContainer-opacity-12) !important;
     }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
   }
   @if( $color == on-surface) {
     &:hover {
@@ -221,6 +236,11 @@
     }
     @if($isFocused == true) {
       background-color: var(--color-onSurface-opacity-12) !important;
+    }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
     }
   }
   @if( $color == primary) {
@@ -230,6 +250,11 @@
     @if($isFocused == true) {
       background-color: var(--color-primary-opacity-12) !important;
     }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
   }
   @if( $color == error) {
     &:hover {
@@ -238,5 +263,11 @@
     @if($isFocused == true) {
       background-color: var(--color-error-opacity-12) !important;
     }
+    @if($isDisable == true) {
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
   }
 }
+

@@ -149,6 +149,8 @@
    
 }
 
+// DESCRIBE button-state-layer mixin
+
 @mixin button-state-layer($color, $negativeColor) {
     .stateLayer{
         @include state-layer($color);
@@ -162,6 +164,12 @@
     &.focused{
         .stateLayer{
             @include state-layer($color, true);
+        }
+    }
+
+    &.disable{
+        .stateLayer{
+            @include state-layer($color, false, true);
         }
     }
 }
@@ -273,7 +281,7 @@
 //DESCRIBE state
 
     &.disable {
-        color: var(--color-onSurface) !important;
+        color: var(--color-onSurface-opacity-38) !important;
         background-color: var(--color-onSurface-opacity-12) !important;
         cursor: default;
     }
