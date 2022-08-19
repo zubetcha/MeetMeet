@@ -9,7 +9,7 @@ const Login = () => {
     setValue(value);
   }
 
-  const status = "default"
+  const status = "fixed"
 
   return (
     <>
