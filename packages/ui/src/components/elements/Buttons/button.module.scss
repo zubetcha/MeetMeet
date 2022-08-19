@@ -126,27 +126,52 @@
 .btnGroup{
     height: fit-content;
     display: flex;
-    width:fit-content;    
-
+    width:fit-content; 
+    border-radius: 4px;
     .btnElement{
-        button{
-            border-right: none !important;
+        .buttonContainer{  
+            border-radius: 4px;
+            // border-collapse:collapse;
         }
+        
         &:first-child{
-            button{
+            .buttonContainer{
                 border-radius: 4px 0px 0px 4px !important;
-    
             }
         }
-        &:last-child{
-            button{
-                border-right: 1px solid rgb(112, 167, 136) !important;
-                border-radius: 0px 4px 4px 0px !important;
     
+        &:last-child{
+            .buttonContainer{
+                border-radius: 0px 4px 4px 0px !important;
             }
         }
     }
-   
+    
+    &.filled {
+        background-color:  var(--color-primary);
+    };
+
+    &.tonal {
+        background-color: var(--color-secondaryContainer);
+    };
+
+    &.outlined {
+        background-color: transparent;
+        .buttonContainer{
+            border-radius: 0px;
+            // border-collapse:collapse;
+            .stateLayer {
+                border-radius: 0px;
+            }
+        }
+    };
+
+    &.text {
+        background-color: transparent;
+        outline: 1px solid var(--color-primary-opacity-16);
+    };
+
+
 }
 
 // DESCRIBE button-state-layer mixin
@@ -180,7 +205,6 @@
     cursor: pointer;
     position: relative;
     align-items: center;
-    
     //Button 컴포넌트
     &.button {
         border-radius: 4px;
@@ -255,7 +279,7 @@
     &.outlined {
         background-color: transparent;
         color: var(--color-primary);
-        border: 1px solid var(--color-outline);
+        outline: 1px solid var(--color-outline);
         &.negativeMood    {
             background-color: transparent;
             color: var(--color-error);
