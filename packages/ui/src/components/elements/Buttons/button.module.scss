@@ -128,23 +128,8 @@
     display: flex;
     width:fit-content; 
     border-radius: 4px;
-    .btnElement{
-        .buttonContainer{  
-            border-radius: 4px;
-            // border-collapse:collapse;
-        }
-        
-        &:first-child{
-            .buttonContainer{
-                border-radius: 4px 0px 0px 4px !important;
-            }
-        }
-    
-        &:last-child{
-            .buttonContainer{
-                border-radius: 0px 4px 4px 0px !important;
-            }
-        }
+    .buttonContainer{  
+        border-radius: 4px;
     }
     
     &.filled {
@@ -157,12 +142,22 @@
 
     &.outlined {
         background-color: transparent;
+        
         .buttonContainer{
+            margin-left: 0px;
+            &:first-child{
+                margin-left: 0px;
+                border-radius: 4px 0px 0px 4px !important;
+            };
+
+            &:last-child{
+                border-radius: 0px 4px 4px 0px !important;
+            };
+
             border-radius: 0px;
-            // border-collapse:collapse;
             .stateLayer {
                 border-radius: 0px;
-            }
+            };
         }
     };
 

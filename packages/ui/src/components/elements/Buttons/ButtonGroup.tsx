@@ -37,14 +37,14 @@ export function ButtonGroup({
     <div className={classNames(classes[configuration], classes.btnGroup)}>
       {Children.toArray(children).map((child: any, index: number) => {
         return (
-          <div className={classes.btnElement} key={`button-child-${index}`}>
+          <>
             {React.cloneElement(child, {
               configuration: configuration,
               state: btnState[index],
               size: size,
               onClick: () => onClick(index),
             })}
-          </div>
+          </>
         );
       })}
     </div>

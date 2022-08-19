@@ -25,12 +25,12 @@ export const Navbar = ({close, setClose}:NavbarProps) => {
         <div className={classes.logoutBox} >
           <Button
             size="medium"
-            text="로그아웃"
-            style="textWhite"
+            label="로그아웃"
+            configuration="textGray"
           />
         </div>
         <div className={classes.menuBox}>
-
+          
         </div>
       </div>
     </div>
