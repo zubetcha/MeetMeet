@@ -26,9 +26,11 @@ export const TextFieldInput = ({
 
   return (
     <>
-      <div style={{ position: "relative" }}>
+      <div className={classes["wrapper__input-box"]}>
         <input
-          className={classNames(classes.input, classes[status], {
+          className={classNames(
+            classes["wrapper__input-box__input"],
+            classes[`wrapper__input-box__input--${status}`], {
             [classes.focused]: isFocused,
           })}
           type={type}
@@ -43,7 +45,7 @@ export const TextFieldInput = ({
           ref={inputElement}
           autoComplete="off"
         />
-        <div className={classes.children_wrapper}>
+        <div className={classes["wrapper__input-box__children"]}>
           {Children.toArray(children).map((child: any) => {
             return (
               <>

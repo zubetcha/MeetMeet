@@ -4,7 +4,7 @@ export * from "./Buttons/ExitBtn";
 export * from "./Buttons/IconButton";
 
 export * from "./TextArea";
-export * from "./Dialog/DialogMain";
+export * from "./Modal";
 export * from "./Dialog";
 export * from "./Text/Text";
 export * from "./Checkbox";
