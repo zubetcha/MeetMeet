@@ -20,9 +20,6 @@
 
       &::placeholder { color: var(--color-onSurface-opacity-38); }
 
-      &:hover {
-      }
-
       &--default {
         background-color: var(--color-surfaceVariant);
         outline: none;
@@ -82,10 +79,9 @@
 
       &--fixed {
         cursor: default !important;
-        padding: 8px 0 !important;
         background-color: transparent;
-        outline: none;
-        color: var(--color-onSurface);
+        outline: 1px solid var(--color-onSurface-opacity-12);
+        color: var(--color-onSurfaceVariant);
       }
 
       &--fixed::placeholder { color: transparent; }
@@ -112,7 +108,7 @@
         &--nice { color: var(--color-onPrimaryContainer); }
         &--danger { color: var(--color-onErrorContainer); }
         &--disable { color: var(--color-onSurface-opacity-38); }
-        &--fixed { color: var(--color-onSurface); }
+        &--fixed { color: var(--color-onSurfaceVariant); }
       }
 
       &__icon {
@@ -123,10 +119,14 @@
           cursor: pointer !important;
           fill: var(--color-onSurfaceVariant);
         }
-
         &--disable {
           svg {
             fill: var(--color-onSurface-opacity-38);
+            cursor: default !important;
+          }
+        }
+        &--fixed {
+          svg {
             cursor: default !important;
           }
         }
