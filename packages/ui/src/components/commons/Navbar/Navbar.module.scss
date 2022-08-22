@@ -20,14 +20,21 @@
         }
 
         .rightBtnBox {
-            padding: 4px 0px;
+            padding: 8px 0px;
             display: flex;
             transition: opacity 0.3s ease-in-out;
         }
     }
 
     .logoLayout {
-        margin: 16px 0 40px 0;
+        margin: 16px 0 40px 8px;
+        transition: opacity 0.3s ease-in-out;
+        .customerName {
+            margin-top: 8px;
+            white-space: nowrap;
+            @include font-style(title-medium);
+            color: var(--color-primary);
+        }
     }
 
     .menuLayout {
@@ -89,7 +96,7 @@
         }
         
         .logoLayout {
-
+            opacity: 0;
         }
 
         .menuLayout {

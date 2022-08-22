@@ -4,6 +4,7 @@ import classes from './Navbar.module.scss';
 import classNames from 'classnames';
 import { Button, ExitBtn } from '../../elements';
 import { NavItemType, NavSection } from '..';
+import MeetmeetLogo from '../../../assets/icons/meetmeet_horizontal.svg';
 
 interface NavbarProps {
   isClose: boolean;
@@ -59,7 +60,8 @@ export const Navbar = ({isClose, setClose, navInfo}:NavbarProps) => {
         </div>
       </div>
       <div className={classes.logoLayout} >
-
+        <MeetmeetLogo width="140px" />
+        <div className={classes.customerName} >젠틀에너지</div>
       </div>
       <div className={classes.menuLayout} >
         {navInfo.map((info, idx) => {
