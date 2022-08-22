@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import classes from './Layout.module.scss';
 import classNames from 'classnames';
+import { navInfo } from '@shared/pageInfo';
 import { Navbar } from '../../ui/index'
 
 
@@ -15,7 +16,7 @@ export const Layout = ({children}: LayoutProps) => {
 
     return (
         <div className={classes.layoutContainer} >
-            <Navbar isClose={isClose} setClose={setIsClose} />
+            <Navbar isClose={isClose} setClose={setIsClose} navInfo={navInfo} />
             <div className={classNames(classes.pageBody, isClose ? classes.close: "" )}>{children}</div>
         </div>
     )

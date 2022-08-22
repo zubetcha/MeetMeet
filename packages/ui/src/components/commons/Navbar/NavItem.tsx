@@ -5,16 +5,19 @@ import { SVG } from '../../elements';
 
 interface Props {
   item: NavItemType;
+  isFocused: boolean;
 }
 
 export const NavItem = ({
-  item
+  item,
+  isFocused
 }:Props) => {
   return (
-    <div className={classes.NavItem} >
+    <div className={classNames(classes.NavItem, isFocused && classes.focused)} >
       <div className={classes.icon} ><SVG width="24px" height="24px" name={item.icon} color="onSurfaceVariant"/></div>
       <div className={classes.label}>{item.label}</div>
       <div className={classes.rightElement} >{item.rightElement}</div>
+      <div className={classes.stateLayer} ></div>
     </div>
   )
 }

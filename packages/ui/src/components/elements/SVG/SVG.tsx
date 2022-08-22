@@ -52,6 +52,8 @@ import VisibilityOffIcon from "../../../assets/icons/visibility-off.svg";
 import VisibilityOnIcon from "../../../assets/icons/visibility-on.svg";
 import ZoomInIcon from "../../../assets/icons/zoom-in.svg";
 import MoreIcon from "../../../assets/icons/more.svg";
+import HomeIcon from '../../../assets/icons/home.svg';
+import AlertIcon from'../../../assets/icons/alert.svg';
 
 import classes from "./SVG.module.scss";
 import classNames from 'classnames';
@@ -126,6 +128,8 @@ export const SVG = ({name, width="24", height="24", color=colors.darkHigh, isHov
         "toggleDarkOn": <ToggleDarkOnIcon {...propsCursor} />,
         "toggleDarkOff": <ToggleDarkOffIcon {...propsCursor} />,
         "helpSolid": <HelpSolidIcon {...propsCursor} />,
+        "alert": <AlertIcon {...propsCursor} />,
+        "home": <HomeIcon {...propsCursor} />,
     }
 
     return (

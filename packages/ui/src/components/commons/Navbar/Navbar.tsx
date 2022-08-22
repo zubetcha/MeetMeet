@@ -3,18 +3,23 @@ import Image from 'next/image';
 import classes from './Navbar.module.scss';
 import classNames from 'classnames';
 import { Button, ExitBtn } from '../../elements';
-import { NavSection } from '..';
+import { NavItemType, NavSection } from '..';
 
 interface NavbarProps {
   isClose: boolean;
   setClose: React.Dispatch<boolean>
+  navInfo: {
+    itemList:NavItemType[];
+    headerLabel?:string;
+  }[]
 }
 
 
 
 
-export const Navbar = ({isClose, setClose}:NavbarProps) => {
+export const Navbar = ({isClose, setClose, navInfo}:NavbarProps) => {
 
+  
 
   const itemList = [
     {
@@ -57,7 +62,11 @@ export const Navbar = ({isClose, setClose}:NavbarProps) => {
 
       </div>
       <div className={classes.menuLayout} >
-          <NavSection headerLabel="설비 종합 효율" itemList={itemList} />
+        {navInfo.map((info, idx) => {
+          return (
+            <NavSection headerLabel={info.headerLabel && info.headerLabel} itemList={info.itemList} key={`navSection_${idx}`} />
+          )
+        })}
       </div>
     </div>
   )

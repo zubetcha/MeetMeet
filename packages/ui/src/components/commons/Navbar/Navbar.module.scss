@@ -52,14 +52,18 @@
             }
 
             .NavItem {
+                position: relative;
                 padding: 16px;
                 display: flex;
                 align-items: center;
                 cursor: pointer;
                 white-space: nowrap;
-                border-radius: 50%;
                 background-color: transparent;
                 @include button-state-layer(primary, error);
+
+                .stateLayer {
+                    border-radius: 100px !important;
+                }
 
                 .label {
                     @include font-style(label-large);
