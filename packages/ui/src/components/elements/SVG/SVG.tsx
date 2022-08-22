@@ -52,6 +52,9 @@ import VisibilityOffIcon from "../../../assets/icons/visibility-off.svg";
 import VisibilityOnIcon from "../../../assets/icons/visibility-on.svg";
 import ZoomInIcon from "../../../assets/icons/zoom-in.svg";
 import MoreIcon from "../../../assets/icons/more.svg";
+import GoogleIcon from "../../../assets/icons/logo-google.svg";
+import MeetMeetHoriIcon from "../../../assets/icons/logo-meetmeet-hori.svg";
+import MeetMeetVertIcon from "../../../assets/icons/logo-meetmeet-vert.svg";
 
 import classes from "./SVG.module.scss";
 import classNames from 'classnames';
@@ -126,6 +129,9 @@ export const SVG = ({name, width="24", height="24", color=colors.darkHigh, isHov
         "toggleDarkOn": <ToggleDarkOnIcon {...propsCursor} />,
         "toggleDarkOff": <ToggleDarkOffIcon {...propsCursor} />,
         "helpSolid": <HelpSolidIcon {...propsCursor} />,
+        "google": <GoogleIcon />,
+        "meetmeetHori": <MeetMeetHoriIcon />,
+        "meetmeetVert": <MeetMeetVertIcon />
     }
 
     return (

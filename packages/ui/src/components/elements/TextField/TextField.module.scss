@@ -3,6 +3,7 @@
 
 .wrapper {
   @include flex-direction(column, 2);
+  width: 100%;
 
   &__label { @include font-style(label-medium, on-surface-variant); }
 

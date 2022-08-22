@@ -1,3 +1,4 @@
+
 import classNames from "classnames";
 import classes from "./Text.module.scss";
 
@@ -16,13 +17,14 @@ export const Text = ({
   children,
   type = "label-large",
   color = "on-background",
-  weight = "400",
-  cursor = "default",
+  style,
+  onClick
 }: TextProps) => {
   return (
     <p
       className={classNames(classes["first-class"], classes[type], `${color}`)}
-      style={{ fontWeight: weight, cursor }}
+      onClick={onClick}
+      style={{ ...style }}
     >
       {children}
     </p>
@@ -32,7 +34,7 @@ export const Text = ({
 interface TextProps {
   children: any;
   color?: string;
-  weight?: string;
   type?: string;
-  cursor?: string;
+  style?: {[key: string]: string};
+  onClick?: (e: React.MouseEvent<HTMLParagraphElement>) => void;
 }

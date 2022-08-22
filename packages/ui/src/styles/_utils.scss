@@ -306,7 +306,7 @@
   align-items: _get-flex-value($ai);
 }
 
-@mixin flex-direction($direction, $gap) {
+@mixin flex-direction($direction, $gap: 0) {
   display: flex;
   flex-direction: $direction;
 

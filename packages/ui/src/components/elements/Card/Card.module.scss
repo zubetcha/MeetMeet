@@ -2,7 +2,7 @@
 @import "../../../styles/utils";
 
 .card-container {
-  @include flex-direction(column, 0);
+  @include flex-direction(column);
   position: relative;
 
   &.depth1 {
@@ -40,13 +40,13 @@
   &.depth1 {
     padding: 24px 32px 32px 32px;
     border-radius: 0px 0px 16px 16px;
-    background-color: var(--color-surface1);
+    background: var(--color-surface1);
   }
 
   &.depth2 {
     padding: 16px 24px 24px 24px;
     border-radius: 0px 0px 8px 8px;
-    background-color: var(--color-surface3);
+    background: var(--color-surface3);
   }
 }
 
