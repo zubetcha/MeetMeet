@@ -2,9 +2,7 @@
 @import "../../../styles/utils";
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: 2px;
+  @include flex-direction(column, 2);
 
   &__label { @include font-style(label-medium, on-surface-variant); }
 
@@ -93,14 +91,10 @@
     }
 
     &__children {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 16px;
+      @include pos-center-y(absolute);
+      @include flexbox(end, center);
 
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
+      right: 16px;
       column-gap: 8px;
 
       /* Unit */
@@ -121,9 +115,7 @@
       }
 
       &__icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flexbox(center, center);
         cursor: pointer;
 
         svg {
