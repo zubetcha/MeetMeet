@@ -22,12 +22,12 @@
   &.depth1 {
     padding: 8px 8px 8px 16px;
     border-radius: 16px 16px 0px 0px;
-    background-color: var(--color-secondaryContainer);
+    background: var(--color-secondaryContainer);
   }
   &.depth2 {
     padding: 16px 16px 0px 16px;
     border-radius: 8px 8px 0px 0px;
-    background-color: var(--color-surface3);
+    background: var(--color-surface3);
   }
   .title-buttons {
     display: flex; 
@@ -39,13 +39,13 @@
 
   &.depth1 {
     padding: 24px 32px 32px 32px;
-    border-radius: 0px 0px 16px 16px;
+    border-radius: 16px;
     background: var(--color-surface1);
   }
 
   &.depth2 {
     padding: 16px 24px 24px 24px;
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 8px;
     background: var(--color-surface3);
   }
 }
