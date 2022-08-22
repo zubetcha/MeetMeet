@@ -36,8 +36,8 @@
     cursor: pointer;
 
     
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     background-color: var(--color-surface);
     border-radius: 4px;
 
@@ -254,7 +254,7 @@
  //DESCRIBE configuration
 
     &.filled {
-        background-color:  var(--color-primary);
+        background-color: var(--color-primary);
         color: var(--color-onPrimary);
         &.negativeMood {
             background-color: var(--color-error);

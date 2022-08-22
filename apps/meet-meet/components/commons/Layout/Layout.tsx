@@ -11,12 +11,12 @@ interface LayoutProps {
 
 export const Layout = ({children}: LayoutProps) => {
 
-    const [close, setClose] = useState<boolean>(false);
+    const [isClose, setIsClose] = useState<boolean>(false);
 
     return (
         <div className={classes.layoutContainer} >
-            <Navbar close={close} setClose={setClose} />
-            <div className={classNames(classes.pageBody, close ? classes.close: "" )}>{children}</div>
+            <Navbar isClose={isClose} setClose={setIsClose} />
+            <div className={classNames(classes.pageBody, isClose ? classes.close: "" )}>{children}</div>
         </div>
     )
 }

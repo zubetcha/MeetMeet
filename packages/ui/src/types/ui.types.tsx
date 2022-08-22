@@ -100,7 +100,7 @@ export interface ButtonProps {
 
 export interface ExitToBurgerProps {
   length?: string;
-  close?: boolean;
+  isClose?: boolean;
   setClose?: any;
 }
 
