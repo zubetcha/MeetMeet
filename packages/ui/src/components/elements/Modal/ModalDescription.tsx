@@ -1,4 +1,6 @@
 import { Text } from "../Text/Text";
+import { TextTypeUnionType } from "../Text/Text.types";
+import { ColorUnionType } from "../../../types/union.types";
 
 export const ModalDescription = ({children, type = "body-medium", color = "on-surface-variant"}: Props) => {
 
@@ -13,6 +15,6 @@ export const ModalDescription = ({children, type = "body-medium", color = "on-su
 
 interface Props {
   children: any;
-  type?: string;
-  color?: string;
+  type?: TextTypeUnionType;
+  color?: ColorUnionType;
 }

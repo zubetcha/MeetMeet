@@ -1,8 +1,8 @@
 
 import classNames from "classnames";
 import classes from "./Text.module.scss";
-
-import { TextColorUnionType, TextTypeUnionType } from "./Text.types";
+import { ColorUnionType } from "../../../types/union.types";
+import { TextTypeUnionType } from "./Text.types";
 
 /**
  *
@@ -33,7 +33,7 @@ export const Text = ({
 
 interface TextProps {
   children: any;
-  color?: TextColorUnionType;
+  color?: ColorUnionType;
   type?: TextTypeUnionType;
   style?: { [key: string]: string };
   onClick?: (e: React.MouseEvent<HTMLParagraphElement>) => void;
