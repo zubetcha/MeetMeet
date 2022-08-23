@@ -2,6 +2,7 @@ import { useState } from 'react';
 import classes from './Layout.module.scss';
 import classNames from 'classnames';
 import { navInfo } from '@shared/pageInfo';
+import MeetmeetLogo from '../../../public/svg/meetmeet_horizontal.svg'
 import { Navbar } from '../../ui/index'
 
 
@@ -16,7 +17,7 @@ export const Layout = ({children}: LayoutProps) => {
 
     return (
         <div className={classes.layoutContainer} >
-            <Navbar isClose={isClose} setClose={setIsClose} navInfo={navInfo} />
+            <Navbar isClose={isClose} setClose={setIsClose} navInfo={navInfo} Logo={MeetmeetLogo} />
             <div className={classNames(classes.pageBody, isClose ? classes.close: "" )}>{children}</div>
         </div>
     )

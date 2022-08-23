@@ -1,11 +1,15 @@
 import classes from './Navbar.module.scss';
 import { NavItem } from '..';
 import classNames from 'classnames';
+import { SetStateAction } from 'react';
+import React from 'react';
 
 export type NavItemType = {
   icon:string,
-  label: string,
+  label:string,
   rightElement?: JSX.Element
+  path:string;
+  isModal:boolean
 }
 
 interface Props {
@@ -15,7 +19,7 @@ interface Props {
 
 export const NavSection = ({
   headerLabel,
-  itemList
+  itemList,
 }:Props) => {
   
   
@@ -33,7 +37,7 @@ export const NavSection = ({
       {
         itemList.map((item, idx) => {
           return (
-            <NavItem item={item} key={`NavItem_${idx}`} />
+            <NavItem item={item} key={`NavItem'_${idx}`} />
           )
         })
       }

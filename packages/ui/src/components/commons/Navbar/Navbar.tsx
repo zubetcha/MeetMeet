@@ -1,10 +1,10 @@
 
+import { useState } from 'react';
 import Image from 'next/image';
 import classes from './Navbar.module.scss';
 import classNames from 'classnames';
 import { Button, ExitBtn } from '../../elements';
 import { NavItemType, NavSection } from '..';
-import MeetmeetLogo from '../../../assets/icons/meetmeet_horizontal.svg';
 
 interface NavbarProps {
   isClose: boolean;
@@ -13,29 +13,13 @@ interface NavbarProps {
     itemList:NavItemType[];
     headerLabel?:string;
   }[]
+  Logo: React.ElementType;
 }
 
 
 
 
-export const Navbar = ({isClose, setClose, navInfo}:NavbarProps) => {
-
-  
-
-  const itemList = [
-    {
-      icon: "calendar",
-      label: "알림 내역",
-    },
-    {
-      icon: "calendar",
-      label: "알림 내역",
-    },
-    {
-      icon: "calendar",
-      label: "알림 내역",
-    },
-  ]
+export const Navbar = ({isClose, setClose, navInfo, Logo}:NavbarProps) => {
 
   return (
     <div className={classNames(
@@ -60,7 +44,7 @@ export const Navbar = ({isClose, setClose, navInfo}:NavbarProps) => {
         </div>
       </div>
       <div className={classes.logoLayout} >
-        <MeetmeetLogo width="140px" />
+        <Logo width="140px" />
         <div className={classes.customerName} >젠틀에너지</div>
       </div>
       <div className={classes.menuLayout} >
