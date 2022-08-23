@@ -10,7 +10,8 @@
   .card-contents-wrapper {
     @include flexbox(center, center);
     @include flex-direction(column, 20);
-    
+    padding: 32px;
+
     .card-title-wrapper {
       @include flexbox(center, start);
       @include flex-direction(column, 12);
@@ -20,7 +21,7 @@
 
     .card-textFields-wrapper {
       @include flex-direction(column, 4);
-      width: 100%
+      width: 100%;
     }
   }
 }

@@ -18,7 +18,7 @@ export const CardDepth1TitleBar = ({children}: Props) => {
       classes["depth1"]
       )}
     >
-      <div>
+      {/* <div>
         {cardTitle && (
           {cardTitle}
         )}
@@ -27,7 +27,7 @@ export const CardDepth1TitleBar = ({children}: Props) => {
         {iconButton && (
           {iconButton}
         )}
-      </div>
+      </div> */}
     </div>
   )
 }

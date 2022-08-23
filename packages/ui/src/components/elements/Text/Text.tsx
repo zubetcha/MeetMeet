@@ -2,13 +2,13 @@
 import classNames from "classnames";
 import classes from "./Text.module.scss";
 
+import { TextColorUnionType, TextTypeUnionType } from "./Text.types";
+
 /**
  *
  * @param text {string} 컴포넌트에 들어가는 text
  * @param type {string} 텍스트 크기 타입 / defaultValue = label-large 
  * @param color {string} 텍스트 컬러 / defaultValue = onBackground
- * @param weight {string} font-weignt / defaultValue = 500
- * @param cursor {string} defaultValue = default
  * @returns
  */
 
@@ -33,8 +33,8 @@ export const Text = ({
 
 interface TextProps {
   children: any;
-  color?: string;
-  type?: string;
-  style?: {[key: string]: string};
+  color?: TextColorUnionType;
+  type?: TextTypeUnionType;
+  style?: { [key: string]: string };
   onClick?: (e: React.MouseEvent<HTMLParagraphElement>) => void;
 }
