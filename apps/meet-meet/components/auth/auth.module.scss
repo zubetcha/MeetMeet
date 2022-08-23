@@ -1,0 +1,19 @@
+@import "ui/src/styles/variables";
+@import "ui/src/styles/utils";
+
+.card-contents-wrapper {
+  @include flexbox(center, center);
+  @include flex-direction(column, 96);
+  padding: 32px 32px 0 32px;
+
+  .card-title-wrapper {
+    @include flexbox(center, center);
+    @include flex-direction(column, 8);
+    padding: 60px 0 0 0;
+  }
+  .card-information-wrapper {
+    @include flexbox(center, center);
+    @include flex-direction(row, 8);
+    padding: 60px 0 0 0;
+  }
+}

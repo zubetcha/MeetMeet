@@ -115,11 +115,11 @@ html[data-theme="light"] {
     --color-onWarningContainer-opacity-12: #{$warning-color-10}1F;
     --color-onWarningContainer-opacity-16: #{$warning-color-10}29;
 
-    --color-surface1: linear-gradient(0deg, rgba(#{$primary-color-40}, 0.05), rgba(#{$primary-color-40}, 0.05)), #{$neutral-color-99};
-    --color-surface2: linear-gradient(0deg, rgba(#{$primary-color-40}, 0.08), rgba(#{$primary-color-40}, 0.08)), #{$neutral-color-99};
-    --color-surface3: linear-gradient(0deg, rgba(#{$primary-color-40}, 0.11), rgba(#{$primary-color-40}, 0.11)), #{$neutral-color-99};
-    --color-surface4: linear-gradient(0deg, rgba(#{$primary-color-40}, 0.12), rgba(#{$primary-color-40}, 0.12)), #{$neutral-color-99};
-    --color-surface5: linear-gradient(0deg, rgba(#{$primary-color-40}, 0.14), rgba(#{$primary-color-40}, 0.14)), #{$neutral-color-99};
+    --color-surface1: linear-gradient(to right, #{$primary-color-40}0D, #{$primary-color-40}0D), #{$neutral-color-99};
+    --color-surface2: linear-gradient(to right, #{$primary-color-40}14, #{$primary-color-40}14), #{$neutral-color-99};
+    --color-surface3: linear-gradient(to right, #{$primary-color-40}1C, #{$primary-color-40}1C), #{$neutral-color-99};
+    --color-surface4: linear-gradient(to right, #{$primary-color-40}1F, #{$primary-color-40}1F), #{$neutral-color-99};
+    --color-surface5: linear-gradient(to right, #{$primary-color-40}24, #{$primary-color-40}24), #{$neutral-color-99};
   }
   
 html[data-theme="dark"] {
@@ -235,9 +235,9 @@ html[data-theme="dark"] {
     --color-onWarningContainer-opacity-12: #{$warning-color-90}1F;
     --color-onWarningContainer-opacity-16: #{$warning-color-90}29;
 
-    --color-surface1: linear-gradient(0deg, rgba(#{$primary-color-80}, 0.05), rgba(#{$primary-color-80}, 0.05)), #{$neutral-color-10};
-    --color-surface2: linear-gradient(0deg, rgba(#{$primary-color-80}, 0.08), rgba(#{$primary-color-80}, 0.08)), #{$neutral-color-10};
-    --color-surface3: linear-gradient(0deg, rgba(#{$primary-color-80}, 0.11), rgba(#{$primary-color-80}, 0.11)), #{$neutral-color-10};
-    --color-surface4: linear-gradient(0deg, rgba(#{$primary-color-80}, 0.12), rgba(#{$primary-color-80}, 0.12)), #{$neutral-color-10};
-    --color-surface5: linear-gradient(0deg, rgba(#{$primary-color-80}, 0.14), rgba(#{$primary-color-80}, 0.14)), #{$neutral-color-10};
+    --color-surface1: linear-gradient(0deg, #{$primary-color-80}0D, #{$primary-color-80}0D), #{$neutral-color-10};
+    --color-surface2: linear-gradient(0deg, #{$primary-color-80}14, #{$primary-color-80}14), #{$neutral-color-10};
+    --color-surface3: linear-gradient(0deg, #{$primary-color-80}1C, #{$primary-color-80}1C), #{$neutral-color-10};
+    --color-surface4: linear-gradient(0deg, #{$primary-color-80}1F, #{$primary-color-80}1F), #{$neutral-color-10};
+    --color-surface5: linear-gradient(0deg, #{$primary-color-80}24, #{$primary-color-80}24), #{$neutral-color-10};
 }

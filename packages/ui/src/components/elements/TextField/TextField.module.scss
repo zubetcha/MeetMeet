@@ -2,9 +2,8 @@
 @import "../../../styles/utils";
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: 2px;
+  @include flex-direction(column, 2);
+  width: 100%;
 
   &__label { @include font-style(label-medium, on-surface-variant); }
 
@@ -20,9 +19,6 @@
       border: none;
 
       &::placeholder { color: var(--color-onSurface-opacity-38); }
-
-      &:hover {
-      }
 
       &--default {
         background-color: var(--color-surfaceVariant);
@@ -83,24 +79,19 @@
 
       &--fixed {
         cursor: default !important;
-        padding: 8px 0 !important;
         background-color: transparent;
-        outline: none;
-        color: var(--color-onSurface);
+        outline: 1px solid var(--color-onSurface-opacity-12);
+        color: var(--color-onSurfaceVariant);
       }
 
       &--fixed::placeholder { color: transparent; }
     }
 
     &__children {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 16px;
+      @include pos-center-y(absolute);
+      @include flexbox(end, center);
 
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
+      right: 16px;
       column-gap: 8px;
 
       /* Unit */
@@ -117,23 +108,25 @@
         &--nice { color: var(--color-onPrimaryContainer); }
         &--danger { color: var(--color-onErrorContainer); }
         &--disable { color: var(--color-onSurface-opacity-38); }
-        &--fixed { color: var(--color-onSurface); }
+        &--fixed { color: var(--color-onSurfaceVariant); }
       }
 
       &__icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flexbox(center, center);
         cursor: pointer;
 
         svg {
           cursor: pointer !important;
           fill: var(--color-onSurfaceVariant);
         }
-
         &--disable {
           svg {
             fill: var(--color-onSurface-opacity-38);
+            cursor: default !important;
+          }
+        }
+        &--fixed {
+          svg {
             cursor: default !important;
           }
         }

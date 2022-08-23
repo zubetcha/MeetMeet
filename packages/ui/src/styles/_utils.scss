@@ -167,7 +167,7 @@
   }
 
   @if ( type-of($color) != false ) {
-    color: map-get($map: $colors, $key: $color);
+    color: map-get($map: $colors-map, $key: $color);
   }
 
   @if ( type-of($weight) == number ) {
@@ -178,13 +178,6 @@
 
 // DESCRIBE Scroll
 
-
-// DESCRIBE 자주 쓰는...!
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
 // DESCRIBE State Layer
@@ -276,3 +269,67 @@
   }
 }
 
+// DESCRIBE position
+
+@mixin pos-center-x($type: absolute) {
+  @if( $type == fixed or $type == absolute ){
+      position: $type;
+      left: 50%;
+      transform: translateX(-50%);
+  }
+}
+
+@mixin pos-center-y($type: absolute) {
+  @if( $type == fixed or $type == absolute ){
+      position: $type;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+}
+
+@mixin pos-center($type: absolute) {
+  @if( $type == fixed or $type == absolute ){
+      position: $type;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+  }
+}
+
+@function _get-flex-value($key) {
+  @return map-get($flex-map, $key);
+}
+
+@mixin flexbox($jc: center, $ai: center) {
+  display: flex;
+  justify-content: _get-flex-value($jc);
+  align-items: _get-flex-value($ai);
+}
+
+@mixin flex-direction($direction, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+
+  @if ($direction == column) {
+    row-gap: #{$gap}px;
+  }
+  @if ($direction == row) {
+    column-gap: #{$gap}px;
+  }
+}
+
+// DESCRIBE scroll
+
+@mixin scroll-bar() {
+  &::-webkit-scrollbar {
+    width: 10px;
+    // background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-onSurface-opacity-16);
+    border-radius: 4px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+}
