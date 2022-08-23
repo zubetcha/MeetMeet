@@ -30,7 +30,7 @@ const Home: NextPage = () => {
         <Button
           configuration="filled"
           size="large"
-          state="disable"
+          state="focused"
           negativeMood={false}
           showIcon={true}
           label="Button filled focused"
@@ -141,20 +141,67 @@ const Home: NextPage = () => {
           icon="more"
         />
       </div>
-
-      <ButtonGroup
-        configuration="outlined"
-        size="large"
-        defaultIndex={2}
-        onChange={(selectedIndex: number) =>
-          console.log("selectedIndex", selectedIndex)
-        }
-      >
-        <Button label="테스트"></Button>
-        <Button label="테스트"></Button>
-        <Button label="테스트"></Button>
-        <Button label="테스트"></Button>
-      </ButtonGroup>
+      <div style={{
+        display:"flex", 
+        flexWrap:"wrap", 
+        gap:'8px', 
+        marginTop:'20px',
+        flexDirection: 'column',
+      }}>
+        <ButtonGroup
+          configuration="outlined"
+          size="large"
+          defaultIndex={2}
+          onChange={(selectedIndex: number) =>
+            console.log("selectedIndex", selectedIndex)
+          }
+          label="Label"
+        >
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+        </ButtonGroup>
+        <ButtonGroup
+          configuration="filled"
+          size="large"
+          defaultIndex={2}
+          onChange={(selectedIndex: number) =>
+            console.log("selectedIndex", selectedIndex)
+          }
+        >
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+        </ButtonGroup>
+        <ButtonGroup
+          configuration="tonal"
+          size="large"
+          defaultIndex={2}
+          onChange={(selectedIndex: number) =>
+            console.log("selectedIndex", selectedIndex)
+          }
+        >
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+        </ButtonGroup>
+        <ButtonGroup
+          configuration="text"
+          size="large"
+          defaultIndex={2}
+          onChange={(selectedIndex: number) =>
+            console.log("selectedIndex", selectedIndex)
+          }
+        >
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+          <Button label="테스트"></Button>
+        </ButtonGroup>
+      </div>
     </Layout>
   );
 };

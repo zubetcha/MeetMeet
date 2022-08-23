@@ -1,61 +1,134 @@
+@import '../../../styles/utils';
+@import '../../elements/Buttons/button.module.scss';
+
 // navBar component 스타일
 .navbarContainer {
-    min-width: 248px;
-    min-height: 100%;
-    position: fixed;
-    transition: min-width 0.3s ease-out;
-    z-index: 50;
-
-    .headerContainer {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        background-color:var(--color-surface);
-        opacity: 1;
-        transition: opacity 0.3s ease-out;
-        padding: 16px 12px;
-        .logoutBox {
-            width: fit-content;
-        };
-        .imageBox {
-            width: 200px;
-            margin : 32px 24px 0 24px;
-        };
-        .myPageBtn {
-            display: flex;
-            margin-top: 26px;
-            align-items: center;
-            padding-left: 26px;
-            gap: 10px;
-            width: fit-content;
-            .name{
-                color: #ffffff;
-                font-size: 16px;
-                vertical-align: middle;
-                font-weight: 700;
-            }
+    padding: 16px 12px;
+    width: 256px;
+    transition: width 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    .topBtnLayout {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        white-space: nowrap;
+        .exitBtnBox {
+            position: absolute;
+            top: 0;
+            left: 8px;
+            z-index: 10;
         }
-        .menuBox {
-            width: 100%;
+
+        .rightBtnBox {
+            padding: 8px 0px;
             display: flex;
-            flex-direction: column;
-            margin-top:40px;
-            
-        };
+            transition: opacity 0.3s ease-in-out;
+        }
     }
 
-    .exitBox {
-        position: absolute;
-        left : 16px;
-        top: 16px;
-        z-index: 10;
+    .logoLayout {
+        margin: 16px 0 40px 8px;
+        transition: opacity 0.3s ease-in-out;
+        .customerName {
+            margin-top: 8px;
+            white-space: nowrap;
+            @include font-style(title-medium);
+            color: var(--color-primary);
+        }
+    }
+
+    .menuLayout {
+        .NavSectionBox {
+            .sectionHeader {
+                flex-direction: column;
+                padding: 0 0 0 12px;
+                white-space: nowrap;
+                height: 56px;
+                transition: all 0.3s ease-in-out;
+                .divider {
+                    width: 208px;
+                    border: 1px solid var(--color-outline);
+                    transition: width 0.3s ease-in-out;
+                }
+                .label {
+                    @include font-style(label-large);
+                    color: var(--color-onSurfaceVariant);
+                    padding: 18px 0;
+                    transition: opacity 0.3s ease-in-out;
+                }
+            }
+
+            .NavItem {
+                position: relative;
+                padding: 16px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                white-space: nowrap;
+                background-color: transparent;
+                @include button-state-layer(primary, error);
+
+                .stateLayer {
+                    border-radius: 100px !important;
+                }
+
+                .label {
+                    @include font-style(label-large);
+                    color: var(--color-onSurfaceVariant);
+                    margin-left: 12px;
+                    transition: opacity 0.3s ease-in-out;
+                }
+                .rightElement{
+                    position: absolute;
+                }
+            }
+
+        }
+    }
+
+    .lightDarkLayout {
+        margin-top: auto;
+        transition: opacity 0.3s ease-in-out;
+        white-space: nowrap;
     }
 
     &.close{
-        overflow: hidden;
-        min-width: 64px;
-        .headerContainer {
+        width: 80px;
+        // transition: width 0.3s ease-in-out;
+        .topBtnLayout {
+            .rightBtnBox {
+                opacity: 0;
+            }
+        }
+        
+        .logoLayout {
+            opacity: 0;
+        }
+
+        .menuLayout {
+            .NavSectionBox {
+                .sectionHeader {
+                    padding: 9px 12px;
+                    height: 18px;
+                    .divider {
+                        width: 32px;
+                    }
+                    .label {
+                        opacity: 0;
+                    }
+                }
+                .NavItem {
+                    .label {
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+
+        .lightDarkLayout {
             opacity: 0;
         }
     }

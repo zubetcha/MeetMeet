@@ -1,16 +1,30 @@
-export const pageInfo = {
-  customer: {
-    path: 'customer',
-    title: 'meetmeet',
-  },
-  pages: [
-    {
-      path: 'reservation',
-      title: '회의실 예약',
-    }, 
-    {
-      path: 'status',
-      title: '예약 현황',
-    }
-  ]
-}
+export const navInfo = [
+  {
+    itemList: [
+      {
+        icon: 'home',
+        label: 'Home',
+        path: 'home',
+        isModal: false,
+      },
+      {
+        icon: 'alert',
+        label: '알림 내역',
+        path: 'alert',
+        isModal: true,
+      },
+      {
+        icon: 'calendar',
+        label: '회의실 예약',
+        path: 'reservation',
+        isModal: false,
+      },
+      {
+        icon: 'map',
+        label: '회의실 관리',
+        path: 'management',
+        isModal: false,
+      }
+    ]
+  }
+]

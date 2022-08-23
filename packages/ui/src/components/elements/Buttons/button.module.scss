@@ -36,8 +36,8 @@
     cursor: pointer;
 
     
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     background-color: var(--color-surface);
     border-radius: 4px;
 
@@ -123,30 +123,60 @@
     }
 }
 
-.btnGroup{
-    height: fit-content;
-    display: flex;
-    width:fit-content;    
+.btnGroupBox {
 
-    .btnElement{
-        button{
-            border-right: none !important;
-        }
-        &:first-child{
-            button{
-                border-radius: 4px 0px 0px 4px !important;
-    
-            }
-        }
-        &:last-child{
-            button{
-                border-right: 1px solid rgb(112, 167, 136) !important;
-                border-radius: 0px 4px 4px 0px !important;
-    
-            }
-        }
+    .btnGroupLabel {
+        @include font-style(label-small);
+        color: var(--color-outline);
+        margin-bottom: 4px;
     }
-   
+
+    .btnGroup{
+        height: fit-content;
+        display: flex;
+        width:fit-content; 
+        border-radius: 4px;
+        .buttonContainer{  
+            border-radius: 4px;
+        }
+        
+        &.filled {
+            background-color:  var(--color-primary);
+        };
+    
+        &.tonal {
+            background-color: var(--color-secondaryContainer);
+        };
+    
+        &.outlined {
+            background-color: transparent;
+            
+            .buttonContainer{
+                margin-left: 0px;
+                &:first-child{
+                    margin-left: 0px;
+                    border-radius: 4px 0px 0px 4px !important;
+                };
+    
+                &:last-child{
+                    border-radius: 0px 4px 4px 0px !important;
+                };
+    
+                border-radius: 0px;
+                .stateLayer {
+                    border-radius: 0px;
+                };
+            }
+        };
+    
+        &.text {
+            background-color: transparent;
+            outline: 1px solid var(--color-primary-opacity-16);
+        };
+    
+    
+    }
+    
 }
 
 // DESCRIBE button-state-layer mixin
@@ -180,7 +210,6 @@
     cursor: pointer;
     position: relative;
     align-items: center;
-    
     //Button 컴포넌트
     &.button {
         border-radius: 4px;
@@ -235,7 +264,7 @@
  //DESCRIBE configuration
 
     &.filled {
-        background-color:  var(--color-primary);
+        background-color: var(--color-primary);
         color: var(--color-onPrimary);
         &.negativeMood {
             background-color: var(--color-error);
@@ -255,7 +284,7 @@
     &.outlined {
         background-color: transparent;
         color: var(--color-primary);
-        border: 1px solid var(--color-outline);
+        outline: 1px solid var(--color-outline);
         &.negativeMood    {
             background-color: transparent;
             color: var(--color-error);
