@@ -1,7 +1,11 @@
-import { Button, ButtonGroup, Select, IconButton } from "ui/src/components/elements";
+import {
+  Button,
+  ButtonGroup,
+  Select,
+  IconButton,
+} from "ui/src/components/elements";
 import type { NextPage } from "next";
 import { DarkModeToggle, ColorCard, Layout } from "../components";
-
 
 const Home: NextPage = () => {
   const onChange = (e: any) => {
@@ -11,13 +15,15 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <DarkModeToggle />
-      <ColorCard/>
-      <div style={{
-        display:"flex", 
-        flexWrap:"wrap", 
-        gap:'8px', 
-        marginTop:'20px'
-      }} >
+      <ColorCard />
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "8px",
+          marginTop: "20px",
+        }}
+      >
         <Button
           configuration="filled"
           size="medium"
@@ -113,12 +119,14 @@ const Home: NextPage = () => {
           icon="more"
         />
       </div>
-      <div style={{
-        display:"flex", 
-        flexWrap:"wrap", 
-        gap:'8px', 
-        marginTop:'20px'
-      }} >
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "8px",
+          marginTop: "20px",
+        }}
+      >
         <IconButton
           configuration="filled"
           size="large"
@@ -141,13 +149,15 @@ const Home: NextPage = () => {
           icon="more"
         />
       </div>
-      <div style={{
-        display:"flex", 
-        flexWrap:"wrap", 
-        gap:'8px', 
-        marginTop:'20px',
-        flexDirection: 'column',
-      }}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "8px",
+          marginTop: "20px",
+          flexDirection: "column",
+        }}
+      >
         <ButtonGroup
           configuration="outlined"
           size="large"

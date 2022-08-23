@@ -46,10 +46,11 @@ export const formatDateHour = (newDate: Date): string => {
 };
 
 export const formatTime = (time: Date) => {
+  const hour = time.getHours() >= 10 ? time.getHours() : `0${time.getHours()}`;
+  const minute =
+    time.getMinutes() >= 10 ? time.getMinutes() : `0${time.getMinutes()}`;
+  const secont =
+    time.getSeconds() >= 10 ? time.getSeconds() : `0${time.getSeconds()}`;
 
-  const hour = time.getHours();
-  const minute = time.getMinutes() >= 10 ? time.getMinutes() : `0${time.getMinutes()}`;
-  const secont = time.getSeconds() >= 10 ? time.getSeconds() : `0${time.getSeconds()}`;
-  
-  return `${hour}:${minute}:${secont}`
-}
+  return `${hour}:${minute}:${secont}`;
+};
