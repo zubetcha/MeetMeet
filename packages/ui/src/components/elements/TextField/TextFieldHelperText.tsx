@@ -7,7 +7,11 @@ export const TextFieldHelperText = ({status = "default", isFocused, children}: P
 
   return (
     <>
-      <p className={classNames(classes.helperText, classes[status], {[classes.focused]: isFocused})}>
+      <p className={classNames(
+        classes["wrapper__helperText"],
+        classes[`wrapper__helperText--${status}`], 
+        {[classes.focused]: isFocused}
+      )}>
         {children}
       </p>
     </>

@@ -1,0 +1,60 @@
+@import "../../../styles/variables";
+@import "../../../styles/utils";
+
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  background-color: var(--color-onBackground-opacity-16);
+  z-index: 10000;
+  cursor: pointer;
+
+  .modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-surface);
+    width: fit-content;
+    height: fit-content;
+    border-radius: 4px;
+    z-index: 10001;
+    padding: $modal-container-padding;
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+    cursor: default;
+
+    &.toast {
+      padding: $toast-modal-container-padding;
+    }
+  }
+}
+
+.modal-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.modal-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 16px;
+}
