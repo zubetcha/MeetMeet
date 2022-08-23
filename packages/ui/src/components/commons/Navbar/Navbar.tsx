@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import classes from './Navbar.module.scss';
 import classNames from 'classnames';
-import { Button, ExitBtn } from '../../elements';
+import { Button, ButtonGroup, ExitBtn } from '../../elements';
 import { NavItemType, NavSection } from '..';
 
 interface NavbarProps {
@@ -53,6 +53,22 @@ export const Navbar = ({isClose, setClose, navInfo, Logo}:NavbarProps) => {
             <NavSection headerLabel={info.headerLabel && info.headerLabel} itemList={info.itemList} key={`navSection_${idx}`} />
           )
         })}
+      </div>
+      <div className={classes.lightDarkLayout} >
+        <ButtonGroup
+          configuration="text"
+          size="medium"
+          defaultIndex={0}
+          label="화면 모드"
+          onChange={(selectedIndex) => {
+            selectedIndex === 0
+              ? document.documentElement.setAttribute("data-theme", "light")
+              : document.documentElement.setAttribute("data-theme", "dark")
+          }}
+        >
+          <Button label="라이트" />
+          <Button label="다아크" />
+        </ButtonGroup>
       </div>
     </div>
   )

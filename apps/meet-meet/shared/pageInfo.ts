@@ -25,7 +25,6 @@ export const navInfo = [
         path: 'management',
         isModal: false,
       }
-
     ]
   }
 ]

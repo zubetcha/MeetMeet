@@ -155,6 +155,7 @@ const Home: NextPage = () => {
           onChange={(selectedIndex: number) =>
             console.log("selectedIndex", selectedIndex)
           }
+          label="Label"
         >
           <Button label="테스트"></Button>
           <Button label="테스트"></Button>

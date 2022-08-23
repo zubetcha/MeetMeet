@@ -123,50 +123,60 @@
     }
 }
 
-.btnGroup{
-    height: fit-content;
-    display: flex;
-    width:fit-content; 
-    border-radius: 4px;
-    .buttonContainer{  
+.btnGroupBox {
+
+    .btnGroupLabel {
+        @include font-style(label-small);
+        color: var(--color-outline);
+        margin-bottom: 4px;
+    }
+
+    .btnGroup{
+        height: fit-content;
+        display: flex;
+        width:fit-content; 
         border-radius: 4px;
+        .buttonContainer{  
+            border-radius: 4px;
+        }
+        
+        &.filled {
+            background-color:  var(--color-primary);
+        };
+    
+        &.tonal {
+            background-color: var(--color-secondaryContainer);
+        };
+    
+        &.outlined {
+            background-color: transparent;
+            
+            .buttonContainer{
+                margin-left: 0px;
+                &:first-child{
+                    margin-left: 0px;
+                    border-radius: 4px 0px 0px 4px !important;
+                };
+    
+                &:last-child{
+                    border-radius: 0px 4px 4px 0px !important;
+                };
+    
+                border-radius: 0px;
+                .stateLayer {
+                    border-radius: 0px;
+                };
+            }
+        };
+    
+        &.text {
+            background-color: transparent;
+            outline: 1px solid var(--color-primary-opacity-16);
+        };
+    
+    
     }
     
-    &.filled {
-        background-color:  var(--color-primary);
-    };
-
-    &.tonal {
-        background-color: var(--color-secondaryContainer);
-    };
-
-    &.outlined {
-        background-color: transparent;
-        
-        .buttonContainer{
-            margin-left: 0px;
-            &:first-child{
-                margin-left: 0px;
-                border-radius: 4px 0px 0px 4px !important;
-            };
-
-            &:last-child{
-                border-radius: 0px 4px 4px 0px !important;
-            };
-
-            border-radius: 0px;
-            .stateLayer {
-                border-radius: 0px;
-            };
-        }
-    };
-
-    &.text {
-        background-color: transparent;
-        outline: 1px solid var(--color-primary-opacity-16);
-    };
-
-
 }
 
 // DESCRIBE button-state-layer mixin

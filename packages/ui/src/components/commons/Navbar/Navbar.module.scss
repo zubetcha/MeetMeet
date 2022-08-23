@@ -6,6 +6,9 @@
     padding: 16px 12px;
     width: 256px;
     transition: width 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     .topBtnLayout {
         position: relative;
         display: flex;
@@ -86,6 +89,12 @@
         }
     }
 
+    .lightDarkLayout {
+        margin-top: auto;
+        transition: opacity 0.3s ease-in-out;
+        white-space: nowrap;
+    }
+
     &.close{
         width: 80px;
         // transition: width 0.3s ease-in-out;
@@ -117,6 +126,10 @@
                     }
                 }
             }
+        }
+
+        .lightDarkLayout {
+            opacity: 0;
         }
     }
 }
