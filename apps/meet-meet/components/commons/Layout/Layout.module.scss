@@ -1,8 +1,11 @@
+@import "ui/src/styles/variables";
+@import "ui/src/styles/utils";
+
 .layoutContainer {
     display: flex;
     height: 100%;
     width: 100%;
-    background-color: var(--color-background);
+    background-color: var(--color-surface);
 }
 
 .pageBody {

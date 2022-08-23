@@ -317,3 +317,19 @@
     column-gap: #{$gap}px;
   }
 }
+
+// DESCRIBE scroll
+
+@mixin scroll-bar() {
+  &::-webkit-scrollbar {
+    width: 10px;
+    // background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-onSurface-opacity-16);
+    border-radius: 4px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+}
