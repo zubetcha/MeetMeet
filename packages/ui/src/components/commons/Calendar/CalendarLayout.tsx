@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 
 import classes from "./calendar.module.scss"
 import { MultipleCalendarsProps } from "../../../types/ui.types";
@@ -6,14 +6,19 @@ import {Button} from "../../elements";
 import { Calendar } from "../Calendar/Calendar";
 import { formatDate } from "../../../utils";
 
-/**
- * 
- * @param date 달력 날짜
- * @param start 조회 시작 날짜
- * @param end 조회 종료 날짜
- * @param onClickSubmitBtn 날짜 적용하기 벝는 클릭시 이벤트 함수
- * @returns 
- */
+
+interface Props {
+    date: Date;
+    start: Date;
+    end: Date;
+    setCalendar: Dispatch<SetStateAction<boolean>>;
+    onClickSubmitBtn?: (startDate: Date, endDate: Date) => void;
+    startTime?:number
+    type: 'multiple' | 'single';
+}
+
+
+
 export const MultipleCalendars = ({
         date,
         start,
@@ -21,39 +26,28 @@ export const MultipleCalendars = ({
         onClickSubmitBtn,
         setCalendar,
         startTime
-    }:MultipleCalendarsProps) => {
+    }:Props) => {
 
     useEffect(()=>{
-        // 이 컴포넌트가 없어질 때 return 안에 코드가 실행됨
-        // 처음 달력이 렌더됬을 때로 시작 & 종료 돌아감
         return(()=> {
             setStartDate(start);
             setEndDate(end);
         })
     },[])
 
-    // 달력 안에서 시작 일시
     const [startDate, setStartDate] = useState<Date>(start);
-    // 달력 안에서 종료 일시
     const [endDate, setEndDate] = useState<Date>(end);
-    // 달력 날짜
     const [currentDate, setCurrentDate] = useState<Date>(date);
-    // 달력 selected된 date type  ex)start, end
     const [selectedDateType, setSelectedDateType] = useState<string>('start');
-    // // 달력 selected된 date type이 있는지 없는지 
-    // const [isSelected, setIsSelected] = useState<boolean>(false);
-    // 달력 hover효과 적용되는 dates[]
     const [hoverDates, setHoverDates] = useState<Date[]|any[]>([]);
 
-    // 달력 한 달 앞으로 넘어가기
     const prevMonth = () => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth()-1, currentDate.getDate()))
     }
-    // 달력 한 달 뒤로 넘어가기
     const nextMonth = () => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth()+1, currentDate.getDate()))
     }
-    // Date를 클릭했을 때
+
     const onClickDate= (value:Date) => {
             if(selectedDateType === "start"){
                 // 선택된 날짜가 종료일보다 미래일 경우 
@@ -147,11 +141,11 @@ export const MultipleCalendars = ({
 
             </div>
             <div className={classes.calendar_container} >
-                <div className={classes.startEnd_selectBox} >
+                {/* <div className={classes.startEnd_selectBox} >
                     <Button 
                         size="medium" 
                         style="line" 
-                        text={formatDate(startDate)}
+                        label={formatDate(startDate)}
                         state={selectedDateType === "start" ? 'focused':'default'} 
                         onClick={() => clickSelectDateType('start')}
                     />
@@ -159,26 +153,25 @@ export const MultipleCalendars = ({
                     <Button 
                         size="medium" 
                         style="line" 
-                        text={formatDate(endDate)}
+                        label={formatDate(endDate)}
                         state={selectedDateType === "end" ? 'focused':'default'}
                         onClick={() => clickSelectDateType('end')} 
                     />
-                </div>
+                </div> */}
                 <div className={classes.calendar_header} >
                     <div className={classes.prevBtn} onClick={prevMonth} > {'<'} </div>
                     <div className={classes.nextBtn} onClick={nextMonth} > {'>'} </div>
                 </div>
                 <div className={classes.calendar_body} >
                     <Calendar startTime={startTime} hoverDates={hoverDates} onMouseLeaveDate={onMouseLeaveDate} onMouseOverDate={onMouseOverDate} date={new Date(currentDate.getFullYear(), currentDate.getMonth()-1, 1)} start={startDate} end={endDate} onClickDate={onClickDate} />
-                    <Calendar startTime={startTime} hoverDates={hoverDates} onMouseLeaveDate={onMouseLeaveDate} onMouseOverDate={onMouseOverDate} date={currentDate} start={startDate} end={endDate} onClickDate={onClickDate} />
+                    {/* <Calendar startTime={startTime} hoverDates={hoverDates} onMouseLeaveDate={onMouseLeaveDate} onMouseOverDate={onMouseOverDate} date={currentDate} start={startDate} end={endDate} onClickDate={onClickDate} /> */}
                 </div>
                 <div className={classes.calendar_footer} >
                     <Button 
                         onClick={onClickSubmitDate} 
-                        text="조회일 적용하기" 
+                        label="조회일 적용하기" 
                         size="large"  
-                        style="solid"
-                        width="100%"
+                        configuration="outlined"
                     />
                 </div>
             </div>

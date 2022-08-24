@@ -4,5 +4,6 @@ export type ConfigurationType =
   | "outlined"
   | "text"
   | "textGray";
+  
 
-export type StateType = "hover" | "focused" | "disable";
+export type StateType = "default" | "hover" | "focused" | "disable";
