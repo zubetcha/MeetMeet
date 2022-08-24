@@ -3,4 +3,22 @@
 
 .container {
   width: fit-content;
+
+  .image-wrapper {
+    @include flex-direction(row, 16);
+  }
+  .text-wrapper {
+    @include flex-direction(column, 8);
+  }
 }
+
+.checkbox-container {
+  @include flex-direction(row, 8);
+
+  .checkbox-wrapper {
+    @include flex-direction(row, 4);
+    @include flexbox(start, center);
+    width: fit-content;
+  }
+}
+

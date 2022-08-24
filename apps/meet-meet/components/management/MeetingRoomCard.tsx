@@ -1,21 +1,50 @@
-
+import { useState } from "react";
+import Image from "next/image";
 import classes from "./management.module.scss";
-import { CardDepth1 } from "ui/src/pages"
+import { CardDepth2, IconButton, Text, SVG, Checkbox } from "ui/src/pages"
+import { EquipmentCheckbox } from "./EquipmentCheckbox";
+
+import logo from "ui/src/assets/img/logo_gec.png";
 
 export const MeetingRoomCard = () => {
-  console.log((<CardDepth1><p></p></CardDepth1>).key)
+  const onClickSettings = () => {
+
+  }
   return (
     <>
       <div className={classes.container}>
-        <CardDepth1>
-          <CardDepth1.TitleBar>
-            <CardDepth1.Title>회의실</CardDepth1.Title>
-          </CardDepth1.TitleBar>
-          <CardDepth1.Contents>
-            <p>gd</p>
-          </CardDepth1.Contents>
-        </CardDepth1>
+        <CardDepth2>
+          <CardDepth2.TitleBar>
+            <CardDepth2.Title>회의실</CardDepth2.Title>
+            <IconButton 
+              configuration="text"
+              size="small"
+              state="default"
+              negativeMood={false}
+              icon="settings"
+            />
+          </CardDepth2.TitleBar>
+          <CardDepth2.Contents>
+            <div className={classes["image-wrapper"]}>
+              <Image src={logo} width={100} height={100} alt="_" />
+              <Image src={logo} width={100} height={100} alt="_" />
+              <Image src={logo} width={100} height={100} alt="_" />
+            </div>
+            <div className={classes["text-wrapper"]}>
+              <Text type="body-medium" color="on-surface-variant" style={{ fontWeight: "500" }}>수용 인원 : </Text>
+              <Text type="body-medium" color="on-surface-variant" style={{ fontWeight: "500" }}>위치 : </Text>
+              <Text type="body-medium" color="on-surface-variant" style={{ fontWeight: "500" }}>장비 여부</Text>
+              <div className={classes["checkbox-container"]}>
+                <EquipmentCheckbox />
+              </div>
+            </div>
+          </CardDepth2.Contents>
+        </CardDepth2>
       </div>
     </>
   )
+}
+
+interface Props {
+  data: any;
 }
