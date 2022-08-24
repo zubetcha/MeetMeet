@@ -1,10 +1,17 @@
+.reservationContainer{
+    position: relative;
+}
+
 .roomList{
-    display: grid;
+    // display: grid;
     display: flex;
     // background-color: darkblue;
 
     .dateContainer{
-        width:150px;
+        top:0;
+        left:0;
+        max-width:150px;
+        min-width:150px;
         background-color: var(--color-primary);
         color: #fff;
         display: flex;
@@ -22,19 +29,20 @@
     width: 100%;
     // height:100%;
     display: grid;
-    grid-template-columns: repeat(25, 1fr);
+    grid-template-columns: repeat(25, 50px);
 
     .slotRoom{
+        top:0;
+        left:150px;
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: var(--color-onSurface-opacity-08) !important;
         height:100%;
-        width: 45px;
     }
     .slotItem{
         color: #fff;
-        border-bottom: 1px solid var(--color-onSurfaceVariant-opacity-12);
+        outline: 1px solid var(--color-onSurfaceVariant-opacity-12);
         &:hover{
             cursor: pointer;
             background-color: var(--color-primaryContainer)
@@ -49,11 +57,10 @@
     height:40px;
     width:100%;
     display: grid;
-    grid-template-columns: repeat(25, 1fr);
+    grid-template-columns: repeat(28, 50px);
 
     .emptyItem{
         background-color: transparent !important;
-        width:180px;
     }
     .dateItem{
         background-color: var(--color-onSurfaceVariant-opacity-12);

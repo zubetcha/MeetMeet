@@ -9,6 +9,10 @@ export default function ReservationHeader() {
   return (
     <div className={classes.dateList}>
       <div className={classes.emptyItem}>{""}</div>
+      <div className={classes.emptyItem}>{""}</div>
+      <div className={classes.emptyItem}>{""}</div>
+      <div className={classes.emptyItem}>{""}</div>
+
       {timeList.map((time, index) => (
         <div key={`reservation-header-${index}`} className={classes.dateItem}>
           <Text type="body-small">{time}</Text>

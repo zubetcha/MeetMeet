@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./reservation.module.scss";
 import classNames from "classnames";
 import useReservation from "./hooks/useReservation";
@@ -7,9 +7,10 @@ import { Text } from "ui/src/pages";
 
 interface Props {
   meetingRoom: string;
+  onChange: (e: any) => void;
 }
 
-export default function ReservationRow({ meetingRoom }: Props) {
+export default function ReservationRow({ meetingRoom, onChange }: Props) {
   const { timeList } = useReservation();
 
   const [selectedInfo, setSelectedInfo] = useState({
@@ -17,9 +18,19 @@ export default function ReservationRow({ meetingRoom }: Props) {
     endIndex: -1,
   });
 
-  const onClickSlot = (index: number) => {
-    console.log(index);
+  useEffect(() => {
+    const { startIndex, endIndex } = selectedInfo;
 
+    if (startIndex !== endIndex) {
+      onChange({
+        startTime: timeList[startIndex],
+        endTime: timeList[endIndex],
+        meetingRoom: meetingRoom,
+      });
+    }
+  }, [selectedInfo.startIndex, selectedInfo.endIndex]);
+
+  const onClickSlot = (index: number) => {
     if (selectedInfo.startIndex === -1 && selectedInfo.endIndex === -1) {
       setSelectedInfo({
         startIndex: index,
