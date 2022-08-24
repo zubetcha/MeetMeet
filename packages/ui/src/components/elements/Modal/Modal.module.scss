@@ -40,6 +40,7 @@
 
 .modal-contents {
   @include flex-direction(column, 16);
+  @include flexbox(center, start);
 }
 
 .modal-buttons {

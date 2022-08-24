@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Image from "next/image";
 import classes from "./management.module.scss";
+
 import { CardDepth2, IconButton, Text, SVG, Checkbox } from "ui/src/pages"
 import { EquipmentCheckbox } from "./EquipmentCheckbox";
+import { MeetingroomEditModal } from "./MeetingroomEditModal";
 
 import logo from "ui/src/assets/img/logo_gec.png";
 
-export const MeetingRoomCard = () => {
-  const onClickSettings = () => {
+export const MeetingroomCard = () => {
+  const [isEditModal, setIsEditModal] = useState(false);
 
-  }
   return (
     <>
       <div className={classes.container}>
@@ -22,10 +23,14 @@ export const MeetingRoomCard = () => {
               state="default"
               negativeMood={false}
               icon="settings"
+              onClick={() => {
+                setIsEditModal(true)
+                console.log("제앨")
+              }}
             />
           </CardDepth2.TitleBar>
           <CardDepth2.Contents>
-            <div className={classes["image-wrapper"]}>
+            <div className={classes["images-wrapper"]}>
               <Image src={logo} width={100} height={100} alt="_" />
               <Image src={logo} width={100} height={100} alt="_" />
               <Image src={logo} width={100} height={100} alt="_" />
@@ -41,6 +46,7 @@ export const MeetingRoomCard = () => {
           </CardDepth2.Contents>
         </CardDepth2>
       </div>
+      {isEditModal && <MeetingroomEditModal />}
     </>
   )
 }

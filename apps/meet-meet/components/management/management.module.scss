@@ -4,9 +4,6 @@
 .container {
   width: fit-content;
 
-  .image-wrapper {
-    @include flex-direction(row, 16);
-  }
   .text-wrapper {
     @include flex-direction(column, 8);
   }
@@ -14,11 +11,46 @@
 
 .checkbox-container {
   @include flex-direction(row, 8);
-
-  .checkbox-wrapper {
-    @include flex-direction(row, 4);
-    @include flexbox(start, center);
-    width: fit-content;
-  }
 }
 
+.checkbox-wrapper {
+  @include flex-direction(row, 4);
+  @include flexbox(start, center);
+  width: fit-content;
+}
+
+.modal-buttons-wrapper {
+  @include flex-direction(row, 16);
+  @include flexbox(end, center);
+}
+
+.images-container {
+  @include flex-direction(column, 8);
+}
+
+.images-wrapper {
+  @include flex-direction(row, 16);
+}
+
+.imagePlaceholder-container {
+  @include flexbox(center, center);
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  border: 4px dashed var(--color-surfaceVariant);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    border: 4px dashed var(--color-outline);
+
+    svg {
+      fill: var(--color-outline);
+    }
+  }
+
+  svg {
+    transition: all 0.3s ease-in-out;
+    fill: var(--color-surfaceVariant);
+  }
+}
