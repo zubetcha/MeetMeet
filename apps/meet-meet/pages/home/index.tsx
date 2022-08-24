@@ -8,23 +8,28 @@ import { formatDate } from "ui/src/utils";
 const Home = () => {
 
   const [btnState, setBtnState] = useState<boolean>(true);
-
+  const [date, setDate] = useState<Date>(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate() - 1));
+  
   return (
     <div>
       <Button
         configuration="outlined"
         size="large"
-        label={formatDate(new Date())}
+        label={formatDate(date)}
         onClick={() => setBtnState(true)}
       />
       {
         btnState 
         && <MultipleCalendars 
             setCalendar={setBtnState} 
-            onClickSubmitBtn={() => {}} 
-            date={new Date()} 
-            start={new Date()} 
-            end={new Date()}
+            onClickSubmitBtn={(startDate) => {
+              setDate(startDate);
+              setBtnState(false);
+
+            }} 
+            date={date} 
+            start={date} 
+            end={date}
             type="single"          
           />
       }

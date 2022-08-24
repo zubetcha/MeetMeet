@@ -12,7 +12,7 @@ interface Props {
     start: Date;
     end: Date;
     setCalendar: Dispatch<SetStateAction<boolean>>;
-    onClickSubmitBtn?: (startDate: Date, endDate: Date) => void;
+    onClickSubmitBtn: (startDate: Date, endDate: Date) => void;
     startTime?:number
     type: 'multiple' | 'single';
 }
@@ -25,7 +25,8 @@ export const MultipleCalendars = ({
         end,
         onClickSubmitBtn,
         setCalendar,
-        startTime
+        startTime,
+        type
     }:Props) => {
 
     useEffect(()=>{
@@ -40,6 +41,9 @@ export const MultipleCalendars = ({
     const [currentDate, setCurrentDate] = useState<Date>(date);
     const [selectedDateType, setSelectedDateType] = useState<string>('start');
     const [hoverDates, setHoverDates] = useState<Date[]|any[]>([]);
+    const [weekendIncluded, setWeekendIncluded] = useState<boolean>(false);
+
+
 
     const prevMonth = () => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth()-1, currentDate.getDate()))
@@ -49,6 +53,8 @@ export const MultipleCalendars = ({
     }
 
     const onClickDate= (value:Date) => {
+
+        if(type === 'multiple') {
             if(selectedDateType === "start"){
                 // 선택된 날짜가 종료일보다 미래일 경우 
                 if(value.getTime() > endDate.getTime()){
@@ -73,45 +79,57 @@ export const MultipleCalendars = ({
                     setEndDate(value);
                 }
             }
+        }
+        else {
+            setStartDate(value);
+            setEndDate(value);
+        }
     }
 
     // DESCRIBE: Dates MouseOver했을 때
     const onMouseOverDate = (value:Date) => {
-        //  _hoverDates = [시작일, 종료일]
-        let _hoverDates:undefined[]|Date[] = []
-        
-            if(selectedDateType === "start"){
-                // value가 종료일보다 미래일경우 value만 hover적용
-                if(value.getTime() > endDate.getTime()){
-                    _hoverDates = [value, value];
-                }
-                // value가 시작일 종료일 사이일경우 value에만 hover적용 
-                // 하지만 시각적으로 hover효괴되는 Date가 없음
-                else if(value.getTime() <= endDate.getTime() 
-                    && value.getTime() >= startDate.getTime()){
-                    _hoverDates = [value, endDate];
-                }
-                // value가 시작일보다 과거일경우 value부터 시작일까지 hover효과줌
-                else{
-                    _hoverDates = [value, endDate];
-                }
-            }else{
-                // value가 시작일보다 과거일경우 value부터 시작일까지 hover효과줌
-                if(value.getTime() < startDate.getTime()){
-                    _hoverDates = [value, endDate];
-                }
-                // value가 시작일 종료일 사이일경우 value에만 hover적용 
-                // 하지만 시각적으로 hover효괴되는 Date가 없음
-                else if(value.getTime() <= endDate.getTime() && value.getTime() >= startDate.getTime()){
-                    _hoverDates = [startDate, value];
-                }
-                // value가 종료일보다 미래일 경우 종료일부터 value까지 hover적용
-                else{
-                    _hoverDates = [startDate, value];
-                }
-            }
 
-        setHoverDates(_hoverDates);
+        if(type === 'multiple') {
+            //  _hoverDates = [시작일, 종료일]
+            let _hoverDates:undefined[]|Date[] = []
+            
+                if(selectedDateType === "start"){
+                    // value가 종료일보다 미래일경우 value만 hover적용
+                    if(value.getTime() > endDate.getTime()){
+                        _hoverDates = [value, value];
+                    }
+                    // value가 시작일 종료일 사이일경우 value에만 hover적용 
+                    // 하지만 시각적으로 hover효괴되는 Date가 없음
+                    else if(value.getTime() <= endDate.getTime() 
+                        && value.getTime() >= startDate.getTime()){
+                        _hoverDates = [value, endDate];
+                    }
+                    // value가 시작일보다 과거일경우 value부터 시작일까지 hover효과줌
+                    else{
+                        _hoverDates = [value, endDate];
+                    }
+                }else{
+                    // value가 시작일보다 과거일경우 value부터 시작일까지 hover효과줌
+                    if(value.getTime() < startDate.getTime()){
+                        _hoverDates = [value, endDate];
+                    }
+                    // value가 시작일 종료일 사이일경우 value에만 hover적용 
+                    // 하지만 시각적으로 hover효괴되는 Date가 없음
+                    else if(value.getTime() <= endDate.getTime() && value.getTime() >= startDate.getTime()){
+                        _hoverDates = [startDate, value];
+                    }
+                    // value가 종료일보다 미래일 경우 종료일부터 value까지 hover적용
+                    else{
+                        _hoverDates = [startDate, value];
+                    }
+                }
+                setHoverDates(_hoverDates);
+        }
+        else {
+            setHoverDates([value, value]);
+        }
+
+
     }
 
     // DESCRIBE: Dates mouseLeave했을 때
@@ -138,33 +156,51 @@ export const MultipleCalendars = ({
     return(
         <div>
             <div className={classes.calendar_outer_box} onClick={() => {setCalendar(false)}} >
-
             </div>
             <div className={classes.calendar_container} >
-                {/* <div className={classes.startEnd_selectBox} >
-                    <Button 
-                        size="medium" 
-                        style="line" 
-                        label={formatDate(startDate)}
-                        state={selectedDateType === "start" ? 'focused':'default'} 
-                        onClick={() => clickSelectDateType('start')}
-                    />
-                    <div>~</div>
-                    <Button 
-                        size="medium" 
-                        style="line" 
-                        label={formatDate(endDate)}
-                        state={selectedDateType === "end" ? 'focused':'default'}
-                        onClick={() => clickSelectDateType('end')} 
-                    />
-                </div> */}
+                {
+                    type === "multiple" &&
+                        <div className={classes.startEnd_selectBox} >
+                            <Button 
+                                size="medium" 
+                                configuration="outlined" 
+                                label={formatDate(startDate)}
+                                state={selectedDateType === "start" ? 'focused':'default'} 
+                                onClick={() => clickSelectDateType('start')}
+                            />
+                            <div>~</div>
+                            <Button 
+                                size="medium" 
+                                configuration="outlined" 
+                                label={formatDate(endDate)}
+                                state={selectedDateType === "end" ? 'focused':'default'}
+                                onClick={() => clickSelectDateType('end')} 
+                            />
+                            <Button
+                                size="medium"
+                                configuration="textGray"
+                                label="주말 및 공휴일 포함"
+                                showIcon={true}
+                                icon={weekendIncluded ? 'checked' : 'unchecked'}
+                                onClick={() => {
+                                    weekendIncluded 
+                                        ? setWeekendIncluded(false)
+                                        : setWeekendIncluded(true)
+                                }}
+                            />
+                        </div>
+                }
+
                 <div className={classes.calendar_header} >
                     <div className={classes.prevBtn} onClick={prevMonth} > {'<'} </div>
                     <div className={classes.nextBtn} onClick={nextMonth} > {'>'} </div>
                 </div>
                 <div className={classes.calendar_body} >
-                    <Calendar startTime={startTime} hoverDates={hoverDates} onMouseLeaveDate={onMouseLeaveDate} onMouseOverDate={onMouseOverDate} date={new Date(currentDate.getFullYear(), currentDate.getMonth()-1, 1)} start={startDate} end={endDate} onClickDate={onClickDate} />
-                    {/* <Calendar startTime={startTime} hoverDates={hoverDates} onMouseLeaveDate={onMouseLeaveDate} onMouseOverDate={onMouseOverDate} date={currentDate} start={startDate} end={endDate} onClickDate={onClickDate} /> */}
+                    {
+                        type === 'multiple' &&
+                        <Calendar startTime={startTime} hoverDates={hoverDates} onMouseLeaveDate={onMouseLeaveDate} onMouseOverDate={onMouseOverDate} date={new Date(currentDate.getFullYear(), currentDate.getMonth()-1, 1)} start={startDate} end={endDate} onClickDate={onClickDate} />
+                    }
+                    <Calendar startTime={startTime} hoverDates={hoverDates} onMouseLeaveDate={onMouseLeaveDate} onMouseOverDate={onMouseOverDate} date={currentDate} start={startDate} end={endDate} onClickDate={onClickDate} />
                 </div>
                 <div className={classes.calendar_footer} >
                     <Button 
