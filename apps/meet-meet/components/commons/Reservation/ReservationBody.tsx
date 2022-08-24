@@ -17,7 +17,7 @@ export default function ReservationBody({
     <>
       {dates.map((date: string) => (
         <>
-          <div className={classes.rowWrapper}>
+          <div>
             {meetingRoom.map((room, index) => (
               <ReservationRow
                 key={`reservation-row-${index}`}

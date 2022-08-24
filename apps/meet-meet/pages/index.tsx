@@ -1,11 +1,6 @@
-import {
-  Button,
-  ButtonGroup,
-  Select,
-  IconButton,
-} from "ui/src/components/elements";
 import type { NextPage } from "next";
-import { DarkModeToggle, ColorCard, Layout } from "../components";
+import { Reservation, Layout } from "components";
+import { Text } from "ui/src/pages";
 
 const Home: NextPage = () => {
   const onChange = (e: any) => {
@@ -14,203 +9,22 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <DarkModeToggle />
-      <ColorCard />
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "8px",
-          marginTop: "20px",
+          position: "absolute",
+          top: "50px",
+          right: "40px",
+          bottom: "24px",
+          left: "24px",
+          display: "grid",
         }}
       >
-        <Button
-          configuration="filled"
-          size="medium"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="filled"
-          size="large"
-          state="focused"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled focused"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="tonal"
-          size="large"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="tonal"
-          size="large"
-          state="focused"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled focused"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="outlined"
-          size="large"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="outlined"
-          size="large"
-          state="disable"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled focused"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="text"
-          size="large"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="text"
-          size="large"
-          negativeMood={true}
-          showIcon={true}
-          label="Button filled focused"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="textGray"
-          size="large"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled"
-          showRightIcon={true}
-          icon="more"
-        />
-        <Button
-          configuration="textGray"
-          size="large"
-          state="focused"
-          negativeMood={false}
-          showIcon={true}
-          label="Button filled focused"
-          showRightIcon={true}
-          icon="more"
-        />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "8px",
-          marginTop: "20px",
-        }}
-      >
-        <IconButton
-          configuration="filled"
-          size="large"
-          state="default"
-          negativeMood={false}
-          icon="more"
-        />
-        <IconButton
-          configuration="filled"
-          size="large"
-          state="default"
-          negativeMood={true}
-          icon="more"
-        />
-        <IconButton
-          configuration="filled"
-          size="large"
-          state="disable"
-          negativeMood={false}
-          icon="more"
-        />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "8px",
-          marginTop: "20px",
-          flexDirection: "column",
-        }}
-      >
-        <ButtonGroup
-          configuration="outlined"
-          size="large"
-          defaultIndex={2}
-          onChange={(selectedIndex: number) =>
-            console.log("selectedIndex", selectedIndex)
-          }
-          label="Label"
-        >
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-        </ButtonGroup>
-        <ButtonGroup
-          configuration="filled"
-          size="large"
-          defaultIndex={2}
-          onChange={(selectedIndex: number) =>
-            console.log("selectedIndex", selectedIndex)
-          }
-        >
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-        </ButtonGroup>
-        <ButtonGroup
-          configuration="tonal"
-          size="large"
-          defaultIndex={2}
-          onChange={(selectedIndex: number) =>
-            console.log("selectedIndex", selectedIndex)
-          }
-        >
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-        </ButtonGroup>
-        <ButtonGroup
-          configuration="text"
-          size="large"
-          defaultIndex={2}
-          onChange={(selectedIndex: number) =>
-            console.log("selectedIndex", selectedIndex)
-          }
-        >
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-          <Button label="테스트"></Button>
-        </ButtonGroup>
+        <Text type="headline-large" color="primary" weight="bold">
+          젠틀에너지 회의실 예약 현황
+        </Text>
+        {/* <div style={{ width: "100%" }}> */}
+        <Reservation />
+        {/* </div> */}
       </div>
     </Layout>
   );

@@ -1,16 +1,13 @@
 import React from "react";
 import classes from "./reservation.module.scss";
-import ReservationRow from "./ReservationRow";
 import { Text } from "ui/src/pages";
-import ReservationHeader from "./ReservationHeader";
 
 interface Props {
   date: string;
+  meetingRoom: string[];
 }
 
-export default function ReservationSection({ date }: Props) {
-  const meetingRoom = ["백범", "마당", "백범", "청파"];
-
+export default function ReservationSection({ date, meetingRoom }: Props) {
   return (
     <div className={classes.roomList}>
       <div className={classes.infoContainer}>

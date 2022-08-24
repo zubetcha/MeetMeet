@@ -18,7 +18,7 @@ export default function ReservationModal({
   const { date, meetingRoom, startTime, endTime } = reservationData;
 
   return (
-    <Modal>
+    <Modal isToast={true}>
       <Modal.Contents>
         <Modal.Icon>
           <SVG name="done" />

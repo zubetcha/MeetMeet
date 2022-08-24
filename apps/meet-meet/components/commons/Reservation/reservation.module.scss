@@ -1,5 +1,8 @@
 .reservationContainer{
-    display: flex;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    width:100%;
+    height: fit-content;
 
     .reservationFixedSection{
         .emptySection{
@@ -8,8 +11,8 @@
         }
     }
 
-    .reservationBody{
-        width:500px;
+    .reservationScrollSection{
+        width: 100%;
         overflow-x:auto;
         position: relative;
 
@@ -35,11 +38,6 @@
     // display: grid;
     display: flex;
     // background-color: darkblue;
-
-    .rowWrapper{
-        width:300px;
-        // overflow-x:auto;
-    }
 }
 
 .infoContainer{ 
@@ -76,7 +74,6 @@
 .slotList{
     height: 40px;
     width: 100%;
-    // height:100%;
     display: grid;
     grid-template-columns: repeat(25, 50px);
 
@@ -95,7 +92,7 @@
 
 .dateList{
     height:40px;
-    width:100%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(28, 50px);
 

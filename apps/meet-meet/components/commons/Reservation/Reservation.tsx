@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./reservation.module.scss";
 import ReservationSection from "./ReservationSection";
 import ReservationHeader from "./ReservationHeader";
 import ReservationModal from "./ReservationModal";
 import ReservationBody from "./ReservationBody";
 
-export const Reservation = () => {
+interface ReservationProps {
+  width?: string;
+}
+
+export const Reservation = ({ width = "100%" }: ReservationProps) => {
   const [selectedData, setSelectedData] = useState({
     meetingRoom: "",
     date: "",
@@ -17,13 +21,16 @@ export const Reservation = () => {
   const meetingRoom = ["백범", "마당", "백범", "청파"];
 
   const onChange = (e: any, date: string) => {
+    setTimeout(() => {
+      setIsOpen(true);
+    }, 500);
+
     setSelectedData({
       date: date,
       meetingRoom: e.meetingRoom,
       startTime: e.startTime,
       endTime: e.endTime,
     });
-    setIsOpen(true);
   };
 
   return (
@@ -36,12 +43,15 @@ export const Reservation = () => {
             <ReservationSection
               key={`reservation-section-${date}`}
               date={date}
+              meetingRoom={meetingRoom}
             />
           ))}
         </div>
 
-        {/* 선택 영역 */}
-        <div className={classes.reservationBody}>
+        <div
+          className={classes.reservationScrollSection}
+          style={{ width: width }}
+        >
           <ReservationHeader />
           <ReservationBody
             dates={dates}
