@@ -1,10 +1,11 @@
+import { MeetingRoomCard } from "@components/management/MeetingRoomCard"
 
-const Management = () => {
+const ManagementPage = () => {
   return (
     <div>
-
+      <MeetingRoomCard />
     </div>
   )
 }
 
-export default Management
+export default ManagementPage
