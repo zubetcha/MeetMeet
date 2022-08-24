@@ -1,7 +1,8 @@
 import { classExpression } from "@babel/types";
-import { Button } from "@components/ui";
+import { Button, ScrollDrag } from "@components/ui";
 import { useState } from "react";
-import { MultipleCalendars } from "@components/ui";
+import { MultipleCalendars, Cell } from "@components/ui";
+import ScrollContainer from 'react-indiana-drag-scroll'
 import { formatDate } from "ui/src/utils";
 
 const Home = () => {
@@ -27,7 +28,78 @@ const Home = () => {
             type="single"          
           />
       }
-    </div>
+
+      <div
+        style={{width:'500px'}}
+      >
+          <ScrollContainer
+            vertical={false}
+          >
+            <div style={{display:'flex'}} >
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+              <Cell
+                state="default"
+                label="18:00"
+                labelColor="default"
+              />
+            </div>
+          </ScrollContainer>
+        </div>
+      </div>
   )
 }
 

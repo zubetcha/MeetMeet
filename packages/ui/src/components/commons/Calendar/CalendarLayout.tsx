@@ -171,7 +171,8 @@ export const MultipleCalendars = ({
                         onClick={onClickSubmitDate} 
                         label="조회일 적용하기" 
                         size="large"  
-                        configuration="outlined"
+                        configuration="filled"
+                        style={{width:'100%', justifyContent:'center'}}
                     />
                 </div>
             </div>
