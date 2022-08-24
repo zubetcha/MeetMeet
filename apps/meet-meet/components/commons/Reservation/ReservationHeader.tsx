@@ -7,15 +7,10 @@ export default function ReservationHeader() {
   const { timeList } = useReservation();
 
   return (
-    <div className={classes.dateList}>
-      <div className={classes.emptyItem}>{""}</div>
-      <div className={classes.emptyItem}>{""}</div>
-      <div className={classes.emptyItem}>{""}</div>
-      <div className={classes.emptyItem}>{""}</div>
-
-      {timeList.map((time, index) => (
-        <div key={`reservation-header-${index}`} className={classes.dateItem}>
-          <Text type="body-small">{time}</Text>
+    <div className={classes.reservationHeader}>
+      {timeList.map((date: string) => (
+        <div key={`reservation-date-${date}`} className={classes.time}>
+          <Text type="body-small">{date}</Text>
         </div>
       ))}
     </div>

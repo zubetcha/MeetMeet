@@ -64,10 +64,11 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
   return (
     <>
       <div className={classes.slotList} ref={ref}>
-        <div className={classes.slotRoom}>
+        {/* <div className={classes.slotRoom}>
           <Text type="body-small">{meetingRoom}</Text>
-        </div>
+        </div> */}
         {timeList.map((item, index) => (
+          // 나중에 GellGroup 으로 갈아껴야됨.
           <div
             key={`reservation-item-${index}`}
             className={classNames(
