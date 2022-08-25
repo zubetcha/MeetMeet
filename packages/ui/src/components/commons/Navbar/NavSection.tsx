@@ -16,9 +16,10 @@ export type NavItemType = {
 interface Props {
   headerLabel?: string;
   itemList: NavItemType[];
+  isClose: boolean;
 }
 
-export const NavSection = ({ headerLabel, itemList }: Props) => {
+export const NavSection = ({ headerLabel, itemList, isClose }: Props) => {
   return (
     <div className={classes.NavSectionBox}>
       {headerLabel && (
@@ -28,7 +29,9 @@ export const NavSection = ({ headerLabel, itemList }: Props) => {
         </div>
       )}
       {itemList.map((item, idx) => {
-        return <NavItem item={item} key={`NavItem'_${idx}`} />;
+        return (
+          <NavItem item={item} isClose={isClose} key={`NavItem'_${idx}`} />
+        );
       })}
     </div>
   );

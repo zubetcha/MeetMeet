@@ -7,9 +7,10 @@ import { SVG } from "../../elements";
 
 interface Props {
   item: NavItemType;
+  isClose: boolean;
 }
 
-export const NavItem = ({ item }: Props) => {
+export const NavItem = ({ item, isClose }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -40,7 +41,17 @@ export const NavItem = ({ item }: Props) => {
           <div className={classes.rightElement}>{item.rightElement}</div>
           <div className={classes.stateLayer}></div>
         </div>
-        {item.isModal && item.Modal && item.Modal(isOpen)}{" "}
+        <div
+          style={{
+            position: "absolute",
+            top: "8px",
+            left: isClose ? "80px" : "180px",
+            zIndex: "100",
+            transition: "left 0.3s ease-in-out",
+          }}
+        >
+          {item.isModal && item.Modal && item.Modal(isOpen)}{" "}
+        </div>
       </div>
     </>
   );
