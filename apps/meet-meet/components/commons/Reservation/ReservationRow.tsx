@@ -3,7 +3,6 @@ import classes from "./reservation.module.scss";
 import classNames from "classnames";
 import useReservation from "./hooks/useReservation";
 import { useOutsideAlerter } from "ui/src/hooks/useOutsideAlerter";
-import { Text } from "ui/src/pages";
 
 interface Props {
   meetingRoom: string;

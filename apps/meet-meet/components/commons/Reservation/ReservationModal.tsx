@@ -21,7 +21,7 @@ export default function ReservationModal({
     <Modal isToast={true}>
       <Modal.Contents>
         <Modal.Icon>
-          <SVG name="done" />
+          <SVG name="done" color="primary" />
         </Modal.Icon>
         <Modal.Title>
           {date} {startTime} - {endTime} [{meetingRoom}] 회의실
