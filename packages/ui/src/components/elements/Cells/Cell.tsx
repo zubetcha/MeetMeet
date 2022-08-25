@@ -2,8 +2,8 @@ import classNames from "classnames";
 import classes from './Cell.module.scss'
 
 interface Props {
-  state: 'default' | 'hover' | 'focused' | 'disable' | 'focusedStartEnd';
-  label: string | number;
+  state?: 'default' | 'hover' | 'focused' | 'disable' | 'focusedStartEnd';
+  label?: string | number;
   labelColor?: 'default' | 'error' | 'tertiary';
   isHover?: boolean;
   onClick?: () => void;
@@ -15,7 +15,7 @@ interface Props {
 
 
 export const Cell = ({
-  state,
+  state = 'default',
   label,
   style,
   labelColor = 'default',

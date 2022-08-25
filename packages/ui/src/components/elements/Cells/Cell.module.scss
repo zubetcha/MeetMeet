@@ -1,27 +1,24 @@
 @use '../../../styles/utils' as *;
 
 @mixin cellTextColor {
-  .cellText {
-    color: var(--color-onSurface);
-  }
+
+  color: var(--color-onSurface);
   
   &.disable {
-    .cellText {
-      color: var(--color-onSurface-opacity-38) !important;
-    }
+    color: var(--color-onSurface-opacity-38);
   }
 
   &.error {
-    .cellText {
-      color: var(--color-error);
-    }
+    color: var(--color-error);
   }
 
   &.tertiary {
-    .cellText {
-      color: var(--color-tertiary);
-    }
+    color: var(--color-tertiary);
   }
+}
+
+.cellGroupBox {
+  display: flex;
 }
 
 .cellContainer {
@@ -33,6 +30,7 @@
   justify-content: center;
   cursor: pointer;
   @include cellTextColor;
+  @include font-style(body-large);
 
   &.focused {
     background-color: var(--color-primary-opacity-12);
@@ -52,7 +50,6 @@
     text-align: center;
     padding: 8px 10.5px;
     border-radius: 4px;
-    @include font-style(body-large);
   }
 
   .stateLayer {
