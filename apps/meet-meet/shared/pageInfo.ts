@@ -13,7 +13,7 @@ export const navInfo = [
         label: "알림 내역",
         path: "alert",
         isModal: true,
-        Modal: () => Alarm(),
+        Modal: (isOpen: boolean) => Alarm({ isOpen: isOpen }),
       },
       {
         icon: "calendar",

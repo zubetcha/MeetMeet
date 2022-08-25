@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { Reservation, Layout } from "components";
 import { Text } from "ui/src/pages";
+import { CardDepth1 } from "ui/src/pages";
 
 const Home: NextPage = () => {
   const onChange = (e: any) => {
@@ -19,12 +20,14 @@ const Home: NextPage = () => {
           display: "grid",
         }}
       >
-        <Text type="headline-large" color="primary" weight="bold">
+        <Text
+          type="headline-large"
+          color="primary"
+          style={{ fontWeight: "bold" }}
+        >
           젠틀에너지 회의실 예약 현황
         </Text>
-        {/* <div style={{ width: "100%" }}> */}
         <Reservation />
-        {/* </div> */}
       </div>
     </Layout>
   );

@@ -1,9 +1,28 @@
+
 .alarmContainer{
     position: absolute;
-    top:20px;
-    left:150px;
-    width:370px;
-    height: 430px;
+    top: 8px;
+    left: 180px;
+    border-radius: 16px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     z-index: 100;
+}
+
+.alarmInnerContainer{
+    width: 250px;
+    height: 200px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    display: grid;
+    row-gap: 10px;
+}
+
+.alarmItem{
+    width: 250px;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom:10px;
+    div{
+        width:250px;
+        white-space:normal;
+    }
 }

@@ -3,6 +3,7 @@ export type ConfigurationType =
   | "tonal"
   | "outlined"
   | "text"
-  | "textGray";
+  | "textGray"
+  | "input";
 
 export type StateType = "hover" | "focused" | "disable";

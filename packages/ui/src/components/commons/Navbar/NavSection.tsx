@@ -10,7 +10,7 @@ export type NavItemType = {
   rightElement?: JSX.Element;
   path: string;
   isModal: boolean;
-  Modal?: () => JSX.Element;
+  Modal?: (isOpen?: boolean) => JSX.Element;
 };
 
 interface Props {
