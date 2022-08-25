@@ -68,13 +68,13 @@ $body-small-line: 16px;
 $body-small-letter: 0px;
 
 
-// DESCRIBE 
+// DESCRIBE: padding
 $default-padding: 24px 24px 16px 24px;
 $modal-container-padding: 24px 40px;
 $toast-modal-container-padding: 40px 40px 24px 40px;
 
 
-// DESCRIBE
+// DESCRIBE: colors-map
 $colors-map: (
   primary: var(--color-primary),
   primary-08: var(--color-primary-opacity-08),
@@ -202,12 +202,14 @@ $colors-map: (
   transparent: transparent,
 );
 
+// DESCRIBE: surface 레벨별 box-shadow값 
 $box-shadow-surface1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
 $box-shadow-surface2: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
 $box-shadow-surface3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
 $box-shadow-surface4: 0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3);
 $box-shadow-surface5: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3);
 
+// DESCRIBE 
 $flex-map: (
   start: flex-start,
   end: flex-end,
@@ -216,4 +218,6 @@ $flex-map: (
   stretch: stretch,
   center: center,
 );
+
+// DESCRIBE: state-layer
 

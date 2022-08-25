@@ -6,6 +6,9 @@ export const MeetingroomAddModal = ({setIsAddModal}: Props) => {
   const onChangeCheckbox = () => {
 
   }
+  const onChangeInput = () => {
+
+  }
   return (
     <>
       <Modal>
@@ -13,17 +16,17 @@ export const MeetingroomAddModal = ({setIsAddModal}: Props) => {
         <Modal.Contents>
           <TextField name="meetingroom-name" status="default">
             <TextField.Label>이름</TextField.Label>
-            <TextField.Input type="text" value="" placeholder="회의실 이름을 입력해주세요." autoFocus/>
+            <TextField.Input type="text" value="" placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeInput}/>
           </TextField>
           <TextField name="meetingroom-merge" status="default">
             <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
-            <TextField.Input type="text" value="" placeholder="선택해주세요.">
+            <TextField.Input type="text" value="" placeholder="선택해주세요." onChange={onChangeInput}>
               <TextField.Icon name="dropdown" />
             </TextField.Input>
           </TextField>
           <TextField name="meetingroom-accommodate" status="default">
             <TextField.Label>수용 인원</TextField.Label>
-            <TextField.Input type="text" value="" placeholder="수용 인원을 선택해주세요.">
+            <TextField.Input type="text" value="" placeholder="수용 인원을 선택해주세요." onChange={onChangeInput}>
               <TextField.Unit>명</TextField.Unit>
               <TextField.Icon name="dropdown" />
             </TextField.Input>
@@ -40,7 +43,7 @@ export const MeetingroomAddModal = ({setIsAddModal}: Props) => {
           </TextField>
           <TextField name="meetingroom-location" status="default">
             <TextField.Label>위치</TextField.Label>
-            <TextField.Input type="textarea" value="" placeholder="회의실 위치 정보를 입력해주세요." />
+            <TextField.Textarea value="" placeholder="회의실 위치 정보를 입력해주세요." onChange={onChangeInput}/>
           </TextField>
           <div className={classes["images-container"]}>
             <TextField.Label>회의실 사진</TextField.Label>

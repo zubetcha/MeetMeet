@@ -12,7 +12,7 @@ interface Props {
   state: string;
   negativeMood: boolean;
   icon: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const IconButton = ({
@@ -37,7 +37,7 @@ export const IconButton = ({
       classes[configuration],
       negativeMood && classes.negativeMood
     )} 
-      onClick={onClick}
+      
     >
       <SVG
         name={icon} 
@@ -45,7 +45,7 @@ export const IconButton = ({
         width={iconWidth}
         height={iconHeight}
       />
-      <div className={classes.stateLayer} ></div>
+      <div className={classes.stateLayer}></div>
     </div>
   )
 }
