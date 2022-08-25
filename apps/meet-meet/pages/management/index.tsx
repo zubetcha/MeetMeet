@@ -1,7 +1,7 @@
 import { useState } from "react";
 import classes from "./managementPage.module.scss";
 
-import { MeetingroomCard } from "@components/management/MeetingroomCard";
+import { MeetingroomCard } from "@components/management/MeetingRoomCard";
 import { MeetingroomAddModal } from "@components/management/MeetingroomAddModal";
 import { CardDepth1, Button, IconButton } from "ui/src/pages"
 

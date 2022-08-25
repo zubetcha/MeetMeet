@@ -1,11 +1,13 @@
+import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useGetGoogleLogin } from "@hooks/queries/auth/useGetQueries";
 
 import classes from "./auth.module.scss";
+
 import { CardDepth1, Text, Button } from 'ui/src/pages';
 
 export const AuthCard = ({type}: Props) => {
   const router = useRouter();
-
   const byType = {
     login: {
       korean: "로그인",
@@ -20,9 +22,12 @@ export const AuthCard = ({type}: Props) => {
       info: "이미 계정이 있으신가요?",
     }
   }
+  
+  const googleLogin = useGetGoogleLogin();
 
   const onClickAuth = () => {
-
+    console.log("인증 버튼 클릭")
+    googleLogin.refetch()
   }
 
   return (
@@ -40,6 +45,7 @@ export const AuthCard = ({type}: Props) => {
               style={{width: "360px", justifyContent: "center"}}
               showIcon
               icon="google"
+              onClick={onClickAuth}
             />
             <div className={classes["card-information-wrapper"]}>
               <Text color="outline">{byType[type].info}</Text>

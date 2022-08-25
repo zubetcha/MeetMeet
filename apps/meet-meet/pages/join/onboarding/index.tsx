@@ -1,8 +1,13 @@
+import { useState } from "react";
 import classes from "./onboardingPage.module.scss";
 
 import { CardDepth1, Text, TextField, Button, SVG } from "ui/src/pages";
 
 const OnboardingPage = () => {
+  // TODO: departments 조회 gql -> 소속 부서 드롭다운 설정 
+
+  // TODO: 
+
   return (
     <div className={classes["onboardingPage-container"]}>
       <CardDepth1>
@@ -31,9 +36,7 @@ const OnboardingPage = () => {
                 <TextField.Label>소속 부서</TextField.Label>
                 <TextField.Input type="text" value="" placeholder="소속 부서">
                   <TextField.Unit>단위</TextField.Unit>
-                  <TextField.Icon>
-                    <SVG name="dropdown" />
-                  </TextField.Icon>
+                  <TextField.Icon name="dropdown" />
                 </TextField.Input>
                 <TextField.HelperText>헬퍼텍스트</TextField.HelperText>
               </TextField>
