@@ -1,0 +1,9 @@
+@import "ui/src/styles/variables";
+@import "ui/src/styles/utils";
+
+.joinPage-container {
+  @include flexbox(center, center);
+  width: 100vh;
+  height: 100vh;
+
+}

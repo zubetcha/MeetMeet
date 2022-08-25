@@ -1,16 +1,19 @@
 import classes from "./Modal.module.scss";
+import { SVG } from "../SVG/SVG";
+import { ColorUnionType } from "../../../types/union.types";
 
-export const ModalIcon = ({children}: Props) => {
+export const ModalIcon = ({name, color}: Props) => {
 
   return (
     <>
       <div className={classes["modal-icon"]}>
-        {children}
+        <SVG name={name} color={color}/>
       </div>
     </>
   )
 }
 
 interface Props {
-  children: JSX.Element;
+  name: string;
+  color: ColorUnionType;
 }

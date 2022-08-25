@@ -3,7 +3,9 @@
 
 html,
 body {
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
+  margin: 0;
+  padding: 0;
 }
 
 a {

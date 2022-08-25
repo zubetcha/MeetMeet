@@ -22,3 +22,5 @@ export * from "./LightSensor/LightSensor";
 
 export * from "./SVG/SVG";
 export * from "./Select";
+
+export * from "./Card";
