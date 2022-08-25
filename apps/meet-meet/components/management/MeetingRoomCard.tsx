@@ -10,7 +10,6 @@ import logo from "ui/src/assets/img/logo_gec.png";
 
 export const MeetingroomCard = () => {
   const [isEditModal, setIsEditModal] = useState(false);
-
   return (
     <>
       <div className={classes.container}>

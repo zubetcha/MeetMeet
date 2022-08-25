@@ -37,7 +37,7 @@ export const IconButton = ({
       classes[configuration],
       negativeMood && classes.negativeMood
     )} 
-      
+      onClick={onClick}
     >
       <SVG
         name={icon} 

@@ -14,12 +14,13 @@ interface NavbarProps {
     headerLabel?:string;
   }[]
   Logo: React.ElementType;
+  onClickUsername: () => void;
 }
 
 
 
 
-export const Navbar = ({isClose, setClose, navInfo, Logo}:NavbarProps) => {
+export const Navbar = ({isClose, setClose, navInfo, Logo, onClickUsername}:NavbarProps) => {
 
   return (
     <div className={classNames(
@@ -35,6 +36,7 @@ export const Navbar = ({isClose, setClose, navInfo, Logo}:NavbarProps) => {
             size="small"
             label="홍길동"
             configuration="text"
+            onClick={onClickUsername}
           />
           <Button
             size="small"

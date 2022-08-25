@@ -4,6 +4,9 @@ import { Modal, TextField, Checkbox, Button, TextArea } from "ui/src/pages"
 
 export const MeetingroomEditModal = ({setIsEditModal}: Props) => {
   const onChangeCheckbox = () => {}
+  const onChangeTextField = () => {
+
+  }
   return (
     <>
       <Modal>
@@ -11,11 +14,11 @@ export const MeetingroomEditModal = ({setIsEditModal}: Props) => {
         <Modal.Contents>
           <TextField name="meetingroom-name" status="default">
             <TextField.Label>이름</TextField.Label>
-            <TextField.Input type="text" value="" placeholder="회의실 이름을 입력해주세요." autoFocus/>
+            <TextField.Input type="text" value="" placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
           </TextField>
           <TextField name="meetingroom-accommodate" status="default">
             <TextField.Label>수용 인원</TextField.Label>
-            <TextField.Input type="text" value="" placeholder="수용 인원을 선택해주세요.">
+            <TextField.Input type="text" value="" placeholder="수용 인원을 선택해주세요." onChange={onChangeTextField}>
               <TextField.Unit>명</TextField.Unit>
               <TextField.Icon name="dropdown" />
             </TextField.Input>
@@ -32,7 +35,7 @@ export const MeetingroomEditModal = ({setIsEditModal}: Props) => {
           </TextField>
           <TextField name="meetingroom-location" status="default">
             <TextField.Label>위치</TextField.Label>
-            <TextField.Input type="textarea" value="" placeholder="회의실 위치 정보를 입력해주세요." />
+            <TextField.Textarea value="" placeholder="회의실 위치 정보를 입력해주세요."  onChange={onChangeTextField}/>
           </TextField>
           <div className={classes["images-container"]}>
             <TextField.Label>회의실 사진</TextField.Label>
@@ -48,6 +51,7 @@ export const MeetingroomEditModal = ({setIsEditModal}: Props) => {
             label="취소"
             size="medium"
             configuration="text"
+            onClick={() => setIsEditModal(false)}
           />
           <Button
             label="회의실 생성"

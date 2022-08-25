@@ -46,10 +46,11 @@ export const TextFieldInput = ({
           autoComplete="off"
         />
         <div className={classes["wrapper__input-box__children"]}>
-          {Children.toArray(children).map((child: any) => {
+          {Children.toArray(children).map((child: any, i) => {
             return (
               <>
                 {cloneElement(child, {
+                  key: i,
                   status,
                   isFocused,
                 })}

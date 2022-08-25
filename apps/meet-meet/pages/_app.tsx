@@ -10,6 +10,7 @@ import { Layout } from "@components/commons/Layout/Layout";
 function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
+  const exceptionList = ["/", "/login", "/join", "/join/onboarding"]
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "light");
@@ -23,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ApolloProvider client={client}>
         {
-          router.pathname === "/" 
+          exceptionList.includes(router.pathname)
           ? <Component {...pageProps} />
           : <Layout>
               <Component {...pageProps} />
