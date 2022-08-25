@@ -3,8 +3,6 @@
 
 .loginPage-container {
   @include flexbox(center, center);
-  width: 100vh;
+  width: 100%;
   height: 100vh;
-  
-
 }
