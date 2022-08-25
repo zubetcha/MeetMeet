@@ -1,8 +1,9 @@
 import classes from "./TextField.module.scss";
 import classNames from "classnames";
 import { TextFieldStatusUnion } from "./TextField.types";
+import { SVG } from "../SVG/SVG";
 
-export const TextFieldIcon = ({children, status = "default", isFocused, onClickIcon}: Props) => {
+export const TextFieldIcon = ({name, status = "default", isFocused, onClickIcon}: Props) => {
 
   return (
     <>
@@ -14,14 +15,14 @@ export const TextFieldIcon = ({children, status = "default", isFocused, onClickI
         )}
         onClick={onClickIcon}
       >
-        {children}
+        <SVG name={name} />
       </div>
     </>
   )
 }
 
 interface Props {
-  children: any;
+  name: string;
   status?: TextFieldStatusUnion;
   isFocused?: boolean;
   onClickIcon?: (e: React.MouseEvent<HTMLDivElement>) => void;

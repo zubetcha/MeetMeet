@@ -1,31 +1,48 @@
-import { Button } from "@components/ui";
 import { useState } from "react";
-import { MultipleCalendars } from "@components/ui";
-import { formatDate } from "ui/src/utils";
+import classes from "./managementPage.module.scss";
 
-const Management = () => {
-  const [btnState, setBtnState] = useState<boolean>(false);
+import { MeetingroomCard } from "@components/management/MeetingRoomCard";
+import { MeetingroomAddModal } from "@components/management/MeetingroomAddModal";
+import { CardDepth1, Button, IconButton } from "ui/src/pages"
+
+const ManagementPage = () => {
+  const [isAddModal, setIsAddModal] = useState(false);
 
   return (
-    <div>
-       <Button
-        configuration="outlined"
-        size="large"
-        label={formatDate(new Date())}
-        onClick={() => setBtnState(true)}
-      />
-      {
-        btnState 
-        && <MultipleCalendars 
-            setCalendar={setBtnState} 
-            onClickSubmitBtn={() => {}} 
-            date={new Date()} 
-            start={new Date()} 
-            end={new Date()} 
+    <>
+      <div className={classes.container}>
+        <div className={classes["button-wrapper"]}>
+          <Button
+            label="회의실 생성하기"
+            size="large"
+            configuration="filled"
+            showIcon
+            icon="add"
+            onClick={() => setIsAddModal(true)}
           />
-      }
-    </div>
+        </div>
+        <CardDepth1>
+          <CardDepth1.TitleBar>
+            <CardDepth1.Title>회의실 목록</CardDepth1.Title>
+              <IconButton 
+                configuration="text"
+                size="small"
+                state="default"
+                negativeMood={false}
+                icon="add"
+              />
+          </CardDepth1.TitleBar>
+          <CardDepth1.Contents>
+            <div>
+              <MeetingroomCard />
+            </div>
+          </CardDepth1.Contents>
+        </CardDepth1>
+      </div>
+
+      {isAddModal && <MeetingroomAddModal setIsAddModal={setIsAddModal} />}
+    </>
   )
 }
 
-export default Management
+export default ManagementPage

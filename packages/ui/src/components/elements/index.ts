@@ -26,3 +26,4 @@ export * from "./Cells/Cell";
 export * from "./Cells/CellGroup";
 
 export * from "./ScrollDrag/ScrollDrag";
+export * from "./Card";

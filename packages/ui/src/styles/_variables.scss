@@ -75,7 +75,7 @@ $toast-modal-container-padding: 40px 40px 24px 40px;
 
 
 // DESCRIBE
-$colors: (
+$colors-map: (
   primary: var(--color-primary),
   primary-08: var(--color-primary-opacity-08),
   primary-12: var(--color-primary-opacity-12),
@@ -192,6 +192,13 @@ $colors: (
   on-warning-container-08: var(--color-onWarningContainer-opacity-08),
   on-warning-container-12: var(--color-onWarningContainer-opacity-12),
   on-warning-container-16: var(--color-onWarningContainer-opacity-16),
+
+  surface-1: var(--color-surface1),
+  surface-2: var(--color-surface2),
+  surface-3: var(--color-surface3),
+  surface-4: var(--color-surface4),
+  surface-5: var(--color-surface5),
+
   transparent: transparent,
 );
 
@@ -200,4 +207,13 @@ $box-shadow-surface2: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0,
 $box-shadow-surface3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
 $box-shadow-surface4: 0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3);
 $box-shadow-surface5: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3);
+
+$flex-map: (
+  start: flex-start,
+  end: flex-end,
+  between: space-between,
+  around: space-around,
+  stretch: stretch,
+  center: center,
+);
 
