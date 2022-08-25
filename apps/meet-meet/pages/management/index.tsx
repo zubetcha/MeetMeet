@@ -40,7 +40,7 @@ const ManagementPage = () => {
         </CardDepth1>
       </div>
 
-      {isAddModal && <MeetingroomAddModal />}
+      {isAddModal && <MeetingroomAddModal setIsAddModal={setIsAddModal} />}
     </>
   )
 }

@@ -2,7 +2,7 @@ import classes from "./management.module.scss";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { Modal, TextField, Checkbox, Button, TextArea } from "ui/src/pages"
 
-export const MeetingroomEditModal = () => {
+export const MeetingroomEditModal = ({setIsEditModal}: Props) => {
   const onChangeCheckbox = () => {}
   return (
     <>

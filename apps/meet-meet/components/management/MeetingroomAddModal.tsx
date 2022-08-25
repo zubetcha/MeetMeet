@@ -2,7 +2,7 @@ import classes from "./management.module.scss";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { Modal, TextField, Checkbox, Button, TextArea } from "ui/src/pages"
 
-export const MeetingroomAddModal = () => {
+export const MeetingroomAddModal = ({setIsAddModal}: Props) => {
   const onChangeCheckbox = () => {
 
   }
@@ -56,6 +56,7 @@ export const MeetingroomAddModal = () => {
             label="취소"
             size="medium"
             configuration="text"
+            onClick={() => setIsAddModal(false)}
           />
           <Button
             label="회의실 생성"

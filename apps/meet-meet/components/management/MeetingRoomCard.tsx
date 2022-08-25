@@ -46,7 +46,7 @@ export const MeetingroomCard = () => {
           </CardDepth2.Contents>
         </CardDepth2>
       </div>
-      {isEditModal && <MeetingroomEditModal />}
+      {isEditModal && <MeetingroomEditModal setIsEditModal={setIsEditModal} />}
     </>
   )
 }
