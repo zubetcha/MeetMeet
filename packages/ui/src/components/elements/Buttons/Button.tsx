@@ -30,7 +30,6 @@ export const Button = ({
   onClick = () => {},
   style,
 }: ButtonProps) => {
-  const [btnState, setbtnState] = useState(state);
   const { width: iconWidth, height: iconHeight } = getSVGSizeByButtonSize(size as string);
   const iconColor = getSVGColorsByButtonStatus(configuration as ConfigurationType, negativeMood, state === 'disable' ? true : false)
 
