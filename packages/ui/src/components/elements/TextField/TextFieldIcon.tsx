@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { TextFieldStatusUnion } from "./TextField.types";
 import { SVG } from "../SVG/SVG";
 
-export const TextFieldIcon = ({children, name, status = "default", isFocused, onClickIcon}: Props) => {
+export const TextFieldIcon = ({name, status = "default", isFocused, onClickIcon}: Props) => {
 
   return (
     <>
@@ -22,7 +22,6 @@ export const TextFieldIcon = ({children, name, status = "default", isFocused, on
 }
 
 interface Props {
-  children: any;
   name: string;
   status?: TextFieldStatusUnion;
   isFocused?: boolean;

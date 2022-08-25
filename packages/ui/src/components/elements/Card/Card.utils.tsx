@@ -1,12 +1,8 @@
-import { Children, isValidElement, ReactNode } from "react";
+import { Children, isValidElement, ReactNode, cloneElement } from "react";
 
-export const getCardTitleContents = (children: ReactNode, type: any) => {
-  const childrenArray = Children.toArray(children);
-  const cardContents = childrenArray.filter((child) => isValidElement(child) && child.type === type);
+export const getCardTitleContents = (children: ReactNode, type: string) => {
+  const childrenArray = Children.toArray(children).map((child: any) => cloneElement(child));
+  const cardTitleContents = childrenArray.filter((child: any) => isValidElement(child) && child.type.name === type);
 
-  return cardContents;
-}
-
-export const getComponentType = (component: JSX.Element) => {
-  return (component).type;
+  return cardTitleContents
 }
