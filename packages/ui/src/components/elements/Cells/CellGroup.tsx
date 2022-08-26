@@ -32,11 +32,6 @@ export const CellGroup = ({
       onChange: onChange,
     });
 
-  const [selectedId, setSelectedId] = useState({
-    start: defaultIndex.start,
-    end: defaultIndex.end,
-  });
-
   return (
     <ScrollContainer>
       <div className={classes.cellGroupBox}>

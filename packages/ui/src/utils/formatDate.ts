@@ -1,12 +1,20 @@
-export const formatDate = (date: Date) => {
+export const formatDate = (
+  date: Date,
+  isDay: boolean = false,
+  joinBy: string = "-"
+) => {
+  const weekDays = ["일", "월", "화", "수", "목", "금", "토", "일"];
   let month = "" + (date.getMonth() + 1);
   let day = "" + date.getDate();
   let year = date.getFullYear();
+  let week = date.getDay();
 
   if (month.length < 2) month = "0" + month;
   if (day.length < 2) day = "0" + day;
 
-  return [year, month, day].join("-");
+  const result = [year, month, day].join(joinBy);
+
+  return isDay ? `${result} (${weekDays[week]})` : result;
 };
 
 export const handleConvertDiff = (duration: number) => {

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
-import { formatTime } from "ui/src/utils";
+import { formatTime, formatDate } from "ui/src/utils";
 
-export default function useReservation() {
+export default function useReservation(startDate?: Date) {
   const addMinutes = (date: Date, minutes: number) => {
     return new Date(date.getTime() + minutes * 60000);
   };
@@ -17,7 +17,20 @@ export default function useReservation() {
     return newList;
   }, []);
 
+  const dateList = useMemo(() => {
+    if (!startDate) return;
+    let date = startDate;
+    let newList = [];
+    for (let i = 0; i < 3; i++) {
+      newList.push(formatDate(date, true, ".").slice(5));
+      const result = addMinutes(date, 60 * 24);
+      date = result;
+    }
+    return newList;
+  }, [startDate]);
+
   return {
     timeList,
+    dateList,
   };
 }

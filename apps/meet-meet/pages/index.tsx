@@ -1,12 +1,19 @@
+import { useState } from "react";
 import type { NextPage } from "next";
 import { Reservation, Layout } from "components";
+import { MultipleCalendars, Button } from "@components/ui";
+import { formatDate } from "ui/src/utils";
 import { Text } from "ui/src/pages";
-import { CardDepth1 } from "ui/src/pages";
 
 const Home: NextPage = () => {
-  const onChange = (e: any) => {
-    console.log(e);
-  };
+  const [btnState, setBtnState] = useState<boolean>(false);
+  const [date, setDate] = useState<Date>(
+    new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate() - 1
+    )
+  );
 
   return (
     <Layout>
@@ -20,14 +27,38 @@ const Home: NextPage = () => {
           display: "grid",
         }}
       >
-        <Text
-          type="headline-large"
-          color="primary"
-          style={{ fontWeight: "bold" }}
-        >
-          젠틀에너지 회의실 예약 현황
-        </Text>
-        <Reservation />
+        <div>
+          <Text
+            type="headline-large"
+            color="primary"
+            style={{ fontWeight: "bold" }}
+          >
+            젠틀에너지 회의실 예약 현황
+          </Text>
+          <div>
+            <Button
+              configuration="outlined"
+              size="large"
+              label={formatDate(date)}
+              onClick={() => setBtnState(true)}
+            />
+          </div>
+          {btnState && (
+            <MultipleCalendars
+              setCalendar={setBtnState}
+              onClickSubmitBtn={(startDate) => {
+                console.log(startDate);
+                setDate(startDate);
+                setBtnState(false);
+              }}
+              date={date}
+              start={date}
+              end={date}
+              type="single"
+            />
+          )}
+        </div>
+        <Reservation startDate={date} />
       </div>
     </Layout>
   );
