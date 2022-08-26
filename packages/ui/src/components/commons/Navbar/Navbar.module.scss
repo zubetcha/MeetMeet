@@ -95,6 +95,14 @@
         white-space: nowrap;
     }
 
+    .modalItem{
+        position: absolute;
+        top: 8px;
+        left: 180px;
+        z-index: 100;
+        transition: left 0.3s ease-in-out;
+    }
+
     &.close{
         width: 80px;
         // transition: width 0.3s ease-in-out;
@@ -131,5 +139,10 @@
         .lightDarkLayout {
             opacity: 0;
         }
+
+        .modalItem{
+            left: 80px;
+        }
     }
+
 }

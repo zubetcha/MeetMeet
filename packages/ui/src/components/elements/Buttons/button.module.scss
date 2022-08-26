@@ -308,6 +308,12 @@
         @include button-state-layer(on-surface, on-surface);
     }
 
+    &.input {
+        background-color: var(--color-surfaceVariant);
+        color: var(--color-onSurfaceVariant);
+        @include button-state-layer(on-surface, on-surface);
+    }
+
 
 //DESCRIBE state
 

@@ -15,6 +15,7 @@ export * from "./Sensor";
 export * from "./Loading";
 export * from "./Tooltip";
 export * from "./TextField";
+export * from "./Card";
 
 export * from "./Radio";
 export * from "./LightSensor/LightSensor";

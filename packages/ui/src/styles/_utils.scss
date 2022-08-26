@@ -177,7 +177,21 @@
 
 
 // DESCRIBE Scroll
+@mixin scollbar{
+  &::-webkit-scrollbar {
+    width: 4px !important;
+    height: 4px !important;
+}
 
+&::-webkit-scrollbar-track {
+    background: transparent;
+    position: absolute;
+}
+&::-webkit-scrollbar-thumb {
+    background-color: var(--color-onSurface-opacity-16);
+    border-radius: 5px;
+}
+}
 
 
 // DESCRIBE State Layer
