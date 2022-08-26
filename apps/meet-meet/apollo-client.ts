@@ -2,14 +2,15 @@ import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, concat } from "@apol
 import { API_BASE_URL } from "constants/common";
 import { ACCESS_TOKEN } from "constants/auth";
 
-const httpLink = new HttpLink({uri: API_BASE_URL});
+const httpLink = new HttpLink({uri: API_BASE_URL + "/graphql"});
 
 const authMiddleware = new ApolloLink((operation, forward) => {
+  const accessToken = localStorage.getItem(ACCESS_TOKEN);
   // DESCRIBE: add the authorization to the headers
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      authorization: localStorage.getItem('token') || null,
+      authorization: accessToken ? `Bearer ${accessToken}` : null,
     }
   }));
 

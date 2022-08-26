@@ -14,7 +14,7 @@ export function SelectTriggerButton() {
       showRightIcon={false}
       configuration="filled"
       onClick={onClick}
-      style={{ width: "220px" }}
+      style={{ width: "100%" }}
     />
   );
 }
