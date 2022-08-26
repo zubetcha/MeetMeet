@@ -1,5 +1,3 @@
-import { useState } from "react";
-import Image from "next/image";
 import classes from "./Navbar.module.scss";
 import classNames from "classnames";
 import { Button, ButtonGroup, ExitBtn } from "../../elements";
@@ -43,7 +41,6 @@ export const Navbar = ({ isClose, setClose, navInfo, Logo }: NavbarProps) => {
               headerLabel={info.headerLabel && info.headerLabel}
               itemList={info.itemList}
               key={`navSection_${idx}`}
-              isClose={isClose}
             />
           );
         })}
@@ -60,8 +57,8 @@ export const Navbar = ({ isClose, setClose, navInfo, Logo }: NavbarProps) => {
               : document.documentElement.setAttribute("data-theme", "dark");
           }}
         >
-          <Button label="라이트" />
-          <Button label="다아크" />
+          <Button label="라이트" key={`button-group-라이트`} />
+          <Button label="다크" key={`button-group-다크`} />
         </ButtonGroup>
       </div>
     </div>

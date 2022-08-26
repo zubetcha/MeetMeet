@@ -7,12 +7,14 @@ import { SVG } from "../../elements";
 
 interface Props {
   item: NavItemType;
-  isClose: boolean;
 }
 
-export const NavItem = ({ item, isClose }: Props) => {
+export const NavItem = ({ item }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  const isFocused =
+    (item.isModal && isOpen) || router.pathname === `/${item.path}`;
 
   return (
     <>
@@ -20,7 +22,8 @@ export const NavItem = ({ item, isClose }: Props) => {
         <div
           className={classNames(
             classes.NavItem,
-            router.pathname === `/${item.path}` && classes.focused
+            isFocused && classes.focused
+            // classes.focused
           )}
           onClick={() => {
             if (item.isModal) {
@@ -41,15 +44,7 @@ export const NavItem = ({ item, isClose }: Props) => {
           <div className={classes.rightElement}>{item.rightElement}</div>
           <div className={classes.stateLayer}></div>
         </div>
-        <div
-          style={{
-            position: "absolute",
-            top: "8px",
-            left: isClose ? "80px" : "180px",
-            zIndex: "100",
-            transition: "left 0.3s ease-in-out",
-          }}
-        >
+        <div className={classes.modalItem}>
           {item.isModal && item.Modal && item.Modal(isOpen)}{" "}
         </div>
       </div>

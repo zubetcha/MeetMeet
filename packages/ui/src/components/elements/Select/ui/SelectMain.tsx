@@ -12,6 +12,14 @@ interface SelectProps {
   children: React.ReactElement[];
 }
 
+/**
+ *
+ * @param isSearch (boolean) 검색 기능이 있는지
+ * @param defaultValue (string) 초기 디폴트 값
+ * @param onChange ((e:SelectItemType)=>void) 선택 변경 이벤트 콜백 함수
+ * @param style style 객체
+ * @returns
+ */
 export function SelectMain({
   isSearch = false,
   defaultValue,

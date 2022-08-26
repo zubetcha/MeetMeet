@@ -1,7 +1,5 @@
 import classes from "./Navbar.module.scss";
 import { NavItem } from "..";
-import classNames from "classnames";
-import { SetStateAction } from "react";
 import React from "react";
 
 export type NavItemType = {
@@ -16,10 +14,9 @@ export type NavItemType = {
 interface Props {
   headerLabel?: string;
   itemList: NavItemType[];
-  isClose: boolean;
 }
 
-export const NavSection = ({ headerLabel, itemList, isClose }: Props) => {
+export const NavSection = ({ headerLabel, itemList }: Props) => {
   return (
     <div className={classes.NavSectionBox}>
       {headerLabel && (
@@ -29,9 +26,7 @@ export const NavSection = ({ headerLabel, itemList, isClose }: Props) => {
         </div>
       )}
       {itemList.map((item, idx) => {
-        return (
-          <NavItem item={item} isClose={isClose} key={`NavItem'_${idx}`} />
-        );
+        return <NavItem item={item} key={`NavItem'_${idx}`} />;
       })}
     </div>
   );

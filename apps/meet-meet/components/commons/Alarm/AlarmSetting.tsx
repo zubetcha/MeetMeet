@@ -7,6 +7,9 @@ interface Props {
 }
 
 export default function AlarmSetting({ onClickButton }: Props) {
+  const onChange = (selectedValue: any) => {
+    console.log(selectedValue);
+  };
   return (
     <>
       <CardDepth1>
@@ -28,7 +31,7 @@ export default function AlarmSetting({ onClickButton }: Props) {
                 <Select
                   isSearch={false}
                   defaultValue="5분"
-                  onChange={() => {}}
+                  onChange={onChange}
                   style={{ width: "100%" }}
                 >
                   <Select.Option id="1" name="5분" />
