@@ -5,6 +5,9 @@ const MypagePage = () => {
   return (
     <div className={classes.container}>
       <CardDepth1>
+        {/* <CardDepth1.TitleBar>
+          <CardDepth1.Title>회원 정보</CardDepth1.Title>
+        </CardDepth1.TitleBar> */}
         <CardDepth1.Contents>
           <div className={classes["card-contents-wrapper"]}>
             <Text type="headline-medium" style={{ padding: "0 0 60px", fontWeight: "700", width: "100%" }}>
@@ -25,9 +28,7 @@ const MypagePage = () => {
                 <TextField.Label>소속 부서</TextField.Label>
                 <TextField.Input type="text" value="" placeholder="소속 부서">
                   <TextField.Unit>단위</TextField.Unit>
-                  <TextField.Icon>
-                    <SVG name="dropdown" />
-                  </TextField.Icon>
+                  <TextField.Icon name="dropdown" />
                 </TextField.Input>
                 <TextField.HelperText>헬퍼텍스트</TextField.HelperText>
               </TextField>
