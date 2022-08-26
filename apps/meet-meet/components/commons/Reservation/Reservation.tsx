@@ -40,8 +40,6 @@ export const Reservation = ({
     });
   };
 
-  console.log(dateList);
-
   return (
     <>
       <div className={classes.reservationContainer}>

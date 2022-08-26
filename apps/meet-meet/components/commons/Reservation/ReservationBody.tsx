@@ -15,7 +15,7 @@ export default function ReservationBody({
 }: Props) {
   return (
     <>
-      {dates.map((date: string, index: number) => (
+      {dates?.map((date: string, index: number) => (
         <>
           <div key={`reservation-row-group-${index}`}>
             {meetingRoom.map((room, index) => (

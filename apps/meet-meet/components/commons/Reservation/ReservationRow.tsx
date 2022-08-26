@@ -54,20 +54,22 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
   return (
     <>
       <div className={classes.slotList} ref={ref}>
-        <CellGroup onChange={onChangeCellGroup}>
-          {timeList.map((item, index) => (
-            // 나중에 CellGroup 으로 갈아껴야됨.
-            <Cell
-              key={`reservation-item-${index}`}
-              state="default"
-              style={{
-                height: "40px",
-                width: "50px",
-                border: "1px solid var(--color-onSurfaceVariant-opacity-12)",
-              }}
-            />
-          ))}
-        </CellGroup>
+        <div>
+          <CellGroup onChange={onChangeCellGroup}>
+            {timeList.map((item, index) => (
+              // 나중에 CellGroup 으로 갈아껴야됨.
+              <Cell
+                key={`reservation-item-${index}`}
+                state="default"
+                style={{
+                  height: "40px",
+                  width: "50px",
+                  border: "1px solid var(--color-onSurfaceVariant-opacity-12)",
+                }}
+              />
+            ))}
+          </CellGroup>
+        </div>
       </div>
     </>
   );

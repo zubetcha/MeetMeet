@@ -4,6 +4,7 @@ import { NavItemType } from "..";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import { SVG } from "../../elements";
+import { useOutsideAlerter } from "ui/src/hooks/useOutsideAlerter";
 
 interface Props {
   item: NavItemType;
@@ -16,9 +17,11 @@ export const NavItem = ({ item }: Props) => {
   const isFocused =
     (item.isModal && isOpen) || router.pathname === `/${item.path}`;
 
+  const { ref } = useOutsideAlerter(() => setIsOpen(false));
+
   return (
     <>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative" }} ref={ref}>
         <div
           className={classNames(
             classes.NavItem,

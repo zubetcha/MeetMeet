@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import classes from "./calendar.module.scss";
-import { MultipleCalendarsProps } from "../../../types/ui.types";
 import { Button } from "../../elements";
 import { Calendar } from "../Calendar/Calendar";
 import { formatDate } from "../../../utils";
@@ -38,6 +37,8 @@ export const MultipleCalendars = ({
   const [selectedDateType, setSelectedDateType] = useState<string>("start");
   const [hoverDates, setHoverDates] = useState<Date[] | any[]>([]);
   const [weekendIncluded, setWeekendIncluded] = useState<boolean>(false);
+
+  useEffect(() => {}, []);
 
   const prevMonth = () => {
     setCurrentDate(
