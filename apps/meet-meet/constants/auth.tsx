@@ -1,4 +1,5 @@
-export const API_BASE_URL = 'http://localhost:8001';
+import { API_BASE_URL } from "./common";
+
 export const ACCESS_TOKEN = 'accessToken';
 export const REFRESH_TOKEN = 'refreshToken';
 

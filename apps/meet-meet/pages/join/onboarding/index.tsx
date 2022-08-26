@@ -1,12 +1,36 @@
-import { useState } from "react";
+import React, { ChangeEvent, useState } from "react"; 
+import { useQuery } from "@apollo/client";
 import classes from "./onboardingPage.module.scss";
+
+import { GET_DEPARTMENTS } from "graphql/common/query";
+import { usePostUserInfo } from "@hooks/queries/auth/useMutationQueries"
+
+import { DepartmentData } from "graphql/common/types";
 
 import { CardDepth1, Text, TextField, Button, SVG } from "ui/src/pages";
 
 const OnboardingPage = () => {
+  const [departments, setDepartments] = useState([]);
+  const [TextFieldvalue, setTextFieldValue] = useState({ username: "", phone: "", departmentId: null})
+
   // TODO: departments 조회 gql -> 소속 부서 드롭다운 설정 
 
-  // TODO: 
+  const { data, loading, error } = useQuery<DepartmentData>(GET_DEPARTMENTS);
+
+  console.log(data)
+  console.log(loading)
+  console.log(error)
+
+
+  // TODO: onChangeValue
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTextFieldValue({ ...TextFieldvalue, [name]: value });
+  }
+
+  const onClick = () => {
+
+  }
 
   return (
     <div className={classes["onboardingPage-container"]}>
@@ -24,12 +48,12 @@ const OnboardingPage = () => {
             <div className={classes["card-textFields-wrapper"]}>
               <TextField name="username" status="default">
                 <TextField.Label>이름</TextField.Label>
-                <TextField.Input type="text" value="" placeholder="이름" />
+                <TextField.Input type="text" value="" placeholder="이름" onChange={onChange}/>
                 <TextField.HelperText>헬퍼텍스트</TextField.HelperText>
               </TextField>
               <TextField name="phone" status="default">
                 <TextField.Label>전화번호</TextField.Label>
-                <TextField.Input type="text" value="" placeholder="전화번호" />
+                <TextField.Input type="text" value="" placeholder="전화번호" onChange={onChange}/>
                 <TextField.HelperText>헬퍼텍스트</TextField.HelperText>
               </TextField>
               <TextField name="department" status="default">

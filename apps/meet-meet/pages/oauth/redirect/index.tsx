@@ -1,6 +1,8 @@
 
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
+import { useUrlParameter } from "ui/src/hooks/useUrlParameter";
+
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'constants/auth';
 
 const Oauth2RedirectHandler = () => {
@@ -12,17 +14,9 @@ const Oauth2RedirectHandler = () => {
 
   const router = useRouter();
 
-  const getUrlParameter = (name: string) => {
-    const _name = name.replace(/[\\[]/, '\\[').replace(/[\]]/, '\\]');
-    const regexp = new RegExp('[\\?&]' + _name + '=([^&#]*)');
-    const results = regexp.exec(router.asPath);
-
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-  }
-
-  const accessToken = getUrlParameter("access_token");
-  const refreshToken = getUrlParameter("refresh_token");
-  const isFirst = getUrlParameter("is_first");
+  const accessToken = useUrlParameter("access_token");
+  const refreshToken = useUrlParameter("refresh_token");
+  const isFirst = useUrlParameter("is_first");
 
   useEffect(() => {
     if (accessToken) {
