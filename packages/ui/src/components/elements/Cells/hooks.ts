@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { start } from 'repl';
 import { selectedIndex } from '..';
@@ -21,14 +22,15 @@ export const useCellGroup = ({defaultIndex, childrenLength, onChange}:Props) => 
 
   useEffect(() => {
     handleButtonState(selectedIndex);
-
-    // onChange(selectedIndex);
-  }, [selectedIndex])
+  }, [selectedIndex]);
 
   useEffect(() => {
     handleButtonHoverState(hoverIndex);
-
   }, [hoverIndex, selectedIndex])
+
+  useEffect(() => {
+    setSelectedIndex(defaultIndex);
+  }, [defaultIndex])
 
   const handleButtonState = (selectedIndex: selectedIndex) => {
     let newArray = [...btnState];

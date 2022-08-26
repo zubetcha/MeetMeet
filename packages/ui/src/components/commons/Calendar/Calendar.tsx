@@ -3,16 +3,22 @@ import React, {useState, useEffect} from "react";
 import { Text } from "../../elements";
 import classes from './calendar.module.scss'
 import { CalendarProps } from "../../../types/ui.types";
+import { DateType } from "../../../types/ui.types";
 import Dates from "./Dates";
 
-/**
- * 
- * @param date 달력 날짜
- * @param onClickDate 날짜 클릭시 이벤트 함수
- * @param start 조회 시작 날짜
- * @param end 조회 종료 날짜
- * @returns 
- */
+interface Props {
+    date: Date;
+    onClickDate: (value: Date) => void;
+    start: Date;
+    end: Date;
+    hoverDates: Date[];
+    onMouseOverDate: (value: Date) => void;
+    onMouseLeaveDate: () => void;
+    btwDates?:DateType;
+    startTime?:number;
+    timeType: 'pastCurrent' | 'futureCurrent';
+    weekendIncluded: boolean
+}
 
 export const Calendar = ({
         date,
@@ -23,15 +29,10 @@ export const Calendar = ({
         onMouseOverDate,
         onMouseLeaveDate,
         btwDates,
-        startTime
-    }:CalendarProps) => {
-        
-    type DateType = any | {
-        condition: string,
-        value: Date,
-        weekend: string,
-        date: number,
-    }
+        startTime,
+        timeType,
+        weekendIncluded
+    }:Props) => {
 
     // 달력 1달치 날짜를 주별로 나눠서 상태관리
     const [month, setMonth] = useState<(number | Object)[][]>([]);
@@ -188,7 +189,7 @@ export const Calendar = ({
                         return(
                         <div key={idx} className={classes.week} >
                             
-                            {week.map((d:DateType, idx:number)=>{
+                            {week.map((d:any, idx:number)=>{
                                 return(
                                     <Dates 
                                         key={`dates-${idx}`} 
@@ -202,6 +203,8 @@ export const Calendar = ({
                                         onMouseLeaveDate={onMouseLeaveDate}
                                         availableDates={btwDates? btwDates : undefined}
                                         startHourMinutes={startTime}
+                                        timeType={timeType}
+                                        weekendIncluded={weekendIncluded}
                                     />
                                 )
                             })}

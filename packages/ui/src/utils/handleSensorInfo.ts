@@ -1,6 +1,6 @@
 import { koreanSensorType } from "./consts";
 import { colors } from "../shared/style";
-import patternImageSrc from '@public/images/exception_pattern.png';
+// import patternImageSrc from '@public/images/exception_pattern.png';
 
 export const getSensorValueUnit = (
   value: number,

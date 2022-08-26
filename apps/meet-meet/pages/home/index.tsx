@@ -1,16 +1,22 @@
 import { classExpression } from "@babel/types";
 import { Button, CellGroup, ScrollDrag } from "@components/ui";
-import { useState } from "react";
-import { MultipleCalendars, Cell } from "@components/ui";
+import { useEffect, useState } from "react";
+import { CalendarLayout, Cell } from "@components/ui";
 import ScrollContainer from 'react-indiana-drag-scroll'
 import { formatDate } from "ui/src/utils";
-import { start } from "repl";
+import { isCompositeType } from "graphql";
 
 const Home = () => {
 
   const [btnState, setBtnState] = useState<boolean>(true);
   const [date, setDate] = useState<Date>(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate() - 1));
-  
+  const [defaultIndex, setDefaultIndex] = useState({start:null, end:null})
+
+
+  useEffect(() => {
+    console.log(defaultIndex)
+  }, [defaultIndex])
+
   return (
     <div>
       <Button
@@ -21,7 +27,7 @@ const Home = () => {
       />
       {
         btnState 
-        && <MultipleCalendars 
+        && <CalendarLayout 
             setCalendar={setBtnState} 
             onClickSubmitBtn={(startDate) => {
               setDate(startDate);
@@ -31,7 +37,8 @@ const Home = () => {
             date={date} 
             start={date} 
             end={date}
-            type="single"          
+            type="single"
+            timeType="futureCurrent"          
           />
       }
 
@@ -41,6 +48,7 @@ const Home = () => {
 
             <CellGroup
               disableIndex={[3]}
+              defaultIndex={defaultIndex}
             >
               <Cell
                 label="18:00"
@@ -89,6 +97,10 @@ const Home = () => {
 
             </CellGroup>
         </div>
+        <Button
+          label='버튼'
+          onClick={() => {setDefaultIndex({start:null, end:null})}}
+        />
       </div>
   )
 }
