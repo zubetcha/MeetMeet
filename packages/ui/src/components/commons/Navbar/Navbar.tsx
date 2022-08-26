@@ -11,9 +11,16 @@ interface NavbarProps {
     headerLabel?: string;
   }[];
   Logo: React.ElementType;
+  onClickUsername: () => void;
 }
 
-export const Navbar = ({ isClose, setClose, navInfo, Logo }: NavbarProps) => {
+export const Navbar = ({
+  isClose,
+  setClose,
+  navInfo,
+  Logo,
+  onClickUsername,
+}: NavbarProps) => {
   return (
     <div
       className={classNames(
@@ -26,7 +33,12 @@ export const Navbar = ({ isClose, setClose, navInfo, Logo }: NavbarProps) => {
           <ExitBtn isClose={isClose} setClose={setClose} />
         </div>
         <div className={classes.rightBtnBox}>
-          <Button size="small" label="홍길동" configuration="text" />
+          <Button
+            size="small"
+            label="홍길동"
+            configuration="text"
+            onClick={onClickUsername}
+          />
           <Button size="small" label="로그아웃" configuration="text" />
         </div>
       </div>

@@ -10,7 +10,6 @@ import logo from "ui/src/assets/img/logo_gec.png";
 
 export const MeetingroomCard = () => {
   const [isEditModal, setIsEditModal] = useState(false);
-
   return (
     <>
       <div className={classes.container}>
@@ -23,10 +22,7 @@ export const MeetingroomCard = () => {
               state="default"
               negativeMood={false}
               icon="settings"
-              onClick={() => {
-                setIsEditModal(true)
-                console.log("제앨")
-              }}
+              onClick={() => setIsEditModal(true)}
             />
           </CardDepth2.TitleBar>
           <CardDepth2.Contents>

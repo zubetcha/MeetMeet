@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import classNames from "classnames";
 
 import classes from './calendar.module.scss';
+import { Cell } from '../../elements/Cells/Cell';
 import { DatesProps } from "../../../types/ui.types";
+
 
 /**
  * 
@@ -53,42 +55,41 @@ const Dates = ({
                         : new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            new Date().getDate() - 1)
+                            new Date().getDate() - 1);
 
 
     return(
-        <div className={classNames(
-                    classes.date,
-                    classes[dateInfo.condition], 
-                    // 조회 시작 날짜 조회 종료 날짜 사이 날짜 && 해당 달의 날짜
-                    btwDates && dateInfo.condition === 'this' ? classes.btwDates : '',
-                    startDate? classes.startDate : '',
-                    endDate? classes.endDate : '',
-                    // 날짜가 오늘보다 미래일경우 future class 추가
-                    dateInfo.value.getTime() > LastDate.getTime() 
-                    || checkBtwDates(dateInfo.value) ? classes.future: '',
-                )}
-            onClick={()=>{
-                if(!checkBtwDates(dateInfo.value) && dateInfo.condition === "this" && dateInfo.value.getTime() <= LastDate.getTime()){
+        <Cell 
+            state={dateInfo.value.getTime() > LastDate.getTime() || checkBtwDates(dateInfo.value) || dateInfo.condition === 'other'
+                ? 'disable'
+                : ((startDate || endDate)
+                    ? 'focusedStartEnd'
+                    : (btwDates
+                        ? 'focused'
+                        : 'default'))}
+            label={dateInfo.date}
+            style={{ width: '48px', height: '48px' }}
+            isHover={hoverDate}
+            onClick={() => {
+                if (!checkBtwDates(dateInfo.value) && dateInfo.condition === "this" && dateInfo.value.getTime() <= LastDate.getTime()) {
                     onClickDate(dateInfo.value);
-            }
-            }}
+                }
+            } }
             onMouseOver={() => {
-                if(dateInfo.condition === "this" && dateInfo.value.getTime() <= LastDate.getTime()){
-                    onMouseOverDate(dateInfo.value)}}
+                if (dateInfo.condition === "this" && dateInfo.value.getTime() <= LastDate.getTime()) {
+                    onMouseOverDate(dateInfo.value);
                 }
+            } }
             onMouseLeave={() => {
-                if(dateInfo.condition === "this" && dateInfo.value.getTime() <= LastDate.getTime()){
-                    onMouseLeaveDate()}}
+                if (dateInfo.condition === "this" && dateInfo.value.getTime() <= LastDate.getTime()) {
+                    onMouseLeaveDate();
                 }
-        >   
-            <div className={hoverDate ? classes.hoverDate : ''} >
-                <span className={classes[dateInfo.weekend]} >{dateInfo.date}</span>
-            </div>
-        </div>
-    )
-
+            } } 
+            day={'default'}        
+        />   
+    )    
 }
+
 
 
 export default Dates;

@@ -12,7 +12,7 @@ export default function ReservationSection({ date, meetingRoom }: Props) {
     <div className={classes.roomList}>
       <div className={classes.infoContainer}>
         <div className={classes.dateContainer}>
-          <Text color="fff" weight="bold">
+          <Text color="on-primary" style={{ weight: "bold" }}>
             {date}
           </Text>
         </div>

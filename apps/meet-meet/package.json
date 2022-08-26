@@ -52,6 +52,7 @@
     "react": "18.2.0",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "^18.2.0",
+    "react-indiana-drag-scroll": "^2.2.0",
     "react-query": "^3.34.16",
     "react-redux": "^7.2.6",
     "react-testing-library": "^8.0.1",

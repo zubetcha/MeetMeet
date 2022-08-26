@@ -168,9 +168,11 @@ export const Calendar = ({
             <div className={classes.calendar_box} >
                 <div className={classes.title} >
                     <Text
-                        text={`${date.getFullYear()}년 ${date.getMonth()+1}월`}
-                        type="header3"
-                    />
+                        color="on-surface"
+                        type="title-large"
+                    >
+                        {`${date.getFullYear()}년 ${date.getMonth()+1}월`}
+                    </Text>    
                 </div>
                 <div className={classes.calendar_layout} >
                     <div className={classes.day_week}>

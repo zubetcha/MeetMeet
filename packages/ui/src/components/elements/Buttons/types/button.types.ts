@@ -6,4 +6,4 @@ export type ConfigurationType =
   | "textGray"
   | "input";
 
-export type StateType = "hover" | "focused" | "disable";
+export type StateType = "default" | "hover" | "focused" | "disable";

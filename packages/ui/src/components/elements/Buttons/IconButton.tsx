@@ -14,7 +14,7 @@ interface Props {
   state: string;
   negativeMood?: boolean;
   icon: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const IconButton = ({

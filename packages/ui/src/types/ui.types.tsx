@@ -121,8 +121,8 @@ export interface MultipleCalendarsProps {
   start: Date;
   end: Date;
   setCalendar: Dispatch<SetStateAction<boolean>>;
-  onClickSubmitBtn: (startDate: Date, endDate: Date) => void;
-  startTime:number
+  onClickSubmitBtn?: (startDate: Date, endDate: Date) => void;
+  startTime?:number
 }
 
 export interface DatesProps {

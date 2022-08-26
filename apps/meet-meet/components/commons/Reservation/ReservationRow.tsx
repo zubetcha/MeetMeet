@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import classes from "./reservation.module.scss";
-import classNames from "classnames";
 import useReservation from "./hooks/useReservation";
 import { useOutsideAlerter } from "ui/src/hooks/useOutsideAlerter";
+import { CellGroup, Cell } from "@components/ui";
 
 interface Props {
   meetingRoom: string;
@@ -29,26 +29,17 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
     }
   }, [selectedInfo.startIndex, selectedInfo.endIndex]);
 
-  const onClickSlot = (index: number) => {
-    if (selectedInfo.startIndex === -1 && selectedInfo.endIndex === -1) {
-      setSelectedInfo({
-        startIndex: index,
-        endIndex: index,
-      });
+  const onChangeCellGroup = (selectedInfo: any) => {
+    if (selectedInfo.start === null || selectedInfo.end === null) {
       return;
     }
-
-    if (selectedInfo.startIndex > index) {
-      setSelectedInfo({
-        startIndex: index,
-        endIndex: selectedInfo.startIndex,
-      });
-    } else {
-      setSelectedInfo({
-        startIndex: selectedInfo.startIndex,
-        endIndex: index,
-      });
+    if (selectedInfo.start === selectedInfo.end) {
+      return;
     }
+    setSelectedInfo({
+      startIndex: selectedInfo.start,
+      endIndex: selectedInfo.end,
+    });
   };
 
   const onCancleAllSlot = () => {
@@ -63,21 +54,20 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
   return (
     <>
       <div className={classes.slotList} ref={ref}>
-        {timeList.map((item, index) => (
-          // 나중에 GellGroup 으로 갈아껴야됨.
-          <div
-            key={`reservation-item-${index}`}
-            className={classNames(
-              classes.slotItem,
-              selectedInfo.startIndex <= index && index <= selectedInfo.endIndex
-                ? classes.selected
-                : ""
-            )}
-            onClick={() => onClickSlot(index)}
-          >
-            {}
-          </div>
-        ))}
+        <CellGroup onChange={onChangeCellGroup}>
+          {timeList.map((item, index) => (
+            // 나중에 CellGroup 으로 갈아껴야됨.
+            <Cell
+              key={`reservation-item-${index}`}
+              state="default"
+              style={{
+                height: "40px",
+                width: "50px",
+                border: "1px solid var(--color-onSurfaceVariant-opacity-12)",
+              }}
+            />
+          ))}
+        </CellGroup>
       </div>
     </>
   );
