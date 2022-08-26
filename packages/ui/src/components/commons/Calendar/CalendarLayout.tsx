@@ -12,17 +12,19 @@ interface Props {
   setCalendar: Dispatch<SetStateAction<boolean>>;
   onClickSubmitBtn: (startDate: Date, endDate: Date) => void;
   startTime?: number;
-  type: "multiple" | "single";
+  type?: "multiple" | "single";
+  timeType?: "pastCurrent" | "futureCurrent";
 }
 
-export const MultipleCalendars = ({
+export const CalendarLayout = ({
   date,
   start,
   end,
   onClickSubmitBtn,
   setCalendar,
   startTime,
-  type,
+  type = "single",
+  timeType = "pastCurrent",
 }: Props) => {
   useEffect(() => {
     return () => {
@@ -36,9 +38,7 @@ export const MultipleCalendars = ({
   const [currentDate, setCurrentDate] = useState<Date>(date);
   const [selectedDateType, setSelectedDateType] = useState<string>("start");
   const [hoverDates, setHoverDates] = useState<Date[] | any[]>([]);
-  const [weekendIncluded, setWeekendIncluded] = useState<boolean>(false);
-
-  useEffect(() => {}, []);
+  const [weekendIncluded, setWeekendIncluded] = useState<boolean>(true);
 
   const prevMonth = () => {
     setCurrentDate(
@@ -227,6 +227,8 @@ export const MultipleCalendars = ({
               start={startDate}
               end={endDate}
               onClickDate={onClickDate}
+              timeType={timeType}
+              weekendIncluded={weekendIncluded}
             />
           )}
           <Calendar
@@ -238,6 +240,8 @@ export const MultipleCalendars = ({
             start={startDate}
             end={endDate}
             onClickDate={onClickDate}
+            timeType={timeType}
+            weekendIncluded={weekendIncluded}
           />
         </div>
         <div className={classes.calendar_footer}>

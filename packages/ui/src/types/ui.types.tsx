@@ -116,15 +116,6 @@ export interface CalendarProps {
   startTime?:number
 }
 
-export interface MultipleCalendarsProps {
-  date: Date;
-  start: Date;
-  end: Date;
-  setCalendar: Dispatch<SetStateAction<boolean>>;
-  onClickSubmitBtn?: (startDate: Date, endDate: Date) => void;
-  startTime?:number
-}
-
 export interface DatesProps {
   dateInfo: {
     condition: string;
@@ -139,8 +130,9 @@ export interface DatesProps {
   hoverDate: boolean;
   onMouseOverDate: (value: Date) => void;
   onMouseLeaveDate: () => void;
-  availableDates?: DateType
-  startHourMinutes?:number
+  availableDates?: DateType;
+  startHourMinutes?:number;
+  timeType:'pastCurrent' | 'futureCurrent'
 }
 
 export interface TimePickerProps {

@@ -30,10 +30,11 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
   }, [selectedInfo.startIndex, selectedInfo.endIndex]);
 
   const onChangeCellGroup = (selectedInfo: any) => {
-    if (selectedInfo.start === null || selectedInfo.end === null) {
-      return;
-    }
-    if (selectedInfo.start === selectedInfo.end) {
+    if (
+      selectedInfo.start === null ||
+      selectedInfo.end === null ||
+      selectedInfo.start === selectedInfo.end
+    ) {
       return;
     }
     setSelectedInfo({
@@ -55,7 +56,10 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
     <>
       <div className={classes.slotList} ref={ref}>
         <div>
-          <CellGroup onChange={onChangeCellGroup}>
+          <CellGroup
+            onChange={onChangeCellGroup}
+            defaultIndex={{ start: null, end: null }}
+          >
             {timeList.map((item, index) => (
               // 나중에 CellGroup 으로 갈아껴야됨.
               <Cell
