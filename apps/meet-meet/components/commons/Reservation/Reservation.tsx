@@ -28,6 +28,7 @@ export const Reservation = ({
   const meetingRoom = ["백범", "마당", "백범", "청파"];
 
   const onChange = (e: any, date: string) => {
+    console.log(e);
     setTimeout(() => {
       setIsOpen(true);
     }, 500);

@@ -37,13 +37,16 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
     ) {
       return;
     }
+
     setSelectedInfo({
       startIndex: selectedInfo.start,
       endIndex: selectedInfo.end,
     });
   };
+  const [defaultIndex, setDefaultIndex] = useState({ start: null, end: null });
 
   const onCancleAllSlot = () => {
+    setDefaultIndex({ start: null, end: null });
     setSelectedInfo({
       startIndex: -1,
       endIndex: -1,
@@ -56,12 +59,8 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
     <>
       <div className={classes.slotList} ref={ref}>
         <div>
-          <CellGroup
-            onChange={onChangeCellGroup}
-            defaultIndex={{ start: null, end: null }}
-          >
+          <CellGroup onChange={onChangeCellGroup} defaultIndex={defaultIndex}>
             {timeList.map((item, index) => (
-              // 나중에 CellGroup 으로 갈아껴야됨.
               <Cell
                 key={`reservation-item-${index}`}
                 state="default"

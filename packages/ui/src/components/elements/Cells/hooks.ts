@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { useEffect, useState } from "react";
-import { start } from "repl";
 import { selectedIndex } from "..";
 
 interface Props {
@@ -26,6 +25,7 @@ export const useCellGroup = ({
 
   useEffect(() => {
     handleButtonState(selectedIndex);
+    onChange(selectedIndex);
   }, [selectedIndex]);
 
   useEffect(() => {
