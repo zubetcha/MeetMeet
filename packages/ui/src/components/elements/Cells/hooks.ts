@@ -24,6 +24,11 @@ export const useCellGroup = ({
   );
 
   useEffect(() => {
+    setBtnState(Array.from({ length: childrenLength }, () => "default"));
+    setBtnHoverState(Array.from({ length: childrenLength }, () => false));
+  }, [childrenLength]);
+
+  useEffect(() => {
     handleButtonState(selectedIndex);
     onChange(selectedIndex);
   }, [selectedIndex]);
@@ -66,7 +71,6 @@ export const useCellGroup = ({
 
   const handleButtonHoverState = (hoverIndex: number) => {
     let newArray = [...btnHoverState];
-
     if (hoverIndex === -1) {
       newArray.map((_, idx: number) => {
         newArray[idx] = false;

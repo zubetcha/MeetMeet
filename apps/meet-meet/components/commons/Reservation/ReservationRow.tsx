@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import classes from "./reservation.module.scss";
 import useReservation from "./hooks/useReservation";
-import { useOutsideAlerter } from "ui/src/hooks/useOutsideAlerter";
 import { CellGroup, Cell } from "@components/ui";
 
 interface Props {
@@ -10,67 +9,65 @@ interface Props {
 }
 
 export default function ReservationRow({ meetingRoom, onChange }: Props) {
-  const { timeList } = useReservation();
+  const dummyList = useMemo(
+    () => [
+      {
+        date: "2022-08-29",
+        department: "ICT팀",
+        startTime: "13:30",
+        endTime: "14:30",
+        meetingRoom: "백범",
+        host: "김서연",
+      },
+    ],
+    []
+  );
 
-  const [selectedInfo, setSelectedInfo] = useState({
-    startIndex: -1,
-    endIndex: -1,
+  const {
+    ref,
+    onChangeCellGroup,
+    newTimeList,
+    defaultIndex,
+    unavailableSlotWidthList,
+  } = useReservation({
+    unavailableList: dummyList,
+    onChange: onChange,
+    meetingRoom: meetingRoom,
   });
-
-  useEffect(() => {
-    const { startIndex, endIndex } = selectedInfo;
-
-    if (startIndex !== endIndex) {
-      onChange({
-        startTime: timeList[startIndex],
-        endTime: timeList[endIndex],
-        meetingRoom: meetingRoom,
-      });
-    }
-  }, [selectedInfo.startIndex, selectedInfo.endIndex]);
-
-  const onChangeCellGroup = (selectedInfo: any) => {
-    if (
-      selectedInfo.start === null ||
-      selectedInfo.end === null ||
-      selectedInfo.start === selectedInfo.end
-    ) {
-      return;
-    }
-
-    setSelectedInfo({
-      startIndex: selectedInfo.start,
-      endIndex: selectedInfo.end,
-    });
-  };
-  const [defaultIndex, setDefaultIndex] = useState({ start: null, end: null });
-
-  const onCancleAllSlot = () => {
-    setDefaultIndex({ start: null, end: null });
-    setSelectedInfo({
-      startIndex: -1,
-      endIndex: -1,
-    });
-  };
-
-  const { ref } = useOutsideAlerter(onCancleAllSlot);
 
   return (
     <>
       <div className={classes.slotList} ref={ref}>
         <div>
           <CellGroup onChange={onChangeCellGroup} defaultIndex={defaultIndex}>
-            {timeList.map((item, index) => (
-              <Cell
-                key={`reservation-item-${index}`}
-                state="default"
-                style={{
-                  height: "40px",
-                  width: "50px",
-                  border: "1px solid var(--color-onSurfaceVariant-opacity-12)",
-                }}
-              />
-            ))}
+            {newTimeList.map((item, idx) => {
+              if (item.includes("start")) {
+                const widthIndex = parseInt(item.split(":")[1]);
+                return (
+                  <Cell
+                    label="18:00"
+                    key={`reservation-item-${idx}`}
+                    style={{
+                      width: `${unavailableSlotWidthList[widthIndex]}px`,
+                      backgroundColor: "var(--color-primary)",
+                      color: "var(--color-onSurface)",
+                    }}
+                  />
+                );
+              }
+              return (
+                <Cell
+                  key={`reservation-item-${idx}`}
+                  state="default"
+                  style={{
+                    height: "40px",
+                    width: "50px",
+                    border:
+                      "1px solid var(--color-onSurfaceVariant-opacity-12)",
+                  }}
+                />
+              );
+            })}
           </CellGroup>
         </div>
       </div>

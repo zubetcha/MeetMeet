@@ -1,10 +1,7 @@
-import { classExpression } from "@babel/types";
 import { Button, CellGroup, ScrollDrag } from "@components/ui";
 import { useEffect, useState } from "react";
 import { CalendarLayout, Cell } from "@components/ui";
-import ScrollContainer from "react-indiana-drag-scroll";
 import { formatDate } from "ui/src/utils";
-import { isCompositeType } from "graphql";
 
 const Home = () => {
   const [btnState, setBtnState] = useState<boolean>(true);
@@ -16,10 +13,6 @@ const Home = () => {
     )
   );
   const [defaultIndex, setDefaultIndex] = useState({ start: null, end: null });
-
-  useEffect(() => {
-    console.log(defaultIndex);
-  }, [defaultIndex]);
 
   return (
     <div>
