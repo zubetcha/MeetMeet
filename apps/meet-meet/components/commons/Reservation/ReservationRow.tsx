@@ -2,38 +2,32 @@ import React, { useState, useMemo, useEffect } from "react";
 import classes from "./reservation.module.scss";
 import useReservation from "./hooks/useReservation";
 import { CellGroup, Cell } from "@components/ui";
+import { useOutsideAlerter } from "ui/src/hooks/useOutsideAlerter";
 
 interface Props {
   meetingRoom: string;
   onChange: (e: any) => void;
+  unavailableRoomList: any;
 }
 
-export default function ReservationRow({ meetingRoom, onChange }: Props) {
-  const dummyList = useMemo(
-    () => [
-      {
-        date: "2022-08-29",
-        department: "ICT팀",
-        startTime: "13:30",
-        endTime: "14:30",
-        meetingRoom: "백범",
-        host: "김서연",
-      },
-    ],
-    []
-  );
-
+export default function ReservationRow({
+  meetingRoom,
+  onChange,
+  unavailableRoomList,
+}: Props) {
   const {
-    ref,
-    onChangeCellGroup,
     newTimeList,
     defaultIndex,
     unavailableSlotWidthList,
+    onChangeCellGroup,
+    onCancleAllSlot,
   } = useReservation({
-    unavailableList: dummyList,
+    unavailableList: unavailableRoomList,
     onChange: onChange,
     meetingRoom: meetingRoom,
   });
+
+  const { ref } = useOutsideAlerter(onCancleAllSlot);
 
   return (
     <>
@@ -48,6 +42,7 @@ export default function ReservationRow({ meetingRoom, onChange }: Props) {
                     label="18:00"
                     key={`reservation-item-${idx}`}
                     style={{
+                      height: "40px",
                       width: `${unavailableSlotWidthList[widthIndex]}px`,
                       backgroundColor: "var(--color-primary)",
                       color: "var(--color-onSurface)",

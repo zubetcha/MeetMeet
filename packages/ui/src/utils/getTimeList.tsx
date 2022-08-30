@@ -1,4 +1,4 @@
-import { formatTime } from "./formatDate";
+import { formatTime, formatDate } from "./formatDate";
 
 const addMinutes = (date: Date, minutes: number) => {
   return new Date(date.getTime() + minutes * 60000);
@@ -13,4 +13,25 @@ export const timeList = () => {
     date = result;
   }
   return newList;
+};
+
+export const getThreeDateFromNow = (startDate: Date) => {
+  if (!startDate) return;
+  let date = startDate;
+  let newList = [];
+  for (let i = 0; i < 3; i++) {
+    newList.push([
+      formatDate(date, true, ".").slice(5),
+      formatDate(date, false, "-"),
+    ]);
+    const result = addMinutes(date, 60 * 24);
+    date = result;
+  }
+  return newList;
+};
+
+export const changeDateToMinute = (date: string) => {
+  const [hour, minute] = date.split(":");
+  const totalMinute = parseInt(hour) * 60 + parseInt(minute);
+  return totalMinute;
 };

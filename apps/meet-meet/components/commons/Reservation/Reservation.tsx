@@ -4,8 +4,7 @@ import ReservationSection from "./ReservationSection";
 import ReservationHeader from "./ReservationHeader";
 import ReservationModal from "./ReservationModal";
 import ReservationBody from "./ReservationBody";
-import useReservation from "./hooks/useReservation";
-import { formatDate } from "ui/src/utils";
+import { getThreeDateFromNow } from "ui/src/utils";
 
 interface ReservationProps {
   width?: string;
@@ -23,28 +22,60 @@ export const Reservation = ({
     endTime: "",
   });
 
-  const addMinutes = (date: Date, minutes: number) => {
-    return new Date(date.getTime() + minutes * 60000);
-  };
-
-  const dateList = useMemo(() => {
-    if (!startDate) return;
-    let date = startDate;
-    let newList = [];
-    for (let i = 0; i < 3; i++) {
-      newList.push(formatDate(date, true, ".").slice(5));
-      const result = addMinutes(date, 60 * 24);
-      date = result;
-    }
-    return newList;
-  }, [startDate]);
-  // const { dateList } = useReservation({startDate:startDate});
+  const dateList = useMemo(
+    () => getThreeDateFromNow(startDate as Date),
+    [startDate]
+  );
 
   const [isOpen, setIsOpen] = useState(false);
-  const meetingRoom = ["백범", "마당", "백범", "청파"];
+  const meetingRoom = ["백범", "마당", "백범2", "청파2"];
+
+  const dummyList = useMemo(() => {
+    return {
+      "2022-08-29": {
+        백범: [
+          {
+            department: "ICT팀",
+            startTime: "13:30",
+            endTime: "14:30",
+            meetingRoom: "백범",
+            host: "김서연",
+          },
+        ],
+        청파2: [
+          {
+            department: "ICT팀",
+            startTime: "09:30",
+            endTime: "10:30",
+            meetingRoom: "청파2",
+            host: "김서연",
+          },
+        ],
+      },
+      "2022-08-31": {
+        백범: [
+          {
+            department: "ICT팀",
+            startTime: "13:30",
+            endTime: "14:30",
+            meetingRoom: "백범",
+            host: "김서연",
+          },
+        ],
+        청파2: [
+          {
+            department: "ICT팀",
+            startTime: "09:30",
+            endTime: "10:30",
+            meetingRoom: "청파2",
+            host: "김서연",
+          },
+        ],
+      },
+    };
+  }, []);
 
   const onChange = (e: any, date: string) => {
-    console.log(e);
     setTimeout(() => {
       setIsOpen(true);
     }, 500);
@@ -63,10 +94,10 @@ export const Reservation = ({
         {/* 고정된 영역 (날짜, 회의실 표시) */}
         <div className={classes.reservationFixedSection}>
           <div className={classes.emptySection}></div>
-          {dateList?.map((date: string) => (
+          {dateList?.map((date: string[]) => (
             <ReservationSection
               key={`reservation-section-${date}`}
-              date={date}
+              date={date[0]}
               meetingRoom={meetingRoom}
             />
           ))}
@@ -78,8 +109,9 @@ export const Reservation = ({
         >
           <ReservationHeader />
           <ReservationBody
-            dates={dateList as string[]}
+            dates={dateList as string[][]}
             meetingRoom={meetingRoom}
+            unavailableRoomList={dummyList}
             onChange={onChange}
           />
         </div>

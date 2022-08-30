@@ -1,6 +1,5 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { timeList } from "ui/src/utils";
-import { useOutsideAlerter } from "ui/src/hooks/useOutsideAlerter";
+import React, { useState, useEffect } from "react";
+import { timeList, changeDateToMinute } from "ui/src/utils";
 
 interface Props {
   unavailableList: any[];
@@ -8,6 +7,13 @@ interface Props {
   meetingRoom: string;
 }
 
+/**
+ *
+ * @param unavailableList (서버 데이터) 이미 예약된 회의실 리스트 정보
+ * @param onChange 선택된 영역 변경시 이벤트
+ * @param meetingRoom 현재 Row 의 미팅룸 이름
+ * @returns
+ */
 export default function useReservation({
   unavailableList,
   onChange,
@@ -67,11 +73,11 @@ export default function useReservation({
     });
   };
 
-  const handleMeetingCellWidth = (dummyList: any) => {
+  const handleMeetingCellWidth = (unavailableList: any) => {
     let widthList: number[] = [];
-    dummyList.map((item: any) => {
-      const startTime = changeStringDateToMinute(item.startTime);
-      const endTime = changeStringDateToMinute(item.endTime);
+    unavailableList?.map((item: any) => {
+      const startTime = changeDateToMinute(item.startTime);
+      const endTime = changeDateToMinute(item.endTime);
 
       const slots = (endTime - startTime) / 30 + 1;
       widthList.push(50 * slots);
@@ -79,21 +85,15 @@ export default function useReservation({
     setUnavailableSlotWidthList(widthList);
   };
 
-  const changeStringDateToMinute = (date: string) => {
-    const [hour, minute] = date.split(":");
-    const totalMinute = parseInt(hour) * 60 + parseInt(minute);
-    return totalMinute;
-  };
-
-  const handleCellList = (dummyList: any[]) => {
+  const handleCellList = (unavailableList: any[]) => {
     let index = 0;
     let newTimeList: any[] = [];
     const dateList = timeList();
     dateList.map((item: any, _) => {
-      dummyList.map((selected: any) => {
-        const startTime = changeStringDateToMinute(selected.startTime);
-        const endTime = changeStringDateToMinute(selected.endTime);
-        const slotTime = changeStringDateToMinute(item);
+      unavailableList?.map((selected: any) => {
+        const startTime = changeDateToMinute(selected.startTime);
+        const endTime = changeDateToMinute(selected.endTime);
+        const slotTime = changeDateToMinute(item);
 
         if (slotTime === startTime) {
           newTimeList.push(`start:${index}`);
@@ -103,20 +103,21 @@ export default function useReservation({
         if (slotTime > startTime && slotTime <= endTime) {
           return;
         }
-
         newTimeList.push(item);
+        return;
       });
+      if (!unavailableList || unavailableList.length === 0) {
+        newTimeList.push(item);
+      }
     });
     setNewTimeList(newTimeList);
   };
 
-  const { ref } = useOutsideAlerter(onCancleAllSlot);
-
   return {
     unavailableSlotWidthList,
-    onChangeCellGroup,
     newTimeList,
     defaultIndex,
-    ref,
+    onChangeCellGroup,
+    onCancleAllSlot,
   };
 }
