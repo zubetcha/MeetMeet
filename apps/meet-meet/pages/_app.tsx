@@ -30,6 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+
       <Head>
         <title>MeetMeet</title>
         <meta charSet="utf-8"></meta>
@@ -38,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ApolloProvider client={client}>
           <RecoilRoot>
             <RecoilObserver />
-                        {
+            {
             exceptionList.includes(router.pathname)
             ? <Component {...pageProps} />
             : <Layout>
@@ -48,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </RecoilRoot>
         </ApolloProvider>
       </QueryClientProvider>
+
     </>
   );
 }

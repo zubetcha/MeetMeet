@@ -17,7 +17,7 @@ import { CardDepth1, Text, TextField, Button, SVG, Select } from "ui/src/pages";
 const OnboardingPage = () => {
   const router = useRouter();
   const setUser = useSetRecoilState(userAtom);
-  
+
   const [userInfo, setUserInfo] = useState({ name: "", phone: "", departmentId: 0});
   const [btnState, setBtnState] = useState<StateType>("disable");
 
@@ -57,7 +57,7 @@ const OnboardingPage = () => {
   useEffect(() => {
     if (isSuccess && userData) {
       setUser({...userData.data});
-      router.replace("/")
+      router.push("/")
     }
   }, [isSuccess, userData])
 

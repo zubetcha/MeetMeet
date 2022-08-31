@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { useRecoilValue } from "recoil";
-import userAtom from "recoil/user";
 import classes from "./managementPage.module.scss";
 
 import { GET_MEETROOMS } from "graphql/meetroom/query";
@@ -13,10 +11,8 @@ import { CardDepth1, Button, IconButton } from "ui/src/pages"
 
 const ManagementPage = () => {
   const [isAddModal, setIsAddModal] = useState(false);
-  const userInfo = useRecoilValue(userAtom)
 
   const { data } = useQuery<MeetRoomData>(GET_MEETROOMS)
-  console.log(userInfo)
 
   return (
     <>
