@@ -6,18 +6,22 @@ import { selectedIndex } from '..';
 interface Props {
   defaultIndex: selectedIndex;
   childrenLength: number;
-  onChange: (e:any) => void;
+  onChange: (e: any) => void;
 }
 
-
-export const useCellGroup = ({defaultIndex, childrenLength, onChange}:Props) => {
-  const [selectedIndex, setSelectedIndex] = useState<selectedIndex>(defaultIndex);
+export const useCellGroup = ({
+  defaultIndex,
+  childrenLength,
+  onChange,
+}: Props) => {
+  const [selectedIndex, setSelectedIndex] =
+    useState<selectedIndex>(defaultIndex);
   const [hoverIndex, setHoverIndex] = useState<number>(-1);
   const [btnState, setBtnState] = useState<string[]>(
-    Array.from({length: childrenLength}, () => 'default')
+    Array.from({ length: childrenLength }, () => "default")
   );
   const [btnHoverState, setBtnHoverState] = useState<boolean[]>(
-    Array.from({length: childrenLength}, () => false)
+    Array.from({ length: childrenLength }, () => false)
   );
 
   useEffect(() => {
@@ -34,11 +38,11 @@ export const useCellGroup = ({defaultIndex, childrenLength, onChange}:Props) => 
 
   const handleButtonState = (selectedIndex: selectedIndex) => {
     let newArray = [...btnState];
-    if(typeof(selectedIndex.start) !== 'number') {
+    if (typeof selectedIndex.start !== "number") {
       newArray.map((_, idx: number) => {
-        newArray[idx] = 'default';
-      })
-    } else if(typeof(selectedIndex.end) !== 'number') {
+        newArray[idx] = "default";
+      });
+    } else if (typeof selectedIndex.end !== "number") {
       newArray.map((_, idx: number) => {
         idx === selectedIndex.start
           ? (newArray[idx] = "focused")
@@ -46,8 +50,11 @@ export const useCellGroup = ({defaultIndex, childrenLength, onChange}:Props) => 
       });
     } else {
       newArray.map((_, idx: number) => {
-        if(typeof(selectedIndex.start) === 'number' && typeof(selectedIndex.end) === 'number'){
-          (selectedIndex.start <= idx) && (idx <= selectedIndex.end)
+        if (
+          typeof selectedIndex.start === "number" &&
+          typeof selectedIndex.end === "number"
+        ) {
+          selectedIndex.start <= idx && idx <= selectedIndex.end
             ? (newArray[idx] = "focused")
             : (newArray[idx] = "default");
         }
@@ -57,87 +64,83 @@ export const useCellGroup = ({defaultIndex, childrenLength, onChange}:Props) => 
     setBtnState(newArray);
   };
 
-  const handleButtonHoverState = (hoverIndex:number) => {
+  const handleButtonHoverState = (hoverIndex: number) => {
     let newArray = [...btnHoverState];
 
-    if(hoverIndex === -1){
+    if (hoverIndex === -1) {
       newArray.map((_, idx: number) => {
-        newArray[idx] = false
-      })
-    } else if(typeof(selectedIndex.start) !== 'number') {
+        newArray[idx] = false;
+      });
+    } else if (typeof selectedIndex.start !== "number") {
       newArray.map((_, idx: number) => {
-        idx === hoverIndex
-          ? (newArray[idx] = true)
-          : (newArray[idx] = false);
-      })
-    } else if(typeof(selectedIndex.end) !== 'number') {
-      if (selectedIndex.start > hoverIndex){
+        idx === hoverIndex ? (newArray[idx] = true) : (newArray[idx] = false);
+      });
+    } else if (typeof selectedIndex.end !== "number") {
+      if (selectedIndex.start > hoverIndex) {
         newArray.map((_, idx: number) => {
-          idx === hoverIndex
-            ? (newArray[idx] = true)
-            : (newArray[idx] = false);
-        })
+          idx === hoverIndex ? (newArray[idx] = true) : (newArray[idx] = false);
+        });
       } else {
         newArray.map((_, idx: number) => {
-          if(typeof(selectedIndex.start) === 'number'){
-            (idx <= hoverIndex && idx >= selectedIndex.start)
+          if (typeof selectedIndex.start === "number") {
+            idx <= hoverIndex && idx >= selectedIndex.start
               ? (newArray[idx] = true)
               : (newArray[idx] = false);
           }
-        })
+        });
       }
     } else {
-      if(selectedIndex.start > hoverIndex){
+      if (selectedIndex.start > hoverIndex) {
         newArray.map((_, idx: number) => {
-          if(typeof(selectedIndex.end) === 'number'){
-            (idx >= hoverIndex && idx <= selectedIndex.end)
+          if (typeof selectedIndex.end === "number") {
+            idx >= hoverIndex && idx <= selectedIndex.end
               ? (newArray[idx] = true)
               : (newArray[idx] = false);
           }
-        })
+        });
       } else {
         newArray.map((_, idx: number) => {
-          if(typeof(selectedIndex.start) === 'number'){
-            (idx >= selectedIndex.start && idx <= hoverIndex)
+          if (typeof selectedIndex.start === "number") {
+            idx >= selectedIndex.start && idx <= hoverIndex
               ? (newArray[idx] = true)
               : (newArray[idx] = false);
           }
-        })
+        });
       }
     }
 
     setBtnHoverState(newArray);
-  }
+  };
 
   const onClick = (index: number) => {
-    let _selectedIndex = {...selectedIndex};
-    
-    if(typeof(selectedIndex.start) !== 'number') {
+    let _selectedIndex = { ...selectedIndex };
+
+    if (typeof selectedIndex.start !== "number") {
       _selectedIndex.start = index;
     } else {
-      if(selectedIndex.start > index || selectedIndex.end === index) {
+      if (selectedIndex.start > index || selectedIndex.end === index) {
         _selectedIndex.start = index;
-      }else{
+      } else {
         _selectedIndex.end = index;
       }
     }
-    
+
     setSelectedIndex(_selectedIndex);
   };
 
   const onMouseOver = (index: number) => {
     setHoverIndex(index);
-  }
+  };
 
   const onMouseLeave = () => {
     setHoverIndex(-1);
-  }
+  };
 
   return {
     btnState,
     btnHoverState,
     onClick,
     onMouseOver,
-    onMouseLeave
-  }
-}
+    onMouseLeave,
+  };
+};

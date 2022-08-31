@@ -133,19 +133,19 @@ export const CalendarLayout = ({
 
     }
 
-    // DESCRIBE: Dates mouseLeave했을 때
-    const onMouseLeaveDate = () => {
-        // hoverDates를 시작일에서 종료일로 설정
-        // 그렇게하면 사실상 시각적으로 hover가되는 Date가 없음
-        let _hoverDates:Date[] = []
+  // DESCRIBE: Dates mouseLeave했을 때
+  const onMouseLeaveDate = () => {
+    // hoverDates를 시작일에서 종료일로 설정
+    // 그렇게하면 사실상 시각적으로 hover가되는 Date가 없음
+    let _hoverDates: Date[] = [];
 
-        setHoverDates(_hoverDates);
-    }
+    setHoverDates(_hoverDates);
+  };
 
-    // 날짜 적용하기 버튼 눌렀을 때 상위 컴포넌트에 적용된 날짜 전달 함수 
-    const onClickSubmitDate = () => {
-        onClickSubmitBtn(startDate, endDate);
-    }
+  // 날짜 적용하기 버튼 눌렀을 때 상위 컴포넌트에 적용된 날짜 전달 함수
+  const onClickSubmitDate = () => {
+    onClickSubmitBtn(startDate, endDate);
+  };
 
     // dateTypeButton 선택했을 때  
     const clickSelectDateType = (dateType:string) => {

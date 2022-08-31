@@ -1,10 +1,7 @@
+import { Reservation } from "@components/commons/Reservation/Reservation";
 
-const Reservation = () => {
-  return (
-    <div>
+const ReservationPage = () => {
+  return <Reservation />;
+};
 
-    </div>
-  )
-}
-
-export default Reservation
+export default ReservationPage;

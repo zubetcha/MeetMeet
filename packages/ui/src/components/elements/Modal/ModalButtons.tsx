@@ -1,16 +1,13 @@
 import classes from "./Modal.module.scss";
 
-export const ModalButtons = ({children}: Props) => {
-
+export const ModalButtons = ({ children }: Props) => {
   return (
     <>
-      <div className={classes["modal-buttonss"]}>
-        {children}
-      </div>
+      <div className={classes["modal-buttons"]}>{children}</div>
     </>
-  )
-}
+  );
+};
 
 interface Props {
-  children: JSX.Element[] | JSX.Element
+  children: JSX.Element[] | JSX.Element;
 }
