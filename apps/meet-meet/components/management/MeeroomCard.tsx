@@ -3,13 +3,13 @@ import Image from "next/image";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
-import { CardDepth2, IconButton, Text, SVG, Checkbox } from "ui/src/pages"
+import { CardDepth2, IconButton, Text } from "ui/src/pages"
 import { EquipmentCheckbox } from "./EquipmentCheckbox";
-import { MeetingroomEditModal } from "./MeetingroomEditModal";
+import { MeetroomEditModal } from "./MeetroomEditModal";
 
 import logo from "ui/src/assets/img/logo_gec.png";
 
-export const MeetingroomCard = ({meetroom}: Props) => {
+export const MeetroomCard = ({meetroom}: Props) => {
   const [isEditModal, setIsEditModal] = useState(false);
   const { id, name, location, seat, canMerge, hasMonitor } = meetroom;
   const textProps: {} = { type: "body-medium", color: "on-surface-variant", style: { fontWeight: "500" } }
@@ -47,7 +47,7 @@ export const MeetingroomCard = ({meetroom}: Props) => {
           </CardDepth2.Contents>
         </CardDepth2>
       </div>
-      {isEditModal && <MeetingroomEditModal setIsEditModal={setIsEditModal} meetroom={meetroom} />}
+      {isEditModal && <MeetroomEditModal setIsEditModal={setIsEditModal} meetroom={meetroom} />}
     </>
   )
 }

@@ -2,7 +2,7 @@ import classes from "./management.module.scss";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { Modal, TextField, Checkbox, Button, TextArea } from "ui/src/pages"
 
-export const MeetingroomAddModal = ({setIsAddModal}: Props) => {
+export const MeetroomAddModal = ({setIsAddModal}: Props) => {
   const onChangeCheckbox = () => {
 
   }
@@ -12,7 +12,7 @@ export const MeetingroomAddModal = ({setIsAddModal}: Props) => {
   return (
     <>
       <Modal>
-        <Modal.Title type="title-large" weight="700">회의실 이름</Modal.Title>
+        <Modal.Title type="title-large" weight="700">회의실 생성</Modal.Title>
         <Modal.Contents>
           <TextField name="meetingroom-name" status="default">
             <TextField.Label>이름</TextField.Label>
