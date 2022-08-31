@@ -1,8 +1,50 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { useEffect } from "react";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { useRouter } from "next/router";
+
+import { ApolloProvider } from "@apollo/client";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import client from "../apollo-client";
+
+import "../styles/globals.scss";
+import { Layout } from "@components/commons/Layout/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+
+  const router = useRouter();
+  const exceptionList = ["/", "/login", "/join", "/join/onboarding"]
+  const queryClient = new QueryClient();
+  queryClient.setDefaultOptions({
+    queries: {
+      retry: false,
+    }
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", "light");
+  }, []);
+
+  return (
+    <>
+      <Head>
+        <title>MeetMeet</title>
+        <meta charSet="utf-8"></meta>
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <ApolloProvider client={client}>
+          {
+            exceptionList.includes(router.pathname)
+            ? <Component {...pageProps} />
+            : <Layout>
+                <Component {...pageProps} />
+              </Layout>
+          }
+        </ApolloProvider>
+      </QueryClientProvider>
+    </>
+  );
 }
 
-export default MyApp
+export default MyApp;

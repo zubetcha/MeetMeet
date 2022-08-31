@@ -97,13 +97,6 @@ export interface CalendarProps {
   end: Date;
 }
 
-export interface MultipleCalendarsProps {
-  date: Date;
-  start: Date;
-  end: Date;
-  onClickSubmitBtn: (startDate: Date, endDate: Date) => void;
-}
-
 export interface DatesProps {
   dateInfo: {
     condition: string;

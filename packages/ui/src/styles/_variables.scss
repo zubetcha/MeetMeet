@@ -1,0 +1,220 @@
+
+// DESCRIBE 반응형 화면 크기
+$mobile: 0px;
+$tablet: 0px;
+$laptop: 0px;
+$desktop: 0px;
+
+
+// DESCRIBE Typography
+$display-large-font: 57px;
+$display-large-line: 64px;
+$display-large-letter: -0.01em;
+
+$display-medium-font: 45px;
+$display-medium-line: 52px;
+$display-medium-letter: -0.01em;
+
+$display-small-font: 36px;
+$display-small-line: 44px;
+$display-small-letter: -0.01em;
+
+$headline-large-font: 32px;
+$headline-large-line: 40px;
+$headline-large-letter: 0px;
+
+$headline-medium-font: 28px;
+$headline-medium-line: 36px;
+$headline-medium-letter: 0px;
+
+$headline-small-font: 24px;
+$headline-small-line: 32px;
+$headline-small-letter: 0px;
+
+$title-large-font: 22px;
+$title-large-line: 28px;
+$title-large-letter: 0px;
+
+$title-medium-font: 16px;
+$title-medium-line: 24px;
+$title-medium-letter: 0.1px;
+
+$title-small-font: 14px;
+$title-small-line: 20px;
+$title-small-letter: 0.1px;
+
+$label-large-font: 14px;
+$label-large-line: 20px;
+$label-large-letter: 0px;
+
+$label-medium-font: 12px;
+$label-medium-line: 16px;
+$label-medium-letter: 0px;
+
+$label-small-font: 11px;
+$label-small-line: 16px;
+$label-small-letter: 0px;
+
+$body-large-font: 16px;
+$body-large-line: 24px;
+$body-large-letter: 0px;
+
+$body-medium-font: 14px;
+$body-medium-line: 20px;
+$body-medium-letter: 0px;
+
+$body-small-font: 12px;
+$body-small-line: 16px;
+$body-small-letter: 0px;
+
+
+// DESCRIBE: padding
+$default-padding: 24px 24px 16px 24px;
+$modal-container-padding: 24px 40px;
+$toast-modal-container-padding: 40px 40px 24px 40px;
+
+
+// DESCRIBE: colors-map
+$colors-map: (
+  primary: var(--color-primary),
+  primary-08: var(--color-primary-opacity-08),
+  primary-12: var(--color-primary-opacity-12),
+  primary-16: var(--color-primary-opacity-16),
+  on-primary: var(--color-onPrimary),
+  on-primary-08: var(--color-onPrimary-opacity-08),
+  on-primary-12: var(--color-onPrimary-opacity-12),
+  on-primary-16: var(--color-onPrimary-opacity-16),
+  primary-container: var(--color-primaryContainer),
+  primary-container-08: var(--color-primaryContainer-opacity-08),
+  primary-container-12: var(--color-primaryContainer-opacity-12),
+  primary-container-16: var(--color-primaryContainer-opacity-16),
+  on-primary-container: var(--color-onPrimaryContainer),
+  on-primary-container-08: var(--color-onPrimaryContainer-opacity-08),
+  on-primary-container-12: var(--color-onPrimaryContainer-opacity-12),
+  on-primary-container-16: var(--color-onPrimaryContainer-opacity-16),
+
+  secondary: var(--color-secondary),
+  secondary-08: var(--color-secondary-opacity-08),
+  secondary-12: var(--color-secondary-opacity-12),
+  secondary-16: var(--color-secondary-opacity-16),
+  on-secondary: var(--color-onSecondary),
+  on-secondary-08: var(--color-onSecondary-opacity-08),
+  on-secondary-12: var(--color-onSecondary-opacity-12),
+  on-secondary-16: var(--color-onSecondary-opacity-16),
+  secondary-container: var(--color-secondaryContainer),
+  secondary-container-08: var(--color-secondaryContainer-opacity-08),
+  secondary-container-12: var(--color-secondaryContainer-opacity-12),
+  secondary-container-16: var(--color-secondaryContainer-opacity-16),
+  on-secondary-container: var(--color-onSecondaryContainer),
+  on-secondary-container-08: var(--color-onSecondaryContainer-opacity-08),
+  on-secondary-container-12: var(--color-onSecondaryContainer-opacity-12),
+  on-secondary-container-16: var(--color-onSecondaryContainer-opacity-16),
+
+  tertiary: var(--color-tertiary),
+  tertiary-08: var(--color-tertiary-opacity-08),
+  tertiary-12: var(--color-tertiary-opacity-12),
+  tertiary-16: var(--color-tertiary-opacity-16),
+  on-tertiary: var(--color-onTertiary),
+  on-tertiary-08: var(--color-onTertiary-opacity-08),
+  on-tertiary-12: var(--color-onTertiary-opacity-12),
+  on-tertiary-16: var(--color-onTertiary-opacity-16),
+  tertiary-container: var(--color-tertiaryContainer),
+  tertiary-container-08: var(--color-tertiaryContainer-opacity-08),
+  tertiary-container-12: var(--color-tertiaryContainer-opacity-12),
+  tertiary-container-16: var(--color-tertiaryContainer-opacity-16),
+  on-tertiary-container: var(--color-onTertiaryContainer),
+  on-tertiary-container-08: var(--color-onTertiaryContainer-opacity-08),
+  on-tertiary-container-12: var(--color-onTertiaryContainer-opacity-12),
+  on-tertiary-container-16: var(--color-onTertiaryContainer-opacity-16),
+
+  error: var(--color-error),
+  error-08: var(--color-error-opacity-08),
+  error-12: var(--color-error-opacity-12),
+  error-16: var(--color-error-opacity-16),
+  on-error: var(--color-onError),
+  on-error-08: var(--color-onError-opacity-08),
+  on-error-12: var(--color-onError-opacity-12),
+  on-error-16: var(--color-onError-opacity-16),
+  error-container: var(--color-errorContainer),
+  error-container-08: var(--color-errorContainer-opacity-08),
+  error-container-12: var(--color-errorContainer-opacity-12),
+  error-container-16: var(--color-errorContainer-opacity-16),
+  on-error-container: var(--color-onErrorContainer),
+  on-error-container-08: var(--color-onErrorContainer-opacity-08),
+  on-error-container-12: var(--color-onErrorContainer-opacity-12),
+  on-error-container-16: var(--color-onErrorContainer-opacity-16),
+
+  background: var(--color-background),
+  background-08: var(--color-background-opacity-08),
+  background-12: var(--color-background-opacity-12),
+  background-16: var(--color-background-opacity-16),
+  on-background: var(--color-onBackground),
+  on-background-08: var(--color-onBackground-opacity-08),
+  on-background-12: var(--color-onBackground-opacity-12),
+  on-background-16: var(--color-onBackground-opacity-16),
+
+  surface: var(--color-surface),
+  surface-08: var(--color-surface-opacity-08),
+  surface-12: var(--color-surface-opacity-12),
+  surface-16: var(--color-surface-opacity-16),
+  on-surface: var(--color-onSurface),
+  on-surface-08: var(--color-onSurface-opacity-08),
+  on-surface-12: var(--color-onSurface-opacity-12),
+  on-surface-16: var(--color-onSurface-opacity-16),
+  on-surface-38: var(--color-onSurface-opacity-38),
+  surface-variant: var(--color-surfaceVariant),
+  surface-variant-08: var(--color-surfaceVariant-opacity-08),
+  surface-variant-12: var(--color-surfaceVariant-opacity-12),
+  surface-variant-16: var(--color-surfaceVariant-opacity-16),
+  on-surface-variant: var(--color-onSurfaceVariant),
+  on-surface-variant-08: var(--color-onSurfaceVariant-opacity-08),
+  on-surface-variant-12: var(--color-onSurfaceVariant-opacity-12),
+  on-surface-variant-16: var(--color-onSurfaceVariant-opacity-16),
+
+  outline: var(--color-outline),
+  outline-08: var(--color-outline-opacity-08),
+  outline-12: var(--color-outline-opacity-12),
+  outline-16: var(--color-outline-opacity-16),
+
+  warning: var(--color-warning),
+  warning-08: var(--color-warning-opacity-08),
+  warning-12: var(--color-warning-opacity-12),
+  warning-16: var(--color-warning-opacity-16),
+  on-warning: var(--color-onWarning),
+  on-warning-08: var(--color-onWarning-opacity-08),
+  on-warning-12: var(--color-onWarning-opacity-12),
+  on-warning-16: var(--color-onWarning-opacity-16),
+  warning-container: var(--color-warningContainer),
+  warning-container-08: var(--color-warningContainer-opacity-08),
+  warning-container-12: var(--color-warningContainer-opacity-12),
+  warning-container-16: var(--color-warningContainer-opacity-16),
+  on-warning-container: var(--color-onWarningContainer),
+  on-warning-container-08: var(--color-onWarningContainer-opacity-08),
+  on-warning-container-12: var(--color-onWarningContainer-opacity-12),
+  on-warning-container-16: var(--color-onWarningContainer-opacity-16),
+
+  surface-1: var(--color-surface1),
+  surface-2: var(--color-surface2),
+  surface-3: var(--color-surface3),
+  surface-4: var(--color-surface4),
+  surface-5: var(--color-surface5),
+
+  transparent: transparent,
+);
+
+// DESCRIBE: surface 레벨별 box-shadow값 
+$box-shadow-surface1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+$box-shadow-surface2: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+$box-shadow-surface3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+$box-shadow-surface4: 0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3);
+$box-shadow-surface5: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3);
+
+// DESCRIBE 
+$flex-map: (
+  start: flex-start,
+  end: flex-end,
+  between: space-between,
+  around: space-around,
+  stretch: stretch,
+  center: center,
+);

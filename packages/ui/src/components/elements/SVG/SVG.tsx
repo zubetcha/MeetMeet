@@ -1,40 +1,4 @@
 import React, {useEffect} from 'react'
-// import { DownwardIcon, UpwardIcon } from './ArrowIcon';
-// import { ForwardIcon, BackwardIcon, DropdownIcon } from './ChevronIcon';
-// import { FilterIcon } from './FilterIcon';
-// import { DocumentIcon, DownloadIcon, UploadIcon } from './DocumentIcon';
-// import { SearchIcon } from './SearchIcon';
-// import { ZoomInIcon } from './ZoomInIcon';
-// import { AddIcon } from './AddIcon';
-// import { DeleteIcon } from './DeleteIcon';
-// import { DoneIcon } from './DoneIcon';
-// import { ErrorIcon } from './ErrorIcon';
-// import { VisibilityOnIcon, VisibilityOffIcon } from './VisibilityIcon';
-// import { CheckedIcon, UncheckedIcon, IndeterminatedIcon, CheckDisabledIcon } from './CheckboxIcon';
-// import { HelpIcon } from './HelpIcon';
-// import { CloseIcon } from './CloseIcon';
-// import { AppsIcon } from './AppsIcon';
-// import { AutorenewIcon } from './AutoRenewIcon';
-// import { CalendarIcon } from './CalendarIcon';
-// import { CancelIcon } from './CancelIcon';
-// import { FullScreenIcon, ExitScreenIcon } from './ScreenIcon';
-// import { EletronicIcon } from './EletronicIcon';
-// import { LocationOnIcon } from './LocationOnIcon';
-// import { EmailIcon } from './EmailIcon';
-// import { GridIcon } from './GridIcon';
-// import { MapIcon } from './MapIcon';
-// import { MenuIcon } from './MenuIcon';
-// import { MoreIcon } from './MoreIcon';
-// import { NumberedListIcon } from './NumberedList';
-// import { SelectedRadioIcon, UnSelectedRadioIcon } from './RadioIcon';
-// import { RefreshIcon } from './RefreshIcon';
-// import { SettingsIcon } from './SettingsIcon';
-// import { SuperuserIcon } from './SuperuserIcon';
-// import { TuneIcon } from './TuneIcon';
-// import { UserIcon } from './UserIcon';
-// import { LightToggleOffDisabledIcon, DarkToggleOnIcon, LightToggleOnDisabledIcon, LightToggleOnIcon, DarkToggleOffIcon, LightToggleOffIcon } from './ToggleIcon';
-// import { EllipseIcon } from "./EllipseIcon";
-
 
 import AddIcon from "../../../assets/icons/add.svg";
 import AppsIcon from "../../../assets/icons/apps.svg";
@@ -88,8 +52,14 @@ import VisibilityOffIcon from "../../../assets/icons/visibility-off.svg";
 import VisibilityOnIcon from "../../../assets/icons/visibility-on.svg";
 import ZoomInIcon from "../../../assets/icons/zoom-in.svg";
 import MoreIcon from "../../../assets/icons/more.svg";
+import GoogleIcon from "../../../assets/icons/logo-google.svg";
+import MeetMeetHoriIcon from "../../../assets/icons/logo-meetmeet-hori.svg";
+import MeetMeetVertIcon from "../../../assets/icons/logo-meetmeet-vert.svg";
+import HomeIcon from '../../../assets/icons/home.svg';
+import AlertIcon from'../../../assets/icons/alert.svg';
 
 import classes from "./SVG.module.scss";
+import classNames from 'classnames';
 import { colors } from '../../../shared/style'
 
 
@@ -104,8 +74,8 @@ interface SVGProps{
 export const SVG = ({name, width="24", height="24", color=colors.darkHigh, isHoverEffect=false}:SVGProps) => {
 
     const ui = { width, height, fill: color };
-    const propsCursor = { ...ui, className: isHoverEffect ? classes.cursor : ""  }
-    const propsElse = { ...ui, className: isHoverEffect ? classes[name] : ""  }
+    const propsCursor = { ...ui, className: classNames(isHoverEffect ? classes.cursor : "", classes[color] ) }
+    const propsElse = { ...ui, className: classNames(isHoverEffect ? classes[name] : "", classes[color] )  }
 
     
     const icons: {[name: string]: JSX.Element} = {
@@ -161,6 +131,11 @@ export const SVG = ({name, width="24", height="24", color=colors.darkHigh, isHov
         "toggleDarkOn": <ToggleDarkOnIcon {...propsCursor} />,
         "toggleDarkOff": <ToggleDarkOffIcon {...propsCursor} />,
         "helpSolid": <HelpSolidIcon {...propsCursor} />,
+        "google": <GoogleIcon />,
+        "meetmeetHori": <MeetMeetHoriIcon />,
+        "meetmeetVert": <MeetMeetVertIcon />,
+        "alert": <AlertIcon {...propsCursor} />,
+        "home": <HomeIcon {...propsCursor} />,
     }
 
     return (

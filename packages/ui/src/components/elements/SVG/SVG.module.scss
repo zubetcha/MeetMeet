@@ -2,6 +2,12 @@
 @use "../../../shared/font.scss" as *;
 @use "../../../shared/common.module.scss" as *;
 
+@mixin path-fill($color) {
+  path {
+    fill: $color
+  }
+}
+
 .filter {
   &:hover{
     cursor: pointer;
@@ -18,6 +24,38 @@
       fill: black;
     }
   }
+}
+
+.primary {
+  @include path-fill(var(--color-primary))
+}
+
+.onPrimary{
+  @include path-fill(var(--color-onPrimary));
+}
+
+.error {
+  @include path-fill(var(--color-error));
+}
+
+.onError {
+  @include path-fill(var(--color-onError));
+}
+
+.onErrorContainer {
+  @include path-fill(var(--color-onErrorContainer));
+}
+
+.onSurface{
+  @include path-fill(var(--color-onSurface-opacity-38));
+}
+
+.onSurfaceVariant{
+  @include path-fill(var(--color-onSurfaceVariant));
+}
+
+.onSecondaryContainer{
+  @include path-fill(var(--color-onSecondaryContainer));
 }
 
 .upward {
