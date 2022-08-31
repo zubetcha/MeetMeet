@@ -1,20 +1,21 @@
 import { classExpression } from "@babel/types";
 import { Button, CellGroup, ScrollDrag } from "@components/ui";
-import { useState } from "react";
-import { MultipleCalendars, Cell } from "@components/ui";
-import ScrollContainer from "react-indiana-drag-scroll";
+import { useEffect, useState } from "react";
+import { CalendarLayout, Cell } from "@components/ui";
+import ScrollContainer from 'react-indiana-drag-scroll'
 import { formatDate } from "ui/src/utils";
-import { start } from "repl";
+import { isCompositeType } from "graphql";
 
 const Home = () => {
+
   const [btnState, setBtnState] = useState<boolean>(true);
-  const [date, setDate] = useState<Date>(
-    new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      new Date().getDate() - 1
-    )
-  );
+  const [date, setDate] = useState<Date>(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate() - 1));
+  const [defaultIndex, setDefaultIndex] = useState({start:null, end:null})
+
+
+  useEffect(() => {
+    console.log(defaultIndex)
+  }, [defaultIndex])
 
   return (
     <div>
@@ -24,47 +25,84 @@ const Home = () => {
         label={formatDate(date)}
         onClick={() => setBtnState(true)}
       />
-      {btnState && (
-        <MultipleCalendars
-          setCalendar={setBtnState}
-          onClickSubmitBtn={(startDate) => {
-            console.log(startDate);
-            setDate(startDate);
-            setBtnState(false);
-          }}
-          date={date}
-          start={date}
-          end={date}
-          type="single"
-        />
-      )}
+      {
+        btnState 
+        && <CalendarLayout 
+            setCalendar={setBtnState} 
+            onClickSubmitBtn={(startDate) => {
+              setDate(startDate);
+              setBtnState(false);
 
-      <div style={{ width: "500px" }}>
-        <CellGroup onChange={(e: any) => console.log(e)} disableIndex={[3]}>
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell
-            label="18:00"
-            style={{
-              width: "300px",
-              backgroundColor: "var(--color-primary)",
-              color: "var(--color-onSurface)",
-            }}
+            }} 
+            date={date} 
+            start={date} 
+            end={date}
+            type="single"
+            timeType="futureCurrent"          
           />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-          <Cell label="18:00" />
-        </CellGroup>
+      }
+
+      <div
+        style={{width:'500px'}}
+      >
+
+            <CellGroup
+              disableIndex={[3]}
+              defaultIndex={defaultIndex}
+            >
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+                style={{
+                  width:'300px',
+                  backgroundColor:'var(--color-primary)',
+                  color: 'var(--color-onSurface)'
+                }}
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+              <Cell
+                label="18:00"
+              />
+
+            </CellGroup>
+        </div>
+        <Button
+          label='버튼'
+          onClick={() => {setDefaultIndex({start:null, end:null})}}
+        />
       </div>
-    </div>
-  );
-};
+  )
+}
 
 export default Home;
