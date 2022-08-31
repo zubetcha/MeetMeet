@@ -9,4 +9,4 @@ export const GET_DEPARTMENTS = gql`
       updatedAt
     }
   }
-`
+`;

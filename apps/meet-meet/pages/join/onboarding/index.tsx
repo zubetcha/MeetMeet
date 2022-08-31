@@ -17,11 +17,17 @@ const OnboardingPage = () => {
   const [btnState, setBtnState] = useState<StateType>("disable");
 
   const { data, loading, error } = useQuery<DepartmentData>(GET_DEPARTMENTS);
-  const { mutateAsync, isError } = usePostUserInfo();
+  const { mutateAsync, isError, error: userInfoError } = usePostUserInfo();
+
+  console.log(userInfoError)
+
+  const getPhoneFormat = (value: string) => {
+    return value.replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+  }
 
   const onChangeTextField = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    const _value = name === "phone" ? value.replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`) : value;
+    const _value = name === "phone" ? getPhoneFormat(value) : value;
 
     setUserInfo({ ...userInfo, [name]: _value });
   }

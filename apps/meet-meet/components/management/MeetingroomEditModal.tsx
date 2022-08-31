@@ -1,12 +1,17 @@
+import { useQuery } from "@apollo/client";
 import classes from "./management.module.scss";
+
+import { GET_MEETROOM_BY_ID } from "graphql/meetroom/query";
+import { MeetRoom } from "graphql/meetroom/types";
+
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { Modal, TextField, Checkbox, Button, TextArea } from "ui/src/pages"
 
-export const MeetingroomEditModal = ({setIsEditModal}: Props) => {
+export const MeetingroomEditModal = ({setIsEditModal, meetroom}: Props) => {
   const onChangeCheckbox = () => {}
   const onChangeTextField = () => {
-
   }
+
   return (
     <>
       <Modal>
@@ -66,4 +71,5 @@ export const MeetingroomEditModal = ({setIsEditModal}: Props) => {
 
 interface Props {
   setIsEditModal: (is: boolean) => void,
+  meetroom: MeetRoom,
 }
