@@ -1,0 +1,28 @@
+@import "../../../styles/variables";
+@import "../../../styles/utils";
+
+.first-class {
+  cursor: default;
+}
+
+.display-large { @include font-style(display-large); }
+.display-medium { @include font-style(display-medium); }
+.display-small { @include font-style(display-small); }
+.headline-large { @include font-style(headline-large); }
+.headline-medium { @include font-style(headline-medium); }
+.headline-small { @include font-style(headline-small); }
+.title-large { @include font-style(title-large); }
+.title-medium { @include font-style(title-medium); }
+.title-small { @include font-style(title-small); }
+.label-large { @include font-style(label-large); }
+.label-medium { @include font-style(label-medium); }
+.label-small { @include font-style(label-small); }
+.body-large { @include font-style(body-large); }
+.body-medium { @include font-style(body-medium); }
+.body-small { @include font-style(body-small); }
+
+@each $color, $value in $colors-map {
+  p.first-class[class*="#{$color}"] {
+    color: $value;
+  }
+}

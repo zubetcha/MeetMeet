@@ -1,6 +1,6 @@
 import { koreanSensorType } from "./consts";
 import { colors } from "../shared/style";
-import patternImageSrc from '@public/images/exception_pattern.png';
+// import patternImageSrc from '@public/images/exception_pattern.png';
 
 export const getSensorValueUnit = (
   value: number,
@@ -220,7 +220,7 @@ export const getTLSensorChartData = (value1: number, name: string, now: number) 
   const duration = 1000 * 10;
 
   const patternImage = new Image()
-  patternImage.src = patternImageSrc.src;
+  // patternImage.src = patternImageSrc.src;
   const pattern = { image: patternImage, repeat: "repeat" };
 
   const lightColors = [["없음", colors.gray200], ["초록", colors.niceMedium], ["주황", colors.warningMedium], ["빨강", colors.dangerMedium], ["-", pattern ]];

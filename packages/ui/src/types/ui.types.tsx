@@ -22,7 +22,7 @@ export interface navBarProps {
     }[];
   };
   shouldLogin: boolean;
-  userInfo: UserInfoType;
+  userInfo?: UserInfoType;
   setMyPageModal: Dispatch<SetStateAction<Boolean>>;
 }
 
@@ -30,16 +30,6 @@ export interface NavMenuProps {
   page: pageInfo;
   key: number;
   customer: string;
-}
-
-export interface TextProps {
-  text: string;
-  size?: string;
-  color?: string;
-  weight?: string;
-  type?: string;
-  cursor?: string;
-  height?: string;
 }
 
 export interface pageInfo {
@@ -110,7 +100,7 @@ export interface ButtonProps {
 
 export interface ExitToBurgerProps {
   length?: string;
-  close?: boolean;
+  isClose?: boolean;
   setClose?: any;
 }
 
@@ -124,15 +114,6 @@ export interface CalendarProps {
   onMouseLeaveDate: () => void;
   btwDates?:DateType;
   startTime?:number
-}
-
-export interface MultipleCalendarsProps {
-  date: Date;
-  start: Date;
-  end: Date;
-  setCalendar: Dispatch<SetStateAction<boolean>>;
-  onClickSubmitBtn: (startDate: Date, endDate: Date) => void;
-  startTime:number
 }
 
 export interface DatesProps {
@@ -149,8 +130,9 @@ export interface DatesProps {
   hoverDate: boolean;
   onMouseOverDate: (value: Date) => void;
   onMouseLeaveDate: () => void;
-  availableDates?: DateType
-  startHourMinutes?:number
+  availableDates?: DateType;
+  startHourMinutes?:number;
+  timeType:'pastCurrent' | 'futureCurrent'
 }
 
 export interface TimePickerProps {
@@ -200,43 +182,6 @@ export interface ComponentDepthBoxProps {
   component_depth: string;
 }
 
-export interface InputProps {
-  type: string;
-  name: string;
-  label?: string;
-  placeholder?: string;
-  value: string;
-  helperText?: string;
-  focused?: boolean;
-  textInput?: boolean;
-  status: string;
-  setIsFocused?:(e:boolean)=>void;
-  isFocused?:boolean;
-  size: string;
-  icon?: JSX.Element;
-  width?: string | number;
-  borderRadius?: string;
-  onChange?: (e: React.ChangeEvent<any>) => void;
-  onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
-  onClickInput?: (e: React.MouseEvent<HTMLElement>) => void;
-  children?: JSX.Element[];
-  isMargin?: boolean;
-  iconMarginBottom?: string;
-  iconMarginRight? : string;
-  isHelperText?:boolean;  
-  maxLength?: number;
-  isBoxShadow?: boolean;
-  autoFocus?:boolean;
-  unit?:string;
-  unitMarginBottom?:string;
-  unitMarginRight?:string;
-  unitType?:string;
-  autoComplete?:string;
-}
-
-export interface TextAreaProps extends InputProps{
-  height?: string;
-}
 export interface MyPageModalProps {
   userInfo: UserInfoType;
   setMyPageModal: (myPageModal: boolean) => void;

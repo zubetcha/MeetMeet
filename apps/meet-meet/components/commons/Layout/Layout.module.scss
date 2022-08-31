@@ -1,0 +1,17 @@
+@import "ui/src/styles/variables";
+@import "ui/src/styles/utils";
+
+.layoutContainer {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-surface);
+}
+
+.pageBody {
+    padding: 24px 40px 24px 24px;
+    transition: margin-left 0.3s ease-out;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}

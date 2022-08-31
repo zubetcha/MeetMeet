@@ -4,14 +4,14 @@ import classNames from "classnames";
 import { ExitToBurgerProps } from "../../../types/ui.types";
 
 // $TODO: 버튼 length에따라서
-export const ExitBtn: React.FC<ExitToBurgerProps> = ({ close, setClose }) => {
+export const ExitBtn = ({ isClose, setClose }:ExitToBurgerProps) => {
   const [open, setOpen] = useState(true);
 
   return (
     <div
       onClick={() => {
         setOpen(open ? false : true);
-        setClose(close ? false : true);
+        setClose(isClose ? false : true);
       }}
       className={classes.exitToBurgerContainer}
     >
