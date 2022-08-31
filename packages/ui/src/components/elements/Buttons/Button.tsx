@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, forwardRef } from "react";
 import classes from "./button.module.scss";
 import classNames from "classnames";
 import { getSVGColorsByButtonStatus, getSVGSizeByButtonSize } from "./Button.utils";
@@ -18,7 +18,7 @@ interface ButtonProps {
   style?: any;
 }
 
-export const Button = ({
+export const Button = forwardRef(({
   label,
   size,
   configuration,
@@ -29,7 +29,7 @@ export const Button = ({
   showRightIcon,
   onClick = () => {},
   style,
-}: ButtonProps) => {
+}: ButtonProps, ref: any) => {
   const { width: iconWidth, height: iconHeight } = getSVGSizeByButtonSize(size as string);
   const iconColor = getSVGColorsByButtonStatus(configuration as ConfigurationType, negativeMood, state === 'disable' ? true : false)
 
@@ -69,4 +69,6 @@ export const Button = ({
       <div className={classes.stateLayer}></div>
     </button>
   );
-};
+});
+
+Button.displayName = "Button";

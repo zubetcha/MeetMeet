@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
 import classes from "./managementPage.module.scss";
 
-import { MeetingroomCard } from "@components/management/MeetingroomCard";
-import { MeetingroomAddModal } from "@components/management/MeetingroomAddModal";
+import { GET_MEETROOMS } from "graphql/meetroom/query";
+import { MeetRoomData } from "graphql/meetroom/types";
+
+import { MeetroomCard } from "@components/management/MeeroomCard";
+import { MeetroomAddModal } from "@components/management/MeetroomAddModal";
 import { CardDepth1, Button, IconButton } from "ui/src/pages"
 
 const ManagementPage = () => {
   const [isAddModal, setIsAddModal] = useState(false);
+
+  const { data } = useQuery<MeetRoomData>(GET_MEETROOMS)
+  console.log(data)
 
   return (
     <>
@@ -34,13 +41,13 @@ const ManagementPage = () => {
           </CardDepth1.TitleBar>
           <CardDepth1.Contents>
             <div>
-              <MeetingroomCard />
+              {data && data.meetrooms.map((meetroom) => <MeetroomCard key={meetroom.id} meetroom={meetroom} />)}
             </div>
           </CardDepth1.Contents>
         </CardDepth1>
       </div>
 
-      {isAddModal && <MeetingroomAddModal setIsAddModal={setIsAddModal} />}
+      {isAddModal && <MeetroomAddModal setIsAddModal={setIsAddModal} />}
     </>
   )
 }

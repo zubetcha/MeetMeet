@@ -14,7 +14,7 @@ const config = {
   // DESCRIBE: path isProduction일 경우 아닐경우 url 분리
   images: {
     loader: "akamai",
-    path: isProduction ? productionURL : "http://localhost:3000/",
+    path: isProduction ? productionURL : "http://localhost:3000",
     domains: ["localhost", "https://www.pov.dev.factoroid.com/"],
   },
   sassOptions: {
@@ -24,6 +24,15 @@ const config = {
   target: "experimental-serverless-trace",
   eslint: {
     dirs: ["pages", "components", "hooks", "shared", "store", "types"],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/:path*',
+        destination: 'http://localhost:8001/:path*',
+        basePath: false,
+      },
+    ]
   },
   webpack(config) {
     config.module.rules.push({
