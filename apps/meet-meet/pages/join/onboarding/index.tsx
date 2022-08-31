@@ -2,18 +2,18 @@ import React, { ChangeEvent, useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import classes from "./onboardingPage.module.scss";
 
-import { GET_DEPARTMENTS } from "graphql/common/query";
+import { GET_DEPARTMENTS } from "graphql/department/query";
 import { usePostUserInfo } from "@hooks/queries/auth/useMutationQueries";
 
 import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
-import { DepartmentData, Department } from "graphql/common/types";
+import { DepartmentData, Department } from "graphql/department/types";
 import { SelectItemType } from "ui/src/components/elements/Select/types/select.types";
 
 import { CardDepth1, Text, TextField, Button, SVG, Select } from "ui/src/pages";
 
 const OnboardingPage = () => {
 
-  const [userInfo, setUserInfo] = useState({ name: "", phone: "", departmentId: ""});
+  const [userInfo, setUserInfo] = useState({ name: "", phone: "", departmentId: 0});
   const [btnState, setBtnState] = useState<StateType>("disable");
 
   const { data, loading, error } = useQuery<DepartmentData>(GET_DEPARTMENTS);
@@ -27,7 +27,7 @@ const OnboardingPage = () => {
   }
 
   const onChangeDepartmentId = (e: SelectItemType) => {
-    setUserInfo({...userInfo, departmentId: e.id});
+    setUserInfo({...userInfo, departmentId: parseInt(e.id)});
   }
 
   const onClickAdd = () => {
@@ -61,7 +61,7 @@ const OnboardingPage = () => {
             <div className={classes["card-textFields-wrapper"]}>
               <TextField name="name" status="default">
                 <TextField.Label>이름</TextField.Label>
-                <TextField.Input type="text" value={userInfo.name} placeholder="이름" onChange={onChangeTextField}/>
+                <TextField.Input type="text" value={userInfo.name} placeholder="이름" onChange={onChangeTextField} autoFocus/>
               </TextField>
 
               <TextField name="phone" status="default">

@@ -10,8 +10,6 @@ export const api = axios.create({
   withCredentials: true,
 }); 
 
-api.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 api.interceptors.request.use((config: any) => {
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
   config.headers!.common["Authorization"] = accessToken ? `Bearer ${accessToken}` : null;
