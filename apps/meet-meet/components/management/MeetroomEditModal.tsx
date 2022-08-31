@@ -9,7 +9,8 @@ import { Modal, TextField, Checkbox, Button } from "ui/src/pages"
 
 export const MeetroomEditModal = ({setIsEditModal, meetroom}: Props) => {
   const { id, name, location, seat, canMerge, hasMonitor } = meetroom;
-  console.log(meetroom)
+
+  // const { data } = useQuery<MeetRoom>(GET_MEETROOM_BY_ID, { variables: { id } })
 
   const onChangeCheckbox = () => {}
   const onChangeTextField = () => {
@@ -62,7 +63,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom}: Props) => {
             onClick={() => setIsEditModal(false)}
           />
           <Button
-            label="회의실 생성"
+            label="회의실 수정"
             size="medium"
             configuration="filled"
           />

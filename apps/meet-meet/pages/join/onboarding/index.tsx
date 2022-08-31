@@ -1,9 +1,12 @@
 import React, { ChangeEvent, useState, useEffect } from "react"; 
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
+import { useSetRecoilState } from "recoil";
+import { usePostUserInfo } from "@hooks/queries/auth/useMutationQueries";
 import classes from "./onboardingPage.module.scss";
 
 import { GET_DEPARTMENTS } from "graphql/department/query";
-import { usePostUserInfo } from "@hooks/queries/auth/useMutationQueries";
+import userAtom from "recoil/user";
 
 import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
 import { DepartmentData, Department } from "graphql/department/types";
@@ -12,12 +15,14 @@ import { SelectItemType } from "ui/src/components/elements/Select/types/select.t
 import { CardDepth1, Text, TextField, Button, SVG, Select } from "ui/src/pages";
 
 const OnboardingPage = () => {
+  const router = useRouter();
+  const setUser = useSetRecoilState(userAtom);
 
   const [userInfo, setUserInfo] = useState({ name: "", phone: "", departmentId: 0});
   const [btnState, setBtnState] = useState<StateType>("disable");
 
   const { data, loading, error } = useQuery<DepartmentData>(GET_DEPARTMENTS);
-  const { mutateAsync, isError, error: userInfoError } = usePostUserInfo();
+  const { data: userData, mutateAsync, isError, error: userInfoError, isSuccess } = usePostUserInfo();
 
   const getPhoneFormat = (value: string) => {
     return value.replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
@@ -48,6 +53,13 @@ const OnboardingPage = () => {
     : setBtnState("disable");
 
   }, [userInfo])
+
+  useEffect(() => {
+    if (isSuccess && userData) {
+      setUser({...userData.data});
+      router.push("/")
+    }
+  }, [isSuccess, userData])
 
   return (
     <div className={classes["onboardingPage-container"]}>

@@ -13,7 +13,6 @@ const ManagementPage = () => {
   const [isAddModal, setIsAddModal] = useState(false);
 
   const { data } = useQuery<MeetRoomData>(GET_MEETROOMS)
-  console.log(data)
 
   return (
     <>
