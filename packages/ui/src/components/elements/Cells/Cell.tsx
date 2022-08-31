@@ -33,7 +33,7 @@ export const Cell = ({
       )}
       style={{ ...style }}
     >
-      <div className={classes.cellText}>{label}</div>
+      <div className={classes.cellText}><div>{label}</div></div>
       <div
         className={classes.stateLayer}
         onClick={onClick}

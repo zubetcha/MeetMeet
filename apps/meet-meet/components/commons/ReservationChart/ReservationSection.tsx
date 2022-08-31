@@ -4,10 +4,10 @@ import { Text } from "ui/src/pages";
 
 interface Props {
   date: string;
-  meetingRoom: string[];
+  meetingRoomList: string[];
 }
 
-export default function ReservationSection({ date, meetingRoom }: Props) {
+export default function ReservationSection({ date, meetingRoomList }: Props) {
   return (
     <div className={classes.roomList}>
       <div className={classes.infoContainer}>
@@ -17,7 +17,7 @@ export default function ReservationSection({ date, meetingRoom }: Props) {
           </Text>
         </div>
         <div className={classes.roomContainer}>
-          {meetingRoom.map((room: string, index) => (
+          {meetingRoomList.map((room: string, index) => (
             <div className={classes.slotRoom} key={`room-${index}`}>
               <Text type="body-small">{room}</Text>
             </div>

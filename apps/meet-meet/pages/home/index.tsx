@@ -1,108 +1,117 @@
-import { classExpression } from "@babel/types";
-import { Button, CellGroup, ScrollDrag } from "@components/ui";
-import { useEffect, useState } from "react";
-import { CalendarLayout, Cell } from "@components/ui";
-import ScrollContainer from 'react-indiana-drag-scroll'
+import { useState, useMemo } from "react";
+import type { NextPage } from "next";
+import { ReservationChart } from "components";
+import { CalendarLayout, Button } from "@components/ui";
 import { formatDate } from "ui/src/utils";
-import { isCompositeType } from "graphql";
+import { Text } from "ui/src/pages";
 
-const Home = () => {
+const Home: NextPage = () => {
+  const [btnState, setBtnState] = useState<boolean>(false);
+  const [date, setDate] = useState<Date>(
+    new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate() - 1
+    )
+  );
 
-  const [btnState, setBtnState] = useState<boolean>(true);
-  const [date, setDate] = useState<Date>(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate() - 1));
-  const [defaultIndex, setDefaultIndex] = useState({start:null, end:null})
+  const meetingRoomList = useMemo(()=> ["백범", "마당", "백범2", "청파2"], []);
+  
+  const dummyList = useMemo(() => {
+    return {
+      "2022-08-30": {
+        백범: [
+          {
+            department: "ICT팀",
+            startTime: "13:30",
+            endTime: "14:30",
+            meetingRoom: "백범",
+            host: "김서연",
+          },
+        ],
+        청파2: [
+          {
+            department: "ICT팀",
+            startTime: "09:30",
+            endTime: "10:30",
+            meetingRoom: "청파2",
+            host: "김서연",
+          },
+        ],
+      },
+      "2022-08-31": {
+        백범: [
+          {
+            department: "ICT팀",
+            startTime: "13:30",
+            endTime: "14:30",
+            meetingRoom: "백범",
+            host: "김서연",
+          },
+        ],
+        청파2: [
+          {
+            department: "ICT팀",
+            startTime: "09:30",
+            endTime: "10:30",
+            meetingRoom: "청파2",
+            host: "김서연",
+          },
+        ],
+      },
+    };
+  }, []);
 
-
-  useEffect(() => {
-    console.log(defaultIndex)
-  }, [defaultIndex])
 
   return (
-    <div>
-      <Button
-        configuration="outlined"
-        size="large"
-        label={formatDate(date)}
-        onClick={() => setBtnState(true)}
-      />
-      {
-        btnState 
-        && <CalendarLayout 
-            setCalendar={setBtnState} 
-            onClickSubmitBtn={(startDate) => {
+    <div
+      style={{
+        position: "absolute",
+        top: "50px",
+        right: "40px",
+        bottom: "24px",
+        left: "24px",
+        display: "grid",
+      }}
+    >
+      <div>
+        <Text
+          type="headline-large"
+          color="primary"
+          style={{ fontWeight: "bold" }}
+        >
+          젠틀에너지 회의실 예약 현황
+        </Text>
+        <div>
+          <Button
+            configuration="outlined"
+            size="large"
+            label={formatDate(date)}
+            onClick={() => setBtnState(true)}
+          />
+        </div>
+        {btnState && (
+          <CalendarLayout
+            setCalendar={setBtnState}
+            onClickSubmitBtn={(startDate: any) => {
+              console.log(startDate);
               setDate(startDate);
               setBtnState(false);
-
-            }} 
-            date={date} 
-            start={date} 
+            }}
+            date={date}
+            start={date}
             end={date}
             type="single"
-            timeType="futureCurrent"          
           />
-      }
-
-      <div
-        style={{width:'500px'}}
-      >
-
-            <CellGroup
-              disableIndex={[3]}
-              defaultIndex={defaultIndex}
-            >
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-                style={{
-                  width:'300px',
-                  backgroundColor:'var(--color-primary)',
-                  color: 'var(--color-onSurface)'
-                }}
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-              <Cell
-                label="18:00"
-              />
-
-            </CellGroup>
-        </div>
-        <Button
-          label='버튼'
-          onClick={() => {setDefaultIndex({start:null, end:null})}}
-        />
+        )}
       </div>
-  )
-}
+      <ReservationChart 
+        startDate={date} 
+        meetingRoomList={meetingRoomList} 
+        unavailableList={dummyList}
+      />
+    </div>
+  );
+};
 
 export default Home;

@@ -1,7 +1,13 @@
+<<<<<<< HEAD
+import { useRef } from "react";
+import { useEffect, useState } from "react";
+import { selectedIndex } from "..";
+=======
 import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { start } from 'repl';
 import { selectedIndex } from '..';
+>>>>>>> origin/feature/v1
 
 interface Props {
   defaultIndex: selectedIndex;
@@ -25,16 +31,29 @@ export const useCellGroup = ({
   );
 
   useEffect(() => {
+    setBtnState(Array.from({ length: childrenLength }, () => "default"));
+    setBtnHoverState(Array.from({ length: childrenLength }, () => false));
+  }, [childrenLength]);
+
+  useEffect(() => {
     handleButtonState(selectedIndex);
+<<<<<<< HEAD
+    onChange(selectedIndex);
+=======
+>>>>>>> origin/feature/v1
   }, [selectedIndex]);
 
   useEffect(() => {
     handleButtonHoverState(hoverIndex);
+<<<<<<< HEAD
+  }, [hoverIndex, selectedIndex]);
+=======
   }, [hoverIndex, selectedIndex])
+>>>>>>> origin/feature/v1
 
   useEffect(() => {
     setSelectedIndex(defaultIndex);
-  }, [defaultIndex])
+  }, [defaultIndex]);
 
   const handleButtonState = (selectedIndex: selectedIndex) => {
     let newArray = [...btnState];
@@ -66,7 +85,6 @@ export const useCellGroup = ({
 
   const handleButtonHoverState = (hoverIndex: number) => {
     let newArray = [...btnHoverState];
-
     if (hoverIndex === -1) {
       newArray.map((_, idx: number) => {
         newArray[idx] = false;

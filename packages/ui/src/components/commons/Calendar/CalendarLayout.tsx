@@ -1,5 +1,46 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 
+<<<<<<< HEAD
+import classes from "./calendar.module.scss";
+import { Button } from "../../elements";
+import { Calendar } from "../Calendar/Calendar";
+import { formatDate } from "../../../utils";
+
+interface Props {
+  date: Date;
+  start: Date;
+  end: Date;
+  setCalendar: Dispatch<SetStateAction<boolean>>;
+  onClickSubmitBtn: (startDate: Date, endDate: Date) => void;
+  startTime?: number;
+  type?: "multiple" | "single";
+  timeType?: "pastCurrent" | "futureCurrent";
+}
+
+export const CalendarLayout = ({
+  date,
+  start,
+  end,
+  onClickSubmitBtn,
+  setCalendar,
+  startTime,
+  type = "single",
+  timeType = "pastCurrent",
+}: Props) => {
+  useEffect(() => {
+    return () => {
+      setStartDate(start);
+      setEndDate(end);
+    };
+  }, []);
+
+  const [startDate, setStartDate] = useState<Date>(start);
+  const [endDate, setEndDate] = useState<Date>(end);
+  const [currentDate, setCurrentDate] = useState<Date>(date);
+  const [selectedDateType, setSelectedDateType] = useState<string>("start");
+  const [hoverDates, setHoverDates] = useState<Date[] | any[]>([]);
+  const [weekendIncluded, setWeekendIncluded] = useState<boolean>(true);
+=======
 import classes from "./calendar.module.scss"
 import {Button} from "../../elements"; 
 import { Calendar } from "../Calendar/Calendar";
@@ -43,6 +84,7 @@ export const CalendarLayout = ({
     const [selectedDateType, setSelectedDateType] = useState<string>('start');
     const [hoverDates, setHoverDates] = useState<Date[]|any[]>([]);
     const [weekendIncluded, setWeekendIncluded] = useState<boolean>(true);
+>>>>>>> origin/feature/v1
 
 
 
@@ -192,6 +234,65 @@ export const CalendarLayout = ({
                         </div>
                 }
 
+<<<<<<< HEAD
+        <div className={classes.calendar_header}>
+          <div className={classes.prevBtn} onClick={prevMonth}>
+            {" "}
+            {"<"}{" "}
+          </div>
+          <div className={classes.nextBtn} onClick={nextMonth}>
+            {" "}
+            {">"}{" "}
+          </div>
+        </div>
+        <div className={classes.calendar_body}>
+          {type === "multiple" && (
+            <Calendar
+              startTime={startTime}
+              hoverDates={hoverDates}
+              onMouseLeaveDate={onMouseLeaveDate}
+              onMouseOverDate={onMouseOverDate}
+              date={
+                new Date(
+                  currentDate.getFullYear(),
+                  currentDate.getMonth() - 1,
+                  1
+                )
+              }
+              start={startDate}
+              end={endDate}
+              onClickDate={onClickDate}
+              timeType={timeType}
+              weekendIncluded={weekendIncluded}
+            />
+          )}
+          <Calendar
+            startTime={startTime}
+            hoverDates={hoverDates}
+            onMouseLeaveDate={onMouseLeaveDate}
+            onMouseOverDate={onMouseOverDate}
+            date={currentDate}
+            start={startDate}
+            end={endDate}
+            onClickDate={onClickDate}
+            timeType={timeType}
+            weekendIncluded={weekendIncluded}
+          />
+        </div>
+        <div className={classes.calendar_footer}>
+          <Button
+            onClick={onClickSubmitDate}
+            label="조회일 적용하기"
+            size="large"
+            configuration="filled"
+            style={{ width: "100%", justifyContent: "center" }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+=======
                 <div className={classes.calendar_header} >
                     <div className={classes.prevBtn} onClick={prevMonth} > {'<'} </div>
                     <div className={classes.nextBtn} onClick={nextMonth} > {'>'} </div>
@@ -238,3 +339,4 @@ export const CalendarLayout = ({
         </div>
     )
 }
+>>>>>>> origin/feature/v1

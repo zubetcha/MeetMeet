@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useMemo } from "react";
 import classes from "./reservation.module.scss";
-import useReservation from "./hooks/useReservation";
+import { timeList } from "ui/src/utils";
+
 import { Text } from "ui/src/pages";
 
 export default function ReservationHeader() {
-  const { timeList } = useReservation();
+  const dateList = useMemo(timeList, []);
 
   return (
     <div className={classes.reservationHeader}>
-      {timeList.map((date: string) => (
+      {dateList.map((date: string) => (
         <div key={`reservation-date-${date}`} className={classes.time}>
           <Text type="body-small">{date}</Text>
         </div>
