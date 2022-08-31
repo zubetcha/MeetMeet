@@ -32,7 +32,7 @@ export const Reservation = ({
 
   const dummyList = useMemo(() => {
     return {
-      "2022-08-29": {
+      "2022-08-30": {
         백범: [
           {
             department: "ICT팀",

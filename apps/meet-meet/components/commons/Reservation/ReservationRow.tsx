@@ -37,15 +37,16 @@ export default function ReservationRow({
             {newTimeList.map((item, idx) => {
               if (item.includes("start")) {
                 const widthIndex = parseInt(item.split(":")[1]);
+                const {department, host}=unavailableRoomList[widthIndex];
                 return (
                   <Cell
-                    label="18:00"
+                    label={`${department} (${host})`}
                     key={`reservation-item-${idx}`}
                     style={{
                       height: "40px",
                       width: `${unavailableSlotWidthList[widthIndex]}px`,
                       backgroundColor: "var(--color-primary)",
-                      color: "var(--color-onSurface)",
+                      color: "var(--color-onPrimary)",
                     }}
                   />
                 );
