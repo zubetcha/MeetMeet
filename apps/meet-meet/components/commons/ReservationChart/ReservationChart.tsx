@@ -6,14 +6,30 @@ import ReservationModal from "./ReservationModal";
 import ReservationBody from "./ReservationBody";
 import { getThreeDateFromNow } from "ui/src/utils";
 
+interface reservationInfo {
+  department: string;
+  startTime: string;
+  endTime: string;
+  meetingRoom: string;
+  host:string;
+}
+
 interface ReservationProps {
   width?: string;
   startDate?: Date;
+  meetingRoomList: string[];
+  unavailableList : {
+    [date:string]:{
+      [meetingRoom:string]:reservationInfo[]
+    }
+  }
 }
 
-export const Reservation = ({
+export const ReservationChart = ({
   width = "100%",
   startDate,
+  meetingRoomList,
+  unavailableList
 }: ReservationProps) => {
   const [selectedData, setSelectedData] = useState({
     meetingRoom: "",
@@ -28,52 +44,6 @@ export const Reservation = ({
   );
 
   const [isOpen, setIsOpen] = useState(false);
-  const meetingRoom = ["백범", "마당", "백범2", "청파2"];
-
-  const dummyList = useMemo(() => {
-    return {
-      "2022-08-30": {
-        백범: [
-          {
-            department: "ICT팀",
-            startTime: "13:30",
-            endTime: "14:30",
-            meetingRoom: "백범",
-            host: "김서연",
-          },
-        ],
-        청파2: [
-          {
-            department: "ICT팀",
-            startTime: "09:30",
-            endTime: "10:30",
-            meetingRoom: "청파2",
-            host: "김서연",
-          },
-        ],
-      },
-      "2022-08-31": {
-        백범: [
-          {
-            department: "ICT팀",
-            startTime: "13:30",
-            endTime: "14:30",
-            meetingRoom: "백범",
-            host: "김서연",
-          },
-        ],
-        청파2: [
-          {
-            department: "ICT팀",
-            startTime: "09:30",
-            endTime: "10:30",
-            meetingRoom: "청파2",
-            host: "김서연",
-          },
-        ],
-      },
-    };
-  }, []);
 
   const onChange = (e: any, date: string) => {
     setTimeout(() => {
@@ -98,7 +68,7 @@ export const Reservation = ({
             <ReservationSection
               key={`reservation-section-${date}`}
               date={date[0]}
-              meetingRoom={meetingRoom}
+              meetingRoomList={meetingRoomList}
             />
           ))}
         </div>
@@ -110,8 +80,8 @@ export const Reservation = ({
           <ReservationHeader />
           <ReservationBody
             dates={dateList as string[][]}
-            meetingRoom={meetingRoom}
-            unavailableRoomList={dummyList}
+            meetingRoomList={meetingRoomList}
+            unavailableRoomList={unavailableList}
             onChange={onChange}
           />
         </div>

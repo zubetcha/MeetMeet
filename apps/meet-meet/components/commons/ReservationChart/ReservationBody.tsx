@@ -4,14 +4,14 @@ import classes from "./reservation.module.scss";
 
 interface Props {
   dates: string[][];
-  meetingRoom: string[];
+  meetingRoomList: string[];
   unavailableRoomList: any;
   onChange: (selectedData: any, date: string) => void;
 }
 
 export default function ReservationBody({
   dates,
-  meetingRoom,
+  meetingRoomList,
   unavailableRoomList,
   onChange,
 }: Props) {
@@ -29,7 +29,7 @@ export default function ReservationBody({
         dates?.map((date: string[], index: number) => (
           <>
             <div key={`reservation-row-group-${index}`}>
-              {meetingRoom.map((room, index) => (
+              {meetingRoomList.map((room, index) => (
                 <ReservationRow
                   key={`reservation-row-${index}`}
                   meetingRoom={room}
