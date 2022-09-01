@@ -1,10 +1,10 @@
-import React, { Children, useState } from 'react';
-import classes from './Cell.module.scss';
-import { ScrollDrag } from '../ScrollDrag/ScrollDrag';
-import ScrollContainer from 'react-indiana-drag-scroll';
-import classNames from 'classnames';
-import { useCellGroup } from './hooks';
-import { useEffect } from 'react';
+import React, { Children, useState } from "react";
+import classes from "./Cell.module.scss";
+import { ScrollDrag } from "../ScrollDrag/ScrollDrag";
+import ScrollContainer from "react-indiana-drag-scroll";
+import classNames from "classnames";
+import { useCellGroup } from "./hooks";
+import { useEffect } from "react";
 
 export type selectedIndex = {
   start: number | null;
@@ -20,19 +20,16 @@ interface Props {
 
 export const CellGroup = ({
   children,
-  defaultIndex = {
-    start: null,
-    end: null,
-  },
-  onChange = ()=>{},
+  defaultIndex,
+  onChange = () => {},
   disableIndex = [],
-}:Props) => {
-
-  const { btnState, onClick, onMouseLeave, onMouseOver, btnHoverState } = useCellGroup({
-    defaultIndex: defaultIndex,
-    childrenLength: Children.toArray(children).length,
-    onChange: onChange,
-  });
+}: Props) => {
+  const { btnState, onClick, onMouseLeave, onMouseOver, btnHoverState } =
+    useCellGroup({
+      defaultIndex: defaultIndex,
+      childrenLength: Children.toArray(children).length,
+      onChange: onChange,
+    });
 
   return (
     <ScrollContainer>

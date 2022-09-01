@@ -1,0 +1,18 @@
+.checkbox_hover {
+    display: flex;
+    align-items: center;
+    * {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .checkbox_label{
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
