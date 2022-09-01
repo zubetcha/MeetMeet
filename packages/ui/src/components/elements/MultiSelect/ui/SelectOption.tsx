@@ -33,7 +33,6 @@ export function SelectOption({ id, name }: OptionProps) {
         name={name}
         checked={isChecked}
         onChange={(checked: boolean) => setIsChecked(checked)}
-        label={name}
       >
         <Checkbox.Label style={{ marginLeft: "11px" }}>{name}</Checkbox.Label>
       </Checkbox>
