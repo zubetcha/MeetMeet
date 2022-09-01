@@ -1,5 +1,10 @@
 import React from "react";
-import { Button, ButtonGroup, IconButton } from "ui/src/components/elements";
+import {
+  Button,
+  ButtonGroup,
+  IconButton,
+  MultiSelect,
+} from "ui/src/components/elements";
 
 export default function TestPage() {
   return (
@@ -200,6 +205,16 @@ export default function TestPage() {
           <Button label="테스트"></Button>
         </ButtonGroup>
       </div>
+      <MultiSelect
+        isSearch={true}
+        defaultValue="5분"
+        onChange={(e: any) => console.log(e)}
+        style={{ width: "500px" }}
+      >
+        <MultiSelect.Option id="1" name="5분" />
+        <MultiSelect.Option id="2" name="10분" />
+        <MultiSelect.Option id="3" name="15분" />
+      </MultiSelect>
     </>
   );
 }
