@@ -5,6 +5,7 @@ import { Meetroom } from "@hooks/meetroom";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
+import { SelectItemType } from "ui/src/components/elements/Select/types/select.types";
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
@@ -13,18 +14,15 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
   const meetroom = new Meetroom();
   const meetroomList = useRecoilValue(meetroomState);
 
-  const [values, setValues] = useState({ name: "", seat: "", location: "" })
-  console.log(meetroomList)
+  const [values, setValues] = useState({ name: "", seat: "", location: "", mergeRoomId: -1, images: [] })
+  const [hasMonitor, setHasMonitor] = useState(false);
 
-
-  const onChangeMerge = () => {
-
+  const onChangeMerge = (e: SelectItemType) => {
+    setValues({ ...values, mergeRoomId: parseInt(e.id) });
   }
-  const onChangeEquipment = () => {
 
-  }
   const onChangeTextField = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, id } = e.target;
     const _value = name === "seat" ? value.replace(/[^0-9]/g, "") : value;
   
     setValues({ ...values, [name]: _value });
@@ -50,14 +48,12 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
           </TextField>
           <TextField name="meetingroom-merge" status="default">
             <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
-                <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
-                  {meetroomList.map((meetroom: MeetRoom) => {
-                    const { id, name } = meetroom;
-                    return (
-                      <Select.Option key={id} id={String(id)} name={name} />
-                    )
-                  })}
-                </Select>
+            <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
+              {meetroomList.map((meetroom: MeetRoom) => {
+                const { id, name } = meetroom;
+                return <Select.Option key={id} id={String(id)} name={name} />;
+              })}
+            </Select>
           </TextField>
           <TextField name="seat" status="default">
             <TextField.Label>수용 인원</TextField.Label>
@@ -71,10 +67,13 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
             <Checkbox
               name="monitor"
               id="monitor"
-              checked={false}
-              label="모니터"
-              onChange={onChangeEquipment}
-            />
+              checked={hasMonitor}
+              onChange={(checked) => setHasMonitor(checked)}
+            >
+              <Checkbox.Label>
+                모니터
+              </Checkbox.Label>
+            </Checkbox>
           </TextField>
           <TextField name="location" status="default">
             <TextField.Label>위치</TextField.Label>

@@ -13,7 +13,6 @@ const Oauth2RedirectHandler = () => {
   // &is_first=false
 
   const router = useRouter();
-
   const accessToken = useUrlParameter("access_token");
   const refreshToken = useUrlParameter("refresh_token");
   const isFirst = useUrlParameter("is_first");

@@ -1,65 +1,57 @@
-import React, { ChangeEvent, useState, useEffect } from "react"; 
+import { useEffect } from "react"; 
 import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
 import { useSetRecoilState } from "recoil";
-import { usePostUserInfo } from "@hooks/queries/auth/useMutationQueries";
+import { useUserForm } from "@hooks/user/useUserForm";
 import classes from "./onboardingPage.module.scss";
 
-import { GET_DEPARTMENTS } from "graphql/department/query";
 import userState from "recoil/user";
 
-import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
-import { DepartmentData, Department } from "graphql/department/types";
-import { SelectItemType } from "ui/src/components/elements/Select/types/select.types";
-
-import { CardDepth1, Text, TextField, Button, SVG, Select } from "ui/src/pages";
+import { UserForm } from "@components/user/UserForm";
+import { CardDepth1, Text, Button, SVG } from "ui/src/pages";
 
 const OnboardingPage = () => {
   const router = useRouter();
   const setUser = useSetRecoilState(userState);
+  const { onChangeTextField, onChangeDepartmentId, onClickMutateButton, btnState, values, mutationResult } = useUserForm();
+  const { isSuccess, data } = mutationResult;
 
-  const [userInfo, setUserInfo] = useState({ name: "", phone: "", departmentId: 0});
-  const [btnState, setBtnState] = useState<StateType>("disable");
+  // const [values, setValues] = useState({ name: "", phone: "", departmentId: -1});
+  // const [btnState, setBtnState] = useState<StateType>("disable");
 
-  const { data, loading, error } = useQuery<DepartmentData>(GET_DEPARTMENTS);
-  const { data: userData, mutateAsync, isError, error: userInfoError, isSuccess } = usePostUserInfo();
+  // const { data: userData, mutateAsync, isError, error: valuesError, isSuccess } = usePostUserInfo();
 
-  const getPhoneFormat = (value: string) => {
-    return value.replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-  }
+  // const onChangeTextField = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   const _value = name === "phone" ? getPhoneFormat(value) : value;
 
-  const onChangeTextField = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const _value = name === "phone" ? getPhoneFormat(value) : value;
+  //   setValues({ ...values, [name]: _value });
+  // }
 
-    setUserInfo({ ...userInfo, [name]: _value });
-  }
+  // const onChangeDepartmentId = (e: SelectItemType) => {
+  //   setValues({...values, departmentId: parseInt(e.id)});
+  // }
 
-  const onChangeDepartmentId = (e: SelectItemType) => {
-    setUserInfo({...userInfo, departmentId: parseInt(e.id)});
-  }
-
-  const onClickAdd = () => {
-    if (btnState === "disable") return;
+  // const onClickAdd = () => {
+  //   if (btnState === "disable") return;
     
-    mutateAsync(userInfo);
-  }
+  //   mutateAsync(values);
+  // }
+
+  // useEffect(() => {
+  //   const { name, phone, departmentId } = values;
+
+  //   name && phone.length === 13 && departmentId
+  //   ? setBtnState("default")
+  //   : setBtnState("disable");
+
+  // }, [values])
 
   useEffect(() => {
-    const { name, phone, departmentId } = userInfo;
-
-    name && phone.length === 13 && departmentId
-    ? setBtnState("default")
-    : setBtnState("disable");
-
-  }, [userInfo])
-
-  useEffect(() => {
-    if (isSuccess && userData) {
-      setUser({...userData.data});
+    if (isSuccess && data) {
+      setUser({...data});
       router.push("/")
     }
-  }, [isSuccess, userData])
+  }, [isSuccess, data])
 
   return (
     <div className={classes["onboardingPage-container"]}>
@@ -74,36 +66,14 @@ const OnboardingPage = () => {
                 회원 정보를 입력해주세요.
               </Text>
             </div>
-            <div className={classes["card-textFields-wrapper"]}>
-              <TextField name="name" status="default">
-                <TextField.Label>이름</TextField.Label>
-                <TextField.Input type="text" value={userInfo.name} placeholder="이름" onChange={onChangeTextField} autoFocus/>
-              </TextField>
-
-              <TextField name="phone" status="default">
-                <TextField.Label>전화번호</TextField.Label>
-                <TextField.Input type="text" value={userInfo.phone} placeholder="전화번호" onChange={onChangeTextField} maxLength={13}/>
-              </TextField>
-
-              <TextField name="department" status="default">
-                <TextField.Label>소속 부서</TextField.Label>
-                <Select isSearch defaultValue="" onChange={onChangeDepartmentId} style={{ width: "100%" }}>
-                  {data && data.departments.map((department: Department) => {
-                    const { id, name } = department;
-                    return (
-                      <Select.Option key={id} id={String(id)} name={name} />
-                    )
-                  })}
-                </Select>
-              </TextField>
-            </div>
+            <UserForm values={values} onChangeTextField={onChangeTextField} onChangeDepartmentId={onChangeDepartmentId} />
             <Button
               label="입력 완료"
               size="large"
               configuration="filled"
               style={{ width: "360px", justifyContent: "center" }}
               state={btnState}
-              onClick={onClickAdd}
+              onClick={onClickMutateButton}
             />
           </div>
         </CardDepth1.Contents>
