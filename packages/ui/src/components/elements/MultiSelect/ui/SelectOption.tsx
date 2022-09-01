@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useOption } from "../hooks";
 import classes from "../style/select.module.scss";
 import classNames from "classnames";
+import { Checkbox } from "../../Checkbox";
 
 interface OptionProps {
   id: string;
@@ -14,6 +15,7 @@ interface OptionProps {
  * @param name (string) 표시 데이터
  */
 export function SelectOption({ id, name }: OptionProps) {
+  const [isChecked, setIsChecked] = useState(false);
   const { isSelected, onClick, isShowOption } = useOption({
     id: id,
     name: name,
@@ -22,11 +24,21 @@ export function SelectOption({ id, name }: OptionProps) {
   return (
     <li
       id={id}
-      onClick={onClick}
+      // onClick={onClick}
       style={{ display: isShowOption }}
       className={classNames(classes.option, isSelected ? classes.selected : "")}
     >
-      {name}
+      <Checkbox
+        id={id}
+        name={name}
+        checked={isChecked}
+        onChange={(checked: boolean) => setIsChecked(checked)}
+        label={name}
+      >
+        <Checkbox.Label style={{ marginLeft: "11px" }}>
+          <span>{name}</span>
+        </Checkbox.Label>
+      </Checkbox>
     </li>
   );
 }
