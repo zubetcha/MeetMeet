@@ -8,9 +8,6 @@ interface CheckboxProps {
   id: string;
   onChange: (e: boolean) => void;
   checked?: boolean;
-  label?: string;
-  labelWidth?: string;
-  width?: number;
   isHalf?: boolean;
   status?: string;
   children?: JSX.Element | undefined;
@@ -18,12 +15,12 @@ interface CheckboxProps {
 
 /**
  *
- * @param name  checkbox name
- * @param id checkbox id
- * @param onChange input[type="checkbox"] onChange 이벤트 핸들러
- * @param checked boolean
- * @param label string
- * @param status string "disable" || "default"
+ * @param name  (string) checkbox name
+ * @param id (string) checkbox id
+ * @param onChange (function) input[type="checkbox"] onChange 이벤트 핸들러
+ * @param isHalf (boolean) 반쪽자리 checkbox 여부
+ * @param checked (boolean) 체크여부
+ * @param status (string) "disable" || "default"
  * @returns
  */
 export const CheckboxMain = ({
