@@ -1,32 +1,67 @@
+import React, { useState } from "react";
+import { useRecoilValue } from "recoil";
+import meetroomState from "recoil/meetroom";
+import { Meetroom } from "@hooks/meetroom";
 import classes from "./management.module.scss";
+
+import { MeetRoom } from "graphql/meetroom/types";
+
 import { ImagePlaceholder } from "./ImagePlaceholder";
-import { Modal, TextField, Checkbox, Button, TextArea } from "ui/src/pages"
+import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
 
 export const MeetroomAddModal = ({setIsAddModal}: Props) => {
-  const onChangeCheckbox = () => {
+  const meetroom = new Meetroom();
+  const meetroomList = useRecoilValue(meetroomState);
+
+  const [values, setValues] = useState({ name: "", seat: "", location: "" })
+  console.log(meetroomList)
+
+
+  const onChangeMerge = () => {
 
   }
-  const onChangeInput = () => {
+  const onChangeEquipment = () => {
 
+  }
+  const onChangeTextField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const _value = name === "seat" ? value.replace(/[^0-9]/g, "") : value;
+  
+    setValues({ ...values, [name]: _value });
+  }
+
+  const selectImages = () => {
+    // TODO: HEIC 포맷인 경우 jpeg로 변환 
+    // TODO: 이미지 사이즈 크기 확인 
+    // TODO: 파일 리스트 길이 확인 (3까지) 
+  }
+
+  const onClickCreate = () => {
+    // meetroom.createMeetroom()
   }
   return (
     <>
       <Modal>
         <Modal.Title type="title-large" weight="700">회의실 생성</Modal.Title>
         <Modal.Contents>
-          <TextField name="meetingroom-name" status="default">
+          <TextField name="name" status="default">
             <TextField.Label>이름</TextField.Label>
-            <TextField.Input type="text" value="" placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeInput}/>
+            <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
           </TextField>
           <TextField name="meetingroom-merge" status="default">
             <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
-            <TextField.Input type="text" value="" placeholder="선택해주세요." onChange={onChangeInput}>
-              <TextField.Icon name="dropdown" />
-            </TextField.Input>
+                <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
+                  {meetroomList.map((meetroom: MeetRoom) => {
+                    const { id, name } = meetroom;
+                    return (
+                      <Select.Option key={id} id={String(id)} name={name} />
+                    )
+                  })}
+                </Select>
           </TextField>
-          <TextField name="meetingroom-accommodate" status="default">
+          <TextField name="seat" status="default">
             <TextField.Label>수용 인원</TextField.Label>
-            <TextField.Input type="text" value="" placeholder="수용 인원을 선택해주세요." onChange={onChangeInput}>
+            <TextField.Input type="text" value={values.seat} placeholder="수용 인원을 입력해주세요." onChange={onChangeTextField}>
               <TextField.Unit>명</TextField.Unit>
               <TextField.Icon name="dropdown" />
             </TextField.Input>
@@ -38,12 +73,12 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
               id="monitor"
               checked={false}
               label="모니터"
-              onChange={onChangeCheckbox}
+              onChange={onChangeEquipment}
             />
           </TextField>
-          <TextField name="meetingroom-location" status="default">
+          <TextField name="location" status="default">
             <TextField.Label>위치</TextField.Label>
-            <TextField.Textarea value="" placeholder="회의실 위치 정보를 입력해주세요." onChange={onChangeInput}/>
+            <TextField.Textarea value={values.location} placeholder="회의실 위치 정보를 입력해주세요." onChange={onChangeTextField}/>
           </TextField>
           <div className={classes["images-container"]}>
             <TextField.Label>회의실 사진</TextField.Label>
@@ -65,6 +100,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
             label="회의실 생성"
             size="medium"
             configuration="filled"
+            onClick={onClickCreate}
           />
         </div>
       </Modal>

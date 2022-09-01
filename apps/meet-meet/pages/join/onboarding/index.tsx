@@ -6,7 +6,7 @@ import { usePostUserInfo } from "@hooks/queries/auth/useMutationQueries";
 import classes from "./onboardingPage.module.scss";
 
 import { GET_DEPARTMENTS } from "graphql/department/query";
-import userAtom from "recoil/user";
+import userState from "recoil/user";
 
 import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
 import { DepartmentData, Department } from "graphql/department/types";
@@ -16,7 +16,7 @@ import { CardDepth1, Text, TextField, Button, SVG, Select } from "ui/src/pages";
 
 const OnboardingPage = () => {
   const router = useRouter();
-  const setUser = useSetRecoilState(userAtom);
+  const setUser = useSetRecoilState(userState);
 
   const [userInfo, setUserInfo] = useState({ name: "", phone: "", departmentId: 0});
   const [btnState, setBtnState] = useState<StateType>("disable");

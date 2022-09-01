@@ -1,18 +1,26 @@
-import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useState, useEffect } from "react";
+import { useSetRecoilState } from "recoil";
 import classes from "./managementPage.module.scss";
-
-import { GET_MEETROOMS } from "graphql/meetroom/query";
-import { MeetRoomData } from "graphql/meetroom/types";
+import { Meetroom } from "@hooks/meetroom";
+import meetroomState from "recoil/meetroom";
 
 import { MeetroomCard } from "@components/management/MeeroomCard";
 import { MeetroomAddModal } from "@components/management/MeetroomAddModal";
 import { CardDepth1, Button, IconButton } from "ui/src/pages"
 
 const ManagementPage = () => {
+  const meetroom = new Meetroom();
+  
+  const setMeetrooms = useSetRecoilState(meetroomState);
   const [isAddModal, setIsAddModal] = useState(false);
 
-  const { data } = useQuery<MeetRoomData>(GET_MEETROOMS)
+  const { data } = meetroom.getAll();
+
+  useEffect(() => {
+    if (data) {
+      setMeetrooms(data.meetrooms);
+    }
+  }, [data])
 
   return (
     <>

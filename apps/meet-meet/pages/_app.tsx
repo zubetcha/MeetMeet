@@ -12,9 +12,9 @@ import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserve
 
 import "../styles/globals.scss";
 import { Layout } from "@components/commons/Layout/Layout";
+import { RouterGuard } from "@components/commons/RouterGuard/RouterGuard";
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   const router = useRouter();
   const exceptionList = ["/", "/login", "/join", "/join/onboarding"]
   const queryClient = new QueryClient();
@@ -39,13 +39,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ApolloProvider client={client}>
           <RecoilRoot>
             <RecoilObserver />
+            <RouterGuard>
             {
-            exceptionList.includes(router.pathname)
-            ? <Component {...pageProps} />
-            : <Layout>
-                <Component {...pageProps} />
-              </Layout>
-          }
+              exceptionList.includes(router.pathname)
+              ? <Component {...pageProps} />
+              : <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+            }
+            </RouterGuard>
           </RecoilRoot>
         </ApolloProvider>
       </QueryClientProvider>

@@ -3,8 +3,8 @@ import { MeetRoom } from "graphql/meetroom/types";
 
 export const AuthAPI = {
   addUserInfo: (userInfo: {[key: string]: string | number}) => api.post("/account/info", userInfo),
-  getUserInfo: () => api.get(""),
-  updateUserInfo: () => api.put("")
+  getUserInfo: () => api.get("/account/info"),
+  updateUserInfo: (userInfo: {[key: string]: string | number}) => api.post("/account/info", userInfo),
 }
 
 export const MeetroomAPI = {

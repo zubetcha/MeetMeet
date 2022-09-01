@@ -1,7 +1,5 @@
-import { useQuery } from "@apollo/client";
 import classes from "./management.module.scss";
 
-import { GET_MEETROOM_BY_ID } from "graphql/meetroom/query";
 import { MeetRoom } from "graphql/meetroom/types";
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
@@ -9,8 +7,6 @@ import { Modal, TextField, Checkbox, Button } from "ui/src/pages"
 
 export const MeetroomEditModal = ({setIsEditModal, meetroom}: Props) => {
   const { id, name, location, seat, canMerge, hasMonitor } = meetroom;
-
-  // const { data } = useQuery<MeetRoom>(GET_MEETROOM_BY_ID, { variables: { id } })
 
   const onChangeCheckbox = () => {}
   const onChangeTextField = () => {
