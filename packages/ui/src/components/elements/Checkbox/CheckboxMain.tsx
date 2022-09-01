@@ -51,7 +51,7 @@ export const CheckboxMain = ({
               {isHalf ? (
                 <SVG name="checkIndeterminated" />
               ) : (
-                <SVG name="checked" color={colors.primary500} />
+                <SVG name="checked" color={"primary"} />
               )}
             </>
           ) : (
