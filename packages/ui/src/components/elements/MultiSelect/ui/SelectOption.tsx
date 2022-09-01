@@ -15,13 +15,13 @@ interface OptionProps {
  * @param name (string) 표시 데이터
  */
 export function SelectOption({ id, name }: OptionProps) {
-  const { isChecked, isShowOption, setIsChecked } = useOption({
+  const { isChecked, isShowOption, setCheckedItem } = useOption({
     id: id,
     name: name,
   });
 
   return (
-    <li
+    <div
       id={id}
       style={{ display: isShowOption }}
       className={classNames(classes.option, isChecked ? classes.selected : "")}
@@ -30,10 +30,10 @@ export function SelectOption({ id, name }: OptionProps) {
         id={id}
         name={name}
         checked={isChecked}
-        onChange={(checked: boolean) => setIsChecked(checked)}
+        onChange={(checked: boolean) => setCheckedItem(id, checked)}
       >
         <Checkbox.Label style={{ marginLeft: "11px" }}>{name}</Checkbox.Label>
       </Checkbox>
-    </li>
+    </div>
   );
 }

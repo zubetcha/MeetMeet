@@ -208,13 +208,17 @@ export default function TestPage() {
       </div>
       <MultiSelect
         isSearch={true}
-        defaultValue="5분"
+        defaultValues={["5분"]}
         onChange={(e: any) => console.log(e)}
         style={{ width: "500px" }}
       >
         <MultiSelect.Option id="1" name="5분" />
         <MultiSelect.Option id="2" name="10분" />
         <MultiSelect.Option id="3" name="15분" />
+        <MultiSelect.Option id="4" name="20분" />
+        <MultiSelect.Option id="5" name="30분" />
+        <MultiSelect.Option id="6" name="40분" />
+        <MultiSelect.Option id="7" name="50분" />
       </MultiSelect>
       {/* <Select
         isSearch={true}

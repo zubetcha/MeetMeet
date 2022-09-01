@@ -2,6 +2,7 @@ import React from "react";
 import classes from "../style/select.module.scss";
 import classNames from "classnames";
 import { useOptionList } from "../hooks";
+import { IndeterminateCheckbox } from "./IndeterminateCheckbox";
 
 interface Props {
   children: any;
@@ -23,6 +24,7 @@ export function SelectOptionList({ children }: Props) {
           </div>
         ) : (
           <div style={{ display: display }} className={classes.optionList}>
+            <IndeterminateCheckbox />
             {children}
           </div>
         )}

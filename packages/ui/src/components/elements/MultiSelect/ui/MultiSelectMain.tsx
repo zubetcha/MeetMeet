@@ -6,7 +6,7 @@ import { SelectItemType } from "../types/select.types";
 
 interface SelectProps {
   isSearch?: boolean;
-  defaultValue?: string;
+  defaultValues?: string[];
   onChange: (e: SelectItemType) => void;
   style?: any;
   children: React.ReactElement[];
@@ -15,14 +15,14 @@ interface SelectProps {
 /**
  *
  * @param isSearch (boolean) 검색 기능이 있는지
- * @param defaultValue (string) 초기 디폴트 값
+ * @param defaultValues (string[]) 초기 디폴트 값 리스트 (name 기준)
  * @param onChange ((e:SelectItemType)=>void) 선택 변경 이벤트 콜백 함수
  * @param style style 객체
  * @returns
  */
 export function MultiSelectMain({
   isSearch = false,
-  defaultValue,
+  defaultValues,
   onChange,
   style = { width: "220px" },
   children,
@@ -44,7 +44,7 @@ export function MultiSelectMain({
     <>
       <SelectProvider
         setValue={setSelected}
-        defaultValue={defaultValue}
+        defaultValues={defaultValues}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
       >

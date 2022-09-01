@@ -9,8 +9,7 @@ interface Props {
 export function useOption({ id, name }: Props) {
   const [isShow, setIsShow] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
-  const [item, setItem] = useState({ id: id, name: name });
-  const { defaultValue, searchResult, setValues, setCheckedItem, setIsOpen } =
+  const { values, defaultValues, searchResult, setValues, setCheckedItem } =
     useSelect();
 
   useEffect(() => {
@@ -31,22 +30,24 @@ export function useOption({ id, name }: Props) {
     });
   }, []);
 
-  // DESCRIBE:
   useEffect(() => {
-    setCheckedItem(id, isChecked);
-  }, [id, isChecked]);
+    if (!values) return;
+    values?.filter((value: any) => value.id === id)[0]?.checked
+      ? setIsChecked(true)
+      : setIsChecked(false);
+  }, [values]);
 
-  // useEffect(() => {
-  //   if (defaultValue === name) {
-  //     setSelected(item);
-  //   }
-  // }, [defaultValue]);
+  useEffect(() => {
+    if (defaultValues && defaultValues.includes(name)) {
+      setCheckedItem(id, true);
+    }
+  }, [defaultValues]);
 
-  const isShowOption = isShow ? "block" : "none";
+  const isShowOption = isShow ? "blocks" : "none";
 
   return {
     isChecked,
     isShowOption,
-    setIsChecked,
+    setCheckedItem,
   };
 }
