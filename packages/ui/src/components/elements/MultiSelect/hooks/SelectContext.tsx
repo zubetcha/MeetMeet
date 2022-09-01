@@ -4,13 +4,12 @@ import { SelectItemType } from "../types/select.types";
 export const SelectContext = createContext({
   values: [] as SelectItemType[] | undefined,
   searchResult: [] as SelectItemType[] | undefined,
-  selected: undefined as SelectItemType | undefined,
   defaultValue: undefined as string | undefined,
   isOpen: false,
   setValues: (e: SelectItemType) => {},
-  setSelected: (e: SelectItemType) => {},
   setSearchResult: (e: SelectItemType[] | undefined) => {},
   setIsOpen: (e: boolean) => {},
+  setCheckedItem: (id: string, checked: boolean) => {},
 });
 
 export const useSelect = () => {
@@ -26,6 +25,18 @@ function reducer(state: any, action: any) {
   switch (action.type) {
     case "ADD":
       return [...state, action.value];
+    case "UPDATE":
+      const { id, checked } = action.value;
+      let newState: any[] = [];
+      state.map((item: any) => {
+        const newItem = {
+          id: item.id,
+          name: item.name,
+          checked: id === item.id ? checked : item.checked,
+        };
+        newState.push(newItem);
+      });
+      return [...newState];
     default:
       return state;
   }
@@ -47,14 +58,19 @@ export const SelectProvider = ({
   children,
 }: SelectProps) => {
   const [state, dispatch] = useReducer(reducer, []);
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState<any[]>([]);
   const [searchResult, setSearchResult] = useState<SelectItemType[]>();
 
   useEffect(() => {
     if (selected) {
+      console.log("selected", selected);
       setValue(selected);
     }
   }, [selected]);
+
+  useEffect(() => {
+    console.log("state", state);
+  }, [state]);
 
   return (
     <>
@@ -62,19 +78,23 @@ export const SelectProvider = ({
         value={{
           values: state,
           searchResult: searchResult,
-          selected: selected,
+          isOpen: isOpen,
+          defaultValue: defaultValue,
           setValues: (value: any) => {
             dispatch({
               type: "ADD",
               value: value,
             });
           },
-          defaultValue: defaultValue,
-          setSelected: (value: any) => setSelected(value),
           setSearchResult: (e: SelectItemType[] | undefined) =>
             setSearchResult(e),
           setIsOpen: setIsOpen,
-          isOpen: isOpen,
+          setCheckedItem: (id: string, checked: boolean) => {
+            dispatch({
+              type: "UPDATE",
+              value: { id: id, checked: checked },
+            });
+          },
         }}
       >
         {children}

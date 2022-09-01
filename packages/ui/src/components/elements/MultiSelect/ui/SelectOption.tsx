@@ -15,8 +15,7 @@ interface OptionProps {
  * @param name (string) 표시 데이터
  */
 export function SelectOption({ id, name }: OptionProps) {
-  const [isChecked, setIsChecked] = useState(false);
-  const { isSelected, onClick, isShowOption } = useOption({
+  const { isChecked, isShowOption, setIsChecked } = useOption({
     id: id,
     name: name,
   });
@@ -24,9 +23,8 @@ export function SelectOption({ id, name }: OptionProps) {
   return (
     <li
       id={id}
-      // onClick={onClick}
       style={{ display: isShowOption }}
-      className={classNames(classes.option, isSelected ? classes.selected : "")}
+      className={classNames(classes.option, isChecked ? classes.selected : "")}
     >
       <Checkbox
         id={id}

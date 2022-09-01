@@ -4,6 +4,7 @@ import {
   ButtonGroup,
   IconButton,
   MultiSelect,
+  Select,
 } from "ui/src/components/elements";
 
 export default function TestPage() {
@@ -215,6 +216,16 @@ export default function TestPage() {
         <MultiSelect.Option id="2" name="10분" />
         <MultiSelect.Option id="3" name="15분" />
       </MultiSelect>
+      {/* <Select
+        isSearch={true}
+        defaultValue="5분"
+        onChange={(e: any) => console.log(e)}
+        style={{ width: "500px" }}
+      >
+        <Select.Option id="1" name="5분" />
+        <Select.Option id="2" name="10분" />
+        <Select.Option id="3" name="15분" />
+      </Select> */}
     </>
   );
 }

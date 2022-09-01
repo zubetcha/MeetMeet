@@ -8,15 +8,10 @@ interface Props {
 
 export function useOption({ id, name }: Props) {
   const [isShow, setIsShow] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [item, setItem] = useState({ id: id, name: name });
-  const {
-    selected,
-    defaultValue,
-    searchResult,
-    setValues,
-    setSelected,
-    setIsOpen,
-  } = useSelect();
+  const { defaultValue, searchResult, setValues, setCheckedItem, setIsOpen } =
+    useSelect();
 
   useEffect(() => {
     if (searchResult) {
@@ -29,27 +24,29 @@ export function useOption({ id, name }: Props) {
   }, [searchResult]);
 
   useEffect(() => {
-    setValues(item);
+    setValues({
+      id: id,
+      name: name,
+      checked: isChecked,
+    });
   }, []);
 
+  // DESCRIBE:
   useEffect(() => {
-    if (defaultValue === name) {
-      setSelected(item);
-    }
-  }, [defaultValue]);
+    setCheckedItem(id, isChecked);
+  }, [id, isChecked]);
 
-  const onClick = () => {
-    setSelected(item);
-    setIsOpen(false);
-  };
+  // useEffect(() => {
+  //   if (defaultValue === name) {
+  //     setSelected(item);
+  //   }
+  // }, [defaultValue]);
 
   const isShowOption = isShow ? "block" : "none";
 
-  const isSelected = JSON.stringify(selected) === JSON.stringify(item);
-
   return {
-    onClick,
-    isSelected,
+    isChecked,
     isShowOption,
+    setIsChecked,
   };
 }
