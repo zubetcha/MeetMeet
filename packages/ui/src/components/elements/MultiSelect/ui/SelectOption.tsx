@@ -15,7 +15,7 @@ interface OptionProps {
  * @param name (string) 표시 데이터
  */
 export function SelectOption({ id, name }: OptionProps) {
-  const { isChecked, isShowOption, defaultValues, setCheckedItem } = useOption({
+  const { isChecked, isShowOption, setCheckedItem } = useOption({
     id: id,
     name: name,
   });

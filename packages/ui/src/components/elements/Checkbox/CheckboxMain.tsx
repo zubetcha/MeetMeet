@@ -37,6 +37,7 @@ export const CheckboxMain = ({
     <>
       <label
         htmlFor={id}
+        style={{ height: "100%" }}
         className={classes.checkbox_hover}
         onClick={() => inputRef.current.click()}
       >

@@ -15,8 +15,9 @@ export function SelectTriggerButton() {
           value={label}
           placeholder=""
           onChange={() => {}}
-        />
-        <TextField.Icon name="dropdown" />
+        >
+          <TextField.Icon name="dropdown" />
+        </TextField.Input>
       </TextField>
     </span>
   );

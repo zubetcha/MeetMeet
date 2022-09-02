@@ -13,19 +13,16 @@ export function SelectOptionList({ children }: Props) {
 
   return (
     <>
-      <div className={classes.optionWrapper}>
-        {searchResult && searchResult.length === 0 ? (
-          <div
-            style={{ display: display }}
-            className={classNames(classes.optionList, classes.noresult)}
-          >
-            검색 결과 없음
-          </div>
-        ) : (
-          <div style={{ display: display }} className={classes.optionList}>
-            {children}
-          </div>
-        )}
+      <div className={classes.optionContainer} style={{ display: display }}>
+        <div className={classes.optionWrapper}>
+          {searchResult && searchResult.length === 0 ? (
+            <div className={classNames(classes.optionList, classes.noresult)}>
+              검색 결과 없음
+            </div>
+          ) : (
+            <div className={classes.optionList}>{children}</div>
+          )}
+        </div>
       </div>
     </>
   );

@@ -1,19 +1,24 @@
-.optionWrapper{
+.optionContainer{
   position: relative;
   width: 100%;
   margin-top:4px;
 
-
-  .optionList{
-    background-color:var(--color-surface);
+  .optionWrapper{
     position: absolute;
     top:0;
     left:0;
+    width:100%;
+  }
+
+  .optionList{
+    background-color:var(--color-surface);
     border: 1px solid var(--color-outline);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     width: 100%;
     z-index: 100;
+    max-height: 220px; 
+    overflow-y: scroll;
   }
 }
 
@@ -46,6 +51,11 @@
 
 .selectButtonWrapper{
   position: relative;
+  *{
+    &:hover{
+      cursor: pointer !important;
+    }
+  }
   .selectButtonIcon{
     position: absolute;
     top:5px;
