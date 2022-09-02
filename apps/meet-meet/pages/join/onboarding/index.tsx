@@ -12,43 +12,15 @@ import { CardDepth1, Text, Button, SVG } from "ui/src/pages";
 const OnboardingPage = () => {
   const router = useRouter();
   const setUser = useSetRecoilState(userState);
-  const { onChangeTextField, onChangeDepartmentId, onClickMutateButton, btnState, values, mutationResult } = useUserForm();
+
+  const initailValues = { name: "", phone: "", departmentId: null };
+
+  const { onChangeTextField, onChangeDepartmentId, onClickMutateButton, btnState, values, mutationResult } = useUserForm(initailValues);
   const { isSuccess, data } = mutationResult;
-
-  // const [values, setValues] = useState({ name: "", phone: "", departmentId: -1});
-  // const [btnState, setBtnState] = useState<StateType>("disable");
-
-  // const { data: userData, mutateAsync, isError, error: valuesError, isSuccess } = usePostUserInfo();
-
-  // const onChangeTextField = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   const _value = name === "phone" ? getPhoneFormat(value) : value;
-
-  //   setValues({ ...values, [name]: _value });
-  // }
-
-  // const onChangeDepartmentId = (e: SelectItemType) => {
-  //   setValues({...values, departmentId: parseInt(e.id)});
-  // }
-
-  // const onClickAdd = () => {
-  //   if (btnState === "disable") return;
-    
-  //   mutateAsync(values);
-  // }
-
-  // useEffect(() => {
-  //   const { name, phone, departmentId } = values;
-
-  //   name && phone.length === 13 && departmentId
-  //   ? setBtnState("default")
-  //   : setBtnState("disable");
-
-  // }, [values])
 
   useEffect(() => {
     if (isSuccess && data) {
-      setUser({...data});
+      setUser({...data.data});
       router.push("/")
     }
   }, [isSuccess, data])

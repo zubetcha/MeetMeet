@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import meetroomState from "recoil/meetroom";
 import { Meetroom } from "@hooks/meetroom";
+import { convertHeicToJpg, checkBiteValid } from "ui/src/utils";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
@@ -16,6 +17,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
 
   const [values, setValues] = useState({ name: "", seat: "", location: "", mergeRoomId: -1, images: [] })
   const [hasMonitor, setHasMonitor] = useState(false);
+  const [isOverThree, setIsOverThree] = useState(false);
 
   const onChangeMerge = (e: SelectItemType) => {
     setValues({ ...values, mergeRoomId: parseInt(e.id) });
@@ -28,10 +30,26 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
     setValues({ ...values, [name]: _value });
   }
 
-  const selectImages = () => {
-    // TODO: HEIC 포맷인 경우 jpeg로 변환 
-    // TODO: 이미지 사이즈 크기 확인 
-    // TODO: 파일 리스트 길이 확인 (3까지) 
+  const onChangeImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    const fileList = Object.values(files as FileList);
+
+    // DESCRIBE: 파일 개수 3개 제한 
+    if (fileList.length > 3) {
+      setIsOverThree(true);
+      setTimeout(() => {
+        setIsOverThree(false);
+      }, 1300)
+      
+      return;
+    }
+
+    // DESCRIBE: 이미지 크기, 확장자 확인 및 heic -> jpg 변환 
+    const newFiles = fileList.map((file: File) => {
+      console.log(file.size)
+      return convertHeicToJpg(file);
+    });
+
   }
 
   const onClickCreate = () => {
@@ -59,7 +77,6 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
             <TextField.Label>수용 인원</TextField.Label>
             <TextField.Input type="text" value={values.seat} placeholder="수용 인원을 입력해주세요." onChange={onChangeTextField}>
               <TextField.Unit>명</TextField.Unit>
-              <TextField.Icon name="dropdown" />
             </TextField.Input>
           </TextField>
           <TextField name="meetingroom-equipment" status="default">
@@ -82,9 +99,9 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
           <div className={classes["images-container"]}>
             <TextField.Label>회의실 사진</TextField.Label>
             <div className={classes["images-wrapper"]}>
-              <ImagePlaceholder />
-              <ImagePlaceholder />
-              <ImagePlaceholder />
+              <ImagePlaceholder onChange={onChangeImages}/>
+              <ImagePlaceholder onChange={onChangeImages} />
+              <ImagePlaceholder onChange={onChangeImages} />
             </div>
           </div>
         </Modal.Contents>
@@ -103,6 +120,14 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
           />
         </div>
       </Modal>
+      {isOverThree && (
+        <Modal>
+          <Modal.Icon name="error" color="error" />
+          <Modal.Contents>
+            <Modal.Description>이미지는 3개까지 업로드할 수 있습니다.</Modal.Description>
+          </Modal.Contents>
+        </Modal>
+      )}
     </>
   )
 }

@@ -34,7 +34,6 @@ export const RouterGuard = ({children}: Props) => {
                 router.replace("/join/onboarding");
                 return;
             }
-
             setUser(data);
         }
         catch (error) {throw new Error("유저 정보 조회 실패")}
