@@ -43,7 +43,7 @@ export function useOption({ id, name }: Props) {
     }
   }, [defaultValues]);
 
-  const isShowOption = isShow ? "blocks" : "none";
+  const isShowOption = isShow ? "block" : "none";
 
   return {
     isChecked,

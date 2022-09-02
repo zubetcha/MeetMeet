@@ -4,8 +4,21 @@ import {
   ButtonGroup,
   IconButton,
   MultiSelect,
-  Select,
 } from "ui/src/components/elements";
+
+// 1. **키워드 검색 전**
+//     - 존재하는 모든 요소 전체 선택 및 해제 작동
+//     - 리스트에서 일부 선택 해제시 체크박스 프로퍼티 ‘indeterminate=true’
+// 2. **키워드 검색 후**
+//     - 검색된 리스트 내에서만 전체 선택 및 해제 적용
+//     - 검색 후에 기존 선택된 리스트만 존재할 시 체크박스 프로퍼티 ‘indeterminate=false’
+// 3. **검색 키워드 삭제**
+//     1. 새로 노출된 리스트들이 모두 체크된 경우
+//     전체 선택 체크박스 프로퍼티 ‘indeterminate=false’
+//     2. 새로 노출된 리스트들이 일부 체크된 경우
+//     전체 선택 체크박스 프로퍼티 ‘indeterminate=true’
+//     3. 새로 노출된 리스트들이 모두 체크 해제된 경우
+//     전체 선택 체크박스 프로퍼티 ‘checked=false’
 
 export default function TestPage() {
   return (
@@ -210,7 +223,7 @@ export default function TestPage() {
         isSearch={true}
         defaultValues={["5분"]}
         onChange={(e: any) => console.log(e)}
-        style={{ width: "500px" }}
+        style={{ width: "300px" }}
       >
         <MultiSelect.Option id="1" name="5분" />
         <MultiSelect.Option id="2" name="10분" />

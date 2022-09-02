@@ -26,6 +26,8 @@ export const useSelect = () => {
 function reducer(state: any, action: any) {
   switch (action.type) {
     case "ADD":
+      const stateIdList = state.map((item: any) => item.id);
+      if (stateIdList.includes(action.value.id)) return [...state];
       return [...state, action.value];
     case "UPDATE": {
       const { id, checked } = action.value;
@@ -90,13 +92,14 @@ export const SelectProvider = ({
 
   useEffect(() => {
     if (selected) {
-      console.log("selected", selected);
       setValue(selected);
     }
   }, [selected]);
 
   useEffect(() => {
     console.log("state", state);
+    const selectedItems = state.filter((item: any) => item.checked);
+    setSelected(selectedItems);
   }, [state]);
 
   return (

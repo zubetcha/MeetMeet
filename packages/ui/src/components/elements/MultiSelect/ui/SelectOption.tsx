@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useOption } from "../hooks";
 import classes from "../style/select.module.scss";
 import classNames from "classnames";
@@ -15,6 +15,7 @@ interface OptionProps {
  * @param name (string) 표시 데이터
  */
 export function SelectOption({ id, name }: OptionProps) {
+  console.log("아 이게 다시 렌더링되나?");
   const { isChecked, isShowOption, setCheckedItem } = useOption({
     id: id,
     name: name,

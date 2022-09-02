@@ -1,3 +1,13 @@
+.selectContainer{
+  position: relative;
+  .label{
+    position: absolute;
+    top:-16px;
+    left:0;
+  }
+}
+
+
 .optionWrapper{
   position: relative;
   width: 100%;
