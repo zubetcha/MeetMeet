@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelect } from "./SelectContext";
 
 export default function useIndeterminateCheckbox() {
-  const { values, onClickCheckedAll, onClickUncheckedAll } = useSelect();
+  const { searchResult, values, onClickCheckedAll, onClickUncheckedAll } =
+    useSelect();
 
   const [isChecked, setIsChecked] = useState(false);
   const [isHalf, setIsHalf] = useState(false);
@@ -12,22 +13,26 @@ export default function useIndeterminateCheckbox() {
     const totalNum = values?.length;
     const trueNum = values.filter((value: any) => value.checked).length;
 
-    // DESCRIBE: 1. 모두 true 일 때 -> checked: true / isHalf = false
-    if (totalNum === trueNum) {
-      setIsChecked(true);
-      setIsHalf(false);
+    // DESCRIBE: 검색 결과가 있을 때
+    if (searchResult && searchResult.length > 0) {
+      handleIfSearchResultExists(searchResult, values);
+      return;
     }
-    // DESCRIBE: 2. 모두 false 일 때  -> checkd: false / isHalf = true
-    else if (trueNum === 0) {
-      setIsChecked(false);
-      setIsHalf(true);
-    }
-    // DESCRIBE: 3. 일부 true 일 때 -> checked: true / isHalf = true
-    else {
-      setIsChecked(true);
-      setIsHalf(true);
-    }
-  }, [values]);
+
+    setIsChecked(totalNum === trueNum);
+  }, [values, searchResult]);
+
+  const handleIfSearchResultExists = (searchResult: any[], values: any) => {
+    const searchResultIdList = searchResult.map((item: any) => item.id);
+    let isCheckedAll = true;
+    values.map((value: any) => {
+      if (searchResultIdList.includes(value.id) && value.checked === false) {
+        isCheckedAll = false;
+      }
+    });
+
+    setIsChecked(isCheckedAll);
+  };
 
   return {
     isChecked,

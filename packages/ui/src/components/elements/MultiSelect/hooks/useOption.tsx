@@ -37,6 +37,7 @@ export function useOption({ id, name }: Props) {
       : setIsChecked(false);
   }, [values]);
 
+  // TOOD: defaultValue 버그 수정해야됨.
   useEffect(() => {
     if (defaultValues && defaultValues.includes(name)) {
       setCheckedItem(id, true);

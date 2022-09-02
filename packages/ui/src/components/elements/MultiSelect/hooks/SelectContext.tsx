@@ -66,6 +66,40 @@ function reducer(state: any, action: any) {
       });
       return [...newState];
     }
+    case "CHECKED_SEARCH_ALL": {
+      let newState: any[] = [];
+      const { value } = action;
+
+      state.map((item: any) => {
+        let newItem = item;
+        if (value.includes(item.id)) {
+          newItem = {
+            id: item.id,
+            name: item.name,
+            checked: true,
+          };
+        }
+        newState.push(newItem);
+      });
+      return [...newState];
+    }
+    case "UNCHECKED_SEARCH_ALL": {
+      let newState: any[] = [];
+      const { value } = action;
+
+      state.map((item: any) => {
+        let newItem = item;
+        if (value.includes(item.id)) {
+          newItem = {
+            id: item.id,
+            name: item.name,
+            checked: false,
+          };
+        }
+        newState.push(newItem);
+      });
+      return [...newState];
+    }
     default:
       return state;
   }
@@ -126,11 +160,25 @@ export const SelectProvider = ({
             });
           },
           onClickCheckedAll: () => {
+            if (searchResult && searchResult?.length > 0) {
+              dispatch({
+                type: "CHECKED_SEARCH_ALL",
+                value: searchResult.map((item: any) => item.id),
+              });
+              return;
+            }
             dispatch({
               type: "CHECKED_ALL",
             });
           },
           onClickUncheckedAll: () => {
+            if (searchResult && searchResult?.length > 0) {
+              dispatch({
+                type: "UNCHECKED_SEARCH_ALL",
+                value: searchResult.map((item: any) => item.id),
+              });
+              return;
+            }
             dispatch({
               type: "UNCHECKED_ALL",
             });
