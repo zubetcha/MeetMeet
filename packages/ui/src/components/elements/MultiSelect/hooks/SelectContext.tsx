@@ -1,4 +1,10 @@
-import React, { createContext, useState, useReducer, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useReducer,
+  useEffect,
+  useRef,
+} from "react";
 import { SelectItemType } from "../types/select.types";
 
 export const SelectContext = createContext({
@@ -12,6 +18,7 @@ export const SelectContext = createContext({
   setCheckedItem: (id: string, checked: boolean) => {},
   onClickCheckedAll: () => {},
   onClickUncheckedAll: () => {},
+  firstRender: false,
 });
 
 export const useSelect = () => {
@@ -123,6 +130,7 @@ export const SelectProvider = ({
   const [state, dispatch] = useReducer(reducer, []);
   const [selected, setSelected] = useState<any[]>([]);
   const [searchResult, setSearchResult] = useState<SelectItemType[]>();
+  const firstRender = useRef(true);
 
   useEffect(() => {
     if (selected) {
@@ -131,7 +139,6 @@ export const SelectProvider = ({
   }, [selected]);
 
   useEffect(() => {
-    console.log("state", state);
     const selectedItems = state.filter((item: any) => item.checked);
     setSelected(selectedItems);
   }, [state]);
@@ -149,6 +156,7 @@ export const SelectProvider = ({
               type: "ADD",
               value: value,
             });
+            firstRender.current = false;
           },
           setSearchResult: (e: SelectItemType[] | undefined) =>
             setSearchResult(e),
@@ -183,6 +191,7 @@ export const SelectProvider = ({
               type: "UNCHECKED_ALL",
             });
           },
+          firstRender: firstRender.current,
         }}
       >
         {children}

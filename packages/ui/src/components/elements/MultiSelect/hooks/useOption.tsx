@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelect } from "./SelectContext";
 
 interface Props {
@@ -9,8 +9,14 @@ interface Props {
 export function useOption({ id, name }: Props) {
   const [isShow, setIsShow] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
-  const { values, defaultValues, searchResult, setValues, setCheckedItem } =
-    useSelect();
+  const {
+    values,
+    defaultValues,
+    searchResult,
+    firstRender,
+    setValues,
+    setCheckedItem,
+  } = useSelect();
 
   useEffect(() => {
     if (searchResult) {
@@ -37,9 +43,9 @@ export function useOption({ id, name }: Props) {
       : setIsChecked(false);
   }, [values]);
 
-  // TOOD: defaultValue 버그 수정해야됨.
+  // // TOOD: defaultValue 버그 수정해야됨.
   useEffect(() => {
-    if (defaultValues && defaultValues.includes(name)) {
+    if (firstRender && defaultValues && defaultValues.includes(name)) {
       setCheckedItem(id, true);
     }
   }, [defaultValues]);
@@ -49,6 +55,7 @@ export function useOption({ id, name }: Props) {
   return {
     isChecked,
     isShowOption,
+    defaultValues,
     setCheckedItem,
   };
 }
