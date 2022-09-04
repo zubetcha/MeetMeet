@@ -1,23 +1,24 @@
-import heic2any from "heic2any"
-
-export const convertHeicToJpg = (file: any) => {
-    const fileExt = file.substring(file.lastIndexOf(".") + 1);
-    let newFile = file;
+export const convertHeicToJpg = async (file: any) => {
+    const heic2any = require('heic2any')
+    const fileExt = file.name.slice(file.name.lastIndexOf(".") + 1);
+    let newFile;
 
     if (fileExt === "heic") {
-        const convertedFile = heic2any({
+        const convertedFile = await heic2any({
             blob: file,
             toType: "image/jpg",
-        }).then((result) => {
+        }).then((result: any) => {
             const url = URL.createObjectURL(result as Blob);
-            const container = new DataTransfer();
-            const file = new File([result as Blob], "heic" + "jpg",{type:"image/jpeg", lastModified:new Date().getTime()});
-            container.items.add(file);
+            const newFile = new File([result as Blob], "heic." + "jpg",{type:"image/jpeg", lastModified:new Date().getTime()});
 
-            return file;
-        }).catch(error => console.log(error));
+            return { file: newFile, preview: url };
+        }).catch((error: any) => console.log(error));
 
         newFile = convertedFile;
+    }
+    else if (!(fileExt === "heic")) {
+        const url = URL.createObjectURL(file);
+        newFile = { file, preview: url };
     }
 
     return newFile;

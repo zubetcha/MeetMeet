@@ -8,7 +8,7 @@ export const AuthAPI = {
 }
 
 export const MeetroomAPI = {
-  uploadImages: () => api.post(``),
+  uploadImages: (images: any) => api.post("/images", images),
   updateImages: () => api.delete(``),
   deleteImages: () => api.delete(``),
 

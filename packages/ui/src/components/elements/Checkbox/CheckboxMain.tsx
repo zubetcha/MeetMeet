@@ -33,6 +33,7 @@ export const CheckboxMain = ({
   children,
 }: CheckboxProps) => {
   const inputRef = useRef(null as any);
+  console.log(checked)
   return (
     <>
       <label

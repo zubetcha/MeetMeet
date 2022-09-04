@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import classes from "./managementPage.module.scss";
-import { Meetroom } from "@hooks/meetroom";
+import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 import meetroomState from "recoil/meetroom";
 
 import { MeetroomCard } from "@components/management/MeeroomCard";
@@ -9,12 +9,10 @@ import { MeetroomAddModal } from "@components/management/MeetroomAddModal";
 import { CardDepth1, Button, IconButton } from "ui/src/pages"
 
 const ManagementPage = () => {
-  const meetroom = new Meetroom();
+  const { data } = useGetMeetrooms();
   
   const setMeetrooms = useSetRecoilState(meetroomState);
   const [isAddModal, setIsAddModal] = useState(false);
-
-  const { data } = meetroom.getAll();
 
   useEffect(() => {
     if (data) {

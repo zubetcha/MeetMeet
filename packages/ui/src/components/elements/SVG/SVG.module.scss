@@ -58,6 +58,10 @@
   @include path-fill(var(--color-onSecondaryContainer));
 }
 
+.warning {
+  @include path-fill(var(--color-warning));
+}
+
 .upward {
   &:hover{
     cursor: pointer;

@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
+import { useCreateMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
 import meetroomState from "recoil/meetroom";
-import { Meetroom } from "@hooks/meetroom";
 import { convertHeicToJpg, checkBiteValid } from "ui/src/utils";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
 import { SelectItemType } from "ui/src/components/elements/Select/types/select.types";
+import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
 
 export const MeetroomAddModal = ({setIsAddModal}: Props) => {
-  const meetroom = new Meetroom();
   const meetroomList = useRecoilValue(meetroomState);
 
-  const [values, setValues] = useState({ name: "", seat: "", location: "", mergeRoomId: -1, images: [] })
+  const [values, setValues] = useState<{ name: string, seat: string, location: string, mergeRoomId: number | null }>({ name: "", seat: "", location: "", mergeRoomId: null })
+  const [images, setImages] = useState<{file: File | null, preview: string}[]>(new Array(3).fill({ file: null, preview: "" }));
   const [hasMonitor, setHasMonitor] = useState(false);
   const [isOverThree, setIsOverThree] = useState(false);
+  const [isOverSize, setIsOverSize] = useState(false);
+  const [btnState, setBtnState] = useState<StateType>("default");
+
+  const { upload, create } = useCreateMeetroom();
 
   const onChangeMerge = (e: SelectItemType) => {
     setValues({ ...values, mergeRoomId: parseInt(e.id) });
@@ -30,31 +35,64 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
     setValues({ ...values, [name]: _value });
   }
 
-  const onChangeImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onDropImages = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const droppedImages = images.filter((image) => image.file !== null);
     const { files } = e.target;
     const fileList = Object.values(files as FileList);
 
     // DESCRIBE: 파일 개수 3개 제한 
-    if (fileList.length > 3) {
+    if ((droppedImages.length + fileList.length) > 3) {
+      console.log("이미지 개수 3개 넘음")
       setIsOverThree(true);
       setTimeout(() => {
         setIsOverThree(false);
-      }, 1300)
-      
+      }, 1300);
+
       return;
     }
 
-    // DESCRIBE: 이미지 크기, 확장자 확인 및 heic -> jpg 변환 
-    const newFiles = fileList.map((file: File) => {
-      console.log(file.size)
-      return convertHeicToJpg(file);
-    });
+    // DESCRIBE: 이미지 크기 확인 
+    fileList.forEach((file) => {
+      const isOver = checkBiteValid(file.size, "MB", 10);
 
-  }
+      if (isOver) {
+        setIsOverSize(true);
+        setTimeout(() => {
+          setIsOverSize(false);
+        }, 1300)
+        
+        return;
+      }
+    })
+
+    // DESCRIBE: 이미지 확장자 확인 및 heic -> jpg 변환 
+    const newFiles = await Promise.all(fileList.map((file: File) => convertHeicToJpg(file)))
+
+    setImages([...droppedImages, ...newFiles]);
+  }, [images])
 
   const onClickCreate = () => {
-    // meetroom.createMeetroom()
+    if (btnState === "disable") return;
+
+    const form = {...values, hasMonitor}
+
+    upload.mutateAsync(images).then(res => {
+      const meetroom = { ...form, images: res.data };
+      create.mutateAsync(meetroom);
+    })
   }
+
+  useEffect(() => {
+    const { name, seat, location } = values;
+
+    if (!name || !seat || !location) {
+      setBtnState("disable");
+    }
+    else if (name && seat && location) {
+      setBtnState("default");
+    }
+  }, [values])
+
   return (
     <>
       <Modal>
@@ -85,7 +123,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
               name="monitor"
               id="monitor"
               checked={hasMonitor}
-              onChange={(checked) => setHasMonitor(checked)}
+              onChange={(checked) => setHasMonitor(prev => !prev)}
             >
               <Checkbox.Label>
                 모니터
@@ -99,9 +137,9 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
           <div className={classes["images-container"]}>
             <TextField.Label>회의실 사진</TextField.Label>
             <div className={classes["images-wrapper"]}>
-              <ImagePlaceholder onChange={onChangeImages}/>
-              <ImagePlaceholder onChange={onChangeImages} />
-              <ImagePlaceholder onChange={onChangeImages} />
+              {new Array(3).fill(0).map((_, index) => {
+                return <ImagePlaceholder key={index} onChange={onDropImages} preview={images[index]?.preview || undefined} setImages={setImages}  />
+              })}
             </div>
           </div>
         </Modal.Contents>
@@ -116,15 +154,24 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
             label="회의실 생성"
             size="medium"
             configuration="filled"
+            state={btnState}
             onClick={onClickCreate}
           />
         </div>
       </Modal>
       {isOverThree && (
         <Modal>
-          <Modal.Icon name="error" color="error" />
+          <Modal.Icon name="error" color="warning" />
           <Modal.Contents>
-            <Modal.Description>이미지는 3개까지 업로드할 수 있습니다.</Modal.Description>
+            <Modal.Title>이미지는 3개까지 업로드할 수 있습니다.</Modal.Title>
+          </Modal.Contents>
+        </Modal>
+      )}
+      {isOverSize && (
+        <Modal>
+          <Modal.Icon name="error" color="warning" />
+          <Modal.Contents>
+            <Modal.Title>이미지는 한 개당 10MB까지 업로드할 수 있습니다.</Modal.Title>
           </Modal.Contents>
         </Modal>
       )}
