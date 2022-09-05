@@ -13,6 +13,7 @@ import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserve
 import "../styles/globals.scss";
 import { Layout } from "@components/commons/Layout/Layout";
 import { RouterGuard } from "@components/commons/RouterGuard/RouterGuard";
+import { SuccessModal } from "@components/commons/Modal/SuccessModal";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -47,6 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <Component {...pageProps} />
                 </Layout>
             }
+            <SuccessModal />
             </RouterGuard>
           </RecoilRoot>
         </ApolloProvider>

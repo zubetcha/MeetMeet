@@ -42,8 +42,11 @@ export const useCreateMeetroom = () => {
 };
 
 export const useUpdateMeetroom = () => {
+    const meetrooms = useGetMeetrooms();
     const result = useMutation(["meetroom", "update"], (meetroom: any) => MeetroomAPI.updateMeetroom(meetroom), {
-        onSuccess: (res) => {},
+        onSuccess: (res) => {
+            meetrooms.refetch();
+        },
         onError: (error) => {}
     });
 

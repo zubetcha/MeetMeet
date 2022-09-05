@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useUploadImages, useCreateMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
-import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 import { useMeetroomForm } from "@hooks/meetroom/useMeetroomForm";
+import { useHandleSuccess } from "@hooks/common/useHandleSuccess";
 import meetroomState from "recoil/meetroom";
 import classes from "./management.module.scss";
 
@@ -11,14 +11,16 @@ import { MeetRoom } from "graphql/meetroom/types";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
 
+// TODO: code: -301, message: 이미 존재하는 회의실입니다.
 export const MeetroomAddModal = ({setIsAddModal}: Props) => {
-  const [isSuccessModal, setIsSuccessModal] = useState(false);
-
-  const meetroomList = useRecoilValue(meetroomState);
 
   const initialValues = { name: "", seat: "", location: "", mergeRoomId: null, hasMonitor: false };
   const initialImages = new Array(3).fill({ file: null, preview: "" });
 
+  const meetroomList = useRecoilValue(meetroomState);
+  const upload = useUploadImages();
+  const create = useCreateMeetroom();
+  const { handleSuccess } = useHandleSuccess();
   const {
     onChangeTextField,
     onChangeMerge,
@@ -32,9 +34,6 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
     btnState
   } = useMeetroomForm(initialValues, initialImages);
 
-  const upload = useUploadImages();
-  const create = useCreateMeetroom();
-
   const onClickCreate = () => {
     if (btnState === "disable") return;
     
@@ -47,14 +46,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
 
   useEffect(() => {
     if (create.isSuccess) {
-      setIsSuccessModal(true);
-
-      setTimeout(() => {
-        setIsSuccessModal(false);
-        setTimeout(() => {
-          setIsAddModal(false);
-        }, 500)
-      }, 1300);
+      handleSuccess({ title: "회의실 생성 완료", setIsModal: setIsAddModal })
     }
   }, [create.isSuccess])
 
@@ -66,6 +58,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
           <TextField name="name" status="default">
             <TextField.Label>이름</TextField.Label>
             <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
+            <TextField.HelperText> </TextField.HelperText>
           </TextField>
           <TextField name="meetingroom-merge" status="default">
             <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
@@ -137,14 +130,6 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
           <Modal.Icon name="error" color="warning" />
           <Modal.Contents>
             <Modal.Title>이미지는 한 개당 10MB까지 업로드할 수 있습니다.</Modal.Title>
-          </Modal.Contents>
-        </Modal>
-      )}
-      {isSuccessModal && (
-        <Modal>
-          <Modal.Icon name="done" color="primary" />
-          <Modal.Contents>
-            <Modal.Title>회의실 생성 완료</Modal.Title>
           </Modal.Contents>
         </Modal>
       )}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useMeetroomForm } from "@hooks/meetroom/useMeetroomForm";
 import { useRecoilValue } from "recoil";
 import { useUploadImages, useUpdateMeetroom, useDeleteImages, useDeleteMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
+import { useHandleSuccess } from "@hooks/common/useHandleSuccess";
 import meetroomState from "recoil/meetroom";
 import classes from "./management.module.scss";
 
@@ -12,15 +13,18 @@ import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
 
 export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInfo}: Props) => {
   const [isDeleteModal, setIsDeleteModal] = useState(false);
-  const [isSuccessModal, setIsSuccessModal] = useState(false);
 
   const { id, name, location, seat, canMerge, hasMonitor } = meetroom;
   const meetroomList = useRecoilValue(meetroomState);
+  const imageUrls = imageList?.map((image) => image.url);
   const initialValues = { name, seat: String(seat), location, mergeRoomId: null, hasMonitor };
-  const initialImages = new Array(3).fill({ file: null, preview: "" });
+  const initialImages = new Array(3).fill({ file: null, preview: "" }); // TODO: preview에 imageList의 url 넣어주기 
 
-  const [ deleteMeetroom ] = useDeleteMeetroom();
-
+  const [ deleteMeetroom, { data } ] = useDeleteMeetroom();
+  const uploadImages = useUploadImages();
+  const updateMeetroom = useUpdateMeetroom();
+  const deleteImages = useDeleteImages();
+  const { handleSuccess } = useHandleSuccess();
   const {
     onChangeMerge,
     onChangeTextField,
@@ -37,19 +41,27 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
   const onClickUpdate = () => {
     if (btnState === "disable") return;
 
+    // TODO: images에서 file이 null이 아닌 것만 s3 이미지 업로드 
+    // TODO: oldImages: imageList 
+    // TODO: newImages: images 중 file이 null이고 preview는 s3 url인 요소들.concat(새로 변환한 s3 url들) 
+    // upload.mutateAsync(images).then(res => {
+      // const meetroom = { ...values, images: res.data };
+      const oldImages = imageList;
+      // const newImages = [...images에서 file이 null인 preview들, ...res.data];
+      const meetroom = { ...values, seat: parseInt(values.seat), images: [""] }; // TODO: images s3 url로 수정 
+      updateMeetroom.mutateAsync(meetroom);
+    // })
   }
 
   const onClickDelete = () => {
-    deleteMeetroom({ variables: { id } }).then(res => {
-      if (res.data.code === 200) {
-        setIsSuccessModal(true);
-        setTimeout(() => {
-          setIsSuccessModal(false);
-          setTimeout(() => setIsEditModal(false), 500);
-        }, 1300)
+    deleteMeetroom({ variables: { id } }).then(({data}) => {
+      // deleteImages.mutateAsync({ images: imageList });
+      // TODO: s3 이미지 삭제 API 
+      if (data.deleteMeetroom.code === 200) {
+        handleSuccess({ title: "회의실 삭제 완료", setIsModal: setIsEditModal })
       }
     });
-  }
+  };
 
   return (
     <>
@@ -170,15 +182,6 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
           </Modal.Buttons>
         </Modal>
       )}
-      {isSuccessModal && (
-        <Modal>
-          <Modal.Icon name="done" color="primary" />
-          <Modal.Contents>
-            <Modal.Title>회의실 삭제 완료</Modal.Title>
-          </Modal.Contents>
-        </Modal>
-      )
-      }
     </>
   )
 }
