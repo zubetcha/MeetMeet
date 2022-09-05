@@ -3,12 +3,12 @@ import classes from "../style/select.module.scss";
 import classNames from "classnames";
 import { useOptionList } from "../hooks";
 import { IndeterminateCheckbox } from "./IndeterminateCheckbox";
-import { SelectConfirmButton } from "./SelectConfirmButton";
+import { MultiSelectConfirmButton } from "./MultiSelectConfirmButton";
 interface Props {
   children: any;
 }
 
-export function SelectOptionList({ children }: Props) {
+export function MultiSelectOptionList({ children }: Props) {
   const { isOpen, searchResult } = useOptionList();
   const display = isOpen ? "block" : "none";
 
@@ -26,7 +26,7 @@ export function SelectOptionList({ children }: Props) {
               {children}
             </div>
           )}
-          <SelectConfirmButton />
+          <MultiSelectConfirmButton />
         </div>
       </div>
     </>

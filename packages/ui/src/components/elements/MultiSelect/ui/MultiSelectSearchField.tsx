@@ -3,7 +3,7 @@ import { useSearch } from "../hooks";
 import { TextField } from "../../TextField";
 import classes from "../style/input.module.scss";
 
-export function SelectSearchField() {
+export function MultiSelectSearchField() {
   const { searchValue, onChange } = useSearch();
 
   return (

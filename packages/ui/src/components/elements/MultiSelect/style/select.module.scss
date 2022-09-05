@@ -28,7 +28,25 @@
     width: 100%;
     z-index: 100;
     max-height: 220px; 
-    overflow-y: scroll;
+    overflow-y: overlay;
+    
+    &::-webkit-scrollbar {
+      position: absolute;
+      width: 4px !important;
+      height: 4px !important;
+  }
+
+    &::-webkit-scrollbar * {
+      background:transparent !important; 
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-onSurface-opacity-12);
+        border-radius: 5px;
+    }
+
   }
 }
 

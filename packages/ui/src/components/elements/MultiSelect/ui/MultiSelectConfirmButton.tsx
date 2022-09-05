@@ -3,7 +3,7 @@ import { Button } from "../../Buttons/Button";
 import classes from "../style/button.module.scss";
 import { useSelect } from "../hooks";
 
-export const SelectConfirmButton = () => {
+export const MultiSelectConfirmButton = () => {
   const {onClickCancel, onClickConfirm} = useSelect();
   return (
     <div className={classes.selectConfirmButton_wrapper}>

@@ -8,19 +8,33 @@ import React, {
 import { SelectItemType } from "../types/select.types";
 
 export const SelectContext = createContext({
+  // 현재 Option 요소들의 상태 (id, name, checked 로 이루어져 있음)
   values: [] as SelectItemType[] | undefined,
-  confirmedValues:[] as SelectItemType[] | undefined, 
+  // 선택 완료 버튼을 클릭해, onChange 함수로 넘겨줄 상태값
+  confirmedValues:[] as SelectItemType[] | undefined,
+  // 검색 결과에 일치하는 Option 요소들 
   searchResult: [] as SelectItemType[] | undefined,
+  // 초기 checked 되어있는 Option 의 name 리스트
   defaultValues: undefined as string[] | undefined,
+  // 현재 드롭다운 열려있는지/ 닫혀있는지 상태값
   isOpen: false,
+  // 현재 선택되어 있는 요소들 개수 
   currentSelectedNumber: 0,
+  // onChagne 함수로 넘겨줄 상태값 setState 함수
   setValues: (e: SelectItemType) => {},
+  // searchResult setState 함수
   setSearchResult: (e: SelectItemType[] | undefined) => {},
+  // isOpen setState 함수
   setIsOpen: (e: boolean) => {},
+  // values 체크 상태 UPDATE dispatch 함수
   setCheckedItem: (id: string, checked: boolean) => {},
+  // values 전체 선택 CHECKED_ALL dispatch 함수
   onClickCheckedAll: () => {},
+  // value 전체 해제 UNCHECKED_ALL dispatch 함수
   onClickUncheckedAll: () => {},
+  // confirmedValues 반영 함수 (선택 완료)
   onClickConfirm : ()=> {},
+  // confirmedValues 이전 상태로 초기화하는 함수 (창 닫기, 외부 클릭)
   onClickCancel: ()=>{},
   firstRender: false,
 });

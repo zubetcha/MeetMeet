@@ -3,7 +3,7 @@ import { useTriggerButton } from "../hooks";
 import { TextField } from "../../TextField";
 import classes from "../style/select.module.scss";
 
-export function SelectTriggerButton() {
+export function MultiSelectTriggerButton() {
   const { label, onClick } = useTriggerButton();
 
   return (

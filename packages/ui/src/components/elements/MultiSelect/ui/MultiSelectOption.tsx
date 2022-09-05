@@ -14,7 +14,7 @@ interface OptionProps {
  * @param id (string) 구분 id 값
  * @param name (string) 표시 데이터
  */
-export function SelectOption({ id, name }: OptionProps) {
+export function MultiSelectOption({ id, name }: OptionProps) {
   const { isChecked, isShowOption, setCheckedItem } = useOption({
     id: id,
     name: name,

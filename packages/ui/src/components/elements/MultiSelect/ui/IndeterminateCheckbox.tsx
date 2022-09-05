@@ -7,8 +7,6 @@ import useIndeterminateCheckbox from "../hooks/useIndeterminateCheckbox";
 export const IndeterminateCheckbox = () => {
   const {
     isChecked,
-    isHalf,
-    setIsChecked,
     onClickCheckedAll,
     onClickUncheckedAll,
   } = useIndeterminateCheckbox();
