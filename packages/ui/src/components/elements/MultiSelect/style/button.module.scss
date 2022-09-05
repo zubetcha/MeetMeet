@@ -9,3 +9,14 @@
     border-radius: 4px;
     font-size: 16px;
 }
+
+.selectConfirmButton_wrapper{
+    display: grid;
+    height:40px;
+    column-gap:8px;
+    grid-template-columns: 74px 1fr;
+    margin-top: 4px;
+    button{
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
