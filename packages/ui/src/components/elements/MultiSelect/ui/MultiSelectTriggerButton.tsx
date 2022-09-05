@@ -3,15 +3,14 @@ import { useTriggerButton } from "../hooks";
 import { TextField } from "../../TextField";
 import classes from "../style/select.module.scss";
 
-export function SelectTriggerButton() {
+export function MultiSelectTriggerButton() {
   const { label, onClick } = useTriggerButton();
 
   return (
     <span className={classes.selectButtonWrapper} onClick={onClick}>
-      <TextField status="default" name="selectSearch">
+      <TextField name="multiSelectSearch" status="default">
         <TextField.Input
-          type="input"
-          name="selectSearchInput"
+          type="text"
           value={label}
           placeholder=""
           onChange={() => {}}

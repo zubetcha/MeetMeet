@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import classes from "./Checkbox.module.scss";
 import { SVG } from "../SVG/SVG";
-import { colors } from "ui/src/shared/style";
 
 interface CheckboxProps {
   name: string;
@@ -37,6 +36,7 @@ export const CheckboxMain = ({
     <>
       <label
         htmlFor={id}
+        style={{ height: "100%" }}
         className={classes.checkbox_hover}
         // onClick={() => inputRef.current.click()}
       >
@@ -52,7 +52,7 @@ export const CheckboxMain = ({
               )}
             </>
           ) : (
-            <SVG name="unchecked" />
+            <SVG name="unchecked" color={"onSurfaceVariant"} />
           )}
         </span>
         <input

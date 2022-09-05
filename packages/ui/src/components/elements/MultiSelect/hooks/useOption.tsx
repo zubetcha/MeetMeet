@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelect } from "./SelectContext";
 
 interface Props {
@@ -8,14 +8,14 @@ interface Props {
 
 export function useOption({ id, name }: Props) {
   const [isShow, setIsShow] = useState(true);
-  const [item, setItem] = useState({ id: id, name: name });
+  const [isChecked, setIsChecked] = useState(false);
   const {
-    selected,
-    defaultValue,
+    values,
+    defaultValues,
     searchResult,
+    firstRender,
     setValues,
-    setSelected,
-    setIsOpen,
+    setCheckedItem,
   } = useSelect();
 
   useEffect(() => {
@@ -29,27 +29,33 @@ export function useOption({ id, name }: Props) {
   }, [searchResult]);
 
   useEffect(() => {
-    setValues(item);
+    setValues({
+      id: id,
+      name: name,
+      checked: isChecked,
+    });
   }, []);
 
   useEffect(() => {
-    if (defaultValue === name) {
-      setSelected(item);
-    }
-  }, [defaultValue]);
+    if (!values) return;
+    values?.filter((value: any) => value.id === id)[0]?.checked
+      ? setIsChecked(true)
+      : setIsChecked(false);
+  }, [values]);
 
-  const onClick = () => {
-    setSelected(item);
-    setIsOpen(false);
-  };
+  // // TOOD: defaultValue 버그 수정해야됨.
+  useEffect(() => {
+    if (firstRender && defaultValues && defaultValues.includes(name)) {
+      setCheckedItem(id, true);
+    }
+  }, [defaultValues]);
 
   const isShowOption = isShow ? "block" : "none";
 
-  const isSelected = JSON.stringify(selected) === JSON.stringify(item);
-
   return {
-    onClick,
-    isSelected,
+    isChecked,
     isShowOption,
+    defaultValues,
+    setCheckedItem,
   };
 }

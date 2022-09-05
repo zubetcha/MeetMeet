@@ -2,12 +2,13 @@ import React from "react";
 import classes from "../style/select.module.scss";
 import classNames from "classnames";
 import { useOptionList } from "../hooks";
-
+import { IndeterminateCheckbox } from "./IndeterminateCheckbox";
+import { MultiSelectConfirmButton } from "./MultiSelectConfirmButton";
 interface Props {
   children: any;
 }
 
-export function SelectOptionList({ children }: Props) {
+export function MultiSelectOptionList({ children }: Props) {
   const { isOpen, searchResult } = useOptionList();
   const display = isOpen ? "block" : "none";
 
@@ -20,8 +21,12 @@ export function SelectOptionList({ children }: Props) {
               검색 결과 없음
             </div>
           ) : (
-            <div className={classes.optionList}>{children}</div>
+            <div className={classes.optionList}>
+              <IndeterminateCheckbox />
+              {children}
+            </div>
           )}
+          <MultiSelectConfirmButton />
         </div>
       </div>
     </>

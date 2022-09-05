@@ -3,7 +3,7 @@ import { useSearch } from "../hooks";
 import { TextField } from "../../TextField";
 import classes from "../style/input.module.scss";
 
-export function SelectSearchField() {
+export function MultiSelectSearchField() {
   const { searchValue, onChange } = useSearch();
 
   return (
@@ -14,7 +14,7 @@ export function SelectSearchField() {
             type="input"
             name="selectSearchInput"
             value={searchValue}
-            placeholder="키워드로 검색하세요"
+            placeholder="검색어를 입력하세요."
             onChange={onChange}
           />
         </TextField>
