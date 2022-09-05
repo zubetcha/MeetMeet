@@ -2,16 +2,16 @@ import React, { useMemo } from "react";
 import { useSelect } from "./SelectContext";
 
 export function useTriggerButton() {
-  const { values, defaultValues, isOpen, setIsOpen } = useSelect();
+  const { confirmedValues, defaultValues, isOpen, setIsOpen } = useSelect();
 
   const trueNum = useMemo(
-    () => values?.filter((value: any) => value.checked === true).length || 0,
-    [values]
+    () => confirmedValues?.filter((value: any) => value.checked === true).length || 0,
+    [confirmedValues]
   );
 
   const label =
-    values && trueNum > 0
-      ? values
+  confirmedValues && trueNum > 0
+      ? confirmedValues
           .filter((value: any) => value.checked === true)
           .map((value) => value.name)
           .join(",")

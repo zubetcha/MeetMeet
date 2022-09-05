@@ -9,6 +9,7 @@ import { SelectItemType } from "../types/select.types";
 
 export const SelectContext = createContext({
   values: [] as SelectItemType[] | undefined,
+  confirmedValues:[] as SelectItemType[] | undefined, 
   searchResult: [] as SelectItemType[] | undefined,
   defaultValues: undefined as string[] | undefined,
   isOpen: false,
@@ -18,6 +19,8 @@ export const SelectContext = createContext({
   setCheckedItem: (id: string, checked: boolean) => {},
   onClickCheckedAll: () => {},
   onClickUncheckedAll: () => {},
+  onClickConfirm : ()=> {},
+  onClickCancel: ()=>{},
   firstRender: false,
 });
 
@@ -36,6 +39,8 @@ function reducer(state: any, action: any) {
       const stateIdList = state.map((item: any) => item.id);
       if (stateIdList.includes(action.value.id)) return [...state];
       return [...state, action.value];
+    case "INITIALIZE":
+      return [...action.value];
     case "UPDATE": {
       const { id, checked } = action.value;
       let newState: any[] = [];
@@ -127,6 +132,7 @@ export const SelectProvider = ({
   setIsOpen,
   children,
 }: SelectProps) => {
+  const [confirmedState, setConfirmedState]=useState<any[] | undefined>();
   const [state, dispatch] = useReducer(reducer, []);
   const [selected, setSelected] = useState<any[]>([]);
   const [searchResult, setSearchResult] = useState<SelectItemType[]>();
@@ -139,15 +145,27 @@ export const SelectProvider = ({
   }, [selected]);
 
   useEffect(() => {
-    const selectedItems = state.filter((item: any) => item.checked);
+    if(!confirmedState) return;
+    const selectedItems = confirmedState.filter((item: any) => item.checked);
     setSelected(selectedItems);
-  }, [state]);
+  }, [confirmedState]);
+
+  useEffect(()=>{
+    if(state && !confirmedState){
+      setConfirmedState(state);
+    }
+  },[isOpen, state])
+
+  useEffect(()=>{
+    console.log("confirmedState", confirmedState);
+  },[confirmedState]);
 
   return (
     <>
       <SelectContext.Provider
         value={{
           values: state,
+          confirmedValues: confirmedState,
           searchResult: searchResult,
           isOpen: isOpen,
           defaultValues: defaultValues,
@@ -192,6 +210,13 @@ export const SelectProvider = ({
             });
           },
           firstRender: firstRender.current,
+          onClickConfirm: ()=>setConfirmedState(state),
+          onClickCancel : ()=>{
+            dispatch({
+              type:"INITIALIZE",
+              value:confirmedState 
+            })
+          }
         }}
       >
         {children}
