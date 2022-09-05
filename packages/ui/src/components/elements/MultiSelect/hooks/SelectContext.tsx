@@ -13,6 +13,7 @@ export const SelectContext = createContext({
   searchResult: [] as SelectItemType[] | undefined,
   defaultValues: undefined as string[] | undefined,
   isOpen: false,
+  currentSelectedNumber: 0,
   setValues: (e: SelectItemType) => {},
   setSearchResult: (e: SelectItemType[] | undefined) => {},
   setIsOpen: (e: boolean) => {},
@@ -135,6 +136,7 @@ export const SelectProvider = ({
   const [confirmedState, setConfirmedState]=useState<any[] | undefined>();
   const [state, dispatch] = useReducer(reducer, []);
   const [selected, setSelected] = useState<any[]>([]);
+  const [currentSelectedNumber, setCurrentSelectedNumber] = useState(0);
   const [searchResult, setSearchResult] = useState<SelectItemType[]>();
   const firstRender = useRef(true);
 
@@ -151,10 +153,16 @@ export const SelectProvider = ({
   }, [confirmedState]);
 
   useEffect(()=>{
-    if(state && !confirmedState){
+    if(!state) return; 
+    const currentSelectedItemNumers = state.filter((item:any)=>item.checked).length;
+    setCurrentSelectedNumber(currentSelectedItemNumers);
+  },[state])
+
+  useEffect(()=>{
+    if(state.length>0 && defaultValues && !confirmedState){
       setConfirmedState(state);
     }
-  },[isOpen, state])
+  },[state, defaultValues, confirmedState])
 
   useEffect(()=>{
     console.log("confirmedState", confirmedState);
@@ -169,6 +177,7 @@ export const SelectProvider = ({
           searchResult: searchResult,
           isOpen: isOpen,
           defaultValues: defaultValues,
+          currentSelectedNumber: currentSelectedNumber,
           setValues: (value: any) => {
             dispatch({
               type: "ADD",
@@ -210,13 +219,17 @@ export const SelectProvider = ({
             });
           },
           firstRender: firstRender.current,
-          onClickConfirm: ()=>setConfirmedState(state),
+          onClickConfirm: ()=>{
+            setConfirmedState(state)
+            setIsOpen(false)
+          },
           onClickCancel : ()=>{
             dispatch({
               type:"INITIALIZE",
-              value:confirmedState 
+              value:confirmedState
             })
-          }
+            setIsOpen(false)
+          },
         }}
       >
         {children}
