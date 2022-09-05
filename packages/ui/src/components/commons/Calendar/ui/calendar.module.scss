@@ -1,7 +1,7 @@
-@use "../../../shared/colors.scss" as *;
-@use "../../../shared/font.scss" as *;
-@use "../../../shared/common.module.scss" as *;
-@use "../../../styles/utils" as *;
+@use "../../../../shared/colors.scss" as *;
+@use "../../../../shared/font.scss" as *;
+@use "../../../../shared/common.module.scss" as *;
+@use "../../../../styles/utils" as *;
 
 .calendar_outer_box {
     position: fixed;
@@ -11,13 +11,13 @@
     width: 100vw;
     height: 100vh;
     z-index: 999;
-    background-color: $dark-low;
+    background-color: transparent;
     cursor: pointer;
 }
 
 .calendar_container {
     position: absolute;
-    top:10px;
+    top:0;
     left:0;
     z-index: 1000;
     padding: 40px 40px 24px 40px;

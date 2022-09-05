@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 
-import { Text } from "../../elements";
+import { Text } from "../../../elements";
 import classes from './calendar.module.scss'
-import { CalendarProps } from "../../../types/ui.types";
-import { DateType } from "../../../types/ui.types";
+import { CalendarProps } from "../../../../types/ui.types";
+import { DateType } from "../../../../types/ui.types";
 import Dates from "./Dates";
 
 interface Props {

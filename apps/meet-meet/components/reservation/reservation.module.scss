@@ -1,0 +1,32 @@
+.page-container{
+  display: flex;
+  flex-direction: column;
+  gap: 47px;
+  padding: 26px 28px;
+  width: 645px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .title-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .title-box {
+      display: flex;
+      padding: 0px 0px 0px 5px;
+      gap: 28px;
+      align-items: flex-end;
+    }
+
+    .title-divider {
+      width: 100%;
+      height: 0px;
+      border: 1px solid var(--color-outline);
+    }
+  }
+}

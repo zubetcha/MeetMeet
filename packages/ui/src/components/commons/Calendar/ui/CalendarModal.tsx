@@ -1,22 +1,22 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import classes from "./calendar.module.scss";
-import { Button } from "../../elements";
-import { Calendar } from "../Calendar/Calendar";
-import { formatDate } from "../../../utils";
+import { Button } from "../../../elements";
+import { Calendar } from "./Calendar";
+import { formatDate } from "../../../../utils";
 
 interface Props {
   date: Date;
   start: Date;
   end: Date;
-  setCalendar: Dispatch<SetStateAction<boolean>>;
+  setCalendar?: Dispatch<SetStateAction<boolean>>;
   onClickSubmitBtn: (startDate: Date, endDate: Date) => void;
   startTime?: number;
   type?: "multiple" | "single";
   timeType?: "pastCurrent" | "futureCurrent";
 }
 
-export const CalendarLayout = ({
+export const CalendarModal = ({
   date,
   start,
   end,
@@ -62,25 +62,19 @@ export const CalendarLayout = ({
   const onClickDate = (value: Date) => {
     if (type === "multiple") {
       if (selectedDateType === "start") {
-        // 선택된 날짜가 종료일보다 미래일 경우
         if (value.getTime() > endDate.getTime()) {
           setStartDate(value);
           setEndDate(value);
         }
-        // 종료일보다 과거이거나 같을경우
         else {
           setStartDate(value);
         }
-        // selectedDateType을 end로 변환
         setSelectedDateType("end");
       }
-      // selectedDateType이 end일 때
       else {
-        // 선택된 날짜가 시작일보다 과거일경우
         if (value.getTime() < startDate.getTime()) {
           setStartDate(value);
         }
-        // 선택된 날짜가 시작일보다 미래이거나 같을경우
         else {
           setEndDate(value);
         }
@@ -164,7 +158,7 @@ export const CalendarLayout = ({
       <div
         className={classes.calendar_outer_box}
         onClick={() => {
-          setCalendar(false);
+          setCalendar && setCalendar(false);
         }}
       ></div>
       <div className={classes.calendar_container}>

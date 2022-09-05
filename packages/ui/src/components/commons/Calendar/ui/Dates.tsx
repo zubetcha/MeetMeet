@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import classNames from "classnames";
 
 import classes from './calendar.module.scss';
-import { Cell } from '../../elements/Cells/Cell';
-import { DateType } from '../../../types/ui.types';
+import { Cell } from '../../../elements/Cells/Cell';
+import { DateType } from '../../../../types/ui.types';
 
 export interface Props {
     dateInfo: {

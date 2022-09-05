@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import type { NextPage } from "next";
 import { ReservationChart } from "components";
-import { CalendarLayout, Button } from "@components/ui";
+import { CalendarModal, Button } from "@components/ui";
 import { formatDate } from "ui/src/utils";
 import { Text } from "ui/src/pages";
 
@@ -91,7 +91,7 @@ const Home: NextPage = () => {
           />
         </div>
         {btnState && (
-          <CalendarLayout
+          <CalendarModal
             setCalendar={setBtnState}
             onClickSubmitBtn={(startDate: any) => {
               console.log(startDate);
