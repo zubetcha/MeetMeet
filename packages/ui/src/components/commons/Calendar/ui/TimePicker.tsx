@@ -4,12 +4,12 @@ import classes from './calendar.module.scss'
 
 interface Props {
   text: string;
-  children: JSX.Element
+  children: JSX.Element;
 }
 
 export const TimePicker = ({
   text,
-  children
+  children,
 }:Props) => {
   const [calendar, setCalendar] = useState<boolean>(false);
 

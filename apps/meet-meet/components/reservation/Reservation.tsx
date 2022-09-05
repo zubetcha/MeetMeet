@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import classes from './reservation.module.scss'
 import { TitleLayout } from './TitleLayout'
-import { CalendarModal, Select, Text, TimePicker } from '@components/ui'
+import { SingleCalendar, Select, Text, TimePicker } from '@components/ui'
 import { formatDate } from 'ui/src/utils'
 
 export const Reservation = () => {
@@ -10,8 +10,7 @@ export const Reservation = () => {
       new Date().getFullYear(),
       new Date().getMonth(),
       new Date().getDate() - 1
-    )
-  );
+  ));
 
   const roomList = new Array(4).fill(null).map((_, idx) => {
     return {
@@ -35,13 +34,12 @@ export const Reservation = () => {
         </Select>
       </TitleLayout>
       <TitleLayout title="날짜 선택" subTitle="2022-8-8 (목)" >
-          <TimePicker text={formatDate(date)} >
-            <CalendarModal
-              onClickSubmitBtn={() => {}}
+          <TimePicker 
+            text={formatDate(date)}  
+          >
+            <SingleCalendar
               date={date}
-              start={date}
-              end={date}
-              type="single"
+              onClickSubmitBtn={(date:Date) => {setDate(date)}}
             />
           </TimePicker>
           
