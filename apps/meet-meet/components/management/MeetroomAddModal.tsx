@@ -1,97 +1,62 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { useCreateMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
+import { useUploadImages, useCreateMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
+import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
+import { useMeetroomForm } from "@hooks/meetroom/useMeetroomForm";
 import meetroomState from "recoil/meetroom";
-import { convertHeicToJpg, checkBiteValid } from "ui/src/utils";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
-import { SelectItemType } from "ui/src/components/elements/Select/types/select.types";
-import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
 
 export const MeetroomAddModal = ({setIsAddModal}: Props) => {
+  const [isSuccessModal, setIsSuccessModal] = useState(false);
+
   const meetroomList = useRecoilValue(meetroomState);
 
-  const [values, setValues] = useState<{ name: string, seat: string, location: string, mergeRoomId: number | null }>({ name: "", seat: "", location: "", mergeRoomId: null })
-  const [images, setImages] = useState<{file: File | null, preview: string}[]>(new Array(3).fill({ file: null, preview: "" }));
-  const [hasMonitor, setHasMonitor] = useState(false);
-  const [isOverThree, setIsOverThree] = useState(false);
-  const [isOverSize, setIsOverSize] = useState(false);
-  const [btnState, setBtnState] = useState<StateType>("default");
+  const initialValues = { name: "", seat: "", location: "", mergeRoomId: null, hasMonitor: false };
+  const initialImages = new Array(3).fill({ file: null, preview: "" });
 
-  const { upload, create } = useCreateMeetroom();
+  const {
+    onChangeTextField,
+    onChangeMerge,
+    onChangeHasEquipment,
+    onDropImages,
+    setImages,
+    values,
+    images,
+    isOverThree,
+    isOverSize,
+    btnState
+  } = useMeetroomForm(initialValues, initialImages);
 
-  const onChangeMerge = (e: SelectItemType) => {
-    setValues({ ...values, mergeRoomId: parseInt(e.id) });
-  }
-
-  const onChangeTextField = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, id } = e.target;
-    const _value = name === "seat" ? value.replace(/[^0-9]/g, "") : value;
-  
-    setValues({ ...values, [name]: _value });
-  }
-
-  const onDropImages = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const droppedImages = images.filter((image) => image.file !== null);
-    const { files } = e.target;
-    const fileList = Object.values(files as FileList);
-
-    // DESCRIBE: 파일 개수 3개 제한 
-    if ((droppedImages.length + fileList.length) > 3) {
-      console.log("이미지 개수 3개 넘음")
-      setIsOverThree(true);
-      setTimeout(() => {
-        setIsOverThree(false);
-      }, 1300);
-
-      return;
-    }
-
-    // DESCRIBE: 이미지 크기 확인 
-    fileList.forEach((file) => {
-      const isOver = checkBiteValid(file.size, "MB", 10);
-
-      if (isOver) {
-        setIsOverSize(true);
-        setTimeout(() => {
-          setIsOverSize(false);
-        }, 1300)
-        
-        return;
-      }
-    })
-
-    // DESCRIBE: 이미지 확장자 확인 및 heic -> jpg 변환 
-    const newFiles = await Promise.all(fileList.map((file: File) => convertHeicToJpg(file)))
-
-    setImages([...droppedImages, ...newFiles]);
-  }, [images])
+  const upload = useUploadImages();
+  const create = useCreateMeetroom();
 
   const onClickCreate = () => {
     if (btnState === "disable") return;
-
-    const form = {...values, hasMonitor}
-
-    upload.mutateAsync(images).then(res => {
-      const meetroom = { ...form, images: res.data };
+    
+    // upload.mutateAsync(images).then(res => {
+      // const meetroom = { ...values, images: res.data };
+      const meetroom = { ...values, seat: parseInt(values.seat), images: [""] }; // TODO: images s3 url로 수정 
       create.mutateAsync(meetroom);
-    })
+    // })
   }
 
   useEffect(() => {
-    const { name, seat, location } = values;
+    if (create.isSuccess) {
+      setIsSuccessModal(true);
 
-    if (!name || !seat || !location) {
-      setBtnState("disable");
+      setTimeout(() => {
+        setIsSuccessModal(false);
+        setTimeout(() => {
+          setIsAddModal(false);
+        }, 500)
+      }, 1300);
     }
-    else if (name && seat && location) {
-      setBtnState("default");
-    }
-  }, [values])
+  }, [create.isSuccess])
 
   return (
     <>
@@ -122,8 +87,8 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
             <Checkbox
               name="monitor"
               id="monitor"
-              checked={hasMonitor}
-              onChange={(checked) => setHasMonitor(prev => !prev)}
+              checked={values.hasMonitor}
+              onChange={onChangeHasEquipment}
             >
               <Checkbox.Label>
                 모니터
@@ -172,6 +137,14 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
           <Modal.Icon name="error" color="warning" />
           <Modal.Contents>
             <Modal.Title>이미지는 한 개당 10MB까지 업로드할 수 있습니다.</Modal.Title>
+          </Modal.Contents>
+        </Modal>
+      )}
+      {isSuccessModal && (
+        <Modal>
+          <Modal.Icon name="done" color="primary" />
+          <Modal.Contents>
+            <Modal.Title>회의실 생성 완료</Modal.Title>
           </Modal.Contents>
         </Modal>
       )}

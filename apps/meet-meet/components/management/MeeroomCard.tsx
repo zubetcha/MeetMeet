@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useGetMeetroomImages, useGetMeetroomMergeInfo } from "@hooks/queries/meetroom/useGetQueries";
 import Image from "next/image";
 import classes from "./management.module.scss";
 
@@ -12,7 +13,10 @@ import logo from "ui/src/assets/img/logo_gec.png";
 export const MeetroomCard = ({meetroom}: Props) => {
   const [isEditModal, setIsEditModal] = useState(false);
   const { id, name, location, seat, canMerge, hasMonitor } = meetroom;
-  const textProps: {} = { type: "body-medium", color: "on-surface-variant", style: { fontWeight: "500" } }
+  const textProps: any = { type: "body-medium", color: "on-surface-variant", style: { fontWeight: "500" } }
+
+  const { data: imagesList } = useGetMeetroomImages(id);
+  const { data: mergeInfo } = useGetMeetroomMergeInfo(id);
   
   return (
     <>
@@ -47,7 +51,7 @@ export const MeetroomCard = ({meetroom}: Props) => {
           </CardDepth2.Contents>
         </CardDepth2>
       </div>
-      {isEditModal && <MeetroomEditModal setIsEditModal={setIsEditModal} meetroom={meetroom} />}
+      {isEditModal && <MeetroomEditModal setIsEditModal={setIsEditModal} meetroom={meetroom} mergeInfo={mergeInfo?.mergeInfoByMeetRoom} imageList={imagesList?.imageByMeetRoom} />}
     </>
   )
 }

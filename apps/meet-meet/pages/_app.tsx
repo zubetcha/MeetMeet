@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ApolloProvider client={client}>
           <RecoilRoot>
-            <RecoilObserver />
+            {/* <RecoilObserver /> */}
             <RouterGuard>
             {
               exceptionList.includes(router.pathname)

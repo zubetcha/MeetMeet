@@ -4,6 +4,9 @@
 .card-container {
   @include flex-direction(column);
   position: relative;
+  overflow: auto;
+
+  height: 100%;
 
   &.depth1 {
     border-radius: 16px;

@@ -27,29 +27,31 @@ const OnboardingPage = () => {
 
   return (
     <div className={classes["onboardingPage-container"]}>
-      <CardDepth1>
-        <CardDepth1.Contents>
-          <div className={classes["card-contents-wrapper"]}>
-            <div className={classes["card-title-wrapper"]}>
-              <div style={{ width: "144px" }}>
-                <SVG name="meetmeetHori" />
+      <div>
+        <CardDepth1>
+          <CardDepth1.Contents>
+            <div className={classes["card-contents-wrapper"]}>
+              <div className={classes["card-title-wrapper"]}>
+                <div style={{ width: "144px" }}>
+                  <SVG name="meetmeetHori" />
+                </div>
+                <Text type="headline-medium" style={{ fontWeight: "700" }}>
+                  회원 정보를 입력해주세요.
+                </Text>
               </div>
-              <Text type="headline-medium" style={{ fontWeight: "700" }}>
-                회원 정보를 입력해주세요.
-              </Text>
+              <UserForm values={values} onChangeTextField={onChangeTextField} onChangeDepartmentId={onChangeDepartmentId} />
+              <Button
+                label="입력 완료"
+                size="large"
+                configuration="filled"
+                style={{ width: "360px", justifyContent: "center" }}
+                state={btnState}
+                onClick={onClickMutateButton}
+              />
             </div>
-            <UserForm values={values} onChangeTextField={onChangeTextField} onChangeDepartmentId={onChangeDepartmentId} />
-            <Button
-              label="입력 완료"
-              size="large"
-              configuration="filled"
-              style={{ width: "360px", justifyContent: "center" }}
-              state={btnState}
-              onClick={onClickMutateButton}
-            />
-          </div>
-        </CardDepth1.Contents>
-      </CardDepth1>
+          </CardDepth1.Contents>
+        </CardDepth1>
+      </div>
     </div>
   );
 };

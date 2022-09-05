@@ -2,7 +2,7 @@
 @import "ui/src/styles/utils";
 
 .container {
-  width: fit-content;
+  width: 380px;
 
   .text-wrapper {
     @include flex-direction(column, 8);

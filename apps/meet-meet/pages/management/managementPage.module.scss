@@ -7,4 +7,15 @@
   .button-wrapper {
     @include flexbox(end, center);
   }
+
+  .meetroomCard-container {
+    height: calc(100vh - 112px);
+
+    .meetroomCards-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 380px);
+      gap: 24px;
+      overflow-y: hidden;
+    }
+  }
 }

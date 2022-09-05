@@ -7,6 +7,7 @@ export const ImagePlaceholder = ({ onChange, preview, setImages }: Props) => {
 
   const onClickCancel = () => {
     setImages(prev => prev.filter(image => image.preview !== preview));
+    URL.revokeObjectURL(preview as string);
   }
 
   if (preview) {
@@ -17,10 +18,11 @@ export const ImagePlaceholder = ({ onChange, preview, setImages }: Props) => {
       </div>
     )
   }
+
   return (
     <>
       <label className={classes["imagePlaceholder-container"]} htmlFor="image-upload">
-        <SVG width="48px" height="48px" name="add" />
+        <SVG width="32px" height="32px" name="add" />
       </label>
       <input className={classes.input} type="file" id="image-upload" accept=".jpg, .jpeg, .png, .heic" multiple onChange={(e) => onChange(e)}/>
     </>
