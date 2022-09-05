@@ -22,8 +22,9 @@ export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: 
         setValues({ ...values, [name]: _value });
     };
 
-    const onChangeHasEquipment = () => {
-        setValues({ ...values, hasMonitor: false });
+    const onChangeHasEquipment = (checked: boolean) => {
+      console.log(checked)
+        setValues({ ...values, hasMonitor: !values.hasMonitor });
     }
 
     const onDropImages = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {

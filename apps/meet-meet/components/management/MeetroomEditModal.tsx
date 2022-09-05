@@ -65,7 +65,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
 
   return (
     <>
-      <Modal>
+      <Modal setIsOpen={setIsEditModal}>
         <Modal.Title type="title-large" weight="700">회의실 수정</Modal.Title>
         <Modal.Contents>
 

@@ -4,8 +4,6 @@
 .card-container {
   @include flex-direction(column);
   position: relative;
-  overflow: auto;
-
   height: 100%;
 
   &.depth1 {
@@ -39,6 +37,7 @@
 
 .card-contents {
   @include flex-direction(column, 24);
+  height: calc(100% - 40px);
 
   &.depth1 {
     padding: 24px 32px 32px 32px;

@@ -15,7 +15,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, 380px);
       gap: 24px;
-      overflow-y: hidden;
+      overflow: hidden auto;
+      @include scroll-bar();
     }
   }
 }

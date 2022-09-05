@@ -4,7 +4,7 @@ import Image from "next/image";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
-import { CardDepth2, IconButton, Text } from "ui/src/pages"
+import { CardDepth2, IconButton, Text, Checkbox } from "ui/src/pages"
 import { EquipmentCheckbox } from "./EquipmentCheckbox";
 import { MeetroomEditModal } from "./MeetroomEditModal";
 

@@ -52,7 +52,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
 
   return (
     <>
-      <Modal>
+      <Modal setIsOpen={setIsAddModal}>
         <Modal.Title type="title-large" weight="700">회의실 생성</Modal.Title>
         <Modal.Contents>
           <TextField name="name" status="default">
