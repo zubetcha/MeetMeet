@@ -40,11 +40,7 @@ export const TextFieldInput = ({
           value={value}
           onFocus={() => setIsFocused && setIsFocused(true)}
           onBlur={() => setIsFocused && setIsFocused(false)}
-          disabled={
-            status == "disable" || status == "fixed" || type === "input"
-              ? true
-              : false
-          }
+          disabled={status == "disable" || status == "fixed" ? true : false}
           onChange={onChange}
           placeholder={isFocused ? "" : placeholder}
           maxLength={maxLength as number}

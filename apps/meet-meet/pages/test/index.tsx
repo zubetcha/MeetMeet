@@ -214,7 +214,6 @@ export default function TestPage() {
           isSearch={true}
           defaultValues={["5분"]}
           onChange={(e: any) => console.log(e)}
-          defaultIsOpen={true}
           style={{ width: "250px" }}
         >
           <MultiSelect.Option id="1" name="5분" />

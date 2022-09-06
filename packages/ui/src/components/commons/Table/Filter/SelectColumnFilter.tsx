@@ -14,25 +14,10 @@ export const MultiFilter = (rows: any, columnIds: any, filterValues: any) => {
 export function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id },
 }: any) {
-  const [isShowFilter, setIsShowFilter] = useState(false);
-  const [selected, setSelected] = useState<any[]>();
+  const [initialValues, setInitialValues] = useState<any[]>([]);
   const [isHoverFilter, setIsHoverFilter] = useState(false);
   const wrapperRef = useRef(null as any);
-
-  useEffect(() => {
-    if (filterValue === undefined) {
-      setSelected(undefined);
-    } else {
-      let selectedValues = filterValue.map((value: string, idx: number) => {
-        return {
-          id: idx,
-          name: value,
-        };
-      });
-      setSelected([...selectedValues]);
-    }
-    console.log(filterValue);
-  }, [filterValue]);
+  const firstRef = useRef(true);
 
   const dropdownItems = React.useMemo(() => {
     const options = new Set();
@@ -50,13 +35,23 @@ export function SelectColumnFilter({
     return dropdownItems;
   }, [id, preFilteredRows]);
 
+  useEffect(() => {
+    console.log("filterValue", filterValue);
+  }, [filterValue]);
+
+  useEffect(() => {
+    if (firstRef && dropdownItems && dropdownItems.length > 0) {
+      setInitialValues([...dropdownItems.map((item) => item.name)]);
+      firstRef.current = false;
+    }
+  }, [dropdownItems]);
   // useEffect(()=>{
   //   if(selected){
   //     setFilter(selected?.map((item)=>item.name));
   //   }
   // },[selected]);
 
-  // Render a multi-select box
+  // Render a multi-select bo
   return (
     <>
       <span
@@ -74,10 +69,15 @@ export function SelectColumnFilter({
           <MultiSelect
             style={{ width: "250px" }}
             isSearch={true}
-            defaultIsOpen={true}
-            onChange={(items) =>
-              setFilter(items?.map((item: any) => item.name))
-            }
+            triggerButtonType="icon"
+            defaultValues={initialValues}
+            onChange={(items) => {
+              if (items.length === dropdownItems.length) {
+                setFilter([]);
+                return;
+              }
+              setFilter(items?.map((item: any) => item.name));
+            }}
           >
             {dropdownItems?.map((item, i) => (
               <MultiSelect.Option

@@ -9,7 +9,6 @@ interface Props {
   isOpen: boolean;
   triggerButtonType?: "button" | "icon";
   setIsOpen: (e: boolean) => void;
-  isShowTriggerButton: boolean;
   isShowSearchField: boolean;
   children: React.ReactElement[];
 }
@@ -17,9 +16,7 @@ export default function MultiSelectWrapper({
   style,
   isOpen,
   triggerButtonType,
-  isShowTriggerButton,
   isShowSearchField,
-  setIsOpen,
   children,
 }: Props) {
   // const [selectedItemNumber, setSelectedItemNumber] = useState(0);
@@ -33,7 +30,7 @@ export default function MultiSelectWrapper({
 
   return (
     <div ref={ref} className={classes.selectContainer}>
-      {isShowTriggerButton && triggerButtonType === "button" ? (
+      {triggerButtonType === "button" ? (
         <MultiSelect.Trigger />
       ) : (
         <MultiSelect.TriggerIcon />

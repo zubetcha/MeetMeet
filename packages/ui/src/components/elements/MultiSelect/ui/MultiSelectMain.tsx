@@ -5,7 +5,6 @@ import MultiSelectWrapper from "./MultiSelectWrapper";
 
 interface SelectProps {
   isSearch?: boolean;
-  defaultIsOpen?: boolean;
   triggerButtonType?: "button" | "icon";
   defaultValues?: string[];
   onChange: (e: SelectItemType[]) => void;
@@ -23,9 +22,8 @@ interface SelectProps {
  */
 export function MultiSelectMain({
   isSearch = false,
-  // defaultIsOpen = false,
   defaultValues,
-  triggerButtonType = "icon",
+  triggerButtonType = "button",
   onChange,
   style = { width: "220px" },
   children,
@@ -38,7 +36,7 @@ export function MultiSelectMain({
     onChange(selected);
   }, [selected]);
 
-  const isShowTriggerButton = !isOpen || (isOpen && !isSearch);
+  // const isShowTriggerButton = !isOpen || (isOpen && !isSearch);
   const isShowSearchField = isOpen && isSearch;
   // const selectedItemNumber = useMemo(()=>selected.filter((item:any)=>item.checked || 0).length,[selected])
 
@@ -56,7 +54,6 @@ export function MultiSelectMain({
           triggerButtonType={triggerButtonType}
           setIsOpen={setIsOpen}
           isShowSearchField={isShowSearchField}
-          isShowTriggerButton={isShowTriggerButton}
         >
           {children}
         </MultiSelectWrapper>

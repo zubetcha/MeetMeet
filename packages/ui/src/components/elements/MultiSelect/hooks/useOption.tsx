@@ -8,7 +8,7 @@ interface Props {
 
 export function useOption({ id, name }: Props) {
   const [isShow, setIsShow] = useState(true);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const {
     values,
     defaultValues,
