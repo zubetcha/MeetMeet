@@ -19,7 +19,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
 
   const meetroomList = useRecoilValue(meetroomState);
   const upload = useUploadImages();
-  const create = useCreateMeetroom();
+  const create = useCreateMeetroom(setIsAddModal);
   const { handleSuccess } = useHandleSuccess();
   const {
     onChangeTextField,
@@ -27,11 +27,13 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
     onChangeHasEquipment,
     onDropImages,
     setImages,
+    setIsSameName,
     values,
     images,
     isOverThree,
     isOverSize,
-    btnState
+    btnState,
+    isSameName
   } = useMeetroomForm(initialValues, initialImages);
 
   const onClickCreate = () => {
@@ -43,11 +45,12 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
     })
   }
 
-  useEffect(() => {
-    if (create.isSuccess) {
-      handleSuccess({ title: "회의실 생성 완료", setIsModal: setIsAddModal })
+    useEffect(() => {
+    const { isError, error } = create;
+    if (isError && error.response.data.code === -301) {
+      setIsSameName(true);
     }
-  }, [create.isSuccess])
+  }, [create.error, create.isError])
 
   return (
     <>
@@ -55,10 +58,10 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
         <Modal.Title type="title-large" weight="700">회의실 생성</Modal.Title>
         <Modal.Contents>
 
-          <TextField name="name" status="default">
+          <TextField name="name" status={isSameName ? "danger" : "default"}>
             <TextField.Label>이름</TextField.Label>
             <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
-            <TextField.HelperText> </TextField.HelperText>
+            <TextField.HelperText>{isSameName && "이미 존재하는 회의실입니다."}</TextField.HelperText>
           </TextField>
 
           <TextField name="mergeRoom" status="default">

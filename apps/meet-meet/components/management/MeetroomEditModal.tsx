@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useMeetroomForm } from "@hooks/meetroom/useMeetroomForm";
 import { useRecoilValue } from "recoil";
 import { useUploadImages, useUpdateMeetroom, useDeleteImages, useDeleteMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
-import { useHandleSuccess } from "@hooks/common/useHandleSuccess";
 import meetroomState from "recoil/meetroom";
 import classes from "./management.module.scss";
 
@@ -20,23 +19,25 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
   const initialValues = { name, seat: String(seat), location, mergeRoomId: null, hasMonitor };
   const initialImages = new Array(3).fill({ file: null, preview: "" }); // TODO: preview에 imageList의 url 넣어주기 
 
-  const [ deleteMeetroom, { data } ] = useDeleteMeetroom();
-  // const uploadImages = useUploadImages();
-  const updateMeetroom = useUpdateMeetroom();
-  // const deleteImages = useDeleteImages();
-  const { handleSuccess } = useHandleSuccess();
   const {
     onChangeMerge,
     onChangeTextField,
     onChangeHasEquipment,
     onDropImages,
     setImages,
+    setIsSameName,
     values,
     images,
     isOverThree,
     isOverSize,
-    btnState
+    btnState,
+    isSameName
   } = useMeetroomForm(initialValues, initialImages);
+
+  const [ deleteMeetroom, { data } ] = useDeleteMeetroom(setIsEditModal, setIsDeleteModal);
+  // const upload = useUploadImages();
+  const updateMeetroom = useUpdateMeetroom(setIsEditModal);
+  // const deleteImages = useDeleteImages();
 
   const onClickUpdate = () => {
     if (btnState === "disable") return;
@@ -51,19 +52,20 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
       const newImages: string[] = [];
       const info = { ...values, seat: parseInt(values.seat), oldImages, newImages }; // TODO: images s3 url로 수정 
       const meetroom = { meetroomId: id, info };
-      updateMeetroom.mutateAsync(meetroom).then(res => handleSuccess({ title: "회의실 수정 완료", setIsModal: setIsEditModal }));
+      updateMeetroom.mutateAsync(meetroom);
     // })
   }
 
   const onClickDelete = () => {
-    deleteMeetroom({ variables: { id } }).then(({data}) => {
-      // deleteImages.mutateAsync({ images: imageList });
-      // TODO: s3 이미지 삭제 API 
-      if (data.deleteMeetroom.code === 200) {
-        handleSuccess({ title: "회의실 삭제 완료", setIsModal: setIsEditModal })
-      }
-    });
+    deleteMeetroom({ variables: { id } });
   };
+
+  useEffect(() => {
+    const { isError, error } = updateMeetroom;
+    if (isError && error.response.data.code === -301) {
+      setIsSameName(true);
+    }
+  }, [updateMeetroom.error, updateMeetroom.isError])
 
   return (
     <>
@@ -71,9 +73,10 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
         <Modal.Title type="title-large" weight="700">회의실 수정</Modal.Title>
         <Modal.Contents>
 
-          <TextField name="name" status="default">
+          <TextField name="name"  status={isSameName ? "danger" : "default"}>
             <TextField.Label>이름</TextField.Label>
             <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
+            <TextField.HelperText>{isSameName && "이미 존재하는 회의실입니다."}</TextField.HelperText>
           </TextField>
 
           <TextField name="mergeRoom" status="default">

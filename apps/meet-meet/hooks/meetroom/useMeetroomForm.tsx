@@ -9,6 +9,7 @@ export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: 
     const [images, setImages] = useState<meetroomImagesType[]>(initialImages);
     const [isOverThree, setIsOverThree] = useState(false);
     const [isOverSize, setIsOverSize] = useState(false);
+    const [isSameName, setIsSameName] = useState(false);
     const [btnState, setBtnState] = useState<StateType>("disable");
 
     const onChangeMerge = (e: SelectItemType) => {
@@ -18,12 +19,15 @@ export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: 
     const onChangeTextField = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value, id } = e.target;
         const _value = name === "seat" ? value.replace(/[^0-9]/g, "") : value;
+
+        if (isSameName) {
+          setIsSameName(false);
+        }
         
         setValues({ ...values, [name]: _value });
     };
 
     const onChangeHasEquipment = (checked: boolean) => {
-      console.log(checked)
         setValues({ ...values, hasMonitor: !values.hasMonitor });
     }
 
@@ -93,11 +97,13 @@ export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: 
       onChangeHasEquipment,
       onDropImages,
       setImages,
+      setIsSameName,
       values,
       images,
       isOverThree,
       isOverSize,
-      btnState
+      btnState,
+      isSameName,
     }
 };
 
