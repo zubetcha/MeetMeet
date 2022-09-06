@@ -17,7 +17,7 @@ export const TitleLayout = ({
     <div className={classes["title-container"]} >
       <div className={classes['title-layout']} >
         <div className={classes['title-box']} >
-          <Text type={'title-medium'} >{title}</Text>
+          <Text type={'title-medium'} style={{fontWeight:'bold'}} >{title}</Text>
           {subTitle && 
             <Text 
               type={'title-small'} 
@@ -29,8 +29,7 @@ export const TitleLayout = ({
         </div>
         <div className={classes['title-divider']} />
       </div>
-
-      {children}
+      {children}  
     
     </div>
   )

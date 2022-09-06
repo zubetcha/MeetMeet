@@ -1,8 +1,8 @@
 .page-container{
   display: flex;
   flex-direction: column;
-  gap: 47px;
-  padding: 26px 28px;
+  gap: 40px;
+  padding: 40px 28px;
   width: 645px;
 }
 
@@ -21,6 +21,7 @@
       padding: 0px 0px 0px 5px;
       gap: 28px;
       align-items: flex-end;
+      margin-bottom:-8px;
     }
 
     .title-divider {
@@ -29,4 +30,23 @@
       border: 1px solid var(--color-outline);
     }
   }
+
+  .children-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .team-select {
+      width: 150px;
+    }
+
+    .member-select {
+      width: 401px;
+    }
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
 }
