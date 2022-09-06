@@ -37,11 +37,11 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
   const onClickCreate = () => {
     if (btnState === "disable") return;
     
-    // upload.mutateAsync(images).then(res => {
-      // const meetroom = { ...values, images: res.data };
-      const meetroom = { ...values, seat: parseInt(values.seat), images: [""] }; // TODO: images s3 url로 수정 
+    upload.mutateAsync(images).then(res => {
+      const meetroom = { ...values, images: res.data };
+      // const meetroom = { ...values, seat: parseInt(values.seat), images: [""] }; // TODO: images s3 url로 수정 
       create.mutateAsync(meetroom);
-    // })
+    })
   }
 
   useEffect(() => {
