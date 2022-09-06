@@ -21,9 +21,9 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
   const initialImages = new Array(3).fill({ file: null, preview: "" }); // TODO: preview에 imageList의 url 넣어주기 
 
   const [ deleteMeetroom, { data } ] = useDeleteMeetroom();
-  const uploadImages = useUploadImages();
+  // const uploadImages = useUploadImages();
   const updateMeetroom = useUpdateMeetroom();
-  const deleteImages = useDeleteImages();
+  // const deleteImages = useDeleteImages();
   const { handleSuccess } = useHandleSuccess();
   const {
     onChangeMerge,
@@ -46,10 +46,12 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
     // TODO: newImages: images 중 file이 null이고 preview는 s3 url인 요소들.concat(새로 변환한 s3 url들) 
     // upload.mutateAsync(images).then(res => {
       // const meetroom = { ...values, images: res.data };
-      const oldImages = imageList;
+      const oldImages: string[] = [];
       // const newImages = [...images에서 file이 null인 preview들, ...res.data];
-      const meetroom = { ...values, seat: parseInt(values.seat), images: [""] }; // TODO: images s3 url로 수정 
-      updateMeetroom.mutateAsync(meetroom);
+      const newImages: string[] = [];
+      const info = { ...values, seat: parseInt(values.seat), oldImages, newImages }; // TODO: images s3 url로 수정 
+      const meetroom = { meetroomId: id, info };
+      updateMeetroom.mutateAsync(meetroom).then(res => handleSuccess({ title: "회의실 수정 완료", setIsModal: setIsEditModal }));
     // })
   }
 
@@ -69,12 +71,12 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
         <Modal.Title type="title-large" weight="700">회의실 수정</Modal.Title>
         <Modal.Contents>
 
-          <TextField name="meetingroom-name" status="default">
+          <TextField name="name" status="default">
             <TextField.Label>이름</TextField.Label>
             <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
           </TextField>
 
-          <TextField name="meetingroom-merge" status="default">
+          <TextField name="mergeRoom" status="default">
             <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
             <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
               {meetroomList.map((meetroom: MeetRoom) => {
@@ -84,7 +86,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
             </Select>
           </TextField>
 
-          <TextField name="meetingroom-accommodate" status="default">
+          <TextField name="seat" status="default">
             <TextField.Label>수용 인원</TextField.Label>
             <TextField.Input type="text" value={values.seat} placeholder="수용 인원을 선택해주세요." onChange={onChangeTextField}>
               <TextField.Unit>명</TextField.Unit>
@@ -92,7 +94,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
             </TextField.Input>
           </TextField>
 
-          <TextField name="meetingroom-equipment" status="default">
+          <TextField name="equipment" status="default">
             <TextField.Label>장비 여부</TextField.Label>
             <Checkbox
               name="monitor"
@@ -104,7 +106,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
             </Checkbox>
           </TextField>
 
-          <TextField name="meetingroom-location" status="default">
+          <TextField name="location" status="default">
             <TextField.Label>위치</TextField.Label>
             <TextField.Textarea value={values.location} placeholder="회의실 위치 정보를 입력해주세요."  onChange={onChangeTextField}/>
           </TextField>
@@ -138,6 +140,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
             size="medium"
             configuration="filled"
             state={btnState}
+            onClick={onClickUpdate}
           />
         </div>
       </Modal>

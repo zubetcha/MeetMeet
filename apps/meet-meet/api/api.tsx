@@ -12,5 +12,5 @@ export const MeetroomAPI = {
   deleteImages: (images: string[] ) => api.delete("/images", { images }),
 
   createMeetroom: (meetroom: any) => api.post("/meetroom", meetroom),
-  updateMeetroom: (meetroom: any) => api.put(`/meetroom/${meetroom.meetroonId}`, meetroom.info)
+  updateMeetroom: (meetroom: any) => api.put(`/meetroom/${meetroom.meetroomId}`, meetroom.info)
 }

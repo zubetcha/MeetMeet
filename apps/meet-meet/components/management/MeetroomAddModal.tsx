@@ -39,7 +39,6 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
     
     upload.mutateAsync(images).then(res => {
       const meetroom = { ...values, images: res.data };
-      // const meetroom = { ...values, seat: parseInt(values.seat), images: [""] }; // TODO: images s3 url로 수정 
       create.mutateAsync(meetroom);
     })
   }
@@ -55,12 +54,14 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
       <Modal setIsOpen={setIsAddModal}>
         <Modal.Title type="title-large" weight="700">회의실 생성</Modal.Title>
         <Modal.Contents>
+
           <TextField name="name" status="default">
             <TextField.Label>이름</TextField.Label>
             <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
             <TextField.HelperText> </TextField.HelperText>
           </TextField>
-          <TextField name="meetingroom-merge" status="default">
+
+          <TextField name="mergeRoom" status="default">
             <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
             <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
               {meetroomList.map((meetroom: MeetRoom) => {
@@ -69,13 +70,15 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
               })}
             </Select>
           </TextField>
+
           <TextField name="seat" status="default">
             <TextField.Label>수용 인원</TextField.Label>
             <TextField.Input type="text" value={values.seat} placeholder="수용 인원을 입력해주세요." onChange={onChangeTextField}>
               <TextField.Unit>명</TextField.Unit>
             </TextField.Input>
           </TextField>
-          <TextField name="meetingroom-equipment" status="default">
+
+          <TextField name="equipment" status="default">
             <TextField.Label>장비 여부</TextField.Label>
             <Checkbox
               name="monitor"
@@ -88,6 +91,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
               </Checkbox.Label>
             </Checkbox>
           </TextField>
+
           <TextField name="location" status="default">
             <TextField.Label>위치</TextField.Label>
             <TextField.Textarea value={values.location} placeholder="회의실 위치 정보를 입력해주세요." onChange={onChangeTextField}/>
@@ -100,6 +104,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
               })}
             </div>
           </div>
+
         </Modal.Contents>
         <div className={classes["modal-buttons-wrapper"]}>
           <Button
