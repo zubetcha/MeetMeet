@@ -11,14 +11,14 @@ export const SelectContext = createContext({
   // 현재 Option 요소들의 상태 (id, name, checked 로 이루어져 있음)
   values: [] as SelectItemType[] | undefined,
   // 선택 완료 버튼을 클릭해, onChange 함수로 넘겨줄 상태값
-  confirmedValues:[] as SelectItemType[] | undefined,
-  // 검색 결과에 일치하는 Option 요소들 
+  confirmedValues: [] as SelectItemType[] | undefined,
+  // 검색 결과에 일치하는 Option 요소들
   searchResult: [] as SelectItemType[] | undefined,
   // 초기 checked 되어있는 Option 의 name 리스트
   defaultValues: undefined as string[] | undefined,
   // 현재 드롭다운 열려있는지/ 닫혀있는지 상태값
   isOpen: false,
-  // 현재 선택되어 있는 요소들 개수 
+  // 현재 선택되어 있는 요소들 개수
   currentSelectedNumber: 0,
   // onChagne 함수로 넘겨줄 상태값 setState 함수
   setValues: (e: SelectItemType) => {},
@@ -33,9 +33,9 @@ export const SelectContext = createContext({
   // value 전체 해제 UNCHECKED_ALL dispatch 함수
   onClickUncheckedAll: () => {},
   // confirmedValues 반영 함수 (선택 완료)
-  onClickConfirm : ()=> {},
+  onClickConfirm: () => {},
   // confirmedValues 이전 상태로 초기화하는 함수 (창 닫기, 외부 클릭)
-  onClickCancel: ()=>{},
+  onClickCancel: () => {},
   firstRender: false,
 });
 
@@ -147,7 +147,7 @@ export const SelectProvider = ({
   setIsOpen,
   children,
 }: SelectProps) => {
-  const [confirmedState, setConfirmedState]=useState<any[] | undefined>();
+  const [confirmedState, setConfirmedState] = useState<any[] | undefined>();
   const [state, dispatch] = useReducer(reducer, []);
   const [selected, setSelected] = useState<any[]>([]);
   const [currentSelectedNumber, setCurrentSelectedNumber] = useState(0);
@@ -161,26 +161,28 @@ export const SelectProvider = ({
   }, [selected]);
 
   useEffect(() => {
-    if(!confirmedState) return;
+    if (!confirmedState) return;
     const selectedItems = confirmedState.filter((item: any) => item.checked);
     setSelected(selectedItems);
   }, [confirmedState]);
 
-  useEffect(()=>{
-    if(!state) return; 
-    const currentSelectedItemNumers = state.filter((item:any)=>item.checked).length;
+  useEffect(() => {
+    if (!state) return;
+    const currentSelectedItemNumers = state.filter(
+      (item: any) => item.checked
+    ).length;
     setCurrentSelectedNumber(currentSelectedItemNumers);
-  },[state])
+  }, [state]);
 
-  useEffect(()=>{
-    if(state.length>0 && defaultValues && !confirmedState){
+  useEffect(() => {
+    if (state.length > 0 && defaultValues && !confirmedState) {
       setConfirmedState(state);
     }
-  },[state, defaultValues, confirmedState])
+  }, [state, defaultValues, confirmedState]);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("confirmedState", confirmedState);
-  },[confirmedState]);
+  }, [confirmedState]);
 
   return (
     <>
@@ -233,16 +235,16 @@ export const SelectProvider = ({
             });
           },
           firstRender: firstRender.current,
-          onClickConfirm: ()=>{
-            setConfirmedState(state)
-            setIsOpen(false)
+          onClickConfirm: () => {
+            setConfirmedState(state);
+            setIsOpen(false);
           },
-          onClickCancel : ()=>{
+          onClickCancel: () => {
             dispatch({
-              type:"INITIALIZE",
-              value:confirmedState
-            })
-            setIsOpen(false)
+              type: "INITIALIZE",
+              value: confirmedState || [],
+            });
+            setIsOpen(false);
           },
         }}
       >

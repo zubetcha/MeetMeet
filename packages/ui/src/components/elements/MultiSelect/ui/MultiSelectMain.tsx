@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { SelectProvider } from "../hooks/SelectContext";
 import { SelectItemType } from "../types/select.types";
-import MultiSelectWrapper from './MultiSelectWrapper';
+import MultiSelectWrapper from "./MultiSelectWrapper";
+
 interface SelectProps {
   isSearch?: boolean;
+  defaultIsOpen?: boolean;
+  triggerButtonType?: "button" | "icon";
   defaultValues?: string[];
   onChange: (e: SelectItemType[]) => void;
   style?: any;
@@ -20,7 +23,9 @@ interface SelectProps {
  */
 export function MultiSelectMain({
   isSearch = false,
+  // defaultIsOpen = false,
   defaultValues,
+  triggerButtonType = "icon",
   onChange,
   style = { width: "220px" },
   children,
@@ -48,6 +53,7 @@ export function MultiSelectMain({
         <MultiSelectWrapper
           style={style}
           isOpen={isOpen}
+          triggerButtonType={triggerButtonType}
           setIsOpen={setIsOpen}
           isShowSearchField={isShowSearchField}
           isShowTriggerButton={isShowTriggerButton}

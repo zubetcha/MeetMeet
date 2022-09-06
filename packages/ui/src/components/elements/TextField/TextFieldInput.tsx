@@ -30,15 +30,21 @@ export const TextFieldInput = ({
         <input
           className={classNames(
             classes["wrapper__input-box__input"],
-            classes[`wrapper__input-box__input--${status}`], {
-            [classes.focused]: isFocused,
-          })}
+            classes[`wrapper__input-box__input--${status}`],
+            {
+              [classes.focused]: isFocused,
+            }
+          )}
           type={type}
           name={name}
           value={value}
           onFocus={() => setIsFocused && setIsFocused(true)}
           onBlur={() => setIsFocused && setIsFocused(false)}
-          disabled={status == "disable" || status == "fixed" ? true : false}
+          disabled={
+            status == "disable" || status == "fixed" || type === "input"
+              ? true
+              : false
+          }
           onChange={onChange}
           placeholder={isFocused ? "" : placeholder}
           maxLength={maxLength as number}

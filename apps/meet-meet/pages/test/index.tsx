@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   ButtonGroup,
@@ -8,6 +8,9 @@ import {
 } from "ui/src/components/elements";
 
 export default function TestPage() {
+  useEffect(() => {
+    console.log(new Date());
+  }, []);
   return (
     <>
       <div
@@ -211,6 +214,7 @@ export default function TestPage() {
           isSearch={true}
           defaultValues={["5분"]}
           onChange={(e: any) => console.log(e)}
+          defaultIsOpen={true}
           style={{ width: "250px" }}
         >
           <MultiSelect.Option id="1" name="5분" />
@@ -222,7 +226,7 @@ export default function TestPage() {
           <MultiSelect.Option id="7" name="50분" />
         </MultiSelect>
         <Select
-          isSearch={true}
+          isSearch={false}
           defaultValue="5분"
           onChange={(e: any) => console.log(e)}
           style={{ width: "250px" }}
