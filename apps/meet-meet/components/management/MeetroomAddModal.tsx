@@ -2,25 +2,24 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useUploadImages, useCreateMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
 import { useMeetroomForm } from "@hooks/meetroom/useMeetroomForm";
-import { useHandleSuccess } from "@hooks/common/useHandleSuccess";
 import meetroomState from "recoil/meetroom";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
+import { ImagePreview } from "./ImagePreview";
 import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
 
 // TODO: code: -301, message: 이미 존재하는 회의실입니다.
 export const MeetroomAddModal = ({setIsAddModal}: Props) => {
 
   const initialValues = { name: "", seat: "", location: "", mergeRoomId: null, hasMonitor: false };
-  const initialImages = new Array(3).fill({ file: null, preview: "" });
+  const initialImages = new Array(3).fill({ file: null, url: "" });
 
   const meetroomList = useRecoilValue(meetroomState);
   const upload = useUploadImages();
   const create = useCreateMeetroom(setIsAddModal);
-  const { handleSuccess } = useHandleSuccess();
   const {
     onChangeTextField,
     onChangeMerge,
@@ -103,7 +102,9 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
             <TextField.Label>회의실 사진</TextField.Label>
             <div className={classes["images-wrapper"]}>
               {new Array(3).fill(0).map((_, index) => {
-                return <ImagePlaceholder key={index} onChange={onDropImages} preview={images[index]?.preview || undefined} setImages={setImages}  />
+                return images[index]?.url
+                ? <ImagePreview key={images[index]?.url} url={images[index]?.url} setImages={setImages} />
+                : <ImagePlaceholder key={index} onChange={onDropImages}  />
               })}
             </div>
           </div>

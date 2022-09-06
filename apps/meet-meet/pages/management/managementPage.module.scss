@@ -13,7 +13,7 @@
 
     .meetroomCards-wrapper {
       display: grid;
-      grid-template-columns: repeat(auto-fit, 380px);
+      grid-template-columns: repeat(auto-fit, 440px);
       gap: 24px;
       overflow: hidden auto;
       @include scroll-bar();

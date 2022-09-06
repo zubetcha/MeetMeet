@@ -11,14 +11,14 @@ export const convertHeicToJpg = async (file: any) => {
             const url = URL.createObjectURL(result as Blob);
             const newFile = new File([result as Blob], "heic." + "jpg",{type:"image/jpeg", lastModified:new Date().getTime()});
 
-            return { file: newFile, preview: url };
+            return { file: newFile, url };
         }).catch((error: any) => console.log(error));
 
         newFile = convertedFile;
     }
     else if (!(fileExt === "heic")) {
         const url = URL.createObjectURL(file);
-        newFile = { file, preview: url };
+        newFile = { file, url };
     }
 
     return newFile;

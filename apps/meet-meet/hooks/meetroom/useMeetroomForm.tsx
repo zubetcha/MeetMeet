@@ -32,7 +32,7 @@ export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: 
     }
 
     const onDropImages = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const droppedImages = images.filter((image) => image.preview !== "");
+        const droppedImages = images.filter((image) => image.url !== "");
         const { files } = e.target;
         const fileList = Object.values(files as FileList);
 
@@ -70,9 +70,9 @@ export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: 
     // DESCRIBE: 언마운트 시 상태 초기화 및 객체 url 메모리 해제 
     const clearStates = () => {
       setValues({ name: "", seat: "", location: "", mergeRoomId: null, hasMonitor: false });
-      setImages(new Array(3).fill({ file: null, preview: "" }));
+      setImages(new Array(3).fill({ file: null, url: "" }));
       images.forEach((image) => {
-        URL.revokeObjectURL(image.preview);
+        URL.revokeObjectURL(image.url);
       })
     }
 
@@ -118,5 +118,5 @@ export interface meetroomFormType {
 
 export interface meetroomImagesType {
     file: File | null;
-    preview: string;
+    url: string;
 }

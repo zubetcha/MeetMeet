@@ -15,7 +15,6 @@ export interface MeetRoomData {
 
 export interface MeetRoomImage {
     id: number;
-    meetRoom: MeetRoom;
     url: string;
 }
 
@@ -25,10 +24,12 @@ export interface MeetroomImageData {
 
 export interface MeetRoomMergeInfo {
     id: number;
-    meetRoom: MeetRoom;
-    mergeRoom: MeetRoom;
+    mergeRoom: {
+        id: number;
+        name: string;
+    };
 }
 
 export interface MeetRoomMergeInfoData {
-    mergeInfoByMeetRoom: MeetRoomMergeInfo[]
+    mergeInfoByMeetRoom: MeetRoomMergeInfo;
 }

@@ -8,6 +8,7 @@ import classes from "./management.module.scss";
 import { MeetRoom, MeetRoomImage, MeetRoomMergeInfo } from "graphql/meetroom/types";
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
+import { ImagePreview } from "./ImagePreview";
 import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
 
 export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInfo}: Props) => {
@@ -15,9 +16,10 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
 
   const { id, name, location, seat, canMerge, hasMonitor } = meetroom;
   const meetroomList = useRecoilValue(meetroomState);
-  const imageUrls = imageList?.map((image) => image.url);
-  const initialValues = { name, seat: String(seat), location, mergeRoomId: null, hasMonitor };
-  const initialImages = new Array(3).fill({ file: null, preview: "" }); // TODO: preview에 imageList의 url 넣어주기 
+  const initialValues = { name, seat: String(seat), location, mergeRoomId: mergeInfo?.mergeRoom?.id || null, hasMonitor };
+  const initialImages = new Array(3).fill(0).map((_, index) => {
+    return { file: null, url: imageList && imageList[index]?.url || "" }
+  }); // TODO: preview에 imageList의 url 넣어주기 
 
   const {
     onChangeMerge,
@@ -35,25 +37,30 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
   } = useMeetroomForm(initialValues, initialImages);
 
   const [ deleteMeetroom, { data } ] = useDeleteMeetroom(setIsEditModal, setIsDeleteModal);
-  // const upload = useUploadImages();
-  const updateMeetroom = useUpdateMeetroom(setIsEditModal);
+  const upload = useUploadImages();
+  const updateMeetroom = useUpdateMeetroom(setIsEditModal, id);
   // const deleteImages = useDeleteImages();
 
   const onClickUpdate = () => {
     if (btnState === "disable") return;
 
-    // TODO: images에서 file이 null이 아닌 것만 s3 이미지 업로드 
-    // TODO: oldImages: imageList 
-    // TODO: newImages: images 중 file이 null이고 preview는 s3 url인 요소들.concat(새로 변환한 s3 url들) 
-    // upload.mutateAsync(images).then(res => {
-      // const meetroom = { ...values, images: res.data };
-      const oldImages: string[] = [];
-      // const newImages = [...images에서 file이 null인 preview들, ...res.data];
-      const newImages: string[] = [];
-      const info = { ...values, seat: parseInt(values.seat), oldImages, newImages }; // TODO: images s3 url로 수정 
+    const oldImages = imageList?.map(image => image.url);
+    const newImages = images.filter(image => image.url.includes("https://s3.ap-northeast-2.amazonaws.com/")).map(image => image.url);
+    const imagesToS3 = images.filter(image => image.url.includes("http://localhost:"));
+
+    if (imagesToS3.length) {
+      upload.mutateAsync(imagesToS3).then(res => {
+        const info = { ...values, seat: parseInt(values.seat), oldImages, newImages: newImages.concat(res.data) };
+        const meetroom = { meetroomId: id, info };
+        updateMeetroom.mutateAsync(meetroom);
+      })
+    }
+
+    else if (!imagesToS3.length) {
+      const info = { ...values, seat: parseInt(values.seat), oldImages, newImages };
       const meetroom = { meetroomId: id, info };
       updateMeetroom.mutateAsync(meetroom);
-    // })
+    }
   }
 
   const onClickDelete = () => {
@@ -81,7 +88,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
 
           <TextField name="mergeRoom" status="default">
             <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
-            <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
+            <Select isSearch defaultValue={mergeInfo?.mergeRoom?.name} onChange={onChangeMerge} style={{ width: "100%" }}>
               {meetroomList.map((meetroom: MeetRoom) => {
                 const { id, name } = meetroom;
                 return <Select.Option key={id} id={String(id)} name={name} />;
@@ -118,7 +125,9 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
             <TextField.Label>회의실 사진</TextField.Label>
             <div className={classes["images-wrapper"]}>
               {new Array(3).fill(0).map((_, index) => {
-                return <ImagePlaceholder key={index} onChange={onDropImages} preview={images[index]?.preview || undefined} setImages={setImages}  />
+                return images[index]?.url
+                ? <ImagePreview key={images[index]?.url} url={images[index]?.url} setImages={setImages} />
+                : <ImagePlaceholder key={index} onChange={onDropImages}  />
               })}
             </div>
           </div>
@@ -196,5 +205,5 @@ interface Props {
   setIsEditModal: (is: boolean) => void,
   meetroom: MeetRoom,
   imageList: MeetRoomImage[] | null | undefined,
-  mergeInfo: MeetRoomMergeInfo[] | null | undefined,
+  mergeInfo: MeetRoomMergeInfo | null | undefined,
 }

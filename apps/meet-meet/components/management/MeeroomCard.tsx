@@ -4,11 +4,12 @@ import Image from "next/image";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
+
 import { CardDepth2, IconButton, Text, Checkbox } from "ui/src/pages"
 import { EquipmentCheckbox } from "./EquipmentCheckbox";
 import { MeetroomEditModal } from "./MeetroomEditModal";
-
-import logo from "ui/src/assets/img/logo_gec.png";
+import { ImagePreview } from "./ImagePreview";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 export const MeetroomCard = ({meetroom}: Props) => {
   const [isEditModal, setIsEditModal] = useState(false);
@@ -17,6 +18,7 @@ export const MeetroomCard = ({meetroom}: Props) => {
 
   const { data: imagesList } = useGetMeetroomImages(id);
   const { data: mergeInfo } = useGetMeetroomMergeInfo(id);
+
   
   return (
     <>
@@ -35,9 +37,11 @@ export const MeetroomCard = ({meetroom}: Props) => {
           </CardDepth2.TitleBar>
           <CardDepth2.Contents>
             <div className={classes["images-wrapper"]}>
-              <Image src={logo} width={100} height={100} alt="_" />
-              <Image src={logo} width={100} height={100} alt="_" />
-              <Image src={logo} width={100} height={100} alt="_" />
+              {new Array(3).fill(0).map((_, index) => {
+                return imagesList?.imageByMeetRoom[index]?.url
+                ? <ImagePreview key={imagesList?.imageByMeetRoom[index]?.id} url={imagesList?.imageByMeetRoom[index]?.url} />
+                : <ImagePlaceholder key={index} />
+              })}
             </div>
             <div className={classes["text-wrapper"]}>
               <Text {...textProps}>수용 인원 : {seat}명</Text>
@@ -48,6 +52,7 @@ export const MeetroomCard = ({meetroom}: Props) => {
                 <EquipmentCheckbox equipment="모니터" has={hasMonitor} />
               </div>
             </div>
+
           </CardDepth2.Contents>
         </CardDepth2>
       </div>

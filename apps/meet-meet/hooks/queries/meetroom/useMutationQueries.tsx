@@ -3,7 +3,7 @@ import { useMutation as gqlMutation } from "@apollo/client";
 import { MeetroomAPI } from "@api/api";
 import { DELETE_MEETROOM } from "graphql/meetroom/mutation";
 import { GET_MEETROOMS } from "graphql/meetroom/query";
-import { useGetMeetrooms } from "./useGetQueries";
+import { useGetMeetrooms, useGetMeetroomImages, useGetMeetroomMergeInfo } from "./useGetQueries";
 import { useHandleSuccess } from "@hooks/common/useHandleSuccess";
 
 export const useUploadImages = () => {
@@ -18,7 +18,7 @@ export const useUploadImages = () => {
     },
     {
         onSuccess: (res) => {},
-        onError: (error) => console.log(error.response)
+        onError: (error) => {}
     });
 
     return result;
@@ -46,8 +46,10 @@ export const useCreateMeetroom = (setIsModal: (is:boolean) => void) => {
     return result;
 };
 
-export const useUpdateMeetroom = (setIsModal: (is:boolean) => void) => {
+export const useUpdateMeetroom = (setIsModal: (is:boolean) => void, meetroomId: number) => {
     const meetrooms = useGetMeetrooms();
+    const images = useGetMeetroomImages(meetroomId);
+    const mergeInfo = useGetMeetroomMergeInfo(meetroomId);
     const { handleSuccess } = useHandleSuccess();
     const successTitle = "회의실 수정 완료";
 
@@ -55,6 +57,8 @@ export const useUpdateMeetroom = (setIsModal: (is:boolean) => void) => {
         onSuccess: (res) => {
             handleSuccess({ title: successTitle, setIsModal });
             meetrooms.refetch();
+            images.refetch();
+            mergeInfo.refetch();
         },
         onError: (error) => {}
     });

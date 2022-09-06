@@ -14,8 +14,8 @@ const config = {
   // DESCRIBE: path isProduction일 경우 아닐경우 url 분리
   images: {
     loader: "akamai",
-    path: isProduction ? productionURL : "http://localhost:3000",
-    domains: ["localhost", "https://www.pov.dev.factoroid.com/"],
+    path: isProduction ? productionURL : "",
+    domains: ["localhost", "https://www.pov.dev.factoroid.com/", "https://s3.ap-northeast-2.amazonaws.com/"],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
