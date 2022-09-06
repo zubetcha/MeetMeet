@@ -26,6 +26,7 @@ export const SingleCalendar = ({
   const [weekendIncluded, setWeekendIncluded] = useState<boolean>(true);
   const {
     currentDate,
+    selectedDate,
     hoverDates,
     onClickDate,
     prevMonth,
@@ -83,8 +84,8 @@ export const SingleCalendar = ({
             onMouseLeaveDate={onMouseLeaveDate}
             onMouseOverDate={onMouseOverDate}
             date={currentDate}
-            start={currentDate}
-            end={currentDate}
+            start={selectedDate}
+            end={selectedDate}
             onClickDate={onClickDate}
             timeType={timeType}
             weekendIncluded={weekendIncluded}

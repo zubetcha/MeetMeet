@@ -8,6 +8,7 @@ export const useDate = ({
   date,
 }:Props) => {
   const [currentDate, setCurrentDate] = useState<Date>(date);
+  const [selectedDate, setSelectedDate] = useState<Date>(date);
   const [hoverDates, setHoverDates] = useState<Date[] | any[]>([]);
 
   const prevMonth = () => {
@@ -31,7 +32,7 @@ export const useDate = ({
   };
 
   const onClickDate = (value: Date) => {
-      setCurrentDate(value);
+    setSelectedDate(value);
   };
 
    // DESCRIBE: Dates MouseOver했을 때
@@ -54,6 +55,7 @@ export const useDate = ({
 
   return {
     currentDate,
+    selectedDate,
     hoverDates,
     onClickDate,
     prevMonth,
