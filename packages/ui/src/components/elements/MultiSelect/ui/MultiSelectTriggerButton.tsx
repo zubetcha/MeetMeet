@@ -9,6 +9,7 @@ export function MultiSelectTriggerButton() {
   return (
     <span className={classes.selectButtonWrapper} onClick={onClick}>
       <TextField name="multiSelectSearch" status="default">
+        <TextField.Label>라벨자리</TextField.Label>
         <TextField.Input
           type="text"
           value={label}
@@ -17,6 +18,7 @@ export function MultiSelectTriggerButton() {
         >
           <TextField.Icon name="dropdown" />
         </TextField.Input>
+        <TextField.HelperText>테스트</TextField.HelperText>
       </TextField>
     </span>
   );

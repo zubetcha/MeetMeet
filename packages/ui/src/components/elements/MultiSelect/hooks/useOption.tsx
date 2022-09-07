@@ -12,15 +12,13 @@ export function useOption({ id, name }: Props) {
     defaultValues,
     searchResult,
     firstRender,
-    triggerButtonType,
+    defaultCheckedAll,
     setValues,
     setCheckedItem,
   } = useSelect();
 
   const [isShow, setIsShow] = useState(true);
-  const [isChecked, setIsChecked] = useState(
-    triggerButtonType === "button" ? false : true
-  );
+  const [isChecked, setIsChecked] = useState(defaultCheckedAll);
 
   useEffect(() => {
     if (searchResult) {

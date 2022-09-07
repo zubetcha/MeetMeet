@@ -78,6 +78,12 @@ export default function TablePage() {
       setSelectedRadio={setSelectedRadio}
       setCheckedRow={setCheckedRow}
       setClickedRow={setClickedRow}
+      initialFilterState={[
+        {
+          id: "sensorName",
+          value: ["김서연", "이대호"],
+        },
+      ]}
     ></Table>
   );
 }

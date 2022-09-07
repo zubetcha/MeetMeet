@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { MultiSelect } from "../../../elements";
 import classes from "./filter.module.scss";
 
@@ -9,14 +9,20 @@ export const MultiFilter = (rows: any, columnIds: any, filterValues: any) => {
 };
 
 /**
- * @ㅇㄷㄴ
+ * @description
  * @param column 각 column 의 상태를 나타내는 React Table 에서 제공되는 column 객체입니다.
  * @returns
  */
 export function MultiSelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id },
+  initialFilterState,
 }: any) {
   const [dropdownItems, setDropdownItems] = useState<any[]>([]);
+
+  const initialState = useMemo(
+    () => initialFilterState.filter((state: any) => state.id === id)[0]?.value,
+    [initialFilterState]
+  );
 
   useEffect(() => {
     const options = new Set();
@@ -33,8 +39,6 @@ export function MultiSelectColumnFilter({
     );
   }, [id, preFilteredRows]);
 
-  console.log(filterValue);
-
   return (
     <>
       <span className={classes.columnFilter_container}>
@@ -44,6 +48,12 @@ export function MultiSelectColumnFilter({
               style={{ width: "250px" }}
               isSearch={true}
               triggerButtonType="icon"
+              defaultCheckedAll={initialState ? false : true}
+              defaultValues={
+                initialState && initialState.length > 0
+                  ? initialState
+                  : undefined
+              }
               onChange={(items) => {
                 setFilter(items?.map((item: any) => item.name));
               }}

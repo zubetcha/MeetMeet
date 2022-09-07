@@ -1,22 +1,15 @@
 .selectContainer{
   position: relative;
   .label{
-    &.icon{
-      position: absolute;
-      top:-15px;
-      left:0px;
-    }
-    &.button{
-      position: absolute;
-      top:-15px;
-      left:0px;
-    }
+    position: absolute;
+    top:-18px;
+    left:0px;
   }
 }
 .selectBody{
   &.icon{
     position: absolute;
-    top:-0px;
+    top:5px;
     left:30px;
     z-index: 100;
   }

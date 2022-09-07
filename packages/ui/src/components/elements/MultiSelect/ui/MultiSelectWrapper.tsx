@@ -9,6 +9,7 @@ interface Props {
   style: any;
   isOpen: boolean;
   triggerButtonType: "button" | "icon";
+  defaultCheckedAll: boolean;
   setIsOpen: (e: boolean) => void;
   isShowSearchField: boolean;
   children: React.ReactElement[];
@@ -17,6 +18,7 @@ export default function MultiSelectWrapper({
   style,
   isOpen,
   triggerButtonType = "button",
+  defaultCheckedAll = false,
   isShowSearchField,
   children,
 }: Props) {

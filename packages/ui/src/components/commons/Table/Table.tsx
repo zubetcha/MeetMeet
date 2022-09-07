@@ -7,6 +7,7 @@ import {
   useRowSelect,
   useResizeColumns,
   useFlexLayout,
+  Column,
 } from "react-table";
 import {
   MultiSelectColumnFilter,
@@ -17,6 +18,7 @@ import Th from "./Th";
 import { Radio } from "../../elements";
 import { TablePropsType, TableInstanceWithHooks } from "./@types/table.types";
 
+// TODO: 테이블 initialFilterState 적용할 수 있어야함.
 export const Table = ({
   columns,
   data,
@@ -29,10 +31,19 @@ export const Table = ({
   isResetFilteringButton = false,
   initialFilterState = [],
 }: TablePropsType) => {
+  const initialFilterState_ = React.useMemo(
+    () => initialFilterState,
+    [initialFilterState]
+  );
+
   const defaultColumn = React.useMemo(
     (): any => ({
       // Let's set up our default Filter UI
-      Filter: MultiSelectColumnFilter,
+      Filter: (column: Column) =>
+        MultiSelectColumnFilter({
+          ...column,
+          initialFilterState: initialFilterState_,
+        }),
       filter: MultiFilter,
       minWidth: 150,
       width: 150,
@@ -43,10 +54,6 @@ export const Table = ({
 
   const onChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedRadio(e.target.value);
-  };
-
-  const initialState_: any = {
-    filters: initialFilterState || [],
   };
 
   const {
@@ -64,8 +71,6 @@ export const Table = ({
       columns,
       data,
       defaultColumn, // Be sure to pass the defaultColumn option
-      // filterTypes
-      initialState: initialState_,
     },
     useFilters, // useFilters!
     useGlobalFilter, // useGlobalFilter!

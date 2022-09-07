@@ -20,7 +20,8 @@ export const SelectContext = createContext({
   isOpen: false,
   // 현재 선택되어 있는 요소들 개수
   currentSelectedNumber: 0,
-  triggerButtonType: "",
+  // 처음에 다 선택되어 있는 상태로 시작하는지
+  defaultCheckedAll: false,
   // onChagne 함수로 넘겨줄 상태값 setState 함수
   setValues: (e: SelectItemType) => {},
   // searchResult setState 함수
@@ -139,7 +140,7 @@ interface SelectProps {
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
   children: React.ReactElement[] | React.ReactElement | any;
-  triggerButtonType: string;
+  defaultCheckedAll: boolean;
 }
 
 export const SelectProvider = ({
@@ -148,7 +149,7 @@ export const SelectProvider = ({
   isOpen,
   setIsOpen,
   children,
-  triggerButtonType,
+  defaultCheckedAll,
 }: SelectProps) => {
   const [confirmedState, setConfirmedState] = useState<any[] | undefined>();
   const [state, dispatch] = useReducer(reducer, []);
@@ -157,28 +158,21 @@ export const SelectProvider = ({
   const [searchResult, setSearchResult] = useState<SelectItemType[]>();
   const firstRender = useRef(true);
 
-  // useEffect(() => {
-  //   if (children) {
-  //     dispatch({
-  //       type: "INITIALIZE",
-  //       value: [],
-  //     });
-  //   }
-  // }, [children]);
-
+  // DESCRIBE: 상위 컴포넌트 (MultiSelectMain) 으로 선택된 요소들 올려주는 로직
   useEffect(() => {
     if (selected) {
-      console.log(selected);
       setValue(selected);
     }
   }, [selected]);
 
+  // DESCRIBE: 선택 완료 버튼을 눌렀을 때, 새로 선택한 요소들 반영하는 로직
   useEffect(() => {
     if (!confirmedState) return;
     const selectedItems = confirmedState.filter((item: any) => item.checked);
     setSelected(selectedItems);
   }, [confirmedState]);
 
+  // DESCRIBE: 현재 선택된 요소들의 개수 {currentSelectedNumber}개 선택하는 로직
   useEffect(() => {
     if (!state) return;
     const currentSelectedItemNumers = state.filter(
@@ -187,15 +181,12 @@ export const SelectProvider = ({
     setCurrentSelectedNumber(currentSelectedItemNumers);
   }, [state]);
 
+  // DESCRIBE: 초기 렌더링 시 (confirmedState undefined 일 때) 초기화 시켜주는 로직 (가장 제일 먼저 동작합니다.)
   useEffect(() => {
     if (state.length > 0 && !confirmedState) {
       setConfirmedState(state);
     }
   }, [state, confirmedState]);
-
-  // useEffect(() => {
-  //   console.log("confirmedState", confirmedState);
-  // }, [confirmedState]);
 
   return (
     <>
@@ -207,7 +198,7 @@ export const SelectProvider = ({
           isOpen: isOpen,
           defaultValues: defaultValues,
           currentSelectedNumber: currentSelectedNumber,
-          triggerButtonType: triggerButtonType,
+          defaultCheckedAll: defaultCheckedAll,
           setValues: (value: any) => {
             dispatch({
               type: "ADD",
