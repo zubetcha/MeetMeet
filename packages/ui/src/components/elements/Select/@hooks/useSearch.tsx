@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelect } from "./SelectContext";
-import { SelectItemType } from "../types/select.types";
+import { SelectItemType } from "../@types/select.types";
 
 export function useSearch() {
   const [searchValue, setSearchValue] = useState("");

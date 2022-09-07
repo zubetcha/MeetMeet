@@ -1,16 +1,19 @@
 import React, { useMemo } from "react";
-import { useSelect } from "./SelectContext";
+import { useMultiSelect } from "./MultiSelectContext";
 
 export function useTriggerButton() {
-  const { confirmedValues, defaultValues, isOpen, setIsOpen } = useSelect();
+  const { label, confirmedValues, defaultValues, isOpen, setIsOpen } =
+    useMultiSelect();
 
   const trueNum = useMemo(
-    () => confirmedValues?.filter((value: any) => value.checked === true).length || 0,
+    () =>
+      confirmedValues?.filter((value: any) => value.checked === true).length ||
+      0,
     [confirmedValues]
   );
 
-  const label =
-  confirmedValues && trueNum > 0
+  const value =
+    confirmedValues && trueNum > 0
       ? confirmedValues
           .filter((value: any) => value.checked === true)
           .map((value) => value.name)
@@ -26,6 +29,7 @@ export function useTriggerButton() {
 
   return {
     label,
+    value,
     onClick,
   };
 }

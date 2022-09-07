@@ -1,7 +1,7 @@
 import React from "react";
-import { useSearch } from "../hooks";
+import { useSearch } from "../@hooks";
 import { TextField } from "../../TextField";
-import classes from "../style/input.module.scss";
+import classes from "../@style/input.module.scss";
 
 export function SelectSearchField() {
   const { searchValue, onChange } = useSearch();
