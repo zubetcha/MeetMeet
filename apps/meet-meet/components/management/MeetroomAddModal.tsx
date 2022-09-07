@@ -45,7 +45,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
   }
 
     useEffect(() => {
-    const { isError, error } = create;
+    const { isError, error }: { isError: boolean, error: any } = create;
     if (isError && error.response.data.code === -301) {
       setIsSameName(true);
     }

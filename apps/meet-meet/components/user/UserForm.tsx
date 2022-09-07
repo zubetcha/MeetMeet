@@ -9,7 +9,7 @@ import { TextField, Select } from "ui/src/pages";
 
 export const UserForm = ({ values, onChangeTextField, onChangeDepartmentId, departmentId }: Props) => {
 
-  const { data, loading, error } = useQuery<DepartmentData>(GET_DEPARTMENTS);
+  const { data } = useQuery<DepartmentData>(GET_DEPARTMENTS);
   const index = data?.departments.findIndex((department: Department) => department.id === departmentId)
 
   return (
@@ -41,5 +41,5 @@ interface Props {
     onChangeTextField: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onChangeDepartmentId: (e: SelectItemType) => void;
     values: any;
-    departmentId?: number;
+    departmentId?: number | null;
 }

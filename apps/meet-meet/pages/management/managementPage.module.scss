@@ -2,14 +2,14 @@
 @import "ui/src/styles/utils";
 
 .container {
-  @include flex-direction(column, 24);
+  // @include flex-direction(column, 24);
 
   .button-wrapper {
     @include flexbox(end, center);
   }
 
   .meetroomCard-container {
-    height: calc(100vh - 112px);
+    height: calc(100vh - 48px);
 
     .meetroomCards-wrapper {
       display: grid;
