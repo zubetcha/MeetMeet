@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client"
 import { useSetRecoilState } from "recoil"
-import meetroomState from "recoil/meetroom"
+import { meetroomState } from "recoil/meetroom"
 import { GET_MEETROOMS, GET_MEETROOM_BY_ID, GET_MEETROOM_IMAGES, GET_MEETROOM_MERGE_INFO } from "graphql/meetroom/query"
 import { MeetRoom, MeetRoomData, MeetroomImageData, MeetRoomMergeInfoData } from "graphql/meetroom/types"
 

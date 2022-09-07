@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useUploadImages, useCreateMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
 import { useMeetroomForm } from "@hooks/meetroom/useMeetroomForm";
-import meetroomState from "recoil/meetroom";
+import { availableMergeState } from "recoil/meetroom";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
@@ -17,7 +17,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
   const initialValues = { name: "", seat: "", location: "", mergeRoomId: null, hasMonitor: false };
   const initialImages = new Array(3).fill({ file: null, url: "" });
 
-  const meetroomList = useRecoilValue(meetroomState);
+  const { availableMergeList } = useRecoilValue(availableMergeState);
   const upload = useUploadImages();
   const create = useCreateMeetroom(setIsAddModal);
   const {
@@ -58,15 +58,15 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
         <Modal.Contents>
 
           <TextField name="name" status={isSameName ? "danger" : "default"}>
-            <TextField.Label>이름</TextField.Label>
+            <TextField.Label>회의실 이름</TextField.Label>
             <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
             <TextField.HelperText>{isSameName && "이미 존재하는 회의실입니다."}</TextField.HelperText>
           </TextField>
 
           <TextField name="mergeRoom" status="default">
-            <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
+            <TextField.Label>합칠 수 있는 회의실</TextField.Label>
             <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
-              {meetroomList.map((meetroom: MeetRoom) => {
+              {availableMergeList.map((meetroom: MeetRoom) => {
                 const { id, name } = meetroom;
                 return <Select.Option key={id} id={String(id)} name={name} />;
               })}
@@ -75,7 +75,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
 
           <TextField name="seat" status="default">
             <TextField.Label>수용 인원</TextField.Label>
-            <TextField.Input type="text" value={values.seat} placeholder="수용 인원을 입력해주세요." onChange={onChangeTextField}>
+            <TextField.Input type="text" value={values.seat} placeholder="수용 가능한 인원을 입력해주세요." onChange={onChangeTextField}>
               <TextField.Unit>명</TextField.Unit>
             </TextField.Input>
           </TextField>

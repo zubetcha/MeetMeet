@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useMeetroomForm } from "@hooks/meetroom/useMeetroomForm";
 import { useRecoilValue } from "recoil";
 import { useUploadImages, useUpdateMeetroom, useDeleteImages, useDeleteMeetroom } from "@hooks/queries/meetroom/useMutationQueries";
-import meetroomState from "recoil/meetroom";
+import { availableMergeState } from "recoil/meetroom";
 import classes from "./management.module.scss";
 
 import { MeetRoom, MeetRoomImage, MeetRoomMergeInfo } from "graphql/meetroom/types";
+import { S3_BASE_URL } from '../../constants/common';
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { ImagePreview } from "./ImagePreview";
@@ -15,11 +16,12 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
   const [isDeleteModal, setIsDeleteModal] = useState(false);
 
   const { id, name, location, seat, canMerge, hasMonitor } = meetroom;
-  const meetroomList = useRecoilValue(meetroomState);
+  const { availableMergeList } = useRecoilValue(availableMergeState);
+  const oldImages = imageList?.map(image => image.url);
   const initialValues = { name, seat: String(seat), location, mergeRoomId: mergeInfo?.mergeRoom?.id || null, hasMonitor };
   const initialImages = new Array(3).fill(0).map((_, index) => {
     return { file: null, url: imageList && imageList[index]?.url || "" }
-  }); // TODO: preview에 imageList의 url 넣어주기 
+  });
 
   const {
     onChangeMerge,
@@ -36,35 +38,38 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
     isSameName
   } = useMeetroomForm(initialValues, initialImages);
 
-  const [ deleteMeetroom, { data } ] = useDeleteMeetroom(setIsEditModal, setIsDeleteModal);
+  const [ deleteMeetroom, { data } ] = useDeleteMeetroom();
   const upload = useUploadImages();
-  const updateMeetroom = useUpdateMeetroom(setIsEditModal, id);
-  // const deleteImages = useDeleteImages();
+  const updateMeetroom = useUpdateMeetroom(setIsEditModal, id as number);
+  const deleteImages = useDeleteImages(setIsEditModal, setIsDeleteModal);
 
   const onClickUpdate = () => {
     if (btnState === "disable") return;
 
-    const oldImages = imageList?.map(image => image.url);
-    const newImages = images.filter(image => image.url.includes("https://s3.ap-northeast-2.amazonaws.com/")).map(image => image.url);
+    const newImages = images.filter(image => image.url.includes(S3_BASE_URL)).map(image => image.url);
     const imagesToS3 = images.filter(image => image.url.includes("http://localhost:"));
 
     if (imagesToS3.length) {
-      upload.mutateAsync(imagesToS3).then(res => {
+      upload.mutateAsync(imagesToS3)
+      .then(res => {
         const info = { ...values, seat: parseInt(values.seat), oldImages, newImages: newImages.concat(res.data) };
-        const meetroom = { meetroomId: id, info };
-        updateMeetroom.mutateAsync(meetroom);
+        updateMeetroom.mutateAsync({ meetroomId: id, info });
       })
     }
 
     else if (!imagesToS3.length) {
       const info = { ...values, seat: parseInt(values.seat), oldImages, newImages };
-      const meetroom = { meetroomId: id, info };
-      updateMeetroom.mutateAsync(meetroom);
+      updateMeetroom.mutateAsync({ meetroomId: id, info });
     }
   }
 
   const onClickDelete = () => {
-    deleteMeetroom({ variables: { id } });
+    deleteMeetroom({ variables: { id } })
+    .then(() => {
+      if (oldImages && oldImages.length) {
+        deleteImages.mutateAsync(oldImages);
+      }
+    });
   };
 
   useEffect(() => {
@@ -81,15 +86,15 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
         <Modal.Contents>
 
           <TextField name="name"  status={isSameName ? "danger" : "default"}>
-            <TextField.Label>이름</TextField.Label>
+            <TextField.Label>회의실 이름</TextField.Label>
             <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
             <TextField.HelperText>{isSameName && "이미 존재하는 회의실입니다."}</TextField.HelperText>
           </TextField>
 
           <TextField name="mergeRoom" status="default">
-            <TextField.Label>합칠 수 있는 회의실 이름</TextField.Label>
+            <TextField.Label>합칠 수 있는 회의실</TextField.Label>
             <Select isSearch defaultValue={mergeInfo?.mergeRoom?.name} onChange={onChangeMerge} style={{ width: "100%" }}>
-              {meetroomList.map((meetroom: MeetRoom) => {
+              {availableMergeList.map((meetroom: MeetRoom) => {
                 const { id, name } = meetroom;
                 return <Select.Option key={id} id={String(id)} name={name} />;
               })}
@@ -98,7 +103,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
 
           <TextField name="seat" status="default">
             <TextField.Label>수용 인원</TextField.Label>
-            <TextField.Input type="text" value={values.seat} placeholder="수용 인원을 선택해주세요." onChange={onChangeTextField}>
+            <TextField.Input type="text" value={values.seat} placeholder="수용 가능한 인원을 선택해주세요." onChange={onChangeTextField}>
               <TextField.Unit>명</TextField.Unit>
               <TextField.Icon name="dropdown" />
             </TextField.Input>

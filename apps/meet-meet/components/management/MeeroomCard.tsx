@@ -16,9 +16,10 @@ export const MeetroomCard = ({meetroom}: Props) => {
   const { id, name, location, seat, canMerge, hasMonitor } = meetroom;
   const textProps: any = { type: "body-medium", color: "on-surface-variant", style: { fontWeight: "500" } }
 
-  const { data: imagesList } = useGetMeetroomImages(id);
-  const { data: mergeInfo } = useGetMeetroomMergeInfo(id);
+  const { data: imagesList } = useGetMeetroomImages(id as number);
+  const { data: mergeInfo } = useGetMeetroomMergeInfo(id as number);
 
+  console.log(mergeInfo)
   
   return (
     <>
@@ -46,7 +47,7 @@ export const MeetroomCard = ({meetroom}: Props) => {
             <div className={classes["text-wrapper"]}>
               <Text {...textProps}>수용 인원 : {seat}명</Text>
               <Text {...textProps}>위치 : {location}</Text>
-              <Text {...textProps}>합칠 수 있는 회의실 유무 : {canMerge ? "O" : "X"}</Text>
+              <Text {...textProps}>합칠 수 있는 회의실 : {!canMerge ? "없음" : mergeInfo?.mergeInfoByMeetRoom?.mergeRoom.name}</Text>
               <Text {...textProps}>장비 여부</Text>
               <div className={classes["checkbox-container"]}>
                 <EquipmentCheckbox equipment="모니터" has={hasMonitor} />

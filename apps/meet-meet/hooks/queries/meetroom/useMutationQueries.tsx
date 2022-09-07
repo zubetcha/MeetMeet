@@ -24,8 +24,16 @@ export const useUploadImages = () => {
     return result;
 }
 
-export const useDeleteImages = () => {
-    const result = useMutation(["meetroom", "delete-images"], ((images: string[]) => MeetroomAPI.deleteImages(images)))
+export const useDeleteImages = (setIsModal: (is:boolean) => void, setIsDeleteModal: (is:boolean) => void) => {
+    const { handleSuccess } = useHandleSuccess();
+    const title = "회의실 삭제 완료";
+    const result = useMutation(
+        ["meetroom", "delete-images"],
+        ((urls: string[]) => MeetroomAPI.deleteImages(urls)), 
+        {
+            onSuccess: res => handleSuccess({ title, setIsModal, setIsSecondModal: setIsDeleteModal })
+        }
+    );
 
     return result;
 }
@@ -33,11 +41,11 @@ export const useDeleteImages = () => {
 export const useCreateMeetroom = (setIsModal: (is:boolean) => void) => {
     const meetrooms = useGetMeetrooms();
     const { handleSuccess } = useHandleSuccess();
-    const successTitle = "회의실 생성 완료";
+    const title = "회의실 생성 완료";
 
     const result = useMutation(["meetroom", "create"], (meetroom: any) => MeetroomAPI.createMeetroom(meetroom), {
         onSuccess: (res) => {
-            handleSuccess({ title: successTitle, setIsModal });
+            handleSuccess({ title, setIsModal });
             meetrooms.refetch();
         },
         onError: (error) => {}
@@ -51,11 +59,11 @@ export const useUpdateMeetroom = (setIsModal: (is:boolean) => void, meetroomId: 
     const images = useGetMeetroomImages(meetroomId);
     const mergeInfo = useGetMeetroomMergeInfo(meetroomId);
     const { handleSuccess } = useHandleSuccess();
-    const successTitle = "회의실 수정 완료";
+    const title = "회의실 수정 완료";
 
     const result = useMutation(["meetroom", "update"], (meetroom: any) => MeetroomAPI.updateMeetroom(meetroom), {
         onSuccess: (res) => {
-            handleSuccess({ title: successTitle, setIsModal });
+            handleSuccess({ title, setIsModal });
             meetrooms.refetch();
             images.refetch();
             mergeInfo.refetch();
@@ -67,14 +75,8 @@ export const useUpdateMeetroom = (setIsModal: (is:boolean) => void, meetroomId: 
 
 };
 
-export const useDeleteMeetroom = (setIsModal: (is:boolean) => void, setIsDeleteModal: (is:boolean) => void) => {
-    const { handleSuccess } = useHandleSuccess();
-    const successTitle = "회의실 삭제 완료";
-
+export const useDeleteMeetroom = () => {
     const result = gqlMutation(DELETE_MEETROOM, {
-        onCompleted: (res) => {
-            handleSuccess({ title: successTitle, setIsModal });
-        },
         refetchQueries: [
             {query: GET_MEETROOMS}
         ],

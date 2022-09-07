@@ -1,12 +1,12 @@
 export interface MeetRoom {
-    id: number;
+    id: number |  null;
     name: string;
     location: string;
     hasMonitor: boolean;
     canMerge: boolean;
     seat: number;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface MeetRoomData {
