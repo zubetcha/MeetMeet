@@ -73,7 +73,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
   };
 
   useEffect(() => {
-    const { isError, error } = updateMeetroom;
+    const { isError, error }: { isError: boolean, error: any } = updateMeetroom;
     if (isError && error.response.data.code === -301) {
       setIsSameName(true);
     }

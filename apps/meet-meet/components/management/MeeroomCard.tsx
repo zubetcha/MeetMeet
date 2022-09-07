@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useGetMeetroomImages, useGetMeetroomMergeInfo } from "@hooks/queries/meetroom/useGetQueries";
-import Image from "next/image";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
@@ -18,8 +17,6 @@ export const MeetroomCard = ({meetroom}: Props) => {
 
   const { data: imagesList } = useGetMeetroomImages(id as number);
   const { data: mergeInfo } = useGetMeetroomMergeInfo(id as number);
-
-  console.log(mergeInfo)
   
   return (
     <>

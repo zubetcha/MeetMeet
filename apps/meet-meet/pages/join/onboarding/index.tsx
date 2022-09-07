@@ -1,29 +1,19 @@
-import { useEffect } from "react"; 
-import { useRouter } from "next/router";
-import { useSetRecoilState } from "recoil";
 import { useUserForm } from "@hooks/user/useUserForm";
+import { usePostUserInfo } from "@hooks/queries/user/useMutationQueries";
 import classes from "./onboardingPage.module.scss";
-
-import userState from "recoil/user";
 
 import { UserForm } from "@components/user/UserForm";
 import { CardDepth1, Text, Button, SVG } from "ui/src/pages";
 
 const OnboardingPage = () => {
-  const router = useRouter();
-  const setUser = useSetRecoilState(userState);
-
   const initailValues = { name: "", phone: "", departmentId: null };
+  const { onChangeTextField, onChangeDepartmentId, btnState, values } = useUserForm(initailValues);
+  const { mutateAsync } = usePostUserInfo();
 
-  const { onChangeTextField, onChangeDepartmentId, onClickMutateButton, btnState, values, mutationResult } = useUserForm(initailValues);
-  const { isSuccess, data } = mutationResult;
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      setUser({...data.data});
-      router.push("/")
-    }
-  }, [isSuccess, data])
+  const onClickUpdate = () => {
+    if (btnState === "disable") return;
+    mutateAsync(values);
+  }
 
   return (
     <div className={classes["onboardingPage-container"]}>
@@ -46,7 +36,7 @@ const OnboardingPage = () => {
                 configuration="filled"
                 style={{ width: "360px", justifyContent: "center" }}
                 state={btnState}
-                onClick={onClickMutateButton}
+                onClick={onClickUpdate}
               />
             </div>
           </CardDepth1.Contents>

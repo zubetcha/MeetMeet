@@ -9,17 +9,13 @@ export const TextFieldMain = ({ children, status, name }: Props) => {
     <>
       <div className={classes["wrapper"]}>
         {Children.toArray(children).map((child: any, i) => {
-          return (
-            <>
-              {cloneElement(child, {
-                key: `textField-child-${i}`,
-                isFocused,
-                setIsFocused,
-                status,
-                name,
-              })}
-            </>
-          );
+          return cloneElement(child, {
+              key: `textField-child-${i}`,
+              isFocused,
+              setIsFocused,
+              status,
+              name,
+            });
         })}
       </div>
     </>
