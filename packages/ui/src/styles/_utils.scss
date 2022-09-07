@@ -1,6 +1,7 @@
 @use "sass:map";
 @import "./variables";
 
+
 // DESCRIBE 브라우저 크기별 반응형 분기점 mixins
 @mixin mobile {
   @media (max-width: $mobile){
@@ -10,12 +11,6 @@
 
 @mixin tablet {
   @media (min-width: ($mobile+1)) and (max-width: $tablet){
-    @content;
-  }
-}
-
-@mixin laptop {
-  @media (min-width: ($tablet+1)) and (max-width: $laptop){
     @content;
   }
 }
