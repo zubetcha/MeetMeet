@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTriggerButton } from "../hooks";
+import { useTriggerButton } from "../@hooks";
 import { IconButton } from "../../Buttons/IconButton";
 
 export function MultiSelectTriggerIcon() {

@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
-import classes from "../style/select.module.scss";
-import { useOutsideAlerter } from "../hooks";
+import classes from "../@style/select.module.scss";
+import { useOutsideAlerter } from "../@hooks";
 import { Text } from "../../Text/Text";
 import { MultiSelect } from "../index";
-import { useSelect } from "../hooks";
+import { useMultiSelect } from "../@hooks";
 import classNames from "classnames";
 interface Props {
   style: any;
@@ -21,7 +21,8 @@ export default function MultiSelectWrapper({
   isShowSearchField,
   children,
 }: Props) {
-  const { confirmedValues, currentSelectedNumber, onClickCancel } = useSelect();
+  const { confirmedValues, currentSelectedNumber, onClickCancel } =
+    useMultiSelect();
 
   const handleCancle = useCallback(() => {
     onClickCancel();

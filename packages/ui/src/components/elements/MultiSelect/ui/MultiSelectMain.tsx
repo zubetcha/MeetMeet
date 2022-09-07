@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { SelectProvider } from "../hooks/SelectContext";
-import { SelectItemType } from "../types/select.types";
+import { MultiSelectProvider } from "../@hooks/MultiSelectContext";
+import { SelectItemType } from "../@types/select.types";
 import MultiSelectWrapper from "./MultiSelectWrapper";
 
 interface SelectProps {
@@ -46,7 +46,7 @@ export function MultiSelectMain({
 
   return (
     <>
-      <SelectProvider
+      <MultiSelectProvider
         setValue={setSelected}
         defaultValues={defaultValues}
         label={label}
@@ -63,7 +63,7 @@ export function MultiSelectMain({
         >
           {children}
         </MultiSelectWrapper>
-      </SelectProvider>
+      </MultiSelectProvider>
     </>
   );
 }

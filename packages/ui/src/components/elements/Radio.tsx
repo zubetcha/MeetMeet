@@ -40,9 +40,9 @@ export const Radio = ({
     <>
       <label htmlFor={id} className={classes.checkbox_hover}>
         {checked == true ? (
-          <SVG name="selectedRadio" />
+          <SVG name="selectedRadio" color={"primary"} />
         ) : (
-          <SVG name="unSelectedRadio" />
+          <SVG name="unSelectedRadio" color={"onSurfaceVariant"} />
         )}
         <input
           type="radio"

@@ -1,7 +1,7 @@
 import React from "react";
-import { useTriggerButton } from "../hooks";
+import { useTriggerButton } from "../@hooks";
 import { TextField } from "../../TextField";
-import classes from "../style/select.module.scss";
+import classes from "../@style/select.module.scss";
 
 export function MultiSelectTriggerButton() {
   const { label, value, onClick } = useTriggerButton();

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useOption } from "../hooks";
-import classes from "../style/select.module.scss";
+import { useOption } from "../@hooks";
+import classes from "../@style/select.module.scss";
 import classNames from "classnames";
 import { Checkbox } from "../../Checkbox";
 

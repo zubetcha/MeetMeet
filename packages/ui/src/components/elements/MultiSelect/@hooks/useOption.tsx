@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelect } from "./SelectContext";
+import { useMultiSelect } from "./MultiSelectContext";
 
 interface Props {
   id: string;
@@ -15,7 +15,7 @@ export function useOption({ id, name }: Props) {
     defaultCheckedAll,
     setValues,
     setCheckedItem,
-  } = useSelect();
+  } = useMultiSelect();
 
   const [isShow, setIsShow] = useState(true);
   const [isChecked, setIsChecked] = useState(defaultCheckedAll);

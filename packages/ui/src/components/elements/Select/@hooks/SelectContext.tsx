@@ -1,5 +1,5 @@
 import React, { createContext, useState, useReducer, useEffect } from "react";
-import { SelectItemType } from "../types/select.types";
+import { SelectItemType } from "../@types/select.types";
 
 export const SelectContext = createContext({
   values: [] as SelectItemType[] | undefined,

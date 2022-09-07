@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { SelectProvider } from "../hooks/SelectContext";
-import { useOutsideAlerter } from "../hooks";
+import { SelectProvider } from "../@hooks/SelectContext";
+import { useOutsideAlerter } from "../@hooks";
 import { Select } from "../index";
-import { SelectItemType } from "../types/select.types";
+import { SelectItemType } from "../@types/select.types";
 
 interface SelectProps {
   isSearch?: boolean;

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   useTable,
   useFilters,
-  useGlobalFilter,
   useSortBy,
   useRowSelect,
   useResizeColumns,
+  useBlockLayout,
   useFlexLayout,
   Column,
 } from "react-table";
@@ -17,11 +17,13 @@ import "./@style/table.scss";
 import Th from "./Th";
 import { Radio } from "../../elements";
 import { TablePropsType, TableInstanceWithHooks } from "./@types/table.types";
+import useCustomTable from "./@hooks/useCustomTable";
+import { ResetResizingButton, ResetFilteringButton } from "./TableComponents";
 
 /**
  *
- * @param columns (Column) 컬럼 객체 (상위 컴포넌틑에서 useMemo 또는 useState 로 감싸야 함).
- * @param rows (Row) 데이터 객체 리스트 (상위 컴포넌틑에서 useMemo 또는 useState 로 감싸야 함).
+ * @param columns (Column) 컬럼 객체 (상위 컴포넌트에서 useMemo 또는 useState 로 감싸야 함).
+ * @param rows (Row) 데이터 객체 리스트 (상위 컴포넌트에서 useMemo 또는 useState 로 감싸야 함).
  * @param height (string) 테이블 height 지정
  * @param defaultRadio (string) 디폴트로 선택할 radio button index (0 부터 시작)
  * @param onChangeCheckedRow (function) 체크박스 클릭시, 체크 선택된 객체 리스트를 상위 컴포넌트로 넘겨주는 콜백함수
@@ -44,7 +46,6 @@ export const Table = ({
   isResetFilteringButton = false,
   initialFilterState = [],
 }: TablePropsType) => {
-  const [selectedRadio, setSelectedRadio] = useState(defaultRadio);
   const initialFilterState_ = React.useMemo(
     () => initialFilterState,
     [initialFilterState]
@@ -66,14 +67,6 @@ export const Table = ({
     []
   );
 
-  const handleRadioButton = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    selectedRow: any
-  ) => {
-    setSelectedRadio(e.target.value);
-    onChangeRadio(selectedRow);
-  };
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -88,23 +81,17 @@ export const Table = ({
     {
       columns,
       data,
-      defaultColumn, // Be sure to pass the defaultColumn option
+      defaultColumn,
     },
-    useFilters, // useFilters!
-    useGlobalFilter, // useGlobalFilter!
+    useFilters,
     useSortBy,
     useRowSelect,
+    // OPTION 1: 반응형 아닐 때
+    // useBlockLayout,
+    // OPTION 2: 반응형 일 때
     useFlexLayout,
     useResizeColumns
   ) as TableInstanceWithHooks<any>;
-
-  // We don't want to render all of the rows for this example, so cap
-  // it for this use case
-  const firstPageRows = rows.slice(0, 100);
-
-  useEffect(() => {
-    onChangeCheckedRow([...selectedFlatRows.map((row: any) => row.original)]);
-  }, [selectedFlatRows]);
 
   const cellProps = (props: any, { cell }: any) =>
     getStyles(props, cell.column.align);
@@ -120,14 +107,24 @@ export const Table = ({
     },
   ];
 
+  const { selectedRadio, handleClickRow, handleRadioButton } = useCustomTable({
+    onChangeCheckedRow: onChangeCheckedRow,
+    onChangeClickedRow: onChangeClickedRow,
+    onChangeRadio: onChangeRadio,
+    selectedFlatRows: selectedFlatRows,
+    defaultRadio: defaultRadio,
+  });
+
   return (
     <>
-      {isResetResizingButton && (
-        <button onClick={resetResizing}>Reset Resizing</button>
-      )}
-      {isResetFilteringButton && (
-        <button onClick={() => setAllFilters([])}>Reset Filter</button>
-      )}
+      <ResetResizingButton
+        isShow={isResetResizingButton}
+        onClick={resetResizing}
+      />
+      <ResetFilteringButton
+        isShow={isResetFilteringButton}
+        onClick={() => setAllFilters([])}
+      />
       <div className="tableWrap">
         <table {...getTableProps()} className="table">
           {/* DESCRIBE: Thead */}
@@ -166,13 +163,7 @@ export const Table = ({
                           <td
                             {...cell.getCellProps(cellProps)}
                             className="td"
-                            onClick={() => {
-                              if (
-                                ["selection", "radio"].includes(cell.column.id)
-                              )
-                                return;
-                              onChangeClickedRow(row.original);
-                            }}
+                            onClick={() => handleClickRow(cell.column.id, row)}
                           >
                             {/* DESCRIBE: Radio Row Cell */}
                             {cell.column.id === "radio" && selectedRadio ? (

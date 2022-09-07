@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSelect } from "./SelectContext";
+import { useMultiSelect } from "./MultiSelectContext";
 import { SelectItemType } from "../types/select.types";
 
 export function useSearch() {
   const [searchValue, setSearchValue] = useState("");
 
-  const { values, setSearchResult } = useSelect();
+  const { values, setSearchResult } = useMultiSelect();
 
   useEffect(() => {
     if (searchValue.length === 0) {

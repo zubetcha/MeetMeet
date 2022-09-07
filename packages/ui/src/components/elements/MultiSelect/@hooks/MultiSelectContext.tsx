@@ -5,9 +5,9 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { SelectItemType } from "../types/select.types";
+import { SelectItemType } from "../@types/select.types";
 
-export const SelectContext = createContext({
+export const MultiSelectContext = createContext({
   // 현재 Option 요소들의 상태 (id, name, checked 로 이루어져 있음)
   values: [] as SelectItemType[] | undefined,
   // 선택 완료 버튼을 클릭해, onChange 함수로 넘겨줄 상태값
@@ -43,11 +43,11 @@ export const SelectContext = createContext({
   firstRender: false,
 });
 
-export const useSelect = () => {
-  const context = React.useContext(SelectContext);
+export const useMultiSelect = () => {
+  const context = React.useContext(MultiSelectContext);
 
   if (context === undefined) {
-    throw new Error("useSelect must be used within a <MultiSelect />");
+    throw new Error("useMultiSelect must be used within a <MultiSelect />");
   }
   return context;
 };
@@ -146,7 +146,7 @@ interface SelectProps {
   defaultCheckedAll: boolean;
 }
 
-export const SelectProvider = ({
+export const MultiSelectProvider = ({
   setValue,
   defaultValues,
   label,
@@ -194,7 +194,7 @@ export const SelectProvider = ({
 
   return (
     <>
-      <SelectContext.Provider
+      <MultiSelectContext.Provider
         value={{
           values: state,
           confirmedValues: confirmedState,
@@ -259,7 +259,7 @@ export const SelectProvider = ({
         }}
       >
         {children}
-      </SelectContext.Provider>
+      </MultiSelectContext.Provider>
     </>
   );
 };

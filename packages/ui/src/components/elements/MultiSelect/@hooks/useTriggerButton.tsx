@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
-import { useSelect } from "./SelectContext";
+import { useMultiSelect } from "./MultiSelectContext";
 
 export function useTriggerButton() {
   const { label, confirmedValues, defaultValues, isOpen, setIsOpen } =
-    useSelect();
+    useMultiSelect();
 
   const trueNum = useMemo(
     () =>
