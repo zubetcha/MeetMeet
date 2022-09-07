@@ -26,12 +26,14 @@ export const UserForm = ({ values, onChangeTextField, onChangeDepartmentId, depa
 
         <TextField name="department" status="default">
             <TextField.Label>소속 부서</TextField.Label>
-            <Select isSearch defaultValue={departmentId ? data?.departments[index as number].name : ""} onChange={onChangeDepartmentId} style={{ width: "100%" }}>
-                {data && data.departments.map((department: Department) => {
-                    const { id, name } = department;
-                    return <Select.Option key={id} id={String(id)} name={name} />
-                })}
-            </Select>
+            {data && (
+                <Select isSearch defaultValue={departmentId ? data?.departments[index as number].name : ""} onChange={onChangeDepartmentId} style={{ width: "100%" }}>
+                    {data.departments.map((department: Department) => {
+                        const { id, name } = department;
+                        return <Select.Option key={id} id={String(id)} name={name} />
+                    })}
+                </Select>
+            )}
         </TextField>
     </div>
   )
