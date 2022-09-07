@@ -18,13 +18,9 @@ export const ModalMain = ({ children, setIsOpen, isToast = false }: Props) => {
         })}
       >
         {Children.toArray(children).map((child: any, i) => {
-          return (
-            <>
-              {cloneElement(child, {
-                key: `modal-child-${i}`,
-              })}
-            </>
-          );
+          return cloneElement(child, {
+              key: `modal-child-${i}`,
+            });
         })}
       </div>
     </>

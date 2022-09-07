@@ -23,27 +23,25 @@ export const TextFieldTextarea = ({
   }, []);
 
   return (
-    <>
-      <div className={classes["wrapper__textarea-box"]}>
-        <textarea
-          className={classNames(
-            classes["wrapper__input-box__textarea"],
-            classes[`wrapper__input-box__textarea--${status}`], {
-            [classes.focused]: isFocused,
-          })}
-          name={name}
-          value={value}
-          onFocus={() => setIsFocused && setIsFocused(true)}
-          onBlur={() => setIsFocused && setIsFocused(false)}
-          disabled={status == "disable" || status == "fixed" ? true : false}
-          onChange={onChange}
-          placeholder={isFocused ? "" : placeholder}
-          maxLength={maxLength as number}
-          ref={textareaElement}
-          autoComplete="off"
-        />
-      </div>
-    </>
+    <div className={classes["wrapper__textarea-box"]}>
+      <textarea
+        className={classNames(
+          classes["wrapper__input-box__textarea"],
+          classes[`wrapper__input-box__textarea--${status}`], {
+          [classes.focused]: isFocused,
+        })}
+        name={name}
+        value={value}
+        onFocus={() => setIsFocused && setIsFocused(true)}
+        onBlur={() => setIsFocused && setIsFocused(false)}
+        disabled={status == "disable" || status == "fixed" ? true : false}
+        onChange={onChange}
+        placeholder={isFocused ? "" : placeholder}
+        maxLength={maxLength as number}
+        ref={textareaElement}
+        autoComplete="off"
+      />
+    </div>
   );
 };
 
