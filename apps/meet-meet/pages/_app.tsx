@@ -17,13 +17,13 @@ import { SuccessModal } from "@components/commons/Modal/SuccessModal";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const exceptionList = ["/", "/login", "/join", "/join/onboarding"]
+  const exceptionList = ["/", "/login", "/join", "/join/onboarding"];
   const queryClient = new QueryClient();
   queryClient.setDefaultOptions({
     queries: {
       retry: false,
-    }
-  })
+    },
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "light");
@@ -31,7 +31,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-
       <Head>
         <title>MeetMeet</title>
         <meta charSet="utf-8"></meta>
@@ -40,20 +39,19 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ApolloProvider client={client}>
           <RecoilRoot>
             {/* <RecoilObserver /> */}
-            <RouterGuard>
-            {
-              exceptionList.includes(router.pathname)
-              ? <Component {...pageProps} />
-              : <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-            }
+            {/* <RouterGuard> */}
+            {exceptionList.includes(router.pathname) ? (
+              <Component {...pageProps} />
+            ) : (
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            )}
             <SuccessModal />
-            </RouterGuard>
+            {/* </RouterGuard> */}
           </RecoilRoot>
         </ApolloProvider>
       </QueryClientProvider>
-
     </>
   );
 }

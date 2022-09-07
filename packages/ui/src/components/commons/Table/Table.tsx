@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   useTable,
   useFilters,
@@ -8,6 +8,7 @@ import {
   useBlockLayout,
   useFlexLayout,
   Column,
+  Row,
 } from "react-table";
 import {
   MultiSelectColumnFilter,
@@ -15,10 +16,14 @@ import {
 } from "./TableFilter/MultiSelectColumnFilter";
 import "./@style/table.scss";
 import Th from "./Th";
-import { Radio } from "../../elements";
+import { Checkbox, Radio } from "../../elements";
 import { TablePropsType, TableInstanceWithHooks } from "./@types/table.types";
 import useCustomTable from "./@hooks/useCustomTable";
-import { ResetResizingButton, ResetFilteringButton } from "./TableComponents";
+import {
+  ResetResizingButton,
+  ResetFilteringButton,
+  ExtraCheckboxCell,
+} from "./TableComponents";
 
 /**
  *
@@ -42,6 +47,7 @@ export const Table = ({
   onChangeCheckedRow = () => {},
   onChangeClickedRow = () => {},
   onChangeRadio = () => {},
+  onChangeExtraCheckedRow = () => {},
   isResetResizingButton = false,
   isResetFilteringButton = false,
   initialFilterState = [],
@@ -107,13 +113,47 @@ export const Table = ({
     },
   ];
 
-  const { selectedRadio, handleClickRow, handleRadioButton } = useCustomTable({
+  const {
+    selectedRadio,
+    handleClickRow,
+    handleRadioButton,
+    handleExtraCheckbox,
+  } = useCustomTable({
     onChangeCheckedRow: onChangeCheckedRow,
     onChangeClickedRow: onChangeClickedRow,
     onChangeRadio: onChangeRadio,
+    onChangeExtraCheckedRow: onChangeExtraCheckedRow,
     selectedFlatRows: selectedFlatRows,
     defaultRadio: defaultRadio,
   });
+
+  const renderCell = (cell: any, row: Row) => {
+    // DESCRIBE: ColumnComponent 중 RadioColumn 을 사용했을 경우
+    if (cell.column.id === "radio") {
+      return (
+        <Radio
+          name={`radio-btn-${row.id}`}
+          id={`radio-btn-${row.id}`}
+          selectedValue={selectedRadio}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleRadioButton(e, row.original)
+          }
+          value={row.id}
+        ></Radio>
+      );
+    }
+    // DESCRIBE: ColumnComponent 중 ExtraCheckboxColumn 을 사용했을 경우
+    if (cell.column.id === "extraCheckbox") {
+      return (
+        <ExtraCheckboxCell
+          row={row}
+          onChange={(checked) => handleExtraCheckbox(checked, row)}
+        />
+      );
+    }
+
+    return cell.render("Cell");
+  };
 
   return (
     <>
@@ -165,22 +205,7 @@ export const Table = ({
                             className="td"
                             onClick={() => handleClickRow(cell.column.id, row)}
                           >
-                            {/* DESCRIBE: Radio Row Cell */}
-                            {cell.column.id === "radio" && selectedRadio ? (
-                              <div>
-                                <Radio
-                                  name={`radio-btn-${row.id}`}
-                                  id={`radio-btn-${row.id}`}
-                                  selectedValue={selectedRadio}
-                                  onChange={(
-                                    e: React.ChangeEvent<HTMLInputElement>
-                                  ) => handleRadioButton(e, row.original)}
-                                  value={row.id}
-                                ></Radio>
-                              </div>
-                            ) : (
-                              cell.render("Cell")
-                            )}
+                            {renderCell(cell, row)}
                           </td>
                         </>
                       );

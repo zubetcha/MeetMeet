@@ -3,13 +3,15 @@ import {
   Table,
   CheckboxColumn,
   RadioColumn,
+  ExtraCheckboxColumn,
 } from "ui/src/components/commons/Table";
 
 export default function TablePage() {
   const columns: any = React.useMemo(
     () => [
-      CheckboxColumn(),
+      // CheckboxColumn(),
       RadioColumn("라디오 박스"),
+      ExtraCheckboxColumn("extra checkbox"),
       {
         Header: "메인 전류 센서",
         accessor: "isMain_string",
@@ -65,6 +67,9 @@ export default function TablePage() {
       onChangeClickedRow={(clickedRow: any) => console.log(clickedRow)}
       onChangeRadio={(selectedRadioRow: string) =>
         console.log("selectedRadioRow", selectedRadioRow)
+      }
+      onChangeExtraCheckedRow={(extraCheckedRowList: any[]) =>
+        console.log(extraCheckedRowList)
       }
       initialFilterState={[
         {

@@ -8,7 +8,7 @@ interface RadioProps {
   id: string;
   checked?: boolean;
   label?: string;
-  selectedValue: string;
+  selectedValue?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }

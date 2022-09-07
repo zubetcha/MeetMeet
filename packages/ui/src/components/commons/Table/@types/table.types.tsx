@@ -14,6 +14,7 @@ export interface TablePropsType {
   onChangeCheckedRow?: (checkedRowList: any[]) => void;
   onChangeClickedRow?: (clickedRow: any) => void;
   onChangeRadio?: (selectedRadioRow: string) => void;
+  onChangeExtraCheckedRow?: (checkedRowList: any[]) => void;
   isResetResizingButton?: boolean;
   isResetFilteringButton?: boolean;
   initialFilterState?: Filter[];
