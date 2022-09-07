@@ -2,6 +2,6 @@
 @import "ui/src/styles/utils";
 
 .textFields-wrapper {
-    @include flex-direction(column, 24);
+    @include flex-direction(column, 40);
     width: 360px;
 }

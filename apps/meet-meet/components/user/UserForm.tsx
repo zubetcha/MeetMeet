@@ -3,7 +3,7 @@ import classes from "./user.module.scss";
 
 import { GET_DEPARTMENTS } from "graphql/department/query";
 import { Department, DepartmentData } from "graphql/department/types";
-import { SelectItemType } from "ui/src/components/elements/Select/types/select.types";
+import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types";
 
 import { TextField, Select } from "ui/src/pages";
 

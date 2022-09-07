@@ -76,3 +76,8 @@
     border-radius: 16px;
   }
 }
+
+.meetroom-form-wrapper {
+  @include flex-direction(column, 40);
+  width: 100%;
+}
