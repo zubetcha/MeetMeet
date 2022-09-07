@@ -85,23 +85,6 @@ export default function TablePage() {
     ],
     []
   );
-  //   const rows = [
-  //     {
-  //       isMain_string: "true",
-  //       sensorId: "1",
-  //       sensorName: "김서연",
-  //     },
-  //     {
-  //       isMain_string: "false",
-  //       sensorId: "2",
-  //       sensorName: "이대호",
-  //     },
-  //     {
-  //       isMain_string: "true",
-  //       sensorId: "3",
-  //       sensorName: "정주혜",
-  //     },
-  //   ];
 
   return (
     <Table
@@ -112,12 +95,6 @@ export default function TablePage() {
       setSelectedRadio={setSelectedRadio}
       setCheckedRow={setCheckedRow}
       setClickedRow={setClickedRow}
-      initialFilterState={[
-        {
-          id: "sensorName",
-          value: ["전류"],
-        },
-      ]}
     ></Table>
   );
 }

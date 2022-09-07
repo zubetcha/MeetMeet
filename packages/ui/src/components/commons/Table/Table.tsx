@@ -9,7 +9,7 @@ import {
   useResizeColumns,
   useFlexLayout,
 } from "react-table";
-import { SelectColumnFilter } from "./Filter/SelectColumnFilter";
+import { SelectColumnFilter, MultiFilter } from "./Filter/SelectColumnFilter";
 // import { DefaultColumnFilter } from "./Filter/DefaultColumnFilter";
 import "./table.scss";
 import Th from "./Th";
@@ -32,7 +32,7 @@ export const Table = ({
     (): any => ({
       // Let's set up our default Filter UI
       Filter: SelectColumnFilter,
-      // filter: MultiFilter,
+      filter: MultiFilter,
       minWidth: 150,
       width: 150,
       maxWidth: 600,
@@ -67,7 +67,7 @@ export const Table = ({
       initialState: initialState_,
     },
     useFilters, // useFilters!
-    // useGlobalFilter, // useGlobalFilter!
+    useGlobalFilter, // useGlobalFilter!
     useSortBy,
     useRowSelect,
     useFlexLayout,
@@ -133,7 +133,6 @@ export const Table = ({
             style={{ height: height }}
           >
             {rows.map((row, i) => {
-              console.log(row);
               prepareRow(row);
               return (
                 <>

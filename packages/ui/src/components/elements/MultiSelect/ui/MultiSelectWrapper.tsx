@@ -35,7 +35,11 @@ export default function MultiSelectWrapper({
       ) : (
         <MultiSelect.TriggerIcon />
       )}
-      <div style={{ ...style }} className={classes.selectBody}>
+      <div
+        style={{ ...style }}
+        className={classes.selectBody}
+        id="multiSelectBody"
+      >
         {isOpen && (
           <div className={classes.label}>
             <Text

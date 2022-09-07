@@ -51,19 +51,19 @@ export const useSelect = () => {
 function reducer(state: any, action: any) {
   switch (action.type) {
     case "ADD":
-      const stateIdList = state.map((item: any) => item.id);
-      if (stateIdList.includes(action.value.id)) return [...state];
+      const stateNameList = state.map((item: any) => item.name);
+      if (stateNameList.includes(action.value.name)) return [...state];
       return [...state, action.value];
     case "INITIALIZE":
       return [...action.value];
     case "UPDATE": {
-      const { id, checked } = action.value;
+      const { name, checked } = action.value;
       let newState: any[] = [];
       state.map((item: any) => {
         const newItem = {
           id: item.id,
           name: item.name,
-          checked: id === item.id ? checked : item.checked,
+          checked: name === item.name ? checked : item.checked,
         };
         newState.push(newItem);
       });
@@ -99,7 +99,7 @@ function reducer(state: any, action: any) {
 
       state.map((item: any) => {
         let newItem = item;
-        if (value.includes(item.id)) {
+        if (value.includes(item.name)) {
           newItem = {
             id: item.id,
             name: item.name,
@@ -116,7 +116,7 @@ function reducer(state: any, action: any) {
 
       state.map((item: any) => {
         let newItem = item;
-        if (value.includes(item.id)) {
+        if (value.includes(item.name)) {
           newItem = {
             id: item.id,
             name: item.name,
@@ -154,8 +154,18 @@ export const SelectProvider = ({
   const [searchResult, setSearchResult] = useState<SelectItemType[]>();
   const firstRender = useRef(true);
 
+  // useEffect(() => {
+  //   if (children) {
+  //     dispatch({
+  //       type: "INITIALIZE",
+  //       value: [],
+  //     });
+  //   }
+  // }, [children]);
+
   useEffect(() => {
     if (selected) {
+      console.log(selected);
       setValue(selected);
     }
   }, [selected]);
@@ -175,14 +185,14 @@ export const SelectProvider = ({
   }, [state]);
 
   useEffect(() => {
-    if (state.length > 0 && defaultValues && !confirmedState) {
+    if (state.length > 0 && !confirmedState) {
       setConfirmedState(state);
     }
-  }, [state, defaultValues, confirmedState]);
+  }, [state, confirmedState]);
 
-  useEffect(() => {
-    console.log("confirmedState", confirmedState);
-  }, [confirmedState]);
+  // useEffect(() => {
+  //   console.log("confirmedState", confirmedState);
+  // }, [confirmedState]);
 
   return (
     <>
@@ -204,17 +214,17 @@ export const SelectProvider = ({
           setSearchResult: (e: SelectItemType[] | undefined) =>
             setSearchResult(e),
           setIsOpen: setIsOpen,
-          setCheckedItem: (id: string, checked: boolean) => {
+          setCheckedItem: (name: string, checked: boolean) => {
             dispatch({
               type: "UPDATE",
-              value: { id: id, checked: checked },
+              value: { name: name, checked: checked },
             });
           },
           onClickCheckedAll: () => {
             if (searchResult && searchResult?.length > 0) {
               dispatch({
                 type: "CHECKED_SEARCH_ALL",
-                value: searchResult.map((item: any) => item.id),
+                value: searchResult.map((item: any) => item.name),
               });
               return;
             }
@@ -226,7 +236,7 @@ export const SelectProvider = ({
             if (searchResult && searchResult?.length > 0) {
               dispatch({
                 type: "UNCHECKED_SEARCH_ALL",
-                value: searchResult.map((item: any) => item.id),
+                value: searchResult.map((item: any) => item.name),
               });
               return;
             }

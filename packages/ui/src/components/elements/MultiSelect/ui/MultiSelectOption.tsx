@@ -30,7 +30,7 @@ export function MultiSelectOption({ id, name }: OptionProps) {
         id={id}
         name={name}
         checked={isChecked}
-        onChange={(checked: boolean) => setCheckedItem(id, checked)}
+        onChange={(checked: boolean) => setCheckedItem(name, checked)}
       >
         <Checkbox.Label style={{ marginLeft: "11px" }}>{name}</Checkbox.Label>
       </Checkbox>

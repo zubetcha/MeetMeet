@@ -14,17 +14,21 @@ export const MultiFilter = (rows: any, columnIds: any, filterValues: any) => {
 export function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id },
 }: any) {
+  const [dropdownItems, setDropdownItems] = useState<any[]>([]);
   const [initialValues, setInitialValues] = useState<any[]>([]);
   const [isHoverFilter, setIsHoverFilter] = useState(false);
   const wrapperRef = useRef(null as any);
   const firstRef = useRef(true);
 
-  const dropdownItems = React.useMemo(() => {
+  useEffect(() => {
     const options = new Set();
+    console.log(preFilteredRows);
+
     preFilteredRows.forEach((row: any) => {
       options.add(row.values[id]);
     });
-    const dropdownItems = [...options.values()].map(
+    console.log("preFilteredRows", id, preFilteredRows);
+    const newDropdownItems = [...options.values()].map(
       (option: any, idx: number) => {
         return {
           id: idx,
@@ -32,7 +36,8 @@ export function SelectColumnFilter({
         };
       }
     );
-    return dropdownItems;
+    console.log("newDropdownItems", newDropdownItems);
+    setDropdownItems(newDropdownItems);
   }, [id, preFilteredRows]);
 
   useEffect(() => {
@@ -45,13 +50,7 @@ export function SelectColumnFilter({
       firstRef.current = false;
     }
   }, [dropdownItems]);
-  // useEffect(()=>{
-  //   if(selected){
-  //     setFilter(selected?.map((item)=>item.name));
-  //   }
-  // },[selected]);
 
-  // Render a multi-select bo
   return (
     <>
       <span
@@ -59,34 +58,30 @@ export function SelectColumnFilter({
         onMouseEnter={() => setIsHoverFilter(true)}
         onMouseLeave={() => setIsHoverFilter(false)}
       >
-        {/* <span onClick={() => setIsShowFilter(!isShowFilter)}>
-          <SVG name={"filter"} width={"20"} height={"20"}></SVG>
-        </span> */}
-        <span
-          id={`${id}-filter-wrapper`}
-          // className={classes.multiselect_container}
-        >
-          <MultiSelect
-            style={{ width: "250px" }}
-            isSearch={true}
-            triggerButtonType="icon"
-            defaultValues={initialValues}
-            onChange={(items) => {
-              if (items.length === dropdownItems.length) {
-                setFilter([]);
-                return;
-              }
-              setFilter(items?.map((item: any) => item.name));
-            }}
-          >
-            {dropdownItems?.map((item, i) => (
-              <MultiSelect.Option
-                id={`${item.id}`}
-                name={item.name}
-                key={`multi-option-${i}`}
-              ></MultiSelect.Option>
-            ))}
-          </MultiSelect>
+        <span id={`${id}-filter-wrapper`}>
+          {dropdownItems && (
+            <MultiSelect
+              style={{ width: "250px" }}
+              isSearch={true}
+              triggerButtonType="icon"
+              defaultValues={filterValue}
+              onChange={(items) => {
+                console.log(
+                  "새로바뀌는 items 들",
+                  items?.map((item: any) => item.name)
+                );
+                setFilter(items?.map((item: any) => item.name));
+              }}
+            >
+              {dropdownItems?.map((item, i) => (
+                <MultiSelect.Option
+                  id={`${item.id}`}
+                  name={item.name}
+                  key={`multi-option-${i}`}
+                ></MultiSelect.Option>
+              ))}
+            </MultiSelect>
+          )}
         </span>
       </span>
     </>

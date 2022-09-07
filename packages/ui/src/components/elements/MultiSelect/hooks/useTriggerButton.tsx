@@ -23,7 +23,6 @@ export function useTriggerButton() {
       ? `${defaultValues.join(",")}`
       : "선택하세요.";
 
-  console.log("isOpen", isOpen);
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) =>
     setIsOpen(!isOpen);
 
