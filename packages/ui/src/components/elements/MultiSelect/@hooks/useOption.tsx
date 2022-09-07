@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelect } from "./SelectContext";
+import { useMultiSelect } from "./MultiSelectContext";
 
 interface Props {
   id: string;
@@ -7,20 +7,22 @@ interface Props {
 }
 
 export function useOption({ id, name }: Props) {
-  const [isShow, setIsShow] = useState(true);
-  const [isChecked, setIsChecked] = useState(false);
   const {
     values,
     defaultValues,
     searchResult,
     firstRender,
+    defaultCheckedAll,
     setValues,
     setCheckedItem,
-  } = useSelect();
+  } = useMultiSelect();
+
+  const [isShow, setIsShow] = useState(true);
+  const [isChecked, setIsChecked] = useState(defaultCheckedAll);
 
   useEffect(() => {
     if (searchResult) {
-      searchResult?.map((result: any) => result.id).includes(id)
+      searchResult?.map((result: any) => result.name).includes(name)
         ? setIsShow(true)
         : setIsShow(false);
     } else {
@@ -38,7 +40,7 @@ export function useOption({ id, name }: Props) {
 
   useEffect(() => {
     if (!values) return;
-    values?.filter((value: any) => value.id === id)[0]?.checked
+    values?.filter((value: any) => value.name === name)[0]?.checked
       ? setIsChecked(true)
       : setIsChecked(false);
   }, [values]);
@@ -46,7 +48,7 @@ export function useOption({ id, name }: Props) {
   // // TOOD: defaultValue 버그 수정해야됨.
   useEffect(() => {
     if (firstRender && defaultValues && defaultValues.includes(name)) {
-      setCheckedItem(id, true);
+      setCheckedItem(name, true);
     }
   }, [defaultValues]);
 

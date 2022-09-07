@@ -1,10 +1,10 @@
 import React from "react";
 import { Button } from "../../Buttons/Button";
-import classes from "../style/button.module.scss";
-import { useSelect } from "../hooks";
+import classes from "../@style/button.module.scss";
+import { useMultiSelect } from "../@hooks";
 
 export const MultiSelectConfirmButton = () => {
-  const {onClickCancel, onClickConfirm} = useSelect();
+  const { onClickCancel, onClickConfirm } = useMultiSelect();
   return (
     <div className={classes.selectConfirmButton_wrapper}>
       <Button

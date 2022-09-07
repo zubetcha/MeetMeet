@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useSelect } from "./SelectContext";
+import { useMultiSelect } from "./MultiSelectContext";
 
 export default function useIndeterminateCheckbox() {
   const { searchResult, values, onClickCheckedAll, onClickUncheckedAll } =
-    useSelect();
+    useMultiSelect();
 
   const [isChecked, setIsChecked] = useState(false);
   const [isHalf, setIsHalf] = useState(false);

@@ -30,9 +30,11 @@ export const TextFieldInput = ({
         <input
           className={classNames(
             classes["wrapper__input-box__input"],
-            classes[`wrapper__input-box__input--${status}`], {
-            [classes.focused]: isFocused,
-          })}
+            classes[`wrapper__input-box__input--${status}`],
+            {
+              [classes.focused]: isFocused,
+            }
+          )}
           type={type}
           name={name}
           value={value}

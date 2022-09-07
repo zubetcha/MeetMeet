@@ -1,11 +1,12 @@
 import React, { createContext, useState, useReducer, useEffect } from "react";
-import { SelectItemType } from "../types/select.types";
+import { SelectItemType } from "../@types/select.types";
 
 export const SelectContext = createContext({
   values: [] as SelectItemType[] | undefined,
   searchResult: [] as SelectItemType[] | undefined,
   selected: undefined as SelectItemType | undefined,
   defaultValue: undefined as string | undefined,
+  label: "" as string | undefined,
   isOpen: false,
   setValues: (e: SelectItemType) => {},
   setSelected: (e: SelectItemType) => {},
@@ -34,6 +35,7 @@ function reducer(state: any, action: any) {
 interface SelectProps {
   setValue: (e: any) => void;
   defaultValue?: string;
+  label?: string;
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
   children: React.ReactElement[] | React.ReactElement | any;
@@ -42,6 +44,7 @@ interface SelectProps {
 export const SelectProvider = ({
   setValue,
   defaultValue,
+  label,
   isOpen,
   setIsOpen,
   children,
@@ -63,6 +66,7 @@ export const SelectProvider = ({
           values: state,
           searchResult: searchResult,
           selected: selected,
+          label: label,
           setValues: (value: any) => {
             dispatch({
               type: "ADD",

@@ -1,7 +1,7 @@
 import React from "react";
-import { useSelect } from "./SelectContext";
+import { useMultiSelect } from "./MultiSelectContext";
 export function useOptionList() {
-  const { isOpen, searchResult } = useSelect();
+  const { isOpen, searchResult } = useMultiSelect();
 
   return {
     isOpen,

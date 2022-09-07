@@ -5,8 +5,14 @@
   @include flex-direction(column, 2);
   @include flexbox(center, start);
   width: 100%;
+  position: relative;
+  &__label { 
+    position: absolute;
+    top:-18px;
+    left:0;
+    @include font-style(label-medium, on-surface-variant); 
+  }
 
-  &__label { @include font-style(label-medium, on-surface-variant); }
 
   &__input-box, &__textarea-box {
     position: relative;
@@ -148,6 +154,9 @@
   }
 
   &__helperText {
+    position: absolute;
+    left:0;
+    bottom: -18px; 
     @include font-style(label-medium);
 
     &--default {
