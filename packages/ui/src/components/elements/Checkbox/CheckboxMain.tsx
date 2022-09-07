@@ -38,7 +38,7 @@ export const CheckboxMain = ({
         htmlFor={id}
         style={{ height: "100%" }}
         className={classes.checkbox_hover}
-        onClick={() => inputRef.current.click()}
+        // onClick={() => inputRef.current.click()}
       >
         <span className={classes.checkbox_hover} style={{ width: "20px" }}>
           {status === "disable" ? (

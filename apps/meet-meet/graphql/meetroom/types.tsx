@@ -1,12 +1,12 @@
 export interface MeetRoom {
-    id: number;
+    id: number |  null;
     name: string;
     location: string;
     hasMonitor: boolean;
     canMerge: boolean;
     seat: number;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface MeetRoomData {
@@ -15,12 +15,21 @@ export interface MeetRoomData {
 
 export interface MeetRoomImage {
     id: number;
-    meetRoom: MeetRoom;
     url: string;
+}
+
+export interface MeetroomImageData {
+    imageByMeetRoom: MeetRoomImage[]
 }
 
 export interface MeetRoomMergeInfo {
     id: number;
-    meetRoom: MeetRoom;
-    mergeRoom: MeetRoom;
+    mergeRoom: {
+        id: number;
+        name: string;
+    };
+}
+
+export interface MeetRoomMergeInfoData {
+    mergeInfoByMeetRoom: MeetRoomMergeInfo;
 }

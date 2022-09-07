@@ -12,9 +12,10 @@ import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserve
 
 import "../styles/globals.scss";
 import { Layout } from "@components/commons/Layout/Layout";
+import { RouterGuard } from "@components/commons/RouterGuard/RouterGuard";
+import { SuccessModal } from "@components/commons/Modal/SuccessModal";
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   const router = useRouter();
   const exceptionList = ["/", "/login", "/join", "/join/onboarding"]
   const queryClient = new QueryClient();
@@ -38,14 +39,17 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ApolloProvider client={client}>
           <RecoilRoot>
-            <RecoilObserver />
+            {/* <RecoilObserver /> */}
+            <RouterGuard>
             {
-            exceptionList.includes(router.pathname)
-            ? <Component {...pageProps} />
-            : <Layout>
-                <Component {...pageProps} />
-              </Layout>
-          }
+              exceptionList.includes(router.pathname)
+              ? <Component {...pageProps} />
+              : <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+            }
+            <SuccessModal />
+            </RouterGuard>
           </RecoilRoot>
         </ApolloProvider>
       </QueryClientProvider>
