@@ -37,20 +37,42 @@
   width: 120px;
   height: 120px;
   border-radius: 16px;
-  border: 4px dashed var(--color-surfaceVariant);
+  border: 3px dashed var(--color-surfaceVariant);
   transition: all 0.3s ease-in-out;
-  cursor: pointer;
 
-  &:hover {
-    border: 4px dashed var(--color-outline);
+  &.onDrop {
+    cursor: pointer;  
+    &:hover {
+      border: 3px dashed var(--color-outline);
 
-    svg {
-      fill: var(--color-outline);
+      svg {
+        fill: var(--color-outline);
+      }
     }
   }
 
   svg {
     transition: all 0.3s ease-in-out;
     fill: var(--color-surfaceVariant);
+  }
+}
+
+.input {
+  display: none;
+}
+
+.preview-container {
+  @include flexbox(center, center);
+  border-radius: 16px;
+  position: relative;
+
+  div {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+  }
+
+  .preview {
+    border-radius: 16px;
   }
 }
