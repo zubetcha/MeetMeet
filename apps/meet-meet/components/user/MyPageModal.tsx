@@ -21,7 +21,7 @@ export const MyPageModal = ({ setIsModal }: Props) => {
 
     return (
         <Modal>
-            <Text type="headline-medium" style={{ fontWeight: "700" }}>회원 정보</Text>
+            <Modal.Title type="title-large" weight="700">회원 정보</Modal.Title>
             <Modal.Contents>
                 <UserForm values={values} onChangeTextField={onChangeTextField} onChangeDepartmentId={onChangeDepartmentId} departmentId={department.id} />
             </Modal.Contents>
