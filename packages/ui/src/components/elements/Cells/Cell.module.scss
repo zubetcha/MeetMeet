@@ -1,0 +1,84 @@
+@use '../../../styles/utils' as *;
+
+@mixin cellTextColor {
+
+  color: var(--color-onSurface);
+  
+  &.disable {
+    color: var(--color-onSurface-opacity-38);
+  }
+
+  &.error {
+    color: var(--color-error);
+  }
+
+  &.tertiary {
+    color: var(--color-tertiary);
+  }
+}
+
+.cellGroupBox {
+  display: flex;
+}
+
+.cellContainer {
+  position: relative;
+  padding: 4px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  @include cellTextColor;
+  @include font-style(body-large);
+
+  &.focused {
+    background-color: var(--color-primary-opacity-12);
+  }
+
+  &.focusedStartEnd {
+    background-color: var(--color-primary-opacity-12);
+    .cellText {
+      background-color: var(--color-primary-opacity-16);
+    }
+  }
+
+
+  .cellText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 8px 10.5px;
+    border-radius: 4px;
+  }
+
+  .stateLayer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  &.disable{
+    cursor: default;
+  }
+
+  &.isHover {
+    .stateLayer {
+      background-color: var(--color-primary-opacity-08);
+    }
+
+    &.disable {
+      .stateLayer {
+        background-color: transparent !important;
+      };
+    }
+  }
+
+}
+

@@ -1,6 +1,7 @@
 @use "../../../shared/colors.scss" as *;
 @use "../../../shared/font.scss" as *;
 @use "../../../shared/common.module.scss" as *;
+@use "../../../styles/utils" as *;
 
 .calendar_outer_box {
     position: fixed;
@@ -18,11 +19,10 @@
     position: absolute;
     top:10px;
     left:0;
-    // transform: translate(-50%);
     z-index: 1000;
     padding: 40px 40px 24px 40px;
     box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.25);
-    background-color: #ffffff;
+    background-color: var(--color-surface);
 
     &.singleDate {
         position: fixed !important;
@@ -46,16 +46,17 @@
 
     .calendar_header {
         position: relative;
-        font-size: 20px;
+        @include font-style(title-large);
+        color:var(--color-primary);
         .prevBtn{
             position: absolute;
-            left: 60px;
+            left: 15px;
             cursor: pointer;
             padding: 0 5px;
         }
         .nextBtn{
             position: absolute;
-            right: 60px;
+            right: 15px;
             cursor: pointer;
             padding: 0 5px;
         }
@@ -99,27 +100,17 @@
     
     .calendar_layout {
         .day_week {
-            // border: 1px solid #CACACC;
-            // border-collapse: collapse;
             box-sizing: border-box;
             display: flex;
             margin-bottom: 12px;
-            // background: #EAEAEB;
             .date{
                 width: 48px;
                 height: 48px;
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
-                font-size: 16px;
-                line-height: 24px;
-                font-weight: 700;
-                .saturday {
-                    color : #46f1d0;
-                }
-                .sunday {
-                    color: #ff765a;
-                }
+                @include font-style(body-large);
+                color: var(--color-onSurface-opacity-38);
             }
             
         }
@@ -134,6 +125,8 @@
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
+                @include font-style(body-large);
+                color: var(--color-onSurface);
                 div {
                     display: inline-flex;
                     justify-content: center;
@@ -163,17 +156,17 @@
                     cursor: pointer;
                 }
                 &.startDate span, &.endDate span{
-                    background: #A0C5AF !important;
+                    background: var(--color-primary-opacity-16) !important;
                     border-radius: 4px;
                     
                     }
                 &.btwDates{
-                    background-color: #E7F0EB;
+                    background-color: var(--color-primary-opacity-12);
                 }
                 &.future {
                     cursor: default;
                     span {
-                        color: rgba(0, 0, 0, 0.38);
+                        color: var(--color-onSurface-opacity-38);
                         cursor: default !important;
                     }
                 } 
@@ -182,7 +175,7 @@
                 }
 
                 .hoverDate {
-                    background: rgba(0, 0, 0, 0.03) !important;
+                    background: var(--color-secondary-opacity-08) !important;
                 }
             }
             
@@ -197,11 +190,11 @@
             }
             
             .saturday {
-                color : #46f1d0;
+                color : var(--color-tertiary);
             }
             
             .sunday {
-                color: #ff765a;
+                color: var(--color-error);
             }
         }
         

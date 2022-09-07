@@ -1,0 +1,25 @@
+@use "ui/src/styles/themes.scss" as *;
+@use "ui/src/styles/color.scss" as *;
+
+html,
+body {
+  background-color: var(--color-surface);
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+*, *::after, *::before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+

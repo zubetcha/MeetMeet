@@ -17,9 +17,8 @@
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.28);
-  }
+  };
 }
-
 .modalOverlay {
   position: fixed;
   width: 100vw;
@@ -441,26 +440,6 @@
     }
     @include animate(rotate, 0.8s, linear, infinite);
   }
-}
-
-.input_icon {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
-  cursor: pointer;
-  img {
-    display: block !important;
-    cursor: pointer !important;
-  }
-}
-
-.input_unit {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
-  cursor: pointer;
 }
 
 .input {

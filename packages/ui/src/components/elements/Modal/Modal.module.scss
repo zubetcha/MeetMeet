@@ -1,0 +1,48 @@
+@import "../../../styles/variables";
+@import "../../../styles/utils";
+
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-onSurface-opacity-38);
+  z-index: 10000;
+}
+
+.modal-container {
+  @include pos-center(fixed);
+  @include flex-direction(column, 32);
+  background-color: var(--color-surface);
+  width: fit-content;
+  height: fit-content;
+  border-radius: 4px;
+  z-index: 10001;
+  padding: $modal-container-padding;
+  cursor: default;
+  z-index: 10001;
+  &.toast {
+    padding: $toast-modal-container-padding;
+  }
+}
+
+.modal-icon {
+  @include flexbox(center, center);
+  width: 100%;  
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.modal-contents {
+  @include flex-direction(column, 16);
+  @include flexbox(center, start);
+}
+
+.modal-buttons {
+  @include flexbox(end, center);
+  @include flex-direction(row, 16);
+}
