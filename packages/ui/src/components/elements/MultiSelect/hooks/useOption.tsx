@@ -7,16 +7,20 @@ interface Props {
 }
 
 export function useOption({ id, name }: Props) {
-  const [isShow, setIsShow] = useState(true);
-  const [isChecked, setIsChecked] = useState(true);
   const {
     values,
     defaultValues,
     searchResult,
     firstRender,
+    triggerButtonType,
     setValues,
     setCheckedItem,
   } = useSelect();
+
+  const [isShow, setIsShow] = useState(true);
+  const [isChecked, setIsChecked] = useState(
+    triggerButtonType === "button" ? false : true
+  );
 
   useEffect(() => {
     if (searchResult) {
@@ -46,7 +50,7 @@ export function useOption({ id, name }: Props) {
   // // TOOD: defaultValue 버그 수정해야됨.
   useEffect(() => {
     if (firstRender && defaultValues && defaultValues.includes(name)) {
-      setCheckedItem(name, isChecked);
+      setCheckedItem(name, true);
     }
   }, [defaultValues]);
 

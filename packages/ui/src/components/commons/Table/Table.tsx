@@ -5,16 +5,17 @@ import {
   useGlobalFilter,
   useSortBy,
   useRowSelect,
-  useBlockLayout,
   useResizeColumns,
   useFlexLayout,
 } from "react-table";
-import { SelectColumnFilter, MultiFilter } from "./Filter/SelectColumnFilter";
-// import { DefaultColumnFilter } from "./Filter/DefaultColumnFilter";
-import "./table.scss";
+import {
+  MultiSelectColumnFilter,
+  MultiFilter,
+} from "./TableFilter/MultiSelectColumnFilter";
+import "./@style/table.scss";
 import Th from "./Th";
 import { Radio } from "../../elements";
-import { TablePropsType, TableInstanceWithHooks } from "./types/table.types";
+import { TablePropsType, TableInstanceWithHooks } from "./@types/table.types";
 
 export const Table = ({
   columns,
@@ -31,7 +32,7 @@ export const Table = ({
   const defaultColumn = React.useMemo(
     (): any => ({
       // Let's set up our default Filter UI
-      Filter: SelectColumnFilter,
+      Filter: MultiSelectColumnFilter,
       filter: MultiFilter,
       minWidth: 150,
       width: 150,
@@ -82,9 +83,6 @@ export const Table = ({
     setCheckedRow([...selectedFlatRows.map((row: any) => row.original)]);
   }, [selectedFlatRows]);
 
-  const headerProps = (props: any, { column }: any) =>
-    getStyles(props, column.align);
-
   const cellProps = (props: any, { cell }: any) =>
     getStyles(props, cell.column.align);
 
@@ -109,6 +107,7 @@ export const Table = ({
       )}
       <div className="tableWrap">
         <table {...getTableProps()} className="table">
+          {/* DESCRIBE: Thead */}
           <thead>
             {headerGroups.map((headerGroup) => (
               <>
@@ -127,6 +126,7 @@ export const Table = ({
               </>
             ))}
           </thead>
+          {/* DESCRIBE: Tbody */}
           <tbody
             {...getTableBodyProps()}
             className="tbody"
@@ -151,6 +151,7 @@ export const Table = ({
                               setClickedRow(row.original);
                             }}
                           >
+                            {/* DESCRIBE: Radio Row Cell */}
                             {cell.column.id === "radio" && selectedRadio ? (
                               <div>
                                 <Radio

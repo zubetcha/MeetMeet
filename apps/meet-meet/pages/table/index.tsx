@@ -1,29 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Table, CheckboxColumn } from "ui/src/components/commons/Table";
-import { Column, Row } from "react-table";
-
-interface ISensorType {
-  createdAt: string;
-  customerId: number;
-  customerName: string;
-  equipmentId: number;
-  equipmentName: string;
-  factoryId: number;
-  factoryName: string;
-  isMain: boolean;
-  location: string;
-  mac: string;
-  sensorHistory: any[];
-  sensorId: string;
-  sensorName: string;
-  sensorNum: string;
-  signalPeriod: number;
-  type: string;
-  updatedAt: string;
-}
+import {
+  Table,
+  CheckboxColumn,
+  RadioColumn,
+} from "ui/src/components/commons/Table";
 
 export default function TablePage() {
-  //   const [rows, setRows] = useState<readonly Row<ISensorType>[]>([]);
   const [selectedRadio, setSelectedRadio] = useState("3");
   const [checkedRow, setCheckedRow] = useState();
   const [clickedRow, setClickedRow] = useState([]);
@@ -43,6 +25,7 @@ export default function TablePage() {
   const columns: any = React.useMemo(
     () => [
       CheckboxColumn(),
+      RadioColumn("라디오 박스"),
       {
         Header: "메인 전류 센서",
         accessor: "isMain_string",

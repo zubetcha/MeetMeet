@@ -20,6 +20,7 @@ export const SelectContext = createContext({
   isOpen: false,
   // 현재 선택되어 있는 요소들 개수
   currentSelectedNumber: 0,
+  triggerButtonType: "",
   // onChagne 함수로 넘겨줄 상태값 setState 함수
   setValues: (e: SelectItemType) => {},
   // searchResult setState 함수
@@ -138,6 +139,7 @@ interface SelectProps {
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
   children: React.ReactElement[] | React.ReactElement | any;
+  triggerButtonType: string;
 }
 
 export const SelectProvider = ({
@@ -146,6 +148,7 @@ export const SelectProvider = ({
   isOpen,
   setIsOpen,
   children,
+  triggerButtonType,
 }: SelectProps) => {
   const [confirmedState, setConfirmedState] = useState<any[] | undefined>();
   const [state, dispatch] = useReducer(reducer, []);
@@ -204,6 +207,7 @@ export const SelectProvider = ({
           isOpen: isOpen,
           defaultValues: defaultValues,
           currentSelectedNumber: currentSelectedNumber,
+          triggerButtonType: triggerButtonType,
           setValues: (value: any) => {
             dispatch({
               type: "ADD",

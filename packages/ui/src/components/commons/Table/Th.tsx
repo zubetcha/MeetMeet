@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./table.scss";
+import "./@style/table.scss";
 import { IconButton } from "../../elements";
 
 export default function Th({ column, idx, isLast }: any) {
@@ -22,7 +22,7 @@ export default function Th({ column, idx, isLast }: any) {
     if (!filterIcon) return;
 
     if (isShowIcon) {
-      filterIcon.style.fill = "var(--color-onsurfaceVariant)";
+      filterIcon.style.fill = "null";
     } else {
       filterIcon.style.fill = "transparent";
     }

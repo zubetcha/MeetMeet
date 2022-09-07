@@ -36,9 +36,7 @@ export function MultiSelectMain({
     onChange(selected);
   }, [selected]);
 
-  // const isShowTriggerButton = !isOpen || (isOpen && !isSearch);
   const isShowSearchField = isOpen && isSearch;
-  // const selectedItemNumber = useMemo(()=>selected.filter((item:any)=>item.checked || 0).length,[selected])
 
   return (
     <>
@@ -47,6 +45,7 @@ export function MultiSelectMain({
         defaultValues={defaultValues}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
+        triggerButtonType={triggerButtonType}
       >
         <MultiSelectWrapper
           style={style}

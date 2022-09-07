@@ -1,2 +1,2 @@
 export * from "./Table";
-export * from "./DefaultColumns/DefaultColumns";
+export * from "./ColumnComponents/ColumnComponents";
