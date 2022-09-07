@@ -2,9 +2,9 @@ import React from "react";
 import { useSelect } from "./SelectContext";
 
 export function useTriggerButton() {
-  const { selected, defaultValue, isOpen, setIsOpen } = useSelect();
+  const { label, selected, defaultValue, isOpen, setIsOpen } = useSelect();
 
-  const label = selected
+  const value = selected
     ? selected.name
     : defaultValue
     ? `${defaultValue}`
@@ -15,6 +15,7 @@ export function useTriggerButton() {
 
   return {
     label,
+    value,
     onClick,
   };
 }

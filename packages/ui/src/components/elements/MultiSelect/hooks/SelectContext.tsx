@@ -22,6 +22,8 @@ export const SelectContext = createContext({
   currentSelectedNumber: 0,
   // 처음에 다 선택되어 있는 상태로 시작하는지
   defaultCheckedAll: false,
+  // TriggerButton TextField Label
+  label: "" as string | undefined,
   // onChagne 함수로 넘겨줄 상태값 setState 함수
   setValues: (e: SelectItemType) => {},
   // searchResult setState 함수
@@ -137,6 +139,7 @@ function reducer(state: any, action: any) {
 interface SelectProps {
   setValue: (e: any) => void;
   defaultValues?: string[];
+  label?: string;
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
   children: React.ReactElement[] | React.ReactElement | any;
@@ -146,6 +149,7 @@ interface SelectProps {
 export const SelectProvider = ({
   setValue,
   defaultValues,
+  label,
   isOpen,
   setIsOpen,
   children,
@@ -195,6 +199,7 @@ export const SelectProvider = ({
           values: state,
           confirmedValues: confirmedState,
           searchResult: searchResult,
+          label: label,
           isOpen: isOpen,
           defaultValues: defaultValues,
           currentSelectedNumber: currentSelectedNumber,

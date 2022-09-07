@@ -7,9 +7,9 @@ import { useSelect } from "../hooks";
 import classNames from "classnames";
 interface Props {
   style: any;
+  label?: string;
   isOpen: boolean;
   triggerButtonType: "button" | "icon";
-  defaultCheckedAll: boolean;
   setIsOpen: (e: boolean) => void;
   isShowSearchField: boolean;
   children: React.ReactElement[];
@@ -18,7 +18,6 @@ export default function MultiSelectWrapper({
   style,
   isOpen,
   triggerButtonType = "button",
-  defaultCheckedAll = false,
   isShowSearchField,
   children,
 }: Props) {

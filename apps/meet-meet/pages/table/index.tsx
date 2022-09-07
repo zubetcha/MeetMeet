@@ -6,22 +6,6 @@ import {
 } from "ui/src/components/commons/Table";
 
 export default function TablePage() {
-  const [selectedRadio, setSelectedRadio] = useState("3");
-  const [checkedRow, setCheckedRow] = useState();
-  const [clickedRow, setClickedRow] = useState([]);
-
-  useEffect(() => {
-    console.log(selectedRadio);
-  }, [selectedRadio]);
-
-  useEffect(() => {
-    console.log(checkedRow);
-  }, [checkedRow]);
-
-  useEffect(() => {
-    console.log(clickedRow);
-  }, [clickedRow]);
-
   const columns: any = React.useMemo(
     () => [
       CheckboxColumn(),
@@ -74,10 +58,14 @@ export default function TablePage() {
       columns={columns}
       data={rows}
       height={"700px"}
-      selectedRadio={selectedRadio}
-      setSelectedRadio={setSelectedRadio}
-      setCheckedRow={setCheckedRow}
-      setClickedRow={setClickedRow}
+      defaultRadio={"0"}
+      onChangeCheckedRow={(checkedRowList: any[]) =>
+        console.log(checkedRowList)
+      }
+      onChangeClickedRow={(clickedRow: any) => console.log(clickedRow)}
+      onChangeRadio={(selectedRadioRow: string) =>
+        console.log("selectedRadioRow", selectedRadioRow)
+      }
       initialFilterState={[
         {
           id: "sensorName",

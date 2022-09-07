@@ -10,10 +10,10 @@ export interface TablePropsType {
   columns: readonly Column<any>[];
   data: readonly Row<any>[];
   height?: string;
-  selectedRadio?: string;
-  setSelectedRadio?: Dispatch<SetStateAction<any>>;
-  setCheckedRow?: Dispatch<SetStateAction<any>>;
-  setClickedRow?: Dispatch<SetStateAction<any>>;
+  defaultRadio?: string;
+  onChangeCheckedRow?: (checkedRowList: any[]) => void;
+  onChangeClickedRow?: (clickedRow: any) => void;
+  onChangeRadio?: (selectedRadioRow: string) => void;
   isResetResizingButton?: boolean;
   isResetFilteringButton?: boolean;
   initialFilterState?: Filter[];

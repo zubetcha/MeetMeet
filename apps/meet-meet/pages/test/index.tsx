@@ -215,6 +215,7 @@ export default function TestPage() {
           defaultValues={["5분"]}
           onChange={(e: any) => console.log(e)}
           style={{ width: "250px" }}
+          label={"안녕 이건 MultiSelect"}
         >
           <MultiSelect.Option id="1" name="5분" />
           <MultiSelect.Option id="2" name="10분" />
@@ -229,6 +230,7 @@ export default function TestPage() {
           defaultValue="5분"
           onChange={(e: any) => console.log(e)}
           style={{ width: "250px" }}
+          label={"안녕 이건 Select"}
         >
           <Select.Option id="1" name="5분" />
           <Select.Option id="2" name="10분" />

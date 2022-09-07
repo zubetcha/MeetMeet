@@ -9,8 +9,9 @@ export const MultiFilter = (rows: any, columnIds: any, filterValues: any) => {
 };
 
 /**
- * @description
+ * @description Column 필터링 (다중 선택 필터링) 컴포넌트입니다.
  * @param column 각 column 의 상태를 나타내는 React Table 에서 제공되는 column 객체입니다.
+ * @param initialFilterState 초기 필터링 조건으로 사용할 상태값을 의미합니다.
  * @returns
  */
 export function MultiSelectColumnFilter({

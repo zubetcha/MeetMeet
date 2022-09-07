@@ -9,6 +9,7 @@ interface SelectProps {
   defaultValue?: string;
   onChange: (e: SelectItemType) => void;
   style?: any;
+  label?: string;
   children: React.ReactElement[];
 }
 
@@ -24,6 +25,7 @@ export function SelectMain({
   isSearch = false,
   defaultValue,
   onChange,
+  label,
   style = { width: "220px" },
   children,
 }: SelectProps) {
@@ -45,6 +47,7 @@ export function SelectMain({
       <SelectProvider
         setValue={setSelected}
         defaultValue={defaultValue}
+        label={label}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
       >

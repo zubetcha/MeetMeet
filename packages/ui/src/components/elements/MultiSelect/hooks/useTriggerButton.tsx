@@ -2,7 +2,8 @@ import React, { useMemo } from "react";
 import { useSelect } from "./SelectContext";
 
 export function useTriggerButton() {
-  const { confirmedValues, defaultValues, isOpen, setIsOpen } = useSelect();
+  const { label, confirmedValues, defaultValues, isOpen, setIsOpen } =
+    useSelect();
 
   const trueNum = useMemo(
     () =>
@@ -11,7 +12,7 @@ export function useTriggerButton() {
     [confirmedValues]
   );
 
-  const label =
+  const value =
     confirmedValues && trueNum > 0
       ? confirmedValues
           .filter((value: any) => value.checked === true)
@@ -28,6 +29,7 @@ export function useTriggerButton() {
 
   return {
     label,
+    value,
     onClick,
   };
 }
