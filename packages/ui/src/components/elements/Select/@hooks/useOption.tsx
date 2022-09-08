@@ -20,7 +20,7 @@ export function useOption({ id, name }: Props) {
 
   useEffect(() => {
     if (searchResult) {
-      searchResult?.map((result: any) => result.id).includes(id)
+      searchResult?.map((result: any) => result.name).includes(name)
         ? setIsShow(true)
         : setIsShow(false);
     } else {

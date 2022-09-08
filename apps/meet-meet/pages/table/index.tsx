@@ -9,7 +9,7 @@ import {
 export default function TablePage() {
   const columns: any = React.useMemo(
     () => [
-      // CheckboxColumn(),
+      CheckboxColumn(),
       RadioColumn("라디오 박스"),
       ExtraCheckboxColumn("extra checkbox"),
       {

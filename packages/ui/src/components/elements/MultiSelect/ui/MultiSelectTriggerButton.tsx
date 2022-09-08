@@ -18,7 +18,6 @@ export function MultiSelectTriggerButton() {
         >
           <TextField.Icon name="dropdown" />
         </TextField.Input>
-        <TextField.HelperText>테스트</TextField.HelperText>
       </TextField>
     </span>
   );

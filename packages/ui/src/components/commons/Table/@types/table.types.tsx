@@ -1,5 +1,4 @@
 import { TableInstance, Column, Row } from "react-table";
-import { Dispatch, SetStateAction } from "react";
 
 type Filter = {
   id: string;

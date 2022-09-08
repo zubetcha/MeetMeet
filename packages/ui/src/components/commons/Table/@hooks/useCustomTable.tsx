@@ -41,11 +41,13 @@ export default function useCustomTable({
     onChangeRadio({ ...selectedRow });
   };
 
+  // DESCRIBE: Extra Checkbox (추가 체크박스) 관련
   useEffect(() => {
     onChangeExtraCheckedRow(extraCheckbox);
   }, [extraCheckbox]);
 
   const handleExtraCheckbox = (checked: boolean, row: Row) => {
+    console.log(checked, row);
     if (checked) {
       setExtraCheckbox([...extraCheckbox, row.original]);
     } else {

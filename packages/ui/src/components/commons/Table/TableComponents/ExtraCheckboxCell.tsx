@@ -8,7 +8,6 @@ interface Props {
 
 export function ExtraCheckboxCell({ row, onChange }: Props) {
   const [isChecked, setIsChecked] = useState(false);
-  console.log("checkbox row id", row.id, row.original);
 
   useEffect(() => {
     onChange(isChecked);
@@ -20,8 +19,10 @@ export function ExtraCheckboxCell({ row, onChange }: Props) {
         id={`checkbox-btn-${row.id}`}
         name={`checkbox-btn-${row.id}`}
         checked={isChecked}
-        onChange={(checked: boolean) => setIsChecked(checked)}
-      />
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setIsChecked(e.target.checked)
+        }
+      ></Checkbox>
     </div>
   );
 }
