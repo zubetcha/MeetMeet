@@ -9,7 +9,8 @@ export interface TablePropsType {
   columns: readonly Column<any>[];
   data: readonly Row<any>[];
   height?: string;
-  defaultRadio?: string;
+  defaultRadioValue?: string;
+  defaultExtraCheckboxValues?: string[];
   onChangeCheckedRow?: (checkedRowList: any[]) => void;
   onChangeClickedRow?: (clickedRow: any) => void;
   onChangeRadio?: (selectedRadioRow: string) => void;

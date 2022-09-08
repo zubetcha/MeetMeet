@@ -9,8 +9,11 @@ import {
 export default function TablePage() {
   const columns: any = React.useMemo(
     () => [
+      // 선택 체크 박스 column
       CheckboxColumn(),
+      // 라디오 버튼을 사용할 column
       RadioColumn("라디오 박스"),
+      // 추가 체크 박스를 사용할 column
       ExtraCheckboxColumn("extra checkbox"),
       {
         Header: "메인 전류 센서",
@@ -60,7 +63,8 @@ export default function TablePage() {
       columns={columns}
       data={rows}
       height={"700px"}
-      defaultRadio={"0"}
+      defaultRadioValue={"0"}
+      defaultExtraCheckboxValues={["0", "1"]}
       onChangeCheckedRow={(checkedRowList: any[]) =>
         console.log(checkedRowList)
       }
@@ -69,7 +73,7 @@ export default function TablePage() {
         console.log("selectedRadioRow", selectedRadioRow)
       }
       onChangeExtraCheckedRow={(extraCheckedRowList: any[]) =>
-        console.log(extraCheckedRowList)
+        console.log("extraCheckedRowList", extraCheckedRowList)
       }
       initialFilterState={[
         {

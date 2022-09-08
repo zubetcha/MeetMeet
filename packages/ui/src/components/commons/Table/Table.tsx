@@ -16,7 +16,7 @@ import {
 } from "./TableFilter/MultiSelectColumnFilter";
 import "./@style/table.scss";
 import Th from "./Th";
-import { Checkbox, Radio } from "../../elements";
+import { Radio } from "../../elements";
 import { TablePropsType, TableInstanceWithHooks } from "./@types/table.types";
 import useCustomTable from "./@hooks/useCustomTable";
 import {
@@ -30,7 +30,8 @@ import {
  * @param columns (Column) 컬럼 객체 (상위 컴포넌트에서 useMemo 또는 useState 로 감싸야 함).
  * @param rows (Row) 데이터 객체 리스트 (상위 컴포넌트에서 useMemo 또는 useState 로 감싸야 함).
  * @param height (string) 테이블 height 지정
- * @param defaultRadio (string) 디폴트로 선택할 radio button index (0 부터 시작)
+ * @param defaultRadioValue (string) 디폴트로 선택할 radio button index (0 부터 시작)
+ * @param defaultExtraCheckboxValues (string[]) 디폴트로 extra checkbox 에서 선택될 체크 박스 index 리스트 (0부터 시작)
  * @param onChangeCheckedRow (function) 체크박스 클릭시, 체크 선택된 객체 리스트를 상위 컴포넌트로 넘겨주는 콜백함수
  * @param onChangeClickedRow (function) 열 클릭시, 클릭된 객체를 상위 컴포넌트로 넘겨주는 콜백함수
  * @param onChangeRadio (function) 라디오버튼 클릭시, 선택된 객체를 상위 컴포넌트로 넘겨주는 콜백함수
@@ -43,7 +44,8 @@ export const Table = ({
   columns,
   data,
   height = "500px",
-  defaultRadio,
+  defaultRadioValue,
+  defaultExtraCheckboxValues = [],
   onChangeCheckedRow = () => {},
   onChangeClickedRow = () => {},
   onChangeRadio = () => {},
@@ -124,7 +126,8 @@ export const Table = ({
     onChangeRadio: onChangeRadio,
     onChangeExtraCheckedRow: onChangeExtraCheckedRow,
     selectedFlatRows: selectedFlatRows,
-    defaultRadio: defaultRadio,
+    defaultRadioValue: defaultRadioValue,
+    defaultExtraCheckboxValues: defaultExtraCheckboxValues,
   });
 
   const renderCell = (cell: any, row: Row) => {
@@ -148,6 +151,7 @@ export const Table = ({
         <ExtraCheckboxCell
           row={row}
           onChange={(checked) => handleExtraCheckbox(checked, row)}
+          defaultChecked={defaultExtraCheckboxValues.includes(row.id)}
         />
       );
     }

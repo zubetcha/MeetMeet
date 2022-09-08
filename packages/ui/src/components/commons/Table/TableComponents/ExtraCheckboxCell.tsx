@@ -4,10 +4,11 @@ import { Checkbox } from "../../../elements";
 interface Props {
   row: any;
   onChange: (checked: boolean) => void;
+  defaultChecked: boolean;
 }
 
-export function ExtraCheckboxCell({ row, onChange }: Props) {
-  const [isChecked, setIsChecked] = useState(false);
+export function ExtraCheckboxCell({ row, onChange, defaultChecked }: Props) {
+  const [isChecked, setIsChecked] = useState(defaultChecked);
 
   useEffect(() => {
     onChange(isChecked);

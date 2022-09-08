@@ -26,6 +26,10 @@ export function MultiSelectColumnFilter({
   );
 
   useEffect(() => {
+    setFilter(initialState);
+  }, [initialState]);
+
+  useEffect(() => {
     const options = new Set();
     preFilteredRows.forEach((row: any) => {
       options.add(row.values[id]);

@@ -7,7 +7,8 @@ interface Props {
   onChangeRadio: (selectedRadioRow: string) => void;
   onChangeExtraCheckedRow: (checkedRowList: any[]) => void;
   selectedFlatRows: Row[];
-  defaultRadio?: string;
+  defaultRadioValue?: string;
+  defaultExtraCheckboxValues?: string[];
 }
 
 export default function useCustomTable({
@@ -16,9 +17,10 @@ export default function useCustomTable({
   onChangeRadio,
   onChangeExtraCheckedRow,
   selectedFlatRows,
-  defaultRadio,
+  defaultRadioValue,
+  defaultExtraCheckboxValues,
 }: Props) {
-  const [selectedRadio, setSelectedRadio] = useState(defaultRadio);
+  const [selectedRadio, setSelectedRadio] = useState(defaultRadioValue);
   const [extraCheckbox, setExtraCheckbox] = useState<any>([]);
 
   // DESCRIBE: 체크박스 관련
@@ -47,7 +49,6 @@ export default function useCustomTable({
   }, [extraCheckbox]);
 
   const handleExtraCheckbox = (checked: boolean, row: Row) => {
-    console.log(checked, row);
     if (checked) {
       setExtraCheckbox([...extraCheckbox, row.original]);
     } else {

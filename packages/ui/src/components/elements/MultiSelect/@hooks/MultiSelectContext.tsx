@@ -215,7 +215,6 @@ export const MultiSelectProvider = ({
             setSearchResult(e),
           setIsOpen: setIsOpen,
           setCheckedItem: (name: string, checked: boolean) => {
-            console.log(name, checked);
             dispatch({
               type: "UPDATE",
               value: { name: name, checked: checked },
