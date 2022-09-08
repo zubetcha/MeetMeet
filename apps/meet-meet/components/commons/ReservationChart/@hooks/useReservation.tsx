@@ -37,16 +37,12 @@ export default function useReservation({
 
   useEffect(() => {
     const { startIndex, endIndex } = selectedInfo;
-    if (
-      startIndex === -1 ||
-      endIndex === -1 ||
-      startIndex === endIndex
-    ) {
+    if (startIndex === -1 || endIndex === -1 || startIndex === endIndex) {
       return;
     }
 
-    if(handleBetweenMeetingCancel()){
-      return; 
+    if (handleBetweenMeetingCancel()) {
+      return;
     }
 
     if (onChange) {
@@ -56,14 +52,13 @@ export default function useReservation({
         meetingRoom: meetingRoom,
       });
     }
-  }, [unavailableList, selectedInfo.startIndex, selectedInfo.endIndex]);
-
+  }, [selectedInfo.startIndex, selectedInfo.endIndex]);
 
   // DESCRIBE: 회의실이 중간에 끼여있으면 선택 취소시키는 로직
-  const handleBetweenMeetingCancel =()=>{
+  const handleBetweenMeetingCancel = () => {
     let flag = false;
-    unavailableList?.map((meeting: any)=>{
-      const {startTime, endTime}= meeting;
+    unavailableList?.map((meeting: any) => {
+      const { startTime, endTime } = meeting;
       const meetingStartTime = changeDateToMinute(startTime);
       const meetingEndTime = changeDateToMinute(endTime);
 
@@ -71,16 +66,17 @@ export default function useReservation({
       const selectedStartTime = changeDateToMinute(newTimeList[startIndex]);
       const selectedEndTime = changeDateToMinute(newTimeList[endIndex]);
 
-      if(selectedStartTime<=meetingStartTime && meetingEndTime<=selectedEndTime){
+      if (
+        selectedStartTime <= meetingStartTime &&
+        meetingEndTime <= selectedEndTime
+      ) {
         onCancleAllSlot();
-        flag=true;
+        flag = true;
         return;
       }
-    })
+    });
     return flag;
-  }
-
-
+  };
 
   const onChangeCellGroup = (selectedInfo: any) => {
     if (

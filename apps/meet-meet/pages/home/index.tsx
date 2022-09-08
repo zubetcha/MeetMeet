@@ -1,25 +1,18 @@
-import { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import type { NextPage } from "next";
 import { ReservationChart } from "components";
-import { CalendarLayout, Button } from "@components/ui";
+import { CalendarLayout, Button, Checkbox, Text, Radio } from "@components/ui";
 import { formatDate, addThreeDateFromNow } from "ui/src/utils";
-import { Text } from "ui/src/pages";
 import { ReservationAPI } from "@api/api";
 import {
   UnAvailableListType,
   MeetingRoomObjectType,
 } from "@components/commons/ReservationChart/@types/reservationChart.types";
+import classes from "./home.module.scss";
 
 const Home: NextPage = () => {
   const [btnState, setBtnState] = useState<boolean>(false);
   const [reservationList, setReservationList] = useState<any>({});
-  // const [date, setDate] = useState<Date>(
-  //   new Date(
-  //     new Date().getFullYear(),
-  //     new Date().getMonth(),
-  //     new Date().getDate()
-  //   )
-  // );
 
   // TODO: 나중에 오늘 시간을 가져오는 것으로 바꿔야함.
   const [date, setDate] = useState<Date>(new Date("2022-08-31"));
@@ -50,6 +43,16 @@ const Home: NextPage = () => {
     }
   };
 
+  const [selectedValue, setSelectedValue] = useState("total");
+  const checkboxInfo = useMemo(
+    () => [
+      { id: "total", label: "전체 리스트" },
+      { id: "userHost", label: "내가 호스트인 회의실" },
+      { id: "userParticipate", label: "내가 참여하는 회의실" },
+    ],
+    []
+  );
+
   return (
     <div
       style={{
@@ -62,11 +65,7 @@ const Home: NextPage = () => {
       }}
     >
       <div>
-        <Text
-          type="headline-large"
-          color="primary"
-          style={{ fontWeight: "bold" }}
-        >
+        <Text type="headline-large" style={{ fontWeight: "bold" }}>
           젠틀에너지 회의실 예약 현황
         </Text>
         <div>
@@ -91,6 +90,22 @@ const Home: NextPage = () => {
             timeType="futureCurrent"
           />
         )}
+      </div>
+      <div className={classes.checkboxFlex}>
+        {checkboxInfo.map((info: any) => (
+          <>
+            <Radio
+              name={info.id}
+              id={info.id}
+              selectedValue={selectedValue}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSelectedValue(e.target.id)
+              }
+              label={info.label}
+              value={info.id}
+            ></Radio>
+          </>
+        ))}
       </div>
       <ReservationChart
         startDate={date}

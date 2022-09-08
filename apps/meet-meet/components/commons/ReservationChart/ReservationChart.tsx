@@ -28,6 +28,7 @@ export const ReservationChart = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const onChange = (e: any, date: string) => {
+    console.log("이게 계속 바뀌나?");
     setTimeout(() => {
       setIsOpen(true);
     }, 500);
