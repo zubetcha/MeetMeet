@@ -31,7 +31,7 @@ export const MultiSelectContext = createContext({
   // isOpen setState 함수
   setIsOpen: (e: boolean) => {},
   // values 체크 상태 UPDATE dispatch 함수
-  setCheckedItem: (id: string, checked: boolean) => {},
+  setCheckedItem: (name: string, checked: boolean) => {},
   // values 전체 선택 CHECKED_ALL dispatch 함수
   onClickCheckedAll: () => {},
   // value 전체 해제 UNCHECKED_ALL dispatch 함수

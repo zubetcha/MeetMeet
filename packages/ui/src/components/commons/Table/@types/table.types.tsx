@@ -1,5 +1,4 @@
 import { TableInstance, Column, Row } from "react-table";
-import { Dispatch, SetStateAction } from "react";
 
 type Filter = {
   id: string;
@@ -10,10 +9,12 @@ export interface TablePropsType {
   columns: readonly Column<any>[];
   data: readonly Row<any>[];
   height?: string;
-  defaultRadio?: string;
+  defaultRadioValue?: string;
+  defaultExtraCheckboxValues?: string[];
   onChangeCheckedRow?: (checkedRowList: any[]) => void;
   onChangeClickedRow?: (clickedRow: any) => void;
   onChangeRadio?: (selectedRadioRow: string) => void;
+  onChangeExtraCheckedRow?: (checkedRowList: any[]) => void;
   isResetResizingButton?: boolean;
   isResetFilteringButton?: boolean;
   initialFilterState?: Filter[];

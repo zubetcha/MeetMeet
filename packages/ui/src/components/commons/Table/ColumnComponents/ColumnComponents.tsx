@@ -48,3 +48,21 @@ export const RadioColumn = (headerName: string, width?: number) => {
     canFilter: false,
   };
 };
+
+/**
+ * @description radio 열을 만들고 싶을 때 사용하는 Column 컴포넌트 입니다.
+ * @param headerName (string) radio 열의 headerName 을 지정합니다.
+ * @param width (number) radio 열의 width 를 지정합니다.
+ * @returns
+ */
+export const ExtraCheckboxColumn = (headerName: string, width?: number) => {
+  return {
+    id: "extraCheckbox",
+    Header: ({ getToggleAllRowsSelectedProps }: any) => <div>{headerName}</div>,
+    width: width || 150,
+    minWidth: width || 150,
+    maxWidth: width || 150,
+    canSort: false,
+    canFilter: false,
+  };
+};
