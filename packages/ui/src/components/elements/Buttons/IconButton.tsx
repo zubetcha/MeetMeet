@@ -14,6 +14,7 @@ interface Props {
   state: string;
   negativeMood?: boolean;
   icon: string;
+  color?: string;
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -23,6 +24,7 @@ export const IconButton = ({
   state,
   negativeMood = false,
   icon,
+  color,
   onClick,
 }: Props) => {
   const { width: iconWidth, height: iconHeight } = getSVGSizeByButtonSize(size);
@@ -47,7 +49,7 @@ export const IconButton = ({
     >
       <SVG
         name={icon}
-        color={iconColor}
+        color={color || iconColor}
         width={iconWidth}
         height={iconHeight}
       />

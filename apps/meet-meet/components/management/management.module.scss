@@ -4,6 +4,10 @@
 .container {
   width: fit-content;
 
+  @include mobile() {
+    width: 100%;
+  }
+
   .text-wrapper {
     @include flex-direction(column, 8);
   }
@@ -40,6 +44,11 @@
   border: 3px dashed var(--color-surfaceVariant);
   transition: all 0.3s ease-in-out;
 
+  @include mobile() {
+    width: 80px;
+    height: 80px;
+  }
+
   &.onDrop {
     cursor: pointer;  
     &:hover {
@@ -75,4 +84,9 @@
   .preview {
     border-radius: 16px;
   }
+}
+
+.meetroom-form-wrapper {
+  @include flex-direction(column, 40);
+  width: 100%;
 }

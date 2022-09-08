@@ -1,15 +1,12 @@
 import React from "react";
 import { Checkbox } from "../../Checkbox";
 import { Button } from "../../Buttons/Button";
-import classes from "../style/select.module.scss";
-import useIndeterminateCheckbox from "../hooks/useIndeterminateCheckbox";
+import classes from "../@style/select.module.scss";
+import useIndeterminateCheckbox from "../@hooks/useIndeterminateCheckbox";
 
 export const IndeterminateCheckbox = () => {
-  const {
-    isChecked,
-    onClickCheckedAll,
-    onClickUncheckedAll,
-  } = useIndeterminateCheckbox();
+  const { isChecked, onClickCheckedAll, onClickUncheckedAll } =
+    useIndeterminateCheckbox();
 
   return (
     <div

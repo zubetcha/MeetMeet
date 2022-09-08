@@ -1,6 +1,7 @@
 import { atom } from "recoil";
+import { UserInfo } from "./types";
 
-const userState = atom({
+const userState = atom<UserInfo>({
     key: "user",
     default: {
         id: null,

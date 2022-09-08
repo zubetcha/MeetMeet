@@ -9,7 +9,7 @@ import { MeetRoom } from "graphql/meetroom/types";
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { ImagePreview } from "./ImagePreview";
-import { Modal, TextField, Checkbox, Button, Select } from "ui/src/pages"
+import { Modal, TextField, Checkbox, Button, Select, Text } from "ui/src/pages"
 
 // TODO: code: -301, message: 이미 존재하는 회의실입니다.
 export const MeetroomAddModal = ({setIsAddModal}: Props) => {
@@ -45,7 +45,7 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
   }
 
     useEffect(() => {
-    const { isError, error } = create;
+    const { isError, error }: { isError: boolean, error: any } = create;
     if (isError && error.response.data.code === -301) {
       setIsSameName(true);
     }
@@ -56,50 +56,53 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
       <Modal setIsOpen={setIsAddModal}>
         <Modal.Title type="title-large" weight="700">회의실 생성</Modal.Title>
         <Modal.Contents>
+          <div className={classes["meetroom-form-wrapper"]}>
+            <TextField name="name" status={isSameName ? "danger" : "default"}>
+              <TextField.Label>회의실 이름</TextField.Label>
+              <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
+              <TextField.HelperText>{isSameName && "이미 존재하는 회의실입니다."}</TextField.HelperText>
+            </TextField>
 
-          <TextField name="name" status={isSameName ? "danger" : "default"}>
-            <TextField.Label>회의실 이름</TextField.Label>
-            <TextField.Input type="text" value={values.name} placeholder="회의실 이름을 입력해주세요." autoFocus onChange={onChangeTextField}/>
-            <TextField.HelperText>{isSameName && "이미 존재하는 회의실입니다."}</TextField.HelperText>
-          </TextField>
+            <TextField name="mergeRoom" status="default">
+              <TextField.Label>합칠 수 있는 회의실</TextField.Label>
+              <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
+                {availableMergeList.map((meetroom: MeetRoom) => {
+                  const { id, name } = meetroom;
+                  return <Select.Option key={id} id={String(id)} name={name} />;
+                })}
+              </Select>
+            </TextField>
 
-          <TextField name="mergeRoom" status="default">
-            <TextField.Label>합칠 수 있는 회의실</TextField.Label>
-            <Select isSearch defaultValue="" onChange={onChangeMerge} style={{ width: "100%" }}>
-              {availableMergeList.map((meetroom: MeetRoom) => {
-                const { id, name } = meetroom;
-                return <Select.Option key={id} id={String(id)} name={name} />;
-              })}
-            </Select>
-          </TextField>
+            <TextField name="seat" status="default">
+              <TextField.Label>수용 인원</TextField.Label>
+              <TextField.Input type="text" value={values.seat} placeholder="수용 가능한 인원을 입력해주세요." onChange={onChangeTextField}>
+                <TextField.Unit>명</TextField.Unit>
+              </TextField.Input>
+            </TextField>
 
-          <TextField name="seat" status="default">
-            <TextField.Label>수용 인원</TextField.Label>
-            <TextField.Input type="text" value={values.seat} placeholder="수용 가능한 인원을 입력해주세요." onChange={onChangeTextField}>
-              <TextField.Unit>명</TextField.Unit>
-            </TextField.Input>
-          </TextField>
+            <TextField name="equipment" status="default">
+              <TextField.Label>장비 여부</TextField.Label>
+              <Checkbox
+                name="monitor"
+                id="monitor"
+                checked={values.hasMonitor}
+                onChange={onChangeHasEquipment}
+              >
+                <Checkbox.Label>
+                  모니터
+                </Checkbox.Label>
+              </Checkbox>
+            </TextField>
 
-          <TextField name="equipment" status="default">
-            <TextField.Label>장비 여부</TextField.Label>
-            <Checkbox
-              name="monitor"
-              id="monitor"
-              checked={values.hasMonitor}
-              onChange={onChangeHasEquipment}
-            >
-              <Checkbox.Label>
-                모니터
-              </Checkbox.Label>
-            </Checkbox>
-          </TextField>
+            <TextField name="location" status="default">
+              <TextField.Label>위치</TextField.Label>
+              <TextField.Textarea value={values.location} placeholder="회의실 위치 정보를 입력해주세요." onChange={onChangeTextField}/>
+            </TextField>
 
-          <TextField name="location" status="default">
-            <TextField.Label>위치</TextField.Label>
-            <TextField.Textarea value={values.location} placeholder="회의실 위치 정보를 입력해주세요." onChange={onChangeTextField}/>
-          </TextField>
+          </div>
+
           <div className={classes["images-container"]}>
-            <TextField.Label>회의실 사진</TextField.Label>
+            <Text>회의실 사진</Text>
             <div className={classes["images-wrapper"]}>
               {new Array(3).fill(0).map((_, index) => {
                 return images[index]?.url
