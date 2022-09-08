@@ -1,67 +1,54 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import type { NextPage } from "next";
 import { ReservationChart } from "components";
 import { CalendarLayout, Button } from "@components/ui";
-import { formatDate } from "ui/src/utils";
+import { formatDate, addThreeDateFromNow } from "ui/src/utils";
 import { Text } from "ui/src/pages";
+import { ReservationAPI } from "@api/api";
+import {
+  UnAvailableListType,
+  MeetingRoomObjectType,
+} from "@components/commons/ReservationChart/@types/reservationChart.types";
 
 const Home: NextPage = () => {
   const [btnState, setBtnState] = useState<boolean>(false);
-  const [date, setDate] = useState<Date>(
-    new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      new Date().getDate() - 1
-    )
-  );
+  const [reservationList, setReservationList] = useState<any>({});
+  // const [date, setDate] = useState<Date>(
+  //   new Date(
+  //     new Date().getFullYear(),
+  //     new Date().getMonth(),
+  //     new Date().getDate()
+  //   )
+  // );
 
-  const meetingRoomList = useMemo(()=> ["백범", "마당", "백범2", "청파2"], []);
-  
-  const dummyList = useMemo(() => {
-    return {
-      "2022-08-30": {
-        백범: [
-          {
-            department: "ICT팀",
-            startTime: "13:30",
-            endTime: "14:30",
-            meetingRoom: "백범",
-            host: "김서연",
-          },
-        ],
-        청파2: [
-          {
-            department: "ICT팀",
-            startTime: "09:30",
-            endTime: "10:30",
-            meetingRoom: "청파2",
-            host: "김서연",
-          },
-        ],
-      },
-      "2022-08-31": {
-        백범: [
-          {
-            department: "ICT팀",
-            startTime: "13:30",
-            endTime: "14:30",
-            meetingRoom: "백범",
-            host: "김서연",
-          },
-        ],
-        청파2: [
-          {
-            department: "ICT팀",
-            startTime: "09:30",
-            endTime: "10:30",
-            meetingRoom: "청파2",
-            host: "김서연",
-          },
-        ],
-      },
-    };
+  // TODO: 나중에 오늘 시간을 가져오는 것으로 바꿔야함.
+  const [date, setDate] = useState<Date>(new Date("2022-08-31"));
+  const meetingRoomList = useMemo(() => ["청파", "마당", "백범", "성지"], []);
+
+  useEffect(() => {
+    ReservationAPI.getAllReservationInfo(
+      formatDate(date),
+      formatDate(addThreeDateFromNow(date))
+    )
+      .then((res) => handleResult(res))
+      .catch((err) => console.log(err));
   }, []);
 
+  // DESCRIBE: 결과값 ReservationChart 에 맞게 수정 하는 로직 (각 정보를 key 값으로 접근할 수 있도록 변경하는 작업)
+  const handleResult = (result: any) => {
+    if (result.status === 200) {
+      let dateObject: UnAvailableListType = {};
+      result.data.map((item: any) => {
+        let meetRoomObject: MeetingRoomObjectType = {};
+        item.meetroomList.map((meetRoomItem: any) => {
+          meetRoomObject[meetRoomItem.meetroomName] =
+            meetRoomItem.reservationList;
+        });
+        dateObject[item.date] = meetRoomObject;
+      });
+      setReservationList(dateObject);
+    }
+  };
 
   return (
     <div
@@ -94,7 +81,6 @@ const Home: NextPage = () => {
           <CalendarLayout
             setCalendar={setBtnState}
             onClickSubmitBtn={(startDate: any) => {
-              console.log(startDate);
               setDate(startDate);
               setBtnState(false);
             }}
@@ -102,13 +88,14 @@ const Home: NextPage = () => {
             start={date}
             end={date}
             type="single"
+            timeType="futureCurrent"
           />
         )}
       </div>
-      <ReservationChart 
-        startDate={date} 
-        meetingRoomList={meetingRoomList} 
-        unavailableList={dummyList}
+      <ReservationChart
+        startDate={date}
+        meetingRoomList={meetingRoomList}
+        unavailableList={reservationList}
       />
     </div>
   );

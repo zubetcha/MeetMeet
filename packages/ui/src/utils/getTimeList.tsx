@@ -30,6 +30,10 @@ export const getThreeDateFromNow = (startDate: Date) => {
   return newList;
 };
 
+export const addThreeDateFromNow = (startDate: Date) => {
+  return addMinutes(startDate, 60 * 24 * 3);
+};
+
 export const changeDateToMinute = (date: string) => {
   const [hour, minute] = date.split(":");
   const totalMinute = parseInt(hour) * 60 + parseInt(minute);

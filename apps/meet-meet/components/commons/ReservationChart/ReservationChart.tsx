@@ -5,31 +5,13 @@ import ReservationHeader from "./ReservationHeader";
 import ReservationModal from "./ReservationModal";
 import ReservationBody from "./ReservationBody";
 import { getThreeDateFromNow } from "ui/src/utils";
-
-interface reservationInfo {
-  department: string;
-  startTime: string;
-  endTime: string;
-  meetingRoom: string;
-  host:string;
-}
-
-interface ReservationProps {
-  width?: string;
-  startDate?: Date;
-  meetingRoomList: string[];
-  unavailableList : {
-    [date:string]:{
-      [meetingRoom:string]:reservationInfo[]
-    }
-  }
-}
+import { ReservationProps } from "./@types/reservationChart.types";
 
 export const ReservationChart = ({
   width = "100%",
   startDate,
   meetingRoomList,
-  unavailableList
+  unavailableList,
 }: ReservationProps) => {
   const [selectedData, setSelectedData] = useState({
     meetingRoom: "",

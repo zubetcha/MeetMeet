@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import classes from "./reservation.module.scss";
-import useReservation from "./hooks/useReservation";
+import useReservation from "./@hooks/useReservation";
 import { CellGroup, Cell } from "@components/ui";
 import { useOutsideAlerter } from "ui/src/hooks/useOutsideAlerter";
 
@@ -37,7 +37,9 @@ export default function ReservationRow({
             {newTimeList.map((item, idx) => {
               if (item.includes("start")) {
                 const widthIndex = parseInt(item.split(":")[1]);
-                const {department, host}=unavailableRoomList[widthIndex];
+                const { department, host } = unavailableRoomList[
+                  widthIndex
+                ] || { department: "", host: "" };
                 return (
                   <Cell
                     label={`${department} (${host})`}
