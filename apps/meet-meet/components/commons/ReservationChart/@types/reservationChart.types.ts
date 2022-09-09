@@ -20,3 +20,18 @@ export interface ReservationProps {
   meetingRoomList: string[];
   unavailableList: UnAvailableListType;
 }
+
+export interface selectedDataType {
+  date: string;
+  meetingRoom: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface RservationRowProps {
+  meetingRoom: string;
+  onChange: (e: selectedDataType) => void;
+  unavailableRoomList: any;
+  date: string;
+  onClickReservedCell?: (e: any) => void;
+}

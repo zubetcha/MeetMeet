@@ -10,12 +10,18 @@ import {
 } from "@components/commons/ReservationChart/@types/reservationChart.types";
 import classes from "./home.module.scss";
 
+// TODO: 1. 이미 예약된 Cell 클릭했을 때, 상세정보 모달 띄우는 로직 추가해야함.
+// TODO: 2. radio button 중 하나 클릭했을 때 조회 API 바꾸는 로직 추가해야함. (전체 조회, 내가 호스트인 예약 조회, 내가 참여하는 예약 조회)
+// TODO: 3. meetingRoomList (전체 미팅룸) 조회하는 graphQL 연결해야함. (지금은 하드코딩되어 있음.)
+// TODO: 4. 처음 조회 시간을 2022-08-21로 되어있는데, 오늘을 기준으로 조회하는 로직으로 바꿔야함.
+// TODO: 5. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함.
 const Home: NextPage = () => {
   const [btnState, setBtnState] = useState<boolean>(false);
   const [reservationList, setReservationList] = useState<any>({});
 
   // TODO: 나중에 오늘 시간을 가져오는 것으로 바꿔야함.
-  const [date, setDate] = useState<Date>(new Date("2022-08-31"));
+  const [date, setDate] = useState<Date>(new Date("2022-09-05"));
+  // TODO: 전체 미팅룸 조회하는 graphQL 연결해야함.
   const meetingRoomList = useMemo(() => ["청파", "마당", "백범", "성지"], []);
 
   useEffect(() => {
@@ -43,8 +49,9 @@ const Home: NextPage = () => {
     }
   };
 
+  // DESCRIBE: 회의실 조회 옵션 선택 (radio button) 과 관련된 상태값들.
   const [selectedValue, setSelectedValue] = useState("total");
-  const checkboxInfo = useMemo(
+  const radioInfo = useMemo(
     () => [
       { id: "total", label: "전체 리스트" },
       { id: "userHost", label: "내가 호스트인 회의실" },
@@ -92,7 +99,7 @@ const Home: NextPage = () => {
         )}
       </div>
       <div className={classes.checkboxFlex}>
-        {checkboxInfo.map((info: any) => (
+        {radioInfo.map((info: any) => (
           <>
             <Radio
               name={info.id}
@@ -101,9 +108,12 @@ const Home: NextPage = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setSelectedValue(e.target.id)
               }
-              label={info.label}
               value={info.id}
-            ></Radio>
+            >
+              <Radio.Label style={{ marginLeft: "5px" }}>
+                <Text type="body-medium">{info.label}</Text>
+              </Radio.Label>
+            </Radio>
           </>
         ))}
       </div>

@@ -2,10 +2,14 @@ import React, { useState, useMemo } from "react";
 import classes from "./reservation.module.scss";
 import ReservationSection from "./ReservationSection";
 import ReservationHeader from "./ReservationHeader";
-import ReservationModal from "./ReservationModal";
+import ReservationModal from "./modal/ReservationModal";
+import ReservedInfoModal from "./modal/ReservedInfoModal";
 import ReservationBody from "./ReservationBody";
 import { getThreeDateFromNow } from "ui/src/utils";
-import { ReservationProps } from "./@types/reservationChart.types";
+import {
+  ReservationProps,
+  selectedDataType,
+} from "./@types/reservationChart.types";
 
 export const ReservationChart = ({
   width = "100%",
@@ -19,6 +23,14 @@ export const ReservationChart = ({
     startTime: "",
     endTime: "",
   });
+  const [reservedDate, setReservedDate] = useState({
+    date: "",
+    meetingRoom: "",
+    host: "",
+    department: "",
+    startTime: "",
+    endTime: "",
+  });
 
   const dateList = useMemo(
     () => getThreeDateFromNow(startDate as Date),
@@ -26,18 +38,25 @@ export const ReservationChart = ({
   );
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenReservedModal, setIsOpenReservedModal] = useState(false);
 
-  const onChange = (e: any, date: string) => {
-    console.log("이게 계속 바뀌나?");
+  const onChange = (e: selectedDataType) => {
     setTimeout(() => {
       setIsOpen(true);
     }, 500);
 
     setSelectedData({
-      date: date,
+      date: e.date,
       meetingRoom: e.meetingRoom,
       startTime: e.startTime,
       endTime: e.endTime,
+    });
+  };
+
+  const onClickReservedCell = (reservedInfo: any) => {
+    setIsOpenReservedModal(true);
+    setReservedDate({
+      ...reservedInfo,
     });
   };
 
@@ -66,6 +85,7 @@ export const ReservationChart = ({
             meetingRoomList={meetingRoomList}
             unavailableRoomList={unavailableList}
             onChange={onChange}
+            onClickReservedCell={onClickReservedCell}
           />
         </div>
 
@@ -73,6 +93,12 @@ export const ReservationChart = ({
           <ReservationModal
             reservationData={selectedData}
             onClickCancle={() => setIsOpen(false)}
+          />
+        )}
+        {isOpenReservedModal && (
+          <ReservedInfoModal
+            reservedDate={reservedDate}
+            onClickCancle={() => setIsOpenReservedModal(false)}
           />
         )}
       </div>
