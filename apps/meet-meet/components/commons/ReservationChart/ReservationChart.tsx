@@ -10,10 +10,13 @@ import {
   ReservationProps,
   selectedDataType,
 } from "./@types/reservationChart.types";
+import { getTimeList } from "ui/src/utils";
 
 export const ReservationChart = ({
   width = "100%",
   startDate,
+  startTime = "08:30",
+  endTime = "20:00",
   meetingRoomList,
   unavailableList,
 }: ReservationProps) => {
@@ -36,6 +39,8 @@ export const ReservationChart = ({
     () => getThreeDateFromNow(startDate as Date),
     [startDate]
   );
+
+  const timeList = useMemo(() => getTimeList(startTime, endTime), []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenReservedModal, setIsOpenReservedModal] = useState(false);
@@ -79,9 +84,10 @@ export const ReservationChart = ({
           className={classes.reservationScrollSection}
           style={{ width: width }}
         >
-          <ReservationHeader />
+          <ReservationHeader timeList={timeList} />
           <ReservationBody
             dates={dateList as string[][]}
+            timeList={timeList}
             meetingRoomList={meetingRoomList}
             unavailableRoomList={unavailableList}
             onChange={onChange}

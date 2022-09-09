@@ -17,6 +17,8 @@ export type UnAvailableListType = {
 export interface ReservationProps {
   width?: string;
   startDate?: Date;
+  startTime?: string;
+  endTime?: string;
   meetingRoomList: string[];
   unavailableList: UnAvailableListType;
 }
@@ -30,6 +32,7 @@ export interface selectedDataType {
 
 export interface RservationRowProps {
   meetingRoom: string;
+  timeList: string[];
   onChange: (e: selectedDataType) => void;
   unavailableRoomList: any;
   date: string;

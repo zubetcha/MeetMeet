@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { timeList, changeDateToMinute } from "ui/src/utils";
+import { changeDateToMinute } from "ui/src/utils";
 import { RservationRowProps } from "../@types/reservationChart.types";
 
 /**
@@ -12,6 +12,7 @@ import { RservationRowProps } from "../@types/reservationChart.types";
  */
 export default function useReservation({
   unavailableRoomList,
+  timeList,
   onChange,
   meetingRoom,
   date,
@@ -36,11 +37,11 @@ export default function useReservation({
   // DESCRIBE: row 에 Cell 채워넣는 로직
   const handleCellList = (unavailableRoomList: any[]) => {
     let widthListindex = 0;
-    const dateList = timeList();
+    const timeList_ = timeList;
     let newTimeList: any = [];
     unavailableRoomList?.sort((a, b) => a.startDate - b.startDate);
     // 1. 기본 날짜 리스트를 순회하며 조건에 만족하는지 체크하는 로직
-    dateList.map((item: any) => {
+    timeList_.map((item: any) => {
       const slotTime = changeDateToMinute(item);
       let newItem = item;
       let flag = true;

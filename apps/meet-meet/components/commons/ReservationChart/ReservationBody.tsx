@@ -3,6 +3,7 @@ import ReservationRow from "./ReservationRow";
 import { selectedDataType } from "./@types/reservationChart.types";
 interface Props {
   dates: string[][];
+  timeList: string[];
   meetingRoomList: string[];
   unavailableRoomList: any;
   onChange: (e: selectedDataType) => void;
@@ -11,6 +12,7 @@ interface Props {
 
 export default function ReservationBody({
   dates,
+  timeList,
   meetingRoomList,
   unavailableRoomList,
   onChange,
@@ -34,6 +36,7 @@ export default function ReservationBody({
                 <ReservationRow
                   key={`reservation-row-${index}`}
                   meetingRoom={room}
+                  timeList={timeList}
                   date={date[0]}
                   onChange={onChange}
                   onClickReservedCell={onClickReservedCell}

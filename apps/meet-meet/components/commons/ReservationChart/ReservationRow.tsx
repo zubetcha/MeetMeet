@@ -7,6 +7,7 @@ import { RservationRowProps } from "./@types/reservationChart.types";
 
 export default function ReservationRow({
   meetingRoom,
+  timeList,
   onChange,
   unavailableRoomList,
   date,
@@ -21,6 +22,7 @@ export default function ReservationRow({
     onCancleAllSlot,
   } = useReservation({
     unavailableRoomList: unavailableRoomList,
+    timeList: timeList,
     onChange: onChange,
     meetingRoom: meetingRoom,
     date: date,
@@ -48,11 +50,12 @@ export default function ReservationRow({
             disableIndex={disabledIndex}
           >
             {newTimeList.map((item, idx) => {
-              if (item.includes("start")) {
+              if (item.includes("start") && unavailableRoomList) {
                 const widthIndex = parseInt(item.split(":")[1]);
                 const { department, host } = unavailableRoomList[
                   widthIndex
                 ] || { department: "", host: "" };
+                // const { department, host } = { department: "", host: "" };
                 return (
                   <span
                     onClick={() =>

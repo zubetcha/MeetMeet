@@ -22,4 +22,12 @@ export const MeetroomAPI = {
 export const ReservationAPI = {
   getAllReservationInfo: (startDate: string, endDate: string) =>
     api.get(`reservations?startDateStr=${startDate}&endDateStr=${endDate}`),
+  getReservationInfobyHost: (startDate: string, endDate: string) =>
+    api.get(
+      `host/reservations?startDateStr=${startDate}&endDateStr=${endDate}`
+    ),
+  getReservationInfobyParticipant: (startDate: string, endDate: string) =>
+    api.get(
+      `participant/reservations?startDateStr=${startDate}&endDateStr=${endDate}`
+    ),
 };
