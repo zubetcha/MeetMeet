@@ -73,12 +73,12 @@ const Home: NextPage = () => {
   return (
     <div
       style={{
-        position: "absolute",
-        top: "50px",
-        right: "40px",
-        bottom: "24px",
-        left: "24px",
+        height: "fit-content",
+        width: "fit-content",
+        margin: "20px auto 0 auto",
         display: "grid",
+        rowGap: "30px",
+        position: "relative",
       }}
     >
       <div>
