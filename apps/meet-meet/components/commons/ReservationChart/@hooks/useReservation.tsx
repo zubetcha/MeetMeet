@@ -17,13 +17,18 @@ export default function useReservation({
   meetingRoom,
   date,
 }: RservationRowProps) {
+  // DESCRIBE: 예약 정보를 입력받고 cellGroup 을 구성하는 데 사용될 timelist
   const [newTimeList, setNewTimeList] = useState<any[]>([]);
+  // DESCRIBE: 현재 선택된 cell index
   const [selectedInfo, setSelectedInfo] = useState({
     startIndex: -1,
     endIndex: -1,
   });
+  // DESCRIBE: cell 선택 해제를 위한 상태값
   const [defaultIndex, setDefaultIndex] = useState({ start: null, end: null });
+  // DESCRIBE: 이미 예약되어 있는 cell들의 index 리스트
   const [disabledIndex, setDisabledIndex] = useState<number[]>([]);
+  // DESCRIBE: 이미 예약되어 있는 cell들의 width를 저장하는 리스트
   const [unavailableSlotWidthList, setUnavailableSlotWidthList] = useState<
     number[]
   >([]);
@@ -77,6 +82,7 @@ export default function useReservation({
     handleDisabledList(newTimeList);
   };
 
+  // DESCRIBE: 이미 선택되어 있는 cell 들의 index 를 구하는 함수
   const handleDisabledList = (newTimeList: any[]) => {
     let disabeldIndexList: number[] = [];
     newTimeList.map((item, idx) =>
@@ -84,6 +90,7 @@ export default function useReservation({
     );
     setDisabledIndex(disabeldIndexList);
   };
+
   // DESCRIBE: 병합 셀의 width 를 구하는 로직
   const handleMeetingCellWidth = (unavailableList: any) => {
     let widthList: number[] = [];

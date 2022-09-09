@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import type { NextPage } from "next";
 import { ReservationChart } from "components";
-import { CalendarLayout, Button, Checkbox, Text, Radio } from "@components/ui";
+import { CalendarLayout, Button, Text, Radio } from "@components/ui";
 import { formatDate, addThreeDateFromNow } from "ui/src/utils";
 import { ReservationAPI } from "@api/api";
 import {
@@ -10,10 +10,9 @@ import {
 } from "@components/commons/ReservationChart/@types/reservationChart.types";
 import classes from "./home.module.scss";
 
-// TODO: 1. radio button 중 하나 클릭했을 때 조회 API 바꾸는 로직 추가해야함. (전체 조회, 내가 호스트인 예약 조회, 내가 참여하는 예약 조회)
+// TODO: 1. 처음 조회 시간을 2022-08-21로 되어있는데, 오늘을 기준으로 조회하는 로직으로 바꿔야함.
 // TODO: 2. meetingRoomList (전체 미팅룸) 조회하는 graphQL 연결해야함. (지금은 하드코딩되어 있음.)
-// TODO: 3. 처음 조회 시간을 2022-08-21로 되어있는데, 오늘을 기준으로 조회하는 로직으로 바꿔야함.
-// TODO: 4. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함.
+// TODO: 3. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함.
 const Home: NextPage = () => {
   const [btnState, setBtnState] = useState<boolean>(false);
   const [reservationList, setReservationList] = useState<any>({});
@@ -67,7 +66,6 @@ const Home: NextPage = () => {
         });
         dateObject[item.date] = meetRoomObject;
       });
-      console.log(dateObject);
       setReservationList(dateObject);
     }
   };

@@ -12,6 +12,16 @@ import {
 } from "./@types/reservationChart.types";
 import { getTimeList } from "ui/src/utils";
 
+/**
+ *
+ * @param width (string) 예약 간트 차트 width 값
+ * @param startDate (Date) 간트 차트 시작 날짜 (+2) 까지 보임. (총 3개 날짜)
+ * @param startTime (string) 간트 차트 시작 시간
+ * @param endTime (string) 간트 차트 종료 시간
+ * @param meetingRoomList (string[]) 미팅룸 리스트
+ * @param unavailableList (UnAvailableListType) 이미 예약된 예약 정보 리스트
+ * @returns
+ */
 export const ReservationChart = ({
   width = "100%",
   startDate,
@@ -20,12 +30,14 @@ export const ReservationChart = ({
   meetingRoomList,
   unavailableList,
 }: ReservationProps) => {
+  // DESCRIBE: 빈 영역 클릭헀을 때 세팅되는 상태값 (새로운 예약 정보)
   const [selectedData, setSelectedData] = useState({
     meetingRoom: "",
     date: "",
     startTime: "",
     endTime: "",
   });
+  // DESCRIBE: 이미 차있는 영역 클릭했을 때 세팅되는 상태값 (기존 예약 정보)
   const [reservedDate, setReservedDate] = useState({
     date: "",
     meetingRoom: "",
@@ -35,29 +47,33 @@ export const ReservationChart = ({
     endTime: "",
   });
 
+  // DESCRIBE: 간트 차트 날짜 리스트
   const dateList = useMemo(
     () => getThreeDateFromNow(startDate as Date),
     [startDate]
   );
 
+  // DESCRIBE: 간트 차트 시간 리스트
   const timeList = useMemo(() => getTimeList(startTime, endTime), []);
 
+  // DESCRIBE: 예약 등록 모달 open 여부
   const [isOpen, setIsOpen] = useState(false);
+
+  // DESCRIBE: 예약 상세정보 확인 모달 open 여부
   const [isOpenReservedModal, setIsOpenReservedModal] = useState(false);
 
-  const onChange = (e: selectedDataType) => {
+  // DESCRIBE: 빈 영역 클릭했을 때
+  const onClickEmptyCells = (selectedInfo: selectedDataType) => {
     setTimeout(() => {
       setIsOpen(true);
     }, 500);
 
     setSelectedData({
-      date: e.date,
-      meetingRoom: e.meetingRoom,
-      startTime: e.startTime,
-      endTime: e.endTime,
+      ...selectedInfo,
     });
   };
 
+  // DESCRIBE: 이미 예약된 정보 cell 클릭했을 때
   const onClickReservedCell = (reservedInfo: any) => {
     setIsOpenReservedModal(true);
     setReservedDate({
@@ -84,13 +100,15 @@ export const ReservationChart = ({
           className={classes.reservationScrollSection}
           style={{ width: width }}
         >
+          {/* 시간 표시하는 header 영역 */}
           <ReservationHeader timeList={timeList} />
+          {/* cell 클릭하는 body 영역  */}
           <ReservationBody
             dates={dateList as string[][]}
             timeList={timeList}
             meetingRoomList={meetingRoomList}
             unavailableRoomList={unavailableList}
-            onChange={onChange}
+            onChange={onClickEmptyCells}
             onClickReservedCell={onClickReservedCell}
           />
         </div>

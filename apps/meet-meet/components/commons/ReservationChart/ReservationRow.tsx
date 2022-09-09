@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React from "react";
 import classes from "./reservation.module.scss";
 import useReservation from "./@hooks/useReservation";
 import { CellGroup, Cell } from "@components/ui";
@@ -55,7 +55,6 @@ export default function ReservationRow({
                 const { department, host } = unavailableRoomList[
                   widthIndex
                 ] || { department: "", host: "" };
-                // const { department, host } = { department: "", host: "" };
                 return (
                   <span
                     onClick={() =>
