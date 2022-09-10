@@ -9,19 +9,16 @@ import {
   MeetingRoomObjectType,
 } from "@components/commons/ReservationChart/@types/reservationChart.types";
 import classes from "./home.module.scss";
+import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 
 // TODO: 1. 처음 조회 시간을 2022-08-21로 되어있는데, 오늘을 기준으로 조회하는 로직으로 바꿔야함.
-// TODO: 2. meetingRoomList (전체 미팅룸) 조회하는 graphQL 연결해야함. (지금은 하드코딩되어 있음.)
-// TODO: 3. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함.
+// TODO: 2. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함.
 const Home: NextPage = () => {
   const [btnState, setBtnState] = useState<boolean>(false);
   const [reservationList, setReservationList] = useState<any>({});
 
   // TODO: 나중에 오늘 시간을 가져오는 것으로 바꿔야함.
   const [date, setDate] = useState<Date>(new Date("2022-09-05"));
-  // TODO: 전체 미팅룸 조회하는 graphQL 연결해야함.
-  const meetingRoomList = useMemo(() => ["청파", "마당", "백범", "성지"], []);
-
   // DESCRIBE: 회의실 조회 옵션 선택 (radio button) 과 관련된 상태값들.
   const [selectedValue, setSelectedValue] = useState("total");
   const radioInfo = useMemo(
@@ -33,25 +30,29 @@ const Home: NextPage = () => {
     []
   );
 
+  // TODO: 미팅룸 전체 리스트 가져오는 부분입니다. 나중에 위 주석 풀고, 아래 주석 처리하면 됩니다. (meetingRoomList)
+
+  // const { data } = useGetMeetrooms();
+  // const meetingRoomList = useMemo(
+  //   () => data?.meetrooms.map((meetRoom: any) => meetRoom.name) || [],
+  //   [data]
+  // );
+
+  const meetingRoomList = useMemo(() => ["청파", "마당", "성지", "백범"], []);
+
   useEffect(() => {
-    let reservationAPI;
-    switch (selectedValue) {
-      case "total":
-        reservationAPI = ReservationAPI.getAllReservationInfo;
-        break;
-      case "userHost":
-        reservationAPI = ReservationAPI.getReservationInfobyHost;
-        break;
-      case "userParticipate":
-        reservationAPI = ReservationAPI.getReservationInfobyParticipant;
-        break;
-      default:
-        reservationAPI = ReservationAPI.getAllReservationInfo;
-        break;
-    }
-    reservationAPI(formatDate(date), formatDate(addThreeDateFromNow(date)))
-      .then((res) => handleResult(res))
-      .catch((err) => console.log(err));
+    let reservationAPI: any = {
+      total: ReservationAPI.getAllReservationInfo,
+      userHost: ReservationAPI.getReservationInfobyHost,
+      userParticipate: ReservationAPI.getReservationInfobyParticipant,
+    };
+
+    reservationAPI[selectedValue](
+      formatDate(date),
+      formatDate(addThreeDateFromNow(date))
+    )
+      .then((res: any) => handleResult(res))
+      .catch((err: any) => console.log(err));
   }, [selectedValue]);
 
   // DESCRIBE: 결과값 ReservationChart 에 맞게 수정 하는 로직 (각 정보를 key 값으로 접근할 수 있도록 변경하는 작업)
