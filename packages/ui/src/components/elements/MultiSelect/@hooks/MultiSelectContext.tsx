@@ -142,6 +142,7 @@ interface SelectProps {
   label?: string;
   isOpen: boolean;
   setIsOpen: (e: boolean) => void;
+  setIsCheckedTotal: (e: boolean) => void;
   children: React.ReactElement[] | React.ReactElement | any;
   defaultCheckedAll: boolean;
 }
@@ -152,6 +153,7 @@ export const MultiSelectProvider = ({
   label,
   isOpen,
   setIsOpen,
+  setIsCheckedTotal,
   children,
   defaultCheckedAll,
 }: SelectProps) => {
@@ -161,6 +163,10 @@ export const MultiSelectProvider = ({
   const [currentSelectedNumber, setCurrentSelectedNumber] = useState(0);
   const [searchResult, setSearchResult] = useState<SelectItemType[]>();
   const firstRender = useRef(true);
+
+  useEffect(() => {
+    setIsCheckedTotal(state.length === selected.length);
+  }, [state, selected]);
 
   // DESCRIBE: 상위 컴포넌트 (MultiSelectMain) 으로 선택된 요소들 올려주는 로직
   useEffect(() => {

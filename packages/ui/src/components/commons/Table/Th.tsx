@@ -14,25 +14,9 @@ export default function Th({ column, idx, isLast }: any) {
     }
   }, []);
 
-  useEffect(() => {
-    const filterIcon = document.querySelector(
-      `#${column.id}_filter_icon svg`
-    ) as HTMLElement;
-
-    if (!filterIcon) return;
-
-    if (isShowIcon) {
-      filterIcon.style.fill = "null";
-    } else {
-      filterIcon.style.fill = "transparent";
-    }
-  }, [isShowIcon]);
-
-  useEffect;
-
   return (
     <th {...column.getHeaderProps()} key={`th-${idx}`} className={"th"}>
-      <div>
+      <div style={{ display: "flex" }}>
         {column.canGroupBy ? (
           // If the column can be grouped, let's add a toggle
           <span {...column.getGroupByToggleProps()}>
@@ -89,13 +73,14 @@ export default function Th({ column, idx, isLast }: any) {
               </div>
             ) : null}
           </div>
-          {column.id !== "selection" && (
-            <div className={"filter_icon"} id={`${column.id}_filter_icon`}>
-              {/* Render the columns filter UI */}
-              {column.canFilter ? column.render("Filter") : null}
-            </div>
-          )}
         </div>
+        {column.id !== "selection" && (
+          <div className={"filter_icon"} id={`${column.id}_filter_icon`}>
+            {/* Render the columns filter UI */}
+
+            {column.canFilter ? column.render("Filter") : null}
+          </div>
+        )}
       </div>
       <div {...column.getResizerProps()} className={"resizer"}></div>
     </th>
