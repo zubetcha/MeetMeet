@@ -6,7 +6,6 @@ import { SVG } from "../SVG/SVG";
 interface RadioProps {
   name: string;
   id: string;
-  checked?: boolean;
   selectedValue?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
