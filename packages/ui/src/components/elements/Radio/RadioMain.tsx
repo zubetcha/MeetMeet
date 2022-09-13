@@ -9,15 +9,16 @@ interface RadioProps {
   selectedValue?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  children?: JSX.Element;
+  children?: JSX.Element | string;
 }
 
 /**
- * @param name radio 그룹 이름
- * @param id 해당 input[type="radio"]의 id
- * @param selectedValue 선택된 input 의 value ( 상위 컴포넌트에서 관리 )
- * @param onChange input onChange 이벤트 핸들러 ( 상위 컴포넌트에서 관리 )
- * @param value  해당 input[type="radio"]의 value
+ * @param name (string) radio input name
+ * @param id (string) radio input id
+ * @param selectedValue (string) 디폴트로 선택할 value 값
+ * @param onChange (function) radio input 이벤트 핸들러
+ * @param value (string) radio input value
+ * @param children (JSX.Element | string) RadioLabel을 넣을 children 객체
  * @returns
  */
 export const RadioMain = ({
