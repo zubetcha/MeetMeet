@@ -17,7 +17,7 @@ export function SelectOptionList({ children }: Props) {
         <div className={classes.optionWrapper}>
           {searchResult && searchResult.length === 0 ? (
             <div className={classNames(classes.optionList, classes.noresult)}>
-              검색 결과 없음
+              검색 결과가 없습니다.
             </div>
           ) : (
             <div className={classes.optionList}>{children}</div>

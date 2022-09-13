@@ -67,6 +67,7 @@ export const ReservationChart = ({
     setTimeout(() => {
       setIsOpen(true);
     }, 500);
+    console.log("새로 선택된 정보", selectedInfo);
 
     setSelectedData({
       ...selectedInfo,
@@ -75,6 +76,8 @@ export const ReservationChart = ({
 
   // DESCRIBE: 이미 예약된 정보 cell 클릭했을 때
   const onClickReservedCell = (reservedInfo: any) => {
+    console.log("기존 예약 정보", reservedInfo);
+
     setIsOpenReservedModal(true);
     setReservedDate({
       ...reservedInfo,

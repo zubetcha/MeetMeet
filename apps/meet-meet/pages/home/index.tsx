@@ -9,6 +9,7 @@ import {
   MeetingRoomObjectType,
 } from "@components/commons/ReservationChart/@types/reservationChart.types";
 import classes from "./home.module.scss";
+// import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 
 // TODO: 1. 처음 조회 시간을 2022-08-21로 되어있는데, 오늘을 기준으로 조회하는 로직으로 바꿔야함.
 // TODO: 2. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함.
