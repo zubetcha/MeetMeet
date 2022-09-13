@@ -1,6 +1,7 @@
 import { atom } from "recoil";
+import { UserInfo } from "./types";
 
-const userAtom = atom({
+const userState = atom<UserInfo>({
     key: "user",
     default: {
         id: null,
@@ -16,4 +17,4 @@ const userAtom = atom({
     }
 })
 
-export default userAtom;
+export default userState;

@@ -2,7 +2,7 @@
 @import "ui/src/styles/utils";
 
 .container {
-  width: fit-content;
+  width: 100%;
 
   .text-wrapper {
     @include flex-direction(column, 8);
@@ -29,7 +29,11 @@
 }
 
 .images-wrapper {
-  @include flex-direction(row, 16);
+  // @include flex-direction(row, 16);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 .imagePlaceholder-container {
@@ -37,15 +41,22 @@
   width: 120px;
   height: 120px;
   border-radius: 16px;
-  border: 4px dashed var(--color-surfaceVariant);
+  border: 3px dashed var(--color-surfaceVariant);
   transition: all 0.3s ease-in-out;
-  cursor: pointer;
 
-  &:hover {
-    border: 4px dashed var(--color-outline);
+  @include mobile() {
+    max-width: 120px;
+    max-height: 120px;
+  }
 
-    svg {
-      fill: var(--color-outline);
+  &.onDrop {
+    cursor: pointer;  
+    &:hover {
+      border: 3px dashed var(--color-outline);
+
+      svg {
+        fill: var(--color-outline);
+      }
     }
   }
 
@@ -53,4 +64,29 @@
     transition: all 0.3s ease-in-out;
     fill: var(--color-surfaceVariant);
   }
+}
+
+.input {
+  display: none;
+}
+
+.preview-container {
+  @include flexbox(center, center);
+  border-radius: 16px;
+  position: relative;
+
+  div {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+  }
+
+  .preview {
+    border-radius: 16px;
+  }
+}
+
+.meetroom-form-wrapper {
+  @include flex-direction(column, 40);
+  width: 100%;
 }

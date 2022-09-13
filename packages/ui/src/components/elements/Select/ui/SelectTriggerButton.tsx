@@ -1,27 +1,25 @@
 import React from "react";
-import { useTriggerButton } from "../hooks";
-import { Button } from "../../Buttons/Button";
-import { SVG } from "../../SVG/SVG";
-import classes from "../style/select.module.scss";
+import { useTriggerButton } from "../@hooks";
+import { TextField } from "../../TextField";
+import classes from "../@style/select.module.scss";
 
 export function SelectTriggerButton() {
-  const { label, onClick } = useTriggerButton();
+  const { label, value, onClick } = useTriggerButton();
 
   return (
-    <span className={classes.selectButtonWrapper}>
-      <Button
-        label={label}
-        size="large"
-        state="hover"
-        showIcon={false}
-        showRightIcon={false}
-        configuration="input"
-        onClick={onClick}
-        style={{ width: "100%" }}
-      />
-      <p className={classes.selectButtonIcon}>
-        <SVG name="dropdown" color="onSurfaceVariant" />
-      </p>
+    <span className={classes.selectButtonWrapper} onClick={onClick}>
+      <TextField status="default" name="selectSearch">
+        <TextField.Label>{label}</TextField.Label>
+        <TextField.Input
+          type="input"
+          name="selectSearchInput"
+          value={value}
+          placeholder=""
+          onChange={() => {}}
+        >
+          <TextField.Icon name="dropdown" />
+        </TextField.Input>
+      </TextField>
     </span>
   );
 }

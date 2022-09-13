@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   ButtonGroup,
   IconButton,
+  Select,
   MultiSelect,
 } from "ui/src/components/elements";
 
 export default function TestPage() {
+  useEffect(() => {
+    console.log(new Date());
+  }, []);
   return (
     <>
       <div
@@ -205,16 +209,34 @@ export default function TestPage() {
           <Button label="테스트"></Button>
         </ButtonGroup>
       </div>
-      <MultiSelect
-        isSearch={true}
-        defaultValue="5분"
-        onChange={(e: any) => console.log(e)}
-        style={{ width: "500px" }}
-      >
-        <MultiSelect.Option id="1" name="5분" />
-        <MultiSelect.Option id="2" name="10분" />
-        <MultiSelect.Option id="3" name="15분" />
-      </MultiSelect>
+      <div style={{ marginTop: "20px", display: "flex", columnGap: "20px" }}>
+        <MultiSelect
+          isSearch={true}
+          defaultValues={["5분"]}
+          onChange={(e: any) => console.log(e)}
+          style={{ width: "250px" }}
+          label={"안녕 이건 MultiSelect"}
+        >
+          <MultiSelect.Option id="1" name="5분" />
+          <MultiSelect.Option id="2" name="10분" />
+          <MultiSelect.Option id="3" name="15분" />
+          <MultiSelect.Option id="4" name="20분" />
+          <MultiSelect.Option id="5" name="30분" />
+          <MultiSelect.Option id="6" name="40분" />
+          <MultiSelect.Option id="7" name="50분" />
+        </MultiSelect>
+        <Select
+          isSearch={true}
+          defaultValue="5분"
+          onChange={(e: any) => console.log(e)}
+          style={{ width: "250px" }}
+          label={"안녕 이건 Select"}
+        >
+          <Select.Option id="1" name="5분" />
+          <Select.Option id="2" name="10분" />
+          <Select.Option id="3" name="15분" />
+        </Select>
+      </div>
     </>
   );
 }

@@ -6,7 +6,9 @@ const LoginPage = () => {
 
   return (
     <div className={classes["loginPage-container"]}>
-      <AuthCard type="login" />
+      <div>
+        <AuthCard type="login" />
+      </div>
     </div>
   )
 }

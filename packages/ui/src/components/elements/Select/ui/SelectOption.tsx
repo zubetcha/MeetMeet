@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useOption } from "../hooks";
-import classes from "../style/select.module.scss";
+import React, { useEffect, useMemo } from "react";
+import { useOption } from "../@hooks";
+import classes from "../@style/select.module.scss";
 import classNames from "classnames";
 
 interface OptionProps {
@@ -14,10 +14,15 @@ interface OptionProps {
  * @param name (string) 표시 데이터
  */
 export function SelectOption({ id, name }: OptionProps) {
-  const { isSelected, onClick, isShowOption } = useOption({
-    id: id,
-    name: name,
-  });
+  const info = useMemo(() => {
+    return { id: id, name: name };
+  }, [id, name]);
+
+  const { isSelected, onClick, isShowOption } = useOption(info);
+
+  useEffect(() => {
+    console.log("selectOption 리렌더링");
+  }, []);
 
   return (
     <li

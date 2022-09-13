@@ -26,3 +26,22 @@ export const GET_MEETROOM_BY_ID = gql`
     }
 `;
 
+export const GET_MEETROOM_IMAGES = gql`
+    query MeetroomImages($meetroomId: Int!) {
+        imageByMeetRoom(meetroomId: $meetroomId) {
+            id,
+            url
+        }
+    }
+`
+
+export const GET_MEETROOM_MERGE_INFO = gql`
+    query MeetroomMergeInfo($meetroomId: Int!) {
+        mergeInfoByMeetRoom(meetroomId: $meetroomId) {
+            mergeRoom {
+                id,
+                name
+            }
+        }
+    }
+`

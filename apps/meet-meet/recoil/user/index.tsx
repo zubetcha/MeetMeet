@@ -1,3 +1,3 @@
-import userAtom from "./atom";
+import userState from "./atom";
 
-export default userAtom;
+export default userState;

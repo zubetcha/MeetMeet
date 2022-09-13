@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { SelectProvider } from "../hooks/SelectContext";
-import { useOutsideAlerter } from "../hooks";
+import { SelectProvider } from "../@context/SelectContext";
+import { useOutsideAlerter } from "../@hooks";
 import { Select } from "../index";
-import { SelectItemType } from "../types/select.types";
+import { SelectItemType } from "../@types/select.types";
 
 interface SelectProps {
   isSearch?: boolean;
   defaultValue?: string;
   onChange: (e: SelectItemType) => void;
   style?: any;
+  label?: string;
   children: React.ReactElement[];
 }
 
@@ -24,6 +25,7 @@ export function SelectMain({
   isSearch = false,
   defaultValue,
   onChange,
+  label,
   style = { width: "220px" },
   children,
 }: SelectProps) {
@@ -45,6 +47,7 @@ export function SelectMain({
       <SelectProvider
         setValue={setSelected}
         defaultValue={defaultValue}
+        label={label}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
       >

@@ -1,12 +1,14 @@
 import { MultiSelectMain } from "./ui/MultiSelectMain";
-import { SelectOption } from "./ui/SelectOption";
-import { SelectTriggerButton } from "./ui/SelectTriggerButton";
-import { SelectSearchField } from "./ui/SelectSearchField";
-import { SelectOptionList } from "./ui/SelectOptionList";
+import { MultiSelectOption } from "./ui/MultiSelectOption";
+import { MultiSelectTriggerButton } from "./ui/MultiSelectTriggerButton";
+import { MultiSelectSearchField } from "./ui/MultiSelectSearchField";
+import { MultiSelectOptionList } from "./ui/MultiSelectOptionList";
+import { MultiSelectTriggerIcon } from "./ui/MultiSelectTriggerIcon";
 
 export const MultiSelect = Object.assign(MultiSelectMain, {
-  Option: SelectOption,
-  Trigger: SelectTriggerButton,
-  Search: SelectSearchField,
-  List: SelectOptionList,
+  Option: MultiSelectOption,
+  Trigger: MultiSelectTriggerButton,
+  TriggerIcon: MultiSelectTriggerIcon,
+  Search: MultiSelectSearchField,
+  List: MultiSelectOptionList,
 });
