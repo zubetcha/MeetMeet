@@ -13,10 +13,19 @@
 
     .meetroomCards-wrapper {
       display: grid;
-      grid-template-columns: repeat(auto-fit, 440px);
       gap: 24px;
       overflow: hidden auto;
       @include scroll-bar();
+
+      @include mobile() {
+        grid-template-columns: 1fr;
+      };
+      @include tablet() {
+        grid-template-columns: repeat(auto-fit, 440px);
+      };
+      @include desktop() {
+        grid-template-columns: repeat(auto-fit, 440px);
+      }
     }
   }
 }

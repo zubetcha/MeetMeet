@@ -1,8 +1,8 @@
 import { useState, useEffect, ChangeEvent, useCallback } from "react";
 import { checkBiteValid, convertHeicToJpg } from "ui/src/utils";
 
-import { SelectItemType } from "ui/src/components/elements/Select/types/select.types";
-import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
+import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types";
+import { StateType } from "ui/src/components/elements/Buttons/types/button.types"
 
 export const useMeetroomForm = (
   initialValues: meetroomFormType,
@@ -30,6 +30,7 @@ export const useMeetroomForm = (
     setValues({ ...values, [name]: _value });
   };
 
+<<<<<<< HEAD
   const onChangeHasEquipment = (checked: boolean) => {
     setValues({ ...values, hasMonitor: !values.hasMonitor });
   };
@@ -57,6 +58,12 @@ export const useMeetroomForm = (
 
         if (isOver) {
           setIsOverSize(true);
+=======
+        // DESCRIBE: 파일 개수 3개 제한 
+        if ((droppedImages.length + fileList.length) > 3) {
+
+          setIsOverThree(true);
+>>>>>>> feature/v1
           setTimeout(() => {
             setIsOverSize(false);
           }, 1300);
