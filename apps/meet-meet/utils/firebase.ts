@@ -1,94 +1,55 @@
-import { initializeApp, getApps } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getMessaging, getToken, onMessage, Messaging, MessagePayload} from "firebase/messaging";
 import { firebaseConfig, FIREBASE_APP_NAME, FCM_TOKEN } from "constants/firebase";
 import localforage from 'localforage';
 
-const firebaseCloudMessaging = {
-  init: async () => {
-    const apps = getApps();
+export const initFirebaseApp = () => {
+  const apps = getApps();
 
-    if (!apps.length) {
+  if (!apps.length) {
+    const app = initializeApp(firebaseConfig);
+    const messaging = getMessaging(app);
 
-      // Initialize the Firebase app with the credentials
-      const app = initializeApp(firebaseConfig);
-
-      try {
-        const messaging = getMessaging(app);
-        const storedFcnToken = await localforage.getItem(FCM_TOKEN);
-        console.log(messaging);
-        console.log(storedFcnToken)
-
-        //  Return the token if it is alredy in our local storage
-        if (storedFcnToken !== null) {
-          return storedFcnToken;
-        }
-
-        try {
-          const status = await Notification.requestPermission();
-          console.log(status)
-
-          if (status && status === "granted") {
-            try {
-              // Get new token from Firebase
-                  if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("./firebase-messaging-sw.js")
-    .then(function(registration) {
-      console.log("Registration successful, scope is:", registration.scope);
-    })
-    .catch(function(err) {
-      console.log("Service worker registration failed, error:", err);
-    });
+    console.log(messaging);
+  }
 }
-              const derivedFcmToken = await getToken(messaging, { vapidKey: 'BGAOShBkQkH4X2sBwyJ1qzCLg6-S6RhZS2awLd809-UeUYN8kRPmmClidLDwn7_mHpwU5A_aXsYGwBGGqkaklu8' });
-              console.log(derivedFcmToken)
 
-              // Set token in our local storage
-              if (derivedFcmToken) {
-                localStorage.setItem(FCM_TOKEN, derivedFcmToken);
-                return derivedFcmToken;
-              }
-            }
-            catch (error) {
-              console.log("getToken", error);
-              return null;
-            }
-          }
-        }
-        catch (error) {
-          console.log("notification request permission", error);
-          return null;
-        }
-      } catch (error) {
-        console.error("getMassaging", error);
-        return null;
-      }
+export const getFcmToken = async () => {
+  Notification.requestPermission().then(function(permission) {
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+    } else {
+      console.log('Unable to get permission to notify.');
     }
-  },
+  });
+  try {
+    const storedFcmToken = await localforage.getItem(FCM_TOKEN);
+    console.log(storedFcmToken)
 
-  setToken: async () => {
-    try {
-      const fcmToken = await firebaseCloudMessaging.init();
-      if (fcmToken) {
-        console.log(fcmToken)
-        return firebaseCloudMessaging.getMessage();
-      }
+    if (storedFcmToken) return storedFcmToken;
+
+    if (!storedFcmToken) {
+     try {
+      const messaging = getMessaging();
+      const derivedFcmToken = await getToken(messaging, { vapidKey: 'BGAOShBkQkH4X2sBwyJ1qzCLg6-S6RhZS2awLd809-UeUYN8kRPmmClidLDwn7_mHpwU5A_aXsYGwBGGqkaklu8' });
+      console.log(derivedFcmToken)
+      if (derivedFcmToken) return derivedFcmToken;
+     } 
+     catch (error) {
+      throw error;
+      return null;
+     }
     }
-    catch (error) {
-      console.log('setToken', error);
-    }
-  },
+  }
+  catch (error) {
+    console.log(error);
+    return null;
+  }
+}
 
-  getMessage: () => {
-    const messaging: Messaging = getMessaging();
-    let message;
-
-    onMessage(messaging, (payload: MessagePayload) => {
-      console.log('Message received. ', payload);
-      message = { ...payload };
-    })
-
-    return message;
-  },
-};
-export { firebaseCloudMessaging };
+export const getMessage = async () => {
+  const messaging: Messaging = getMessaging();
+  onMessage(messaging, (payload: MessagePayload) => {
+    console.log('Message received. ', payload);
+  })
+}

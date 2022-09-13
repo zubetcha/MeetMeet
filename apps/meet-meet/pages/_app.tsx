@@ -10,6 +10,7 @@ import client from "../apollo-client";
 import { RecoilRoot } from "recoil";
 import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserver";
 import { PushNotificationLayout } from "@components/commons/Layout/PushNotificationLayout";
+import { initFirebaseApp } from "@utils/firebase";
 import Script from "next/script";
 
 import "../styles/globals.scss";
@@ -30,6 +31,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "light");
   }, []);
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/firebase-messaging-sw.js")
+      .then(registration => {
+        console.log(registration);
+      })
+    }
+    initFirebaseApp();
+  }, [])
 
   return (
     <>
