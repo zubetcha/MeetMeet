@@ -10,9 +10,9 @@ import client from "../apollo-client";
 import { RecoilRoot } from "recoil";
 import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserver";
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getMessaging, getToken } from 'firebase/messaging';
+import { firebaseConfig } from "constants/firebase";
 import Script from "next/script";
-
 
 import "../styles/globals.scss";
 import { Layout } from "@components/commons/Layout/Layout";
@@ -33,21 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     document.documentElement.setAttribute("data-theme", "light");
   }, []);
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyB5MsSaVHen868J6lRWD1R4bQX0jH5K7qE",
-  authDomain: "meetmeet-a49ad.firebaseapp.com",
-  projectId: "meetmeet-a49ad",
-  storageBucket: "meetmeet-a49ad.appspot.com",
-  messagingSenderId: "831729942382",
-  appId: "1:831729942382:web:4aa84d00b6d73b28ad4b7f",
-  measurementId: "G-41K21FTLLR"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-  
-
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);  
+  // Initialize Firebase Cloud Messaging and get a reference to the service
+  const messaging = getMessaging(app);
 
   return (
     <>
