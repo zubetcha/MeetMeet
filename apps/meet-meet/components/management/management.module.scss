@@ -2,11 +2,7 @@
 @import "ui/src/styles/utils";
 
 .container {
-  width: fit-content;
-
-  @include mobile() {
-    width: 100%;
-  }
+  width: 100%;
 
   .text-wrapper {
     @include flex-direction(column, 8);
@@ -33,7 +29,11 @@
 }
 
 .images-wrapper {
-  @include flex-direction(row, 16);
+  // @include flex-direction(row, 16);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 .imagePlaceholder-container {
@@ -45,8 +45,8 @@
   transition: all 0.3s ease-in-out;
 
   @include mobile() {
-    width: 80px;
-    height: 80px;
+    max-width: 120px;
+    max-height: 120px;
   }
 
   &.onDrop {

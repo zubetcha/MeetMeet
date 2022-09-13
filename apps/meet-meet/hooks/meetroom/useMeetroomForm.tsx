@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent, useCallback } from "react"
 import { checkBiteValid, convertHeicToJpg } from "ui/src/utils";
 
-import { SelectItemType } from "ui/src/components/elements/Select/types/select.types";
+import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types";
 import { StateType } from "ui/src/components/elements/Buttons/types/button.types"
 
 export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: meetroomImagesType[]) => {
@@ -38,7 +38,7 @@ export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: 
 
         // DESCRIBE: 파일 개수 3개 제한 
         if ((droppedImages.length + fileList.length) > 3) {
-          console.log("이미지 개수 3개 넘음")
+
           setIsOverThree(true);
           setTimeout(() => {
             setIsOverThree(false);

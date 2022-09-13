@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./managementPage.module.scss";
+import Script from "next/script";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 
 import { MeetroomCard } from "@components/management/MeeroomCard";
@@ -11,6 +14,21 @@ import { MeetRoom } from "graphql/meetroom/types";
 const ManagementPage = () => {
   const { data } = useGetMeetrooms();
   const [isAddModal, setIsAddModal] = useState(false);
+
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyB5MsSaVHen868J6lRWD1R4bQX0jH5K7qE",
+    authDomain: "meetmeet-a49ad.firebaseapp.com",
+    projectId: "meetmeet-a49ad",
+    storageBucket: "meetmeet-a49ad.appspot.com",
+    messagingSenderId: "831729942382",
+    appId: "1:831729942382:web:4aa84d00b6d73b28ad4b7f",
+    measurementId: "G-41K21FTLLR"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
   return (
     <>
