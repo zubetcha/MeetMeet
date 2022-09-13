@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MultiSelectProvider } from "../@hooks/MultiSelectContext";
+import { MultiSelectProvider } from "../@context/MultiSelectContext";
 import { SelectItemType } from "../@types/select.types";
 import MultiSelectWrapper from "./MultiSelectWrapper";
 

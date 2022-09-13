@@ -14,7 +14,7 @@ import { getTimeList } from "ui/src/utils";
 
 /**
  *
- * @param width (string) 예약 간트 차트 width 값
+ * @param width (string) 예약 간트 차트 스크롤 영역 width 값
  * @param startDate (Date) 간트 차트 시작 날짜 (+2) 까지 보임. (총 3개 날짜)
  * @param startTime (string) 간트 차트 시작 시간
  * @param endTime (string) 간트 차트 종료 시간
@@ -67,6 +67,7 @@ export const ReservationChart = ({
     setTimeout(() => {
       setIsOpen(true);
     }, 500);
+
     console.log("새로 선택된 정보", selectedInfo);
 
     setSelectedData({

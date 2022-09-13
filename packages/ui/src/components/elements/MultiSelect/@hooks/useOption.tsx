@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useMultiSelect } from "./MultiSelectContext";
+import { useMultiSelect } from "../@context/MultiSelectContext";
 
 interface Props {
   id: string;

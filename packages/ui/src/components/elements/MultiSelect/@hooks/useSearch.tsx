@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useMultiSelect } from "./MultiSelectContext";
+import { useMultiSelect } from "../@context/MultiSelectContext";
 import { SelectItemType } from "../@types/select.types";
 
 export function useSearch() {

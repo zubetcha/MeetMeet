@@ -1,4 +1,4 @@
-export * from "./MultiSelectContext";
+export * from "../@context/MultiSelectContext";
 export * from "./useOption";
 export * from "./useSearch";
 export * from "./useTriggerButton";
