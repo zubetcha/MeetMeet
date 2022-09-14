@@ -15,14 +15,6 @@ export const PushNotificationLayout = ({ children }: Props) => {
   const [message, setMessage] = useState<MessagePayload | null>(null);
 
   useEffect(() => {
-    const _getFcmToken = async () => {
-      const fcmToken = await getFcmToken();
-      console.log(fcmToken);
-    }
-    _getFcmToken();
-  }, [])
-
-  useEffect(() => {
     // Event listener that listens for the push notification event in the background
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.addEventListener("message", (event) => {
