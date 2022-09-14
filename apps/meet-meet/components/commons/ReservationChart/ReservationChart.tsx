@@ -89,16 +89,10 @@ export const ReservationChart = ({
     <>
       <div className={classes.reservationContainer}>
         {/* 고정된 영역 (날짜, 회의실 표시) */}
-        <div className={classes.reservationFixedSection}>
-          <div className={classes.emptySection}></div>
-          {dateList?.map((date: string[]) => (
-            <ReservationSection
-              key={`reservation-section-${date}`}
-              date={date[0]}
-              meetingRoomList={meetingRoomList}
-            />
-          ))}
-        </div>
+        <ReservationSection
+          dateList={dateList}
+          meetingRoomList={meetingRoomList}
+        />
 
         <div
           className={classes.reservationScrollSection}

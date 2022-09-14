@@ -30,6 +30,7 @@ export function useTriggerButton() {
   return {
     label,
     value,
+    isOpen,
     onClick,
   };
 }

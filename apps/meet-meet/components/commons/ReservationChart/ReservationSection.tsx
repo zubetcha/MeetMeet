@@ -1,29 +1,32 @@
 import React from "react";
 import classes from "./reservation.module.scss";
-import { Text } from "ui/src/pages";
+import ReservationSectionItem from "./ReservationSectionItem";
 
 interface Props {
-  date: string;
+  dateList: string[][] | undefined;
   meetingRoomList: string[];
 }
 
-export default function ReservationSection({ date, meetingRoomList }: Props) {
+/**
+ *
+ * @param dateList (string[][]) 날짜 리스트 (총 3개)
+ * @param meetingRoomList (string[]) 미팅룸 리스트
+ * @returns
+ */
+export default function ReservationSection({
+  dateList,
+  meetingRoomList,
+}: Props) {
   return (
-    <div className={classes.roomList}>
-      <div className={classes.infoContainer}>
-        <div className={classes.dateContainer}>
-          <Text color="on-primary" style={{ weight: "bold" }}>
-            {date}
-          </Text>
-        </div>
-        <div className={classes.roomContainer}>
-          {meetingRoomList.map((room: string, index) => (
-            <div className={classes.slotRoom} key={`room-${index}`}>
-              <Text type="body-small">{room}</Text>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className={classes.reservationFixedSection}>
+      <div className={classes.emptySection}></div>
+      {dateList?.map((date: string[]) => (
+        <ReservationSectionItem
+          key={`reservation-section-${date}`}
+          date={date[0]}
+          meetingRoomList={meetingRoomList}
+        />
+      ))}
     </div>
   );
 }

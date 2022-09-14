@@ -30,6 +30,7 @@ export default function MultiSelectWrapper({
 
   const { ref } = useOutsideAlerter(() => handleCancle());
 
+  console.log("isShowSearchField", isShowSearchField);
   return (
     <div ref={ref} className={classes.selectContainer}>
       {triggerButtonType === "button" ? (
