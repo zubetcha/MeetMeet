@@ -3,6 +3,8 @@ import { getMessaging, getToken, onMessage, Messaging, MessagePayload} from "fir
 import { firebaseConfig, FIREBASE_APP_NAME, FCM_TOKEN } from "constants/firebase";
 import localforage from 'localforage';
 
+const VAPID_KEY = "BGAOShBkQkH4X2sBwyJ1qzCLg6-S6RhZS2awLd809-UeUYN8kRPmmClidLDwn7_mHpwU5A_aXsYGwBGGqkaklu8";
+
 export const initFirebaseApp = () => {
   const apps = getApps();
 
@@ -15,36 +17,36 @@ export const initFirebaseApp = () => {
 }
 
 export const getFcmToken = async () => {
-  Notification.requestPermission().then(function(permission) {
+  Notification.requestPermission().then(async(permission) =>  {
     if (permission === 'granted') {
       console.log('Notification permission granted.');
+      try {
+        const storedFcmToken = await localforage.getItem(FCM_TOKEN);
+        console.log(storedFcmToken)
+      
+        if (storedFcmToken) return storedFcmToken;
+      
+        if (!storedFcmToken) {
+         try {
+          const messaging = getMessaging();
+          const derivedFcmToken = await getToken(messaging, { vapidKey: VAPID_KEY });
+          console.log(derivedFcmToken)
+          if (derivedFcmToken) return derivedFcmToken;
+         } 
+         catch (error) {
+          console.log(error);
+          return null;
+         }
+        }
+      }
+      catch (error) {
+        console.log(error);
+        return null;
+      }
     } else {
       console.log('Unable to get permission to notify.');
     }
   });
-  try {
-    const storedFcmToken = await localforage.getItem(FCM_TOKEN);
-    console.log(storedFcmToken)
-
-    if (storedFcmToken) return storedFcmToken;
-
-    if (!storedFcmToken) {
-     try {
-      const messaging = getMessaging();
-      const derivedFcmToken = await getToken(messaging, { vapidKey: 'BGAOShBkQkH4X2sBwyJ1qzCLg6-S6RhZS2awLd809-UeUYN8kRPmmClidLDwn7_mHpwU5A_aXsYGwBGGqkaklu8' });
-      console.log(derivedFcmToken)
-      if (derivedFcmToken) return derivedFcmToken;
-     } 
-     catch (error) {
-      throw error;
-      return null;
-     }
-    }
-  }
-  catch (error) {
-    console.log(error);
-    return null;
-  }
 }
 
 export const getMessage = async () => {

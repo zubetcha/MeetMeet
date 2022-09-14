@@ -33,12 +33,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/firebase-messaging-sw.js")
-      .then(registration => {
-        console.log(registration);
-      })
-    }
+    // if ("serviceWorker" in navigator) {
+    //   navigator.serviceWorker.register("/firebase-messaging-sw.js")
+    //   .then(registration => {
+    //     console.log(registration);
+    //   })
+    // }
     initFirebaseApp();
   }, [])
 
@@ -49,10 +49,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta charSet="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       </Head>
-      {/* <Script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></Script>
-      <Script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></Script>
-      <Script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-messaging.js"></Script> */}
-      {/* <Script src="../public/firebase-messaging-sw.js" ></Script> */}
       <PushNotificationLayout>
         <QueryClientProvider client={queryClient}>
           <ApolloProvider client={client}>
