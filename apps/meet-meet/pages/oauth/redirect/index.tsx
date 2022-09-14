@@ -2,8 +2,12 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { useUrlParameter } from "ui/src/hooks/useUrlParameter";
+import { useSendDeviceInfo } from '@hooks/queries/alarm/useMutationQueries';
+import { getFcmToken } from '@utils/firebase';
+import { osName } from 'react-device-detect';
 
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'constants/auth';
+import { DeviceInfo } from '@hooks/queries/alarm/alarm.types';
 
 const Oauth2RedirectHandler = () => {
   // DESCRIBE: redirect-uri format 
@@ -16,18 +20,32 @@ const Oauth2RedirectHandler = () => {
   const accessToken = useUrlParameter("access_token");
   const refreshToken = useUrlParameter("refresh_token");
   const isFirst = useUrlParameter("is_first");
+  const { mutateAsync, isSuccess } = useSendDeviceInfo();
 
   useEffect(() => {
     if (accessToken) {
       localStorage.setItem(ACCESS_TOKEN, accessToken);
       localStorage.setItem(REFRESH_TOKEN, refreshToken);
 
-      JSON.parse(isFirst) === true ? router.replace("/join/onboarding") : router.replace("/home");
+      getFcmToken().then(fcmToken => {
+        if (fcmToken) {
+          const deviceInfo: DeviceInfo = { device: osName, fcmToken };
+          mutateAsync(deviceInfo);
+        }
+      })
     }
     else if (!accessToken) {
       router.replace("/login")
     }
   }, [accessToken, refreshToken])
+
+  useEffect(() => {
+    if (isSuccess) {
+      JSON.parse(isFirst) === true
+      ? router.replace("/join/onboarding")
+      : router.replace("/home");
+    }
+  }, [isSuccess])
 
   return (
     <></>

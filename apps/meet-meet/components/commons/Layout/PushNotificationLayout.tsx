@@ -24,16 +24,10 @@ export const PushNotificationLayout = ({ children }: Props) => {
     getMessage();
   })
 
-  if (message) {
+  return (
     <>
-      <div onClick={() => router.push(message?.data?.url as string)}>
-        <Text>{message?.notification?.title}</Text>  
-        <Text>{message?.notification?.body}</Text>  
-      </div>
       {children}
-    </>  
-  }
-
-  return null;
+    </>
+  );
 }
 

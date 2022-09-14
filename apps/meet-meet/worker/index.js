@@ -21,7 +21,7 @@ self.addEventListener("message", (event) => {
 
 
 import { initializeApp } from "firebase/app";
-import { getMessaging } from "firebase/messaging/sw";
+import { getMessaging, onBackgroundMessage } from "firebase/messaging/sw";
 
 // Initialize the Firebase app in the service worker by passing in
 // your app's Firebase config object.

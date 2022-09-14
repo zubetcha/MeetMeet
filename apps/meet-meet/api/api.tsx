@@ -1,5 +1,6 @@
 import { api } from "./axios";
 import { MeetRoom } from "graphql/meetroom/types";
+import { DeviceInfo } from "@hooks/queries/alarm/alarm.types";
 
 export const AuthAPI = {
   addUserInfo: (userInfo: {[key: string]: string | number}) => api.post("/account/info", userInfo),
@@ -13,4 +14,9 @@ export const MeetroomAPI = {
 
   createMeetroom: (meetroom: any) => api.post("/meetroom", meetroom),
   updateMeetroom: (meetroom: any) => api.put(`/meetroom/${meetroom.meetroomId}`, meetroom.info)
+}
+
+export const AlarmAPI = {
+  sendDeviceInfo: (deviceInfo: DeviceInfo) => api.post("/accounts/device", deviceInfo),
+  deleteDeviceInfo: (fcmToken: string) => api.delete("/accounts/device", { params: { fcmToken }}),
 }

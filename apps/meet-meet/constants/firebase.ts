@@ -8,7 +8,6 @@ export const firebaseConfig = {
   measurementId: "G-41K21FTLLR"
 };
 
-
-
+export const VAPID_KEY = "BGAOShBkQkH4X2sBwyJ1qzCLg6-S6RhZS2awLd809-UeUYN8kRPmmClidLDwn7_mHpwU5A_aXsYGwBGGqkaklu8";
 export const FIREBASE_APP_NAME = 'meetmeet';
 export const FCM_TOKEN = 'fcm_token';
