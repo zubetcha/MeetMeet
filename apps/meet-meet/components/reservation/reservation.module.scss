@@ -34,14 +34,25 @@
   .children-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
+    &.space-between {
+      justify-content: space-between;
+    }
 
     .team-select {
-      width: 150px;
+      width: 30%;
     }
 
     .member-select {
-      width: 401px;
+      width: 60%;      
+    }
+
+    .room-select {
+      width: 45%;
+    }
+
+    .mergeRoom-checkbox {
+      margin-left: 20px;
     }
   }
 }

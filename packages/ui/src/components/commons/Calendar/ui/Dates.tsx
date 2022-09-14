@@ -60,15 +60,15 @@ const Dates = ({
                             ? new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            new Date().getDate() - 2)
+                            new Date().getDate() - 1)
                             : new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            new Date().getDate() - 1)
+                            new Date().getDate() - 0)
                         : new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            new Date().getDate() - 1);
+                            new Date().getDate() - 0);
 
     const checkDisableDate = () =>{
         return timeType === 'pastCurrent' 

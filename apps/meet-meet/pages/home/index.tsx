@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import type { NextPage } from "next";
 import { ReservationChart } from "components";
-import { CalendarModal, Button, Text, Radio } from "@components/ui";
+import { SingleCalendar, Button, Text, Radio } from "@components/ui";
 import { formatDate, addThreeDateFromNow } from "ui/src/utils";
 import { ReservationAPI } from "@api/api";
 import {
@@ -99,16 +99,13 @@ const Home: NextPage = () => {
           />
         </div>
         {btnState && (
-          <CalendarModal
+          <SingleCalendar
             setCalendar={setBtnState}
             onClickSubmitBtn={(startDate: any) => {
               setDate(startDate);
               setBtnState(false);
             }}
             date={date}
-            start={date}
-            end={date}
-            type="single"
             timeType="futureCurrent"
           />
         )}

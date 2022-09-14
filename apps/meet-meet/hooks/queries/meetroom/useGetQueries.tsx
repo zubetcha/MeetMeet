@@ -25,6 +25,8 @@ export const useGetMeetroomImages = (id: number) => {
 }
 
 export const useGetMeetroomMergeInfo = (id: number) => {
-    const result = useQuery<MeetRoomMergeInfoData>(GET_MEETROOM_MERGE_INFO, { variables: { meetroomId: id } });
+    const result = useQuery<MeetRoomMergeInfoData>(GET_MEETROOM_MERGE_INFO, { 
+        variables: { meetroomId: id },
+    });
     return { ...result };
 }

@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from 'react'
 import classes from './reservation.module.scss'
 import { TitleLayout } from './TitleLayout'
-import { SingleCalendar, Select, Text, TimePicker, CellGroup, Cell, TextField, Button } from '@components/ui'
+import classNames from 'classnames'
+import { SingleCalendar, Select, Text, TimePicker, CellGroup, Cell, TextField, Button, Checkbox } from '@components/ui'
+import { useGetMeetroomMergeInfo, useGetMeetrooms } from '@hooks/queries/meetroom/useGetQueries'
 import { formatDate } from 'ui/src/utils'
 
 export const Reservation = () => {
@@ -11,13 +14,12 @@ export const Reservation = () => {
       new Date().getMonth(),
       new Date().getDate() - 1
   ));
+  const [selectedRoomId, setSelectedRoomId] = useState<number>(-1);
 
-  const roomList = new Array(4).fill(null).map((_, idx) => {
-    return {
-      id: `${idx + 1}`,
-      name: `${idx+1}회의실`
-    }
-  })
+  const {data: meetRoomList} = useGetMeetrooms();
+  const {data: meetRoomMergeInfo} = useGetMeetroomMergeInfo(selectedRoomId);
+
+      console.log(meetRoomMergeInfo);
 
   const teamList = new Array(4).fill(null).map((_, idx) => {
     return {
@@ -40,15 +42,33 @@ export const Reservation = () => {
     <div className={classes["page-container"]} >
       <Text type={'title-large'} style={{fontWeight: 'bold'}} >회의실 예약</Text>
       <TitleLayout title="회의실 선택" >
-        <Select
-          isSearch={false}
-          defaultValue={roomList[0].name}
-          onChange={() => {}}
-        >
-          {roomList.map((room, idx) => {
-            return <Select.Option id={room.id} name={room.name} key={`room-selectOption-${idx}`} />
-          })}
-        </Select>
+        <div className={classes['children-wrapper']} >
+          <div className={classes['room-select']} >
+            <Select
+              isSearch={false}
+              defaultValue={meetRoomList?.meetrooms[0].name}
+              onChange={(room) => {console.log(room); setSelectedRoomId(parseInt(room.id))}}
+              style={{width: '100%'}}
+              label="회의실"
+            >
+              {meetRoomList?.meetrooms.map((room, idx) => {
+                return <Select.Option id={`${room.id}`} name={room.name} key={`room-selectOption-${idx}`} />
+              })}
+            </Select>
+          </div>
+          {meetRoomMergeInfo?.mergeInfoByMeetRoom &&
+            <div className={classes['mergeRoom-checkbox']} >
+              <Checkbox
+                name="함께 사용할 회의실"
+                id='meetingRoomMerged-checkbox'
+                checked={false}
+                onChange={() => {}}
+              >
+                <Checkbox.Label>{`${meetRoomMergeInfo?.mergeInfoByMeetRoom?.mergeRoom.name} 회의실과 함께 사용`}</Checkbox.Label>
+              </Checkbox>
+            </div>
+          }
+        </div>
       </TitleLayout>
 
       <TitleLayout title="날짜 선택" subTitle="2022-8-8 (목)" >
@@ -56,6 +76,7 @@ export const Reservation = () => {
             <SingleCalendar
               date={date}
               onClickSubmitBtn={(date:Date) => {setDate(date)}}
+              timeType='futureCurrent'
             />
           </TimePicker>
       </TitleLayout>
@@ -87,13 +108,14 @@ export const Reservation = () => {
       </TitleLayout>
 
       <TitleLayout  title='참여자 초대'>
-        <div className={classes['children-wrapper']} >
+        <div className={classNames(classes['children-wrapper'], classes['space-between'])} >
           <div className={classes['team-select']} >
             <Select
               isSearch={false}
               defaultValue={''}
               onChange={() => {}}
               style={{width: '100%'}}
+              label="팀"
             >
               {teamList.map((team, idx) => {
               return <Select.Option id={team.id} name={team.name} key={`team-selectOption-${idx}`} />
@@ -106,6 +128,7 @@ export const Reservation = () => {
                 defaultValue={''}
                 onChange={() => {}}
                 style={{width: '100%'}}
+                label="참여자 이름"
               >
                 {memeberList.map((member, idx) => {
                 return <Select.Option id={member.id} name={member.name} key={`team-selectOption-${idx}`} />
