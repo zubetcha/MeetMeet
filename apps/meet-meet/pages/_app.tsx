@@ -14,6 +14,7 @@ import { initFirebaseApp } from "@utils/firebase";
 import Script from "next/script";
 
 import "../styles/globals.scss";
+import "react-toastify/dist/ReactToastify.css";
 import { Layout } from "@components/commons/Layout/Layout";
 import { RouterGuard } from "@components/commons/RouterGuard/RouterGuard";
 import { SuccessModal } from "@components/commons/Modal/SuccessModal";
@@ -33,12 +34,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
-    // if ("serviceWorker" in navigator) {
-    //   navigator.serviceWorker.register("/firebase-messaging-sw.js")
-    //   .then(registration => {
-    //     console.log(registration);
-    //   })
-    // }
     initFirebaseApp();
   }, [])
 

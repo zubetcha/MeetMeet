@@ -8,16 +8,24 @@ export const initFirebaseApp = () => {
 
   if (!apps.length) {
     const app = initializeApp(firebaseConfig);
-    return getMessaging(app);
-  }
+    const messaging =  getMessaging(app);
+  } 
 }
 
 export const getFcmToken = async () => {
+  initFirebaseApp();
+  const messaging = getMessaging();
+  const storedFcmToken: string | null = await localforage.getItem(FCM_TOKEN);
+
+  if (storedFcmToken !== null) {
+    return storedFcmToken;
+  }
+
   try {
     const permission = await Notification.requestPermission();
     if (permission === 'granted') {
       console.log('Notification permission granted.');
-      const messaging = getMessaging();
+
       try {
         const derivedFcmToken = await getToken(messaging, { vapidKey: VAPID_KEY })
         console.log(derivedFcmToken)
@@ -35,21 +43,5 @@ export const getFcmToken = async () => {
   }
   catch (error) {
     console.log(error);
-  }
-}
-
-export const getMessage = () => {
-  const messaging: Messaging | undefined = initFirebaseApp();
-
-  if (messaging) {
-    onMessage(messaging, (payload: MessagePayload) => {
-      const title = payload?.notification?.title;
-      const options = {
-          body : payload?.notification?.body
-      };
-      navigator.serviceWorker.ready.then(registration => {
-          registration.showNotification(title as string, options);
-      })
-    })
   }
 }
