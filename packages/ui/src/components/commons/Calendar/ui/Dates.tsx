@@ -40,7 +40,6 @@ const Dates = ({
     timeType,
     weekendIncluded
 }:Props) => {
-
     const checkBtwDates = (d:Date) => {
         
         if(!availableDates) return false;

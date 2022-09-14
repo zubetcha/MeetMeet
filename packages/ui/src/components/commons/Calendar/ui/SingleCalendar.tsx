@@ -40,7 +40,8 @@ export const SingleCalendar = ({
   // 날짜 적용하기 버튼 눌렀을 때 상위 컴포넌트에 적용된 날짜 전달 함수
   const onClickSubmitDate = () => {
     setCalendar && setCalendar(false)
-    onClickSubmitBtn(currentDate)
+    console.log(selectedDate)
+    onClickSubmitBtn(selectedDate)
   };
 
   return (

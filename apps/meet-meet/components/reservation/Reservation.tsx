@@ -12,14 +12,12 @@ export const Reservation = () => {
     new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
-      new Date().getDate() - 1
+      new Date().getDate()
   ));
   const [selectedRoomId, setSelectedRoomId] = useState<number>(-1);
 
   const {data: meetRoomList} = useGetMeetrooms();
   const {data: meetRoomMergeInfo} = useGetMeetroomMergeInfo(selectedRoomId);
-
-      console.log(meetRoomMergeInfo);
 
   const teamList = new Array(4).fill(null).map((_, idx) => {
     return {
@@ -75,7 +73,10 @@ export const Reservation = () => {
           <TimePicker text={formatDate(date)}>
             <SingleCalendar
               date={date}
-              onClickSubmitBtn={(date:Date) => {setDate(date)}}
+              onClickSubmitBtn={(date:Date) => { 
+                console.log(date); 
+                setDate(date);
+              }}
               timeType='futureCurrent'
             />
           </TimePicker>
