@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta charSet="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       </Head>
-      <PushNotificationLayout>
+      
         <QueryClientProvider client={queryClient}>
           <ApolloProvider client={client}>
             <RecoilRoot>
@@ -58,16 +58,17 @@ function MyApp({ Component, pageProps }: AppProps) {
               {exceptionList.includes(router.pathname) ? (
                 <Component {...pageProps} />
               ) : (
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
+                <PushNotificationLayout>
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </PushNotificationLayout>
               )}
               <SuccessModal />
               {/* </RouterGuard> */}
             </RecoilRoot>
           </ApolloProvider>
         </QueryClientProvider>
-      </PushNotificationLayout>
     </>
   );
 }

@@ -31,7 +31,10 @@ export const getFcmToken = async () => {
           const messaging = getMessaging();
           const derivedFcmToken = await getToken(messaging, { vapidKey: VAPID_KEY });
           console.log(derivedFcmToken)
-          if (derivedFcmToken) return derivedFcmToken;
+          if (derivedFcmToken) {
+            await localforage.setItem(FCM_TOKEN, derivedFcmToken);
+            return derivedFcmToken;
+          }
          } 
          catch (error) {
           console.log(error);
@@ -49,9 +52,15 @@ export const getFcmToken = async () => {
   });
 }
 
-export const getMessage = async () => {
+export const getMessage = () => {
   const messaging: Messaging = getMessaging();
   onMessage(messaging, (payload: MessagePayload) => {
-    console.log('Message received. ', payload);
+    const title = payload?.notification?.title;
+    const options = {
+        body : payload?.notification?.body
+    };
+    navigator.serviceWorker.ready.then(registration => {
+        registration.showNotification(title as string, options);
+    })
   })
 }
