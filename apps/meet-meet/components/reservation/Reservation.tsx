@@ -45,7 +45,7 @@ export const Reservation = () => {
             <Select
               isSearch={false}
               defaultValue={meetRoomList?.meetrooms[0].name}
-              onChange={(room) => {console.log(room); setSelectedRoomId(parseInt(room.id))}}
+              onChange={(room) => {setSelectedRoomId(parseInt(room.id))}}
               style={{width: '100%'}}
               label="회의실"
             >
@@ -69,12 +69,11 @@ export const Reservation = () => {
         </div>
       </TitleLayout>
 
-      <TitleLayout title="날짜 선택" subTitle="2022-8-8 (목)" >
-          <TimePicker text={formatDate(date)}>
+      <TitleLayout title="날짜 선택" subTitle={formatDate(date, true)} >
+          <TimePicker text={formatDate(date, true)}>
             <SingleCalendar
               date={date}
-              onClickSubmitBtn={(date:Date) => { 
-                console.log(date); 
+              onClickSubmitBtn={(date:Date) => {  
                 setDate(date);
               }}
               timeType='futureCurrent'
