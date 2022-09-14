@@ -4,8 +4,13 @@ import classes from './reservation.module.scss'
 import { TitleLayout } from './TitleLayout'
 import classNames from 'classnames'
 import { SingleCalendar, Select, Text, TimePicker, CellGroup, Cell, TextField, Button, Checkbox } from '@components/ui'
-import { useGetMeetroomMergeInfo, useGetMeetrooms } from '@hooks/queries/meetroom/useGetQueries'
+import { useGetMeetroomMergeInfo, useGetMeetrooms, useGetReservationByRoomAndDate } from '@hooks/queries/meetroom/useGetQueries'
 import { formatDate } from 'ui/src/utils'
+
+type timeIdType = {
+  start:number | null,
+  end:number| null
+}
 
 export const Reservation = () => {
   const [date, setDate] = useState<Date>(
@@ -14,10 +19,17 @@ export const Reservation = () => {
       new Date().getMonth(),
       new Date().getDate()
   ));
+
+  const [isChecked, setIsChecked] = useState<boolean>(false)
   const [selectedRoomId, setSelectedRoomId] = useState<number>(-1);
+  const [selectedTimeId, setSelectedTimeId] = useState<timeIdType>({
+    start:null,
+    end:null
+  });
 
   const {data: meetRoomList} = useGetMeetrooms();
   const {data: meetRoomMergeInfo} = useGetMeetroomMergeInfo(selectedRoomId);
+  const {data: reservationByMeetRoomAndDate} = useGetReservationByRoomAndDate([selectedRoomId], date)
 
   const teamList = new Array(4).fill(null).map((_, idx) => {
     return {
@@ -33,8 +45,10 @@ export const Reservation = () => {
     }
   })
 
+
+
   const timeList = Array.from({length: 22}, (_, idx:number) => `${Math.floor((idx + 16)/2)}:${idx%2*3}0`)
-  const disabledIndex = [1,2,3,4,5]
+  const disabledIndex: number[] | undefined = []
 
   return (
     <div className={classes["page-container"]} >
@@ -59,8 +73,8 @@ export const Reservation = () => {
               <Checkbox
                 name="함께 사용할 회의실"
                 id='meetingRoomMerged-checkbox'
-                checked={false}
-                onChange={() => {}}
+                checked={isChecked}
+                onChange={() => {setIsChecked(!isChecked)}}
               >
                 <Checkbox.Label>{`${meetRoomMergeInfo?.mergeInfoByMeetRoom?.mergeRoom.name} 회의실과 함께 사용`}</Checkbox.Label>
               </Checkbox>
@@ -81,8 +95,16 @@ export const Reservation = () => {
           </TimePicker>
       </TitleLayout>
 
-      <TitleLayout title="이용시간 선택" subTitle="12:00 ~ 12:30" >
-          <CellGroup disableIndex={disabledIndex}>
+      <TitleLayout 
+        title="이용시간 선택" 
+        subTitle={(typeof(selectedTimeId.start) === 'number' && typeof(selectedTimeId.end) === 'number') 
+          ? (timeList[selectedTimeId.start] + '~' + timeList[selectedTimeId.end + 1]) 
+          : ''
+      }>
+          <CellGroup 
+            disableIndex={disabledIndex}
+            onChange={(timeId) => setSelectedTimeId(timeId)}
+          >
             {timeList.map((time, idx) => {
               return <Cell label={time} key={`reservation-time-${idx}`} />
             })}
