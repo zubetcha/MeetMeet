@@ -1,5 +1,5 @@
 import classes from './reservationPage.module.scss'
-import { Reservation } from '@components/reservation/Reservation';
+import { Reservation } from '@components/reservation/ui/Reservation';
 
 const ReservationPage = () => {
   return (
