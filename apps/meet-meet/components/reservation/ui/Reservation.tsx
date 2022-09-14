@@ -4,7 +4,7 @@ import classes from './reservation.module.scss'
 import { TitleLayout } from './TitleLayout'
 import classNames from 'classnames'
 import { SingleCalendar, Select, Text, TimePicker, CellGroup, Cell, TextField, Button, Checkbox } from '@components/ui'
-import { useGetMeetroomMergeInfo, useGetMeetrooms, useGetReservationByRoomAndDate } from '@hooks/queries/meetroom/useGetQueries'
+import { useGetDepartments, useGetMeetroomMergeInfo, useGetMeetrooms, useGetReservationByRoomAndDate } from '@hooks/queries/meetroom/useGetQueries'
 import { formatDate } from 'ui/src/utils'
 import { useReservation } from '../hooks/useReservation'
 import { SelectDate } from './SelectDate'
@@ -13,10 +13,6 @@ import { SelectTime } from './SelectTime'
 import { WriteMeetingInfo } from './WriteMeetingInfo'
 import { SelectMemeber } from './SelectMember'
 
-type timeIdType = {
-  start:number | null,
-  end:number| null
-}
 
 export const Reservation = () => {
   const {
@@ -33,10 +29,6 @@ export const Reservation = () => {
     meetingAgenda,
     setMeetingAgenda,
   } = useReservation();
-
-  const {data: meetRoomList} = useGetMeetrooms();
-  const {data: meetRoomMergeInfo} = useGetMeetroomMergeInfo(selectedRoomId);
-  const {data: reservationByMeetRoomAndDate} = useGetReservationByRoomAndDate([selectedRoomId], date)
 
   const timeList = Array.from({length: 22}, (_, idx:number) => `${Math.floor((idx + 16)/2)}:${idx%2*3}0`)
 
@@ -65,7 +57,12 @@ export const Reservation = () => {
         disabledIndex={disabledIndex}
       />
 
-      <WriteMeetingInfo/>
+      <WriteMeetingInfo
+        meetingTitle={meetingTitle}
+        meetingAgenda={meetingAgenda}
+        setMeetingAgenda={setMeetingAgenda}
+        setMeetingTitle={setMeetingTitle}
+      />
 
       <SelectMemeber/>
 

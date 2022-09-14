@@ -21,8 +21,8 @@ export const useReservation = () => {
     end:null
   });
 
-  const [meetingTitle, setMeetingTitle] = useState();
-  const [meetingAgenda, setMeetingAgenda] = useState();
+  const [meetingTitle, setMeetingTitle] = useState<string>('');
+  const [meetingAgenda, setMeetingAgenda] = useState<string>('');
 
 
   return {
