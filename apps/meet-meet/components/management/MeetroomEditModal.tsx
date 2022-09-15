@@ -12,6 +12,12 @@ import { ImagePlaceholder } from "./ImagePlaceholder";
 import { ImagePreview } from "./ImagePreview";
 import { Modal, TextField, Checkbox, Button, Select, Text } from "ui/src/pages"
 
+/**
+ * 회의실 수정 모달
+ * 
+ * @param param
+ * @returns 
+ */
 export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInfo}: Props) => {
   const [isDeleteModal, setIsDeleteModal] = useState(false);
 

@@ -2,8 +2,15 @@ import { useState, useEffect, ChangeEvent, useCallback } from "react";
 import { checkBiteValid, convertHeicToJpg } from "ui/src/utils";
 
 import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types";
-import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
+import { StateType } from "ui/src/components/elements/Buttons/types/button.types"
 
+/**
+ * 회의실을 생성하거나 수정할 때 사용하는 커스텀 훅
+ * 
+ * @param {meetroomFormType} initialValues 
+ * @param {meetroomImagesType} initialImages 
+ * @returns 
+ */
 export const useMeetroomForm = (
   initialValues: meetroomFormType,
   initialImages: meetroomImagesType[]
@@ -30,9 +37,9 @@ export const useMeetroomForm = (
     setValues({ ...values, [name]: _value });
   };
 
-  const onChangeHasEquipment = (checked: boolean) => {
-    setValues({ ...values, hasMonitor: !values.hasMonitor });
-  };
+    const onChangeHasEquipment = (e: ChangeEvent<HTMLInputElement>) => {
+        setValues({ ...values, hasMonitor: !values.hasMonitor });
+    }
 
   const onDropImages = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {

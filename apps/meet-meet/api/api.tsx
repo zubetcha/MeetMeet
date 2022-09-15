@@ -1,5 +1,6 @@
 import { api } from "./axios";
 import { MeetRoom } from "graphql/meetroom/types";
+import { DeviceInfo } from "@hooks/queries/alarm/alarm.types";
 
 export const AuthAPI = {
   addUserInfo: (userInfo: { [key: string]: string | number }) =>
@@ -31,3 +32,9 @@ export const ReservationAPI = {
       `participant/reservations?startDateStr=${startDate}&endDateStr=${endDate}`
     ),
 };
+
+
+export const AlarmAPI = {
+  sendDeviceInfo: (deviceInfo: DeviceInfo) => api.post("/accounts/device", deviceInfo),
+  deleteDeviceInfo: (fcmToken: string) => api.delete("/accounts/device", { params: { fcmToken }}),
+}
