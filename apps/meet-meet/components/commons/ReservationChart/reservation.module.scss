@@ -15,18 +15,35 @@
 
     .reservationScrollSection{
         width: 100%;
-        overflow-x:auto;
+        overflow-x:overlay;
         position: relative;
 
+        &::-webkit-scrollbar {
+            position: absolute;
+            width: 4px !important;
+            height: 4px !important;
+        }
+      
+        &::-webkit-scrollbar * {
+          background:transparent !important; 
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--color-onSurface-opacity-12);
+            border-radius: 5px;
+        }
+
         .reservationHeader{
-            display: grid;
-            grid-template-columns: repeat(24, 50px);    
+            display: flex;  
             width:fit-content;
             height:40px;
             background-color: var(--color-onSurfaceVariant-opacity-12);
             border-right: 1px solid var(--color-onSurfaceVariant-opacity-16);
 
             .time{
+                width:50px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -107,4 +124,11 @@
         align-items: center;
         justify-content: center;
     }
+}
+
+.checkboxFlex{
+    width: 100%;
+    justify-content: left;
+    display: flex;
+    column-gap: 20px;
 }

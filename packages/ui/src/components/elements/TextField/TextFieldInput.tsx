@@ -14,6 +14,7 @@ export const TextFieldInput = ({
   autoFocus,
   isFocused,
   setIsFocused,
+  disabled = false,
   children,
 }: Props) => {
   const inputElement = useRef(null as any);
@@ -25,41 +26,39 @@ export const TextFieldInput = ({
   }, []);
 
   return (
-    <>
-      <div className={classes["wrapper__input-box"]}>
-        <input
-          className={classNames(
-            classes["wrapper__input-box__input"],
-            classes[`wrapper__input-box__input--${status}`], {
+    <div className={classes["wrapper__input-box"]}>
+      <input
+        className={classNames(
+          classes["wrapper__input-box__input"],
+          classes[`wrapper__input-box__input--${status}`],
+          {
             [classes.focused]: isFocused,
-          })}
-          type={type}
-          name={name}
-          value={value}
-          onFocus={() => setIsFocused && setIsFocused(true)}
-          onBlur={() => setIsFocused && setIsFocused(false)}
-          disabled={status == "disable" || status == "fixed" ? true : false}
-          onChange={onChange}
-          placeholder={isFocused ? "" : placeholder}
-          maxLength={maxLength as number}
-          ref={inputElement}
-          autoComplete="off"
-        />
-        <div className={classes["wrapper__input-box__children"]}>
-          {Children.toArray(children).map((child: any, i) => {
-            return (
-              <>
-                {cloneElement(child, {
-                  key: i,
-                  status,
-                  isFocused,
-                })}
-              </>
-            );
-          })}
-        </div>
+          }
+        )}
+        type={type}
+        name={name}
+        value={value}
+        onFocus={() => setIsFocused && setIsFocused(true)}
+        onBlur={() => setIsFocused && setIsFocused(false)}
+        disabled={
+          disabled || status == "disable" || status == "fixed" ? true : false
+        }
+        onChange={onChange}
+        placeholder={isFocused ? "" : placeholder}
+        maxLength={maxLength as number}
+        ref={inputElement}
+        autoComplete="off"
+      />
+      <div className={classes["wrapper__input-box__children"]}>
+        {Children.toArray(children).map((child: any, i) => {
+          return cloneElement(child, {
+            key: i,
+            status,
+            isFocused,
+          });
+        })}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -74,5 +73,6 @@ interface Props {
   maxLength?: number;
   name?: string;
   placeholder?: string;
+  disabled?: boolean;
   onChange?: (e: React.ChangeEvent<any>) => void;
 }

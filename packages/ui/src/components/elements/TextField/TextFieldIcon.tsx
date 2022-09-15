@@ -6,18 +6,16 @@ import { SVG } from "../SVG/SVG";
 export const TextFieldIcon = ({name, status = "default", isFocused, onClickIcon}: Props) => {
 
   return (
-    <>
-      <div
-        className={classNames(
-          classes["wrapper__input-box__children__icon"], 
-          classes[`wrapper__input-box__children__icon--${status}`], 
-          {[classes.focused]: isFocused}
-        )}
-        onClick={onClickIcon}
-      >
-        <SVG name={name} />
-      </div>
-    </>
+    <div
+      className={classNames(
+        classes["wrapper__input-box__children__icon"], 
+        classes[`wrapper__input-box__children__icon--${status}`], 
+        {[classes.focused]: isFocused}
+      )}
+      onClick={onClickIcon}
+    >
+      <SVG name={name} />
+    </div>
   )
 }
 

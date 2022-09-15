@@ -1,0 +1,12 @@
+.radio {
+    display: flex;
+    align-items: center;
+    * {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }

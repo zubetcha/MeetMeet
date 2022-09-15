@@ -45,3 +45,8 @@ yarn-error.log*
 # storybook
 /storybook-static
 node_modules
+
+# service worker
+**/public/workbox-*.js
+**/public/firebase-messaing-sw.js
+**/public/worker-*.js

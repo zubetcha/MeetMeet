@@ -1,0 +1,10 @@
+.columnFilter_container{
+    position: relative;
+    z-index: 100;
+    
+    .multiselect_container{
+        position: absolute;
+        top:-10px;
+        left:0px;
+    }
+}

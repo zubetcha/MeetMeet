@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useOption } from "../hooks";
-import classes from "../style/select.module.scss";
+import React from "react";
+import { useOption } from "../@hooks";
+import classes from "../@style/select.module.scss";
 import classNames from "classnames";
 import { Checkbox } from "../../Checkbox";
 
@@ -30,7 +30,10 @@ export function MultiSelectOption({ id, name }: OptionProps) {
         id={id}
         name={name}
         checked={isChecked}
-        onChange={(checked: boolean) => setCheckedItem(id, checked)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setCheckedItem(name, e.target.checked);
+        }}
+        forceClick
       >
         <Checkbox.Label style={{ marginLeft: "11px" }}>{name}</Checkbox.Label>
       </Checkbox>

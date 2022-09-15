@@ -2,21 +2,30 @@
 @import "ui/src/styles/utils";
 
 .container {
-  @include flex-direction(column, 24);
+  // @include flex-direction(column, 24);
 
   .button-wrapper {
     @include flexbox(end, center);
   }
 
   .meetroomCard-container {
-    height: calc(100vh - 112px);
+    height: calc(100vh - 48px);
 
     .meetroomCards-wrapper {
       display: grid;
-      grid-template-columns: repeat(auto-fit, 440px);
       gap: 24px;
       overflow: hidden auto;
       @include scroll-bar();
+
+      @include mobile() {
+        grid-template-columns: 1fr;
+      };
+      @include tablet() {
+        grid-template-columns: repeat(auto-fit, 440px);
+      };
+      @include desktop() {
+        grid-template-columns: repeat(auto-fit, 440px);
+      }
     }
   }
 }

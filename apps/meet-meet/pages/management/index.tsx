@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import classes from "./managementPage.module.scss";
 import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 
 import { MeetroomCard } from "@components/management/MeeroomCard";
 import { MeetroomAddModal } from "@components/management/MeetroomAddModal";
 import { CardDepth1, Button, IconButton } from "ui/src/pages"
+
+import { MeetRoom } from "graphql/meetroom/types";
 
 const ManagementPage = () => {
   const { data } = useGetMeetrooms();
@@ -38,7 +40,7 @@ const ManagementPage = () => {
             </CardDepth1.TitleBar>
             <CardDepth1.Contents>
               <div className={classes["meetroomCards-wrapper"]}>
-                {data && data.meetrooms.map((meetroom) => <MeetroomCard key={meetroom.id} meetroom={meetroom} />)}
+                {data && data.meetrooms.map((meetroom: MeetRoom) => <MeetroomCard key={meetroom.id} meetroom={meetroom} />)}
               </div>
             </CardDepth1.Contents>
           </CardDepth1>

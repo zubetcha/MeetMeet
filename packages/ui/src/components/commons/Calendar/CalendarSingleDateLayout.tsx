@@ -2,7 +2,7 @@
 import classNames from 'classnames';
 
 import classes from './calendar.module.scss';
-import { Button, Text, Tooltip } from '../../elements';
+import { Button, Text } from '../../elements';
 import { SVG } from '../../elements';
 import { Calendar } from '..';
 import { formatDate } from '../../../utils';
@@ -77,11 +77,9 @@ export const CalendarSigleDateLayout = ({
             </div>
             <div className={classNames(classes.calendar_container, classes.singleDate)} >
                 <div className={classes.calendar_description} >
-                  <Text
-                    text="센서 Raw data는 하루 단위로 다운로드가 가능합니다. 다운로드 받을 날짜를 선택하세요."
-                    type="Body1"
-                    weight="bold"
-                  />
+                    <Text style={{ fontWeight: "bold" }}>
+                        센서 Raw data는 하루 단위로 다운로드가 가능합니다. 다운로드 받을 날짜를 선택하세요.
+                    </Text>
                 </div>
                 <div className={classes.calendar_header} >
                     <div className={classes.prevBtn} onClick={prevMonth} > {'<'} </div>
@@ -93,14 +91,14 @@ export const CalendarSigleDateLayout = ({
                 </div>
                 <div className={classes.calendar_footer} >
                     <Button
-                      text="취소하기"
+                      label="취소하기"
                       style="textGray"
                       size="large"
                       onClick={() => setCalendar(false)}
                     />
                     <Button 
                         onClick={onClickSubmitDate} 
-                        text="Raw data 다운로드" 
+                        label="Raw data 다운로드" 
                         size="large"  
                         style="solid"
                     />
