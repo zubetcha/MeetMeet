@@ -24,6 +24,10 @@ export const CellGroup = ({
 
   const [index, setIndex] = useState<selectedIndex>(defaultIndex)
 
+  useEffect(() => {
+    setIndex(defaultIndex);
+  }, [defaultIndex])
+
   const { btnState, onClick, onMouseLeave, onMouseOver, btnHoverState } =
     useCellGroup({
       defaultIndex: index,
