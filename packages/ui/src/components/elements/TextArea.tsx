@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { TextAreaProps } from "../../types/ui.types";
 import { inputs } from "../../shared/style";
 import classes from "./elements.module.scss";
 import classNames from "classnames";
@@ -45,7 +44,7 @@ export const TextArea = ({
   onClick,
   isMargin = true,
   isBoxShadow = false,
-}: TextAreaProps) => {
+}: any) => {
   const [focused, setFocused] = useState<boolean>(false);
 
   const handleOnFocus = (e: React.FocusEvent<HTMLTextAreaElement>): void => {
