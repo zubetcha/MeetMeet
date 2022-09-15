@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useGetUserInfo } from "@hooks/queries/user/useGetQueries";
+import { getCookie } from "@utils/cookies";
 
 import { ACCESS_TOKEN } from "constants/auth";
 
@@ -16,7 +17,7 @@ export const RouterGuard = ({ children }: Props) => {
 
   // DESCRIBE: 웹스토리지 토큰 유무 여부 확인
   const checkAuth = () => {
-    const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    const accessToken = getCookie(ACCESS_TOKEN);
 
     if (!accessToken) {
       router.replace("/login");

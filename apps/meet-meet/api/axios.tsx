@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCookie } from '@utils/cookies';
 import { API_BASE_URL } from 'constants/common';
 import { ACCESS_TOKEN } from 'constants/auth';
 
@@ -11,7 +12,7 @@ export const api = axios.create({
 }); 
 
 api.interceptors.request.use((config: any) => {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+  const accessToken = getCookie(ACCESS_TOKEN);
   config.headers!.common["Authorization"] = accessToken ? `Bearer ${accessToken}` : null;
 
   return config;
