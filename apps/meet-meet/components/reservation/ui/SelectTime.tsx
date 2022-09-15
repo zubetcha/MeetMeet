@@ -1,7 +1,7 @@
 import { TitleLayout } from "./TitleLayout"
 import { timeIdType } from "../hooks/useReservation"
 import { CellGroup, Cell } from "@components/ui"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
 interface Props {
@@ -9,7 +9,6 @@ interface Props {
   setSelectedTimeId: (st:timeIdType) => void
   timeList: string[]
   disabledIndex: number[] | undefined
-
 }
 
 
@@ -20,10 +19,24 @@ export const SelectTime = ({
   disabledIndex
 }:Props) => {
 
-  const [defaultIndex, setDefaultIndex] = useState({
+  const [defaultIndex, setDefaultIndex] = useState<timeIdType>({
     start: null,
     end: null
   })
+
+  useEffect(() => {
+    if(selectedTimeId.start && selectedTimeId.end){
+      const start = selectedTimeId.start;
+      const end = selectedTimeId.end;
+      const found = disabledIndex?.find(idx => idx > start && end > idx);
+      
+      if(found){
+        if(selectedTimeId.start === defaultIndex.start) setDefaultIndex({start:end, end:end});
+        else setDefaultIndex({start:start, end:start});
+      }
+      else setDefaultIndex(selectedTimeId);
+    }
+  }, [selectedTimeId])
   
   return (
     <TitleLayout 

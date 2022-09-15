@@ -9,7 +9,7 @@ export const getDisabledIndex = (timeList:string[], reservationTime: Reservation
     reservationTime.map((time) => {
       const startTimeIndex = timeList.findIndex((f) => f === time?.startTime);
       const endTimeIndex = timeList.findIndex((f) => f === time?.endTime);
-      indexList.push(startTimeIndex, endTimeIndex - 1)
+      indexList.push(startTimeIndex, endTimeIndex - 1);
     })
   }
 
