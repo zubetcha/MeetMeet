@@ -1,11 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { useState } from 'react'
 import classes from './reservation.module.scss'
-import { TitleLayout } from './TitleLayout'
-import classNames from 'classnames'
 import { SingleCalendar, Select, Text, TimePicker, CellGroup, Cell, TextField, Button, Checkbox } from '@components/ui'
-import { useGetDepartments, useGetMeetroomMergeInfo, useGetMeetrooms, useGetReservationByRoomAndDate } from '@hooks/queries/meetroom/useGetQueries'
-import { formatDate } from 'ui/src/utils'
 import { useReservation } from '../hooks/useReservation'
 import { SelectDate } from './SelectDate'
 import { SelectMeetingRoom } from './SelectMeetingRoom'
@@ -22,6 +16,8 @@ export const Reservation = () => {
     setIsChecked,
     selectedRoomId,
     setSelectedRoomId,
+    mergedRoomId,
+    setMergedRoomId,
     selectedTimeId,
     setSelectedTimeId,
     meetingTitle,
@@ -30,12 +26,12 @@ export const Reservation = () => {
     setMeetingAgenda,
     selectedMembers,
     setSelectedMembers,
-    btnState
+    btnState,
+    timeList,
+    submitReservation,
+    disabledIndex
   } = useReservation();
 
-  const timeList = Array.from({length: 22}, (_, idx:number) => `${Math.floor((idx + 16)/2)}:${idx%2*3}0`)
-
-  const disabledIndex: number[] | undefined = []
 
   return (
     <div className={classes["page-container"]} >
@@ -44,6 +40,8 @@ export const Reservation = () => {
       <SelectMeetingRoom
         selectedRoomId={selectedRoomId}
         setSelectedRoomId={setSelectedRoomId}
+        mergedRoomId={mergedRoomId}
+        setMergedRoomId={setMergedRoomId}
         isChecked={isChecked}
         setIsChecked={setIsChecked}
       />
@@ -78,6 +76,7 @@ export const Reservation = () => {
             label='회의실 예약하기'
             configuration='filled'
             state={btnState ? 'default' : 'disable'}
+            onClick={submitReservation}
           />
         </div>
       </footer>

@@ -2,23 +2,34 @@ import { TitleLayout } from "./TitleLayout"
 import classes from './reservation.module.scss'
 import { Select, Checkbox } from "@components/ui"
 import { useGetMeetroomMergeInfo, useGetMeetrooms, } from "@hooks/queries/meetroom/useGetQueries"
+import { useEffect, useState } from "react"
 
 interface Props {
   selectedRoomId: number
   setSelectedRoomId: (st:number) => void
   isChecked: boolean
   setIsChecked: (st:boolean) => void
+  mergedRoomId: number
+  setMergedRoomId: (st:number) => void
 }
 
 export const SelectMeetingRoom = ({
   selectedRoomId,
   setSelectedRoomId,
+  mergedRoomId,
+  setMergedRoomId,
   isChecked,
   setIsChecked
 }:Props) => {
-
   const {data: meetRoomList} = useGetMeetrooms();
   const {data: meetRoomMergeInfo} = useGetMeetroomMergeInfo(selectedRoomId);
+
+  useEffect(() => {
+    if(isChecked && meetRoomMergeInfo?.mergeInfoByMeetRoom?.mergeRoom) {
+      setMergedRoomId(meetRoomMergeInfo?.mergeInfoByMeetRoom?.mergeRoom.id)
+    }
+    else if (!isChecked) setMergedRoomId(-1);
+  }, [isChecked])
 
   return (
     <TitleLayout title="회의실 선택" >

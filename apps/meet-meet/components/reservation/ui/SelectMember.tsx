@@ -2,18 +2,17 @@ import { TitleLayout } from "./TitleLayout"
 import classNames from "classnames"
 import classes from './reservation.module.scss'
 import { Button, Select } from "@components/ui"
-import { useGetAccountsByDepartment, useGetDepartments } from "@hooks/queries/meetroom/useGetQueries"
+import { useGetAccountsByDepartment, useGetDepartments } from "@hooks/queries/user/useGetQueries"
 import { useEffect, useState } from "react"
+import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types"
 
 interface Props {
   selectedMembers: any
   setSelectedMembers: (st:any) => void
 }
 
-type memberType = {
-  id: number;
-  name: string;
-}
+type memberType = SelectItemType;
+
 
 export const SelectMemeber = ({
   selectedMembers,

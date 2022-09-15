@@ -1,5 +1,6 @@
 import { api } from "./axios";
 import { MeetRoom } from "graphql/meetroom/types";
+import { reservationInfoType } from "./types";
 
 export const AuthAPI = {
   addUserInfo: (userInfo: { [key: string]: string | number }) =>
@@ -30,6 +31,8 @@ export const ReservationAPI = {
     api.get(
       `participant/reservations?startDateStr=${startDate}&endDateStr=${endDate}`
     ),
+  addReservation: (reservationInfo:reservationInfoType) => 
+    api.post(`/reservation`, reservationInfo)
 };
 
 

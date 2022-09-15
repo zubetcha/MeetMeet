@@ -1,6 +1,7 @@
 import { TitleLayout } from "./TitleLayout"
 import { timeIdType } from "../hooks/useReservation"
 import { CellGroup, Cell } from "@components/ui"
+import { useState } from "react"
 
 
 interface Props {
@@ -18,7 +19,11 @@ export const SelectTime = ({
   timeList,
   disabledIndex
 }:Props) => {
-  
+
+  const [defaultIndex, setDefaultIndex] = useState({
+    start: null,
+    end: null
+  })
   
   return (
     <TitleLayout 
@@ -30,6 +35,7 @@ export const SelectTime = ({
           <CellGroup 
             disableIndex={disabledIndex}
             onChange={(timeId) => setSelectedTimeId(timeId)}
+            defaultIndex={defaultIndex}
           >
             {timeList.map((time, idx) => {
               return <Cell label={time} key={`reservation-time-${idx}`} />

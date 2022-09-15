@@ -12,7 +12,11 @@ export type Reservation = {
   updateAt: string;
 }
 
-export type ReservationByMeeetRoomAndDate = {
+export type ReservationByMeetRoomAndDate = {
+  reservationByMeetRoomAndDate : ReservationWithTime[]
+}
+
+export type ReservationWithTime = {
   startTime: string;
-  endTime: string
-}[]
+  endTime: string;
+} | undefined
