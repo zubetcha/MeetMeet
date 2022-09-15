@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelect } from "./SelectContext";
+import { useSelect } from "../@context/SelectContext";
 
 export function useTriggerButton() {
   const { label, selected, defaultValue, isOpen, setIsOpen } = useSelect();

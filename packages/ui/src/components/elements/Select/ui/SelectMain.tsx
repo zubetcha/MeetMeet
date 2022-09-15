@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SelectProvider } from "../@hooks/SelectContext";
+import { SelectProvider } from "../@context/SelectContext";
 import { useOutsideAlerter } from "../@hooks";
 import { Select } from "../index";
 import { SelectItemType } from "../@types/select.types";

@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from "react";
-import classes from "./elements.module.scss";
+import React, { useState, useEffect, Children } from "react";
+import classes from "./radio.module.scss";
 
-import { SVG } from "./SVG/SVG";
+import { SVG } from "../SVG/SVG";
 
 interface RadioProps {
   name: string;
   id: string;
-  checked?: boolean;
-  label?: string;
   selectedValue?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  children?: JSX.Element | string;
 }
 
 /**
- * @param name radio 그룹 이름
- * @param id 해당 input[type="radio"]의 id
- * @param label radio 버튼의 label
- * @param selectedValue 선택된 input 의 value ( 상위 컴포넌트에서 관리 )
- * @param onChange input onChange 이벤트 핸들러 ( 상위 컴포넌트에서 관리 )
- * @param value  해당 input[type="radio"]의 value
+ * @param name (string) radio input name
+ * @param id (string) radio input id
+ * @param selectedValue (string) 디폴트로 선택할 value 값
+ * @param onChange (function) radio input 이벤트 핸들러
+ * @param value (string) radio input value
+ * @param children (JSX.Element | string) RadioLabel을 넣을 children 객체
  * @returns
  */
-export const Radio = ({
+export const RadioMain = ({
   name,
   id,
-  label,
   selectedValue,
   onChange,
   value,
+  children,
 }: RadioProps) => {
   const [checked, setChecked] = useState(false);
 
@@ -38,7 +37,7 @@ export const Radio = ({
 
   return (
     <>
-      <label htmlFor={id} className={classes.checkbox_hover}>
+      <label htmlFor={id} className={classes.radio}>
         {checked == true ? (
           <SVG name="selectedRadio" color={"primary"} />
         ) : (
@@ -53,7 +52,7 @@ export const Radio = ({
           checked={checked}
           style={{ display: "none" }}
         ></input>
-        <span>{label}</span>
+        {children}
       </label>
     </>
   );

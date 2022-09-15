@@ -8,7 +8,6 @@ interface Props {
   onChangeExtraCheckedRow: (checkedRowList: any[]) => void;
   selectedFlatRows: Row[];
   defaultRadioValue?: string;
-  defaultExtraCheckboxValues?: string[];
 }
 
 export default function useCustomTable({
@@ -18,7 +17,6 @@ export default function useCustomTable({
   onChangeExtraCheckedRow,
   selectedFlatRows,
   defaultRadioValue,
-  defaultExtraCheckboxValues,
 }: Props) {
   const [selectedRadio, setSelectedRadio] = useState(defaultRadioValue);
   const [extraCheckbox, setExtraCheckbox] = useState<any>([]);

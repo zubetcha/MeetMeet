@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelect } from "./SelectContext";
+import { useSelect } from "../@context/SelectContext";
 
 interface Props {
   id: string;

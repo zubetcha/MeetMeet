@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useMultiSelect } from "./MultiSelectContext";
+import { useMultiSelect } from "../@context/MultiSelectContext";
 
 export function useTriggerButton() {
   const { label, confirmedValues, defaultValues, isOpen, setIsOpen } =
@@ -30,6 +30,7 @@ export function useTriggerButton() {
   return {
     label,
     value,
+    isOpen,
     onClick,
   };
 }

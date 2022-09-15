@@ -19,6 +19,7 @@ export default function TablePage() {
         Header: "메인 전류 센서",
         accessor: "isMain_string",
         width: 170,
+        minWidth: 170,
         Cell: ({ cell }: any) => {
           return cell.value === "true" ? <div>메인센서</div> : "";
         },
@@ -75,12 +76,14 @@ export default function TablePage() {
       onChangeExtraCheckedRow={(extraCheckedRowList: any[]) =>
         console.log("extraCheckedRowList", extraCheckedRowList)
       }
-      initialFilterState={[
-        {
-          id: "sensorName",
-          value: ["김서연", "이대호"],
-        },
-      ]}
+      // initialFilterState={[
+      //   {
+      //     id: "sensorName",
+      //     value: ["김서연", "이대호"],
+      //   },
+      // ]}
+      // isResetResizingButton
+      // isResetFilteringButton
     ></Table>
   );
 }

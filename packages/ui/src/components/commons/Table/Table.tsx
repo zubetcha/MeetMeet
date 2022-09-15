@@ -127,7 +127,6 @@ export const Table = ({
     onChangeExtraCheckedRow: onChangeExtraCheckedRow,
     selectedFlatRows: selectedFlatRows,
     defaultRadioValue: defaultRadioValue,
-    defaultExtraCheckboxValues: defaultExtraCheckboxValues,
   });
 
   const renderCell = (cell: any, row: Row) => {

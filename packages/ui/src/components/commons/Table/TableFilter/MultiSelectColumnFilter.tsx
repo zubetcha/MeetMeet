@@ -15,15 +15,33 @@ export const MultiFilter = (rows: any, columnIds: any, filterValues: any) => {
  * @returns
  */
 export function MultiSelectColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id },
+  column: { filterValue, filter, setFilter, preFilteredRows, id },
   initialFilterState,
 }: any) {
   const [dropdownItems, setDropdownItems] = useState<any[]>([]);
+  const [isFiltered, setIsFiltered] = useState(true);
+  const [isShowIcon, setIsShowIcon] = useState(false);
 
   const initialState = useMemo(
     () => initialFilterState.filter((state: any) => state.id === id)[0]?.value,
     [initialFilterState]
   );
+
+  useEffect(() => {
+    const filterIcon = document.querySelector(
+      `#${id}-filter-wrapper svg`
+    ) as HTMLElement;
+
+    if (!filterIcon) return;
+
+    if (isFiltered) {
+      filterIcon.style.fill = "var(--color-onSurfaceVariant)";
+    } else {
+      if (!isShowIcon) {
+        filterIcon.style.fill = "transparent";
+      }
+    }
+  }, [isFiltered, isShowIcon]);
 
   useEffect(() => {
     setFilter(initialState);
@@ -46,7 +64,11 @@ export function MultiSelectColumnFilter({
 
   return (
     <>
-      <span className={classes.columnFilter_container}>
+      <span
+        className={classes.columnFilter_container}
+        onMouseEnter={() => setIsShowIcon(true)}
+        onMouseLeave={() => setIsShowIcon(false)}
+      >
         <span id={`${id}-filter-wrapper`}>
           {dropdownItems && (
             <MultiSelect
@@ -61,6 +83,9 @@ export function MultiSelectColumnFilter({
               }
               onChange={(items) => {
                 setFilter(items?.map((item: any) => item.name));
+              }}
+              onChangeIsCheckedAll={(isCheckedAll: boolean) => {
+                setIsFiltered(!isCheckedAll);
               }}
             >
               {dropdownItems?.map((item, i) => (

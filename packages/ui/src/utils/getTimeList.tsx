@@ -4,13 +4,17 @@ const addMinutes = (date: Date, minutes: number) => {
   return new Date(date.getTime() + minutes * 60000);
 };
 
-export const timeList = () => {
-  let date = new Date("2022-05-05 08:30");
+export const getTimeList = (startTime: string, endTime: string) => {
+  let date = new Date(`2022-05-05 ${startTime}`);
   let newList = [];
-  for (let i = 0; i < 24; i++) {
+  while (true) {
     newList.push(formatTime(date).slice(0, 5));
     const result = addMinutes(date, 30);
     date = result;
+    if (formatTime(date).slice(0, 5) === endTime) {
+      newList.push(formatTime(date).slice(0, 5));
+      break;
+    }
   }
   return newList;
 };
@@ -28,6 +32,10 @@ export const getThreeDateFromNow = (startDate: Date) => {
     date = result;
   }
   return newList;
+};
+
+export const addThreeDateFromNow = (startDate: Date) => {
+  return addMinutes(startDate, 60 * 24 * 3);
 };
 
 export const changeDateToMinute = (date: string) => {
