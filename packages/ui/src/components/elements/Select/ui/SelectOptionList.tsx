@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Children, useEffect} from "react";
 import classes from "../@style/select.module.scss";
 import classNames from "classnames";
 import { useOptionList } from "../@hooks";
@@ -8,8 +8,13 @@ interface Props {
 }
 
 export function SelectOptionList({ children }: Props) {
-  const { isOpen, searchResult } = useOptionList();
+  const { isOpen, searchResult, setSelected } = useOptionList();
   const display = isOpen ? "block" : "none";
+
+  useEffect(()=>{
+    Children.toArray(children).length===0 && setSelected(undefined);
+    
+  },[children])
 
   return (
     <>

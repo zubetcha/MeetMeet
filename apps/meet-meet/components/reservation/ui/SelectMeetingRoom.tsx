@@ -26,7 +26,7 @@ export const SelectMeetingRoom = ({
           <div className={classes['room-select']} >
             <Select
               isSearch={false}
-              defaultValue={meetRoomList?.meetrooms[0].name}
+              defaultValue={''}
               onChange={(room) => {setSelectedRoomId(parseInt(room.id))}}
               style={{width: '100%'}}
               label="회의실"

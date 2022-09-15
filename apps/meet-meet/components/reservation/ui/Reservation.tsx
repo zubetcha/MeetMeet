@@ -28,6 +28,9 @@ export const Reservation = () => {
     setMeetingTitle,
     meetingAgenda,
     setMeetingAgenda,
+    selectedMembers,
+    setSelectedMembers,
+    btnState
   } = useReservation();
 
   const timeList = Array.from({length: 22}, (_, idx:number) => `${Math.floor((idx + 16)/2)}:${idx%2*3}0`)
@@ -64,13 +67,17 @@ export const Reservation = () => {
         setMeetingTitle={setMeetingTitle}
       />
 
-      <SelectMemeber/>
+      <SelectMemeber
+        selectedMembers={selectedMembers}
+        setSelectedMembers={setSelectedMembers}
+      />
 
       <footer>
         <div className={classes['button-wrapper']} >
           <Button
             label='회의실 예약하기'
             configuration='filled'
+            state={btnState ? 'default' : 'disable'}
           />
         </div>
       </footer>

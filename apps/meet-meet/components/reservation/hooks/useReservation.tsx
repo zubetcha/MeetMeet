@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
 export type timeIdType = {
@@ -20,10 +20,32 @@ export const useReservation = () => {
     start:null,
     end:null
   });
-
   const [meetingTitle, setMeetingTitle] = useState<string>('');
   const [meetingAgenda, setMeetingAgenda] = useState<string>('');
+  const [selectedMembers, setSelectedMembers] = useState<any[]>([]);
+  const [btnState, setBtnState] = useState<boolean>(false);
 
+
+  useEffect(() => { 
+    console.log(selectedRoomId, selectedTimeId, meetingTitle, meetingAgenda, selectedMembers)
+
+
+    if(selectedRoomId > 0 
+      && typeof(selectedTimeId.start) === 'number'
+      && typeof(selectedTimeId.end) === 'number'
+      && meetingTitle 
+      && meetingAgenda 
+      && selectedMembers
+    ) setBtnState(true);
+
+    else setBtnState(false);
+  }, [
+    selectedRoomId,
+    selectedTimeId,
+    meetingTitle,
+    meetingAgenda,
+    selectedMembers
+  ])
 
   return {
     date,
@@ -37,6 +59,9 @@ export const useReservation = () => {
     meetingTitle,
     setMeetingTitle,
     meetingAgenda,
-    setMeetingAgenda
+    setMeetingAgenda,
+    selectedMembers,
+    setSelectedMembers,
+    btnState
   }
 } 

@@ -44,7 +44,17 @@
     }
 
     .member-select {
-      width: 60%;      
+      width: 60%;
+      position: relative;
+
+      .selected-member-list {
+        position: absolute;
+        bottom: -35px;
+        left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
     }
 
     .room-select {
