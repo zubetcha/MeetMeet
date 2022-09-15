@@ -2,26 +2,8 @@
 
 // To disable all workbox logging during development, you can set self.__WB_DISABLE_DEV_LOGS to true
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox#disable_logging
-//
-// self.__WB_DISABLE_DEV_LOGS = true
+self.__WB_DISABLE_DEV_LOGS = true
 
-const util = require("./util");
-
-util();
-
-// listen to message event from window
-self.addEventListener("message", (event) => {
-  // HOW TO TEST THIS?
-  // Run this in your browser console:
-  //     window.navigator.serviceWorker.controller.postMessage({command: 'log', message: 'hello world'})
-  // OR use next-pwa injected workbox object
-  //     window.workbox.messageSW({command: 'log', message: 'hello world'})
-  console.log("안녕", event.data);
-});
-
-
-// import { initializeApp } from "firebase/app";
-// import { getMessaging, onBackgroundMessage } from "firebase/messaging/sw";
 importScripts("https://www.gstatic.com/firebasejs/9.5.0/firebase-app-compat.js");
 importScripts("https://www.gstatic.com/firebasejs/9.5.0/firebase-messaging-compat.js");
 
@@ -38,30 +20,15 @@ const firebaseApp = firebase.initializeApp({
   measurementId: "G-41K21FTLLR"
 });
 
-// Retrieve an instance of Firebase Messaging so that it can handle background
-// messages.
-// const messaging = firebase.getMessaging(firebaseApp);
-// const messaging = firebase.messaging();
-
-// messaging.onBackgroundMessage((payload) => {
-//   console.log('[firebase-messaging-sw.js] Received background message ', payload);
-//   const title = payload.notification.title;
-//   const options = {
-//     body: payload.notification.body,
-//   };
-
-//   self.registration.showNotification(title, options);
-// });
-
+// Retrieve an instance of Firebase Messaging so that it can handle background messages.
 const isSupported = firebase.messaging.isSupported();
 if (isSupported) {
-    const messaging = firebase.messaging();
+  const messaging = firebase.messaging();
 
-    messaging.onBackgroundMessage((payload) => {
-      console.log('[firebase-messaging-sw.js] Received background message ', payload);
-      const title = payload.notification.title;
-      const body = payload.notification.body;
-
-      self.registration.showNotification(title, { body });
-    });
+  messaging.onBackgroundMessage((payload) => {
+    console.log('[firebase-messaging-sw.js] Received background message ', payload);
+    const title = payload.notification.title;
+    const body = payload.notification.body;
+    self.registration.showNotification(title, { body });
+  });
 }

@@ -48,5 +48,5 @@ node_modules
 
 # service worker
 **/public/workbox-*.js
-**/public/sw.js
+**/public/firebase-messaing-sw.js
 **/public/worker-*.js

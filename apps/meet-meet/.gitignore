@@ -37,5 +37,5 @@ next-env.d.ts
 
 # service worker
 **/public/workbox-*.js
-**/public/sw.js
+**/public/firebase-messaing-sw.js
 **/public/worker-*.js

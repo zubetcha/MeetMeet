@@ -11,7 +11,6 @@ import { RecoilRoot } from "recoil";
 import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserver";
 import { PushNotificationLayout } from "@components/commons/Layout/PushNotificationLayout";
 import { initFirebaseApp } from "@utils/firebase";
-import Script from "next/script";
 
 import "../styles/globals.scss";
 import "react-toastify/dist/ReactToastify.css";

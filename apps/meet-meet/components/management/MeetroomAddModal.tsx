@@ -11,7 +11,12 @@ import { ImagePlaceholder } from "./ImagePlaceholder";
 import { ImagePreview } from "./ImagePreview";
 import { Modal, TextField, Checkbox, Button, Select, Text } from "ui/src/pages"
 
-// TODO: code: -301, message: 이미 존재하는 회의실입니다.
+/**
+ * 회의실 생성 모달
+ * 
+ * @param {function} setIsAddModal
+ * @returns 
+ */
 export const MeetroomAddModal = ({setIsAddModal}: Props) => {
 
   const initialValues = { name: "", seat: "", location: "", mergeRoomId: null, hasMonitor: false };

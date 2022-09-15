@@ -4,6 +4,13 @@ import { checkBiteValid, convertHeicToJpg } from "ui/src/utils";
 import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types";
 import { StateType } from "ui/src/components/elements/Buttons/types/button.types"
 
+/**
+ * 회의실을 생성하거나 수정할 때 사용하는 커스텀 훅
+ * 
+ * @param {meetroomFormType} initialValues 
+ * @param {meetroomImagesType} initialImages 
+ * @returns 
+ */
 export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: meetroomImagesType[]) => {
     const [values, setValues] = useState<meetroomFormType>(initialValues);
     const [images, setImages] = useState<meetroomImagesType[]>(initialImages);
@@ -27,7 +34,7 @@ export const useMeetroomForm = (initialValues: meetroomFormType, initialImages: 
         setValues({ ...values, [name]: _value });
     };
 
-    const onChangeHasEquipment = (checked: boolean) => {
+    const onChangeHasEquipment = (e: ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, hasMonitor: !values.hasMonitor });
     }
 

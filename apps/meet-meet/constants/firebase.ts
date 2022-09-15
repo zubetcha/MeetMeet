@@ -1,13 +1,13 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyB5MsSaVHen868J6lRWD1R4bQX0jH5K7qE",
-  authDomain: "meetmeet-a49ad.firebaseapp.com",
-  projectId: "meetmeet-a49ad",
-  storageBucket: "meetmeet-a49ad.appspot.com",
-  messagingSenderId: "831729942382",
-  appId: "1:831729942382:web:4aa84d00b6d73b28ad4b7f",
-  measurementId: "G-41K21FTLLR"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-export const VAPID_KEY = "BGAOShBkQkH4X2sBwyJ1qzCLg6-S6RhZS2awLd809-UeUYN8kRPmmClidLDwn7_mHpwU5A_aXsYGwBGGqkaklu8";
+export const VAPID_KEY = process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY;
 export const FIREBASE_APP_NAME = 'meetmeet';
 export const FCM_TOKEN = 'fcm_token';
