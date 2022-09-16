@@ -20,3 +20,20 @@ export type ReservationWithTime = {
   startTime: string;
   endTime: string;
 } | undefined
+
+export type ReservationInfo = {
+  content: string;
+  date: string;
+  endTime: string;
+  startTime: string;
+  meetRoomList: MeetRoomInReservation[];
+  participantCnt: number;
+  participantList: string[];
+  title: string;
+}
+
+type MeetRoomInReservation = {
+  id: number;
+  name: string;
+  hasMonitor: boolean;
+}

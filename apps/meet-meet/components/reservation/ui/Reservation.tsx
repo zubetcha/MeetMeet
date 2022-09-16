@@ -1,11 +1,12 @@
 import classes from './reservation.module.scss'
-import { SingleCalendar, Select, Text, TimePicker, CellGroup, Cell, TextField, Button, Checkbox } from '@components/ui'
+import { Text, Button, Modal } from '@components/ui'
 import { useReservation } from '../hooks/useReservation'
 import { SelectDate } from './SelectDate'
 import { SelectMeetingRoom } from './SelectMeetingRoom'
 import { SelectTime } from './SelectTime'
 import { WriteMeetingInfo } from './WriteMeetingInfo'
 import { SelectMemeber } from './SelectMember'
+import { ConfirmModal } from './ConfirmModal'
 
 
 export const Reservation = () => {
@@ -29,7 +30,10 @@ export const Reservation = () => {
     btnState,
     timeList,
     submitReservation,
-    disabledIndex
+    disabledIndex,
+    isModal,
+    setIsModal,
+    reservedInfo
   } = useReservation();
 
 
@@ -80,6 +84,12 @@ export const Reservation = () => {
           />
         </div>
       </footer>
+      {(isModal && reservedInfo) &&
+        <ConfirmModal
+          setIsModal={setIsModal}
+          reservedInfo={reservedInfo}
+        />
+      }
     </div>
   )
 }
