@@ -5,11 +5,11 @@ export const getDisabledIndex = (timeList:string[], reservationTime: Reservation
   
   let indexList: any[] = [];
   if(reservationTime){
-
     reservationTime.map((time) => {
       const startTimeIndex = timeList.findIndex((f) => f === time?.startTime);
       const endTimeIndex = timeList.findIndex((f) => f === time?.endTime);
-      indexList.push(startTimeIndex, endTimeIndex - 1);
+      const startToEndIndex = Array.from({length:endTimeIndex - startTimeIndex}, (v,k) => startTimeIndex + k)
+      indexList.push(...startToEndIndex);
     })
   }
 
