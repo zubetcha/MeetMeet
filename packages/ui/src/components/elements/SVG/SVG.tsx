@@ -57,6 +57,7 @@ import MeetMeetHoriIcon from "../../../assets/icons/logo-meetmeet-hori.svg";
 import MeetMeetVertIcon from "../../../assets/icons/logo-meetmeet-vert.svg";
 import HomeIcon from "../../../assets/icons/home.svg";
 import AlertIcon from "../../../assets/icons/alert.svg";
+import MenuOpenedIcon from "../../../assets/icons/menu-opened.svg";
 
 import classes from "./SVG.module.scss";
 import classNames from "classnames";
@@ -145,6 +146,7 @@ export const SVG = ({
     meetmeetVert: <MeetMeetVertIcon />,
     alert: <AlertIcon {...propsCursor} />,
     home: <HomeIcon {...propsCursor} />,
+    menuOpened: <MenuOpenedIcon {...propsCursor}/>
   };
 
   return <>{icons[name]}</>;
