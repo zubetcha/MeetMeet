@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useReadAlarm, useReadAllAlarms } from "@hooks/queries/alarm/useMutationQueries";
-import { Alarm } from "./Alarm.types";
+import { Alarm as AlarmType } from "./Alarm.types";
 
 import classes from "./alarm.module.scss";
 import { Button, CardDepth1, IconButton, Modal } from "ui/src/pages";
@@ -8,10 +8,11 @@ import AlarmItem from "./AlarmItem";
 
 interface Props {
   onClickButton: () => void;
+  setIsOpen?: (is: boolean) => void;
 }
 
-export default function AlarmList({ onClickButton }: Props) {
-  const alarmList: Array<Alarm> = new Array(20).fill(0).map((_, i) => {
+export default function AlarmList({ onClickButton, setIsOpen }: Props) {
+  const alarmList: Array<AlarmType> = new Array(20).fill(0).map((_, i) => {
     return {
       notification: {
         title: "[회의명]회의에 초대됐습니다.",
@@ -99,6 +100,13 @@ export default function AlarmList({ onClickButton }: Props) {
             icon="settings"
             onClick={onClickButton}
           />
+          <IconButton
+            configuration="text"
+            size="medium"
+            state="default"
+            icon="close"
+            onClick={() => setIsOpen && setIsOpen(false)}
+          />
         </CardDepth1.TitleBar>
         <CardDepth1.Contents>
           <div className={classes.alarmInnerContainer}>
@@ -118,7 +126,7 @@ export default function AlarmList({ onClickButton }: Props) {
               configuration="textGray"
               size="large"
               state="default"
-              onClick={() => setIsConfirmModal(false)}
+              // onClick={() => }
             />
             <Button
               label="모두 읽기"

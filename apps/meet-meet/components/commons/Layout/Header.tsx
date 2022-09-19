@@ -42,7 +42,7 @@ export const Header = ({ isClose, setClose, navInfo, Logo, onClickUsername, onCl
         </div>
         {isOpenAlarm && (
           <div className={classes.m_alarmWrapper}>
-            <Alarm isOpen={isOpenAlarm} />
+            <Alarm isOpen={isOpenAlarm} setIsOpen={setIsOpenAlarm} />
           </div>
         )}
         <div className={classNames(classes.m_menuContainer, isClose ? classes.close : classes.open)}>
