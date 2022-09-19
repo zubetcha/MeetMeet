@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { Modal, Button } from "../../ui/index";
 import { Header } from "./Header";
 import { useWindowSize } from "ui/src/hooks/useWindowSize";
+import { useSSE } from "@hooks/notice/useSSE";
 
 import { FCM_TOKEN } from "constants/firebase";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "constants/auth";
@@ -22,6 +23,7 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
   const { dynamicWidth } = useWindowSize();
+  const {} = useSSE();
 
   const [isClose, setIsClose] = useState<boolean>(false);
   const [isMyPageModal, setIsMyPageModal] = useState(false);
