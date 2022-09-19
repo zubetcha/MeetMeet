@@ -1,11 +1,11 @@
-import { cloneElement } from "react";
 import classes from "./Card.module.scss";
 import classNames from "classnames";
 import { getCardTitleContents } from "./Card.utils";
 
 export const CardDepth1TitleBar = ({children}: Props) => {
-  const cardTitle = getCardTitleContents(children, "CardDepth1Title")
-  const cardIconButtons = getCardTitleContents(children, "IconButton")
+  const cardTitle = getCardTitleContents(children, "CardDepth1Title");
+  const cardIconButtons = getCardTitleContents(children, "IconButton");
+  const cardButtons = getCardTitleContents(children, "Button");
 
   return (
     <div className={classNames(
@@ -17,6 +17,7 @@ export const CardDepth1TitleBar = ({children}: Props) => {
         {cardTitle && cardTitle}
       </div>
       <div className={classes["title-buttons"]}>
+        {cardButtons && cardButtons}
         {cardIconButtons && cardIconButtons}
       </div>
     </div>
@@ -24,7 +25,7 @@ export const CardDepth1TitleBar = ({children}: Props) => {
 }
 
 export const CardDepth2TitleBar = ({children}: Props) => {
-    const cardTitle = getCardTitleContents(children, "CardDepth2Title")
+  const cardTitle = getCardTitleContents(children, "CardDepth2Title")
   const cardIconButtons = getCardTitleContents(children, "IconButton")
 
   return (
@@ -37,7 +38,7 @@ export const CardDepth2TitleBar = ({children}: Props) => {
         {cardTitle && cardTitle}
       </div>
       <div className={classes["title-buttons"]}>
-          {cardIconButtons && cardIconButtons}
+        {cardIconButtons && cardIconButtons}
       </div>
     </div>
   )

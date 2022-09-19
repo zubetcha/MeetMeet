@@ -1,6 +1,7 @@
+
 import classes from "./Navbar.module.scss";
 import classNames from "classnames";
-import { Button, ButtonGroup, ExitBtn } from "../../elements";
+import { Button, ButtonGroup, ExitBtn, IconButton, SVG } from "../../elements";
 import { NavItemType, NavSection } from "..";
 
 interface NavbarProps {
@@ -12,6 +13,7 @@ interface NavbarProps {
   }[];
   Logo: React.ElementType;
   onClickUsername: () => void;
+  onClickLogout: () => void;
 }
 
 export const Navbar = ({
@@ -20,7 +22,9 @@ export const Navbar = ({
   navInfo,
   Logo,
   onClickUsername,
+  onClickLogout,
 }: NavbarProps) => {
+
   return (
     <div
       className={classNames(
@@ -39,7 +43,7 @@ export const Navbar = ({
             configuration="text"
             onClick={onClickUsername}
           />
-          <Button size="small" label="로그아웃" configuration="text" />
+          <Button size="small" label="로그아웃" configuration="text" onClick={onClickLogout} />
         </div>
       </div>
       <div className={classes.logoLayout}>

@@ -6,7 +6,11 @@ import userState from "recoil/user";
 import { UserForm } from "./UserForm";
 import { Modal, Button, Text } from "ui/src/pages"
 
-export const MyPageModal = ({ setIsModal }: Props) => {
+interface Props {
+    isModal: boolean;
+    setIsModal: (isModal: boolean) => void;
+}
+export const MyPageModal = ({ isModal, setIsModal }: Props) => {
     const userInfo = useRecoilValue(userState);
     const { mutateAsync } = usePostUserInfo(setIsModal);
     const { name, phone, department } = userInfo;
@@ -20,7 +24,7 @@ export const MyPageModal = ({ setIsModal }: Props) => {
     }
 
     return (
-        <Modal>
+        <Modal isOpen={isModal}>
             <Modal.Title type="title-large" weight="700">회원 정보</Modal.Title>
             <Modal.Contents>
                 <UserForm values={values} onChangeTextField={onChangeTextField} onChangeDepartmentId={onChangeDepartmentId} departmentId={department.id} />
@@ -33,6 +37,4 @@ export const MyPageModal = ({ setIsModal }: Props) => {
     )
 }
 
-interface Props {
-    setIsModal: (isModal: boolean) => void;
-}
+
