@@ -44,7 +44,7 @@ export const PushNotificationLayout = ({ children }: Props) => {
       if (payload.notification) {
         const title = payload.notification.title;
         const [location, date] = payload.notification.body?.split(", ") as string[];
-
+        // const reservationId = payload.data?.reservation;
 
         navigator.serviceWorker.ready.then(registration => {
           toast(

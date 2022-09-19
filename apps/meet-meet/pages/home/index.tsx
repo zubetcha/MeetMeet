@@ -76,7 +76,6 @@ const Home: NextPage = () => {
       style={{
         height: "fit-content",
         width: "fit-content",
-        margin: "20px auto 0 auto",
         display: "grid",
         rowGap: "30px",
         position: "relative",

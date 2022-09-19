@@ -1,5 +1,9 @@
 import { Text } from "../Text/Text"
 
+interface Props {
+  children?: JSX.Element[] | JSX.Element | string;
+}
+
 export const CardDepth1Title = ({children}: Props) => {
 
   return (
@@ -16,8 +20,4 @@ export const CardDepth2Title = ({children}: Props) => {
       {children}
     </Text>
   )
-}
-
-interface Props {
-  children?: JSX.Element[] | JSX.Element | string;
 }

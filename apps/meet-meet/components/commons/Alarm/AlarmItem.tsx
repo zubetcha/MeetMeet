@@ -1,13 +1,32 @@
-import React from "react";
-import { Text } from "ui/src/pages";
-import classes from "./alarm.module.scss";
+import React, { useState } from "react";
+import { Alarm } from "./Alarm.types";
 
-export default function AlarmItem() {
+import classes from "./alarm.module.scss";
+import { Text, SVG, IconButton } from "ui/src/pages";
+
+interface Props {
+  isTune: boolean;
+  isToRead: boolean;
+  onClickRadio: (e: React.MouseEvent<HTMLDivElement>) => void;
+  alarm: Alarm;
+}
+
+export default function AlarmItem({ isTune, isToRead, onClickRadio, alarm }: Props) {
+
+  const { notification: { title, description }, data: { reservationId, createdAt } } = alarm;
+
   return (
     <div className={classes.alarmItem}>
-      <Text style={{ fontWeight: "bold" }}>[주간회의]회의에 초대됐습니다.</Text>
-      <Text>08.15(화) 10:00-11:00 / 2층 백범</Text>
-      <Text>10초 전</Text>
+      {isTune && (
+        <div id={String(reservationId)} className={classes.radio} onClick={(e) => onClickRadio(e)}>
+          <SVG name={isToRead ? "selectedRadio" : "unSelectedRadio"} width="20" height="20"/>
+        </div>
+      )}
+      <div className={classes.notification}>
+        <Text style={{ fontWeight: "bold" }}>{title}</Text>
+        <Text>{description}</Text>
+        <Text>{createdAt}</Text>
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { useUrlParameter } from "ui/src/hooks/useUrlParameter";
 import { useSendDeviceInfo } from '@hooks/queries/alarm/useMutationQueries';
 import { getFcmToken } from '@utils/firebase';
 import { osName } from 'react-device-detect';
+import { setCookie } from '@utils/cookies';
 
 import { ACCESS_TOKEN, REFRESH_TOKEN } from 'constants/auth';
 import { DeviceInfo } from '@hooks/queries/alarm/alarm.types';
@@ -38,8 +39,8 @@ const Oauth2RedirectHandler = () => {
 
   useEffect(() => {
     if (accessToken) {
-      localStorage.setItem(ACCESS_TOKEN, accessToken);
-      localStorage.setItem(REFRESH_TOKEN, refreshToken);
+      setCookie(ACCESS_TOKEN, accessToken, 60 * 60 * 24)
+      setCookie(REFRESH_TOKEN, refreshToken, 60 * 60 * 24)
 
       getFcmToken().then(fcmToken => {
         if (fcmToken) {

@@ -27,8 +27,8 @@ if (isSupported) {
 
   messaging.onBackgroundMessage((payload) => {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
-    const title = payload.notification.title;
-    const body = payload.notification.body;
+    const { notification: { title, body }, data: { reservation } } = payload;
+    const reservationId = parseInt(reservation);
     self.registration.showNotification(title, { body });
   });
 }

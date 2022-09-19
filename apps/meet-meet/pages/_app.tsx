@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ApolloProvider client={client}>
             <RecoilRoot>
               {/* <RecoilObserver /> */}
-              {/* <RouterGuard> */}
+              <RouterGuard>
               {exceptionList.includes(router.pathname) ? (
                 <Component {...pageProps} />
               ) : (
@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </PushNotificationLayout>
               )}
               <SuccessModal />
-              {/* </RouterGuard> */}
+              </RouterGuard>
             </RecoilRoot>
           </ApolloProvider>
         </QueryClientProvider>
