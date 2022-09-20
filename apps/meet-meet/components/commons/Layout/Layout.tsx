@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import classes from "./Layout.module.scss";
 import classNames from "classnames";
 import { navInfo } from "@shared/pageInfo";
@@ -10,6 +10,9 @@ import { Modal, Button } from "../../ui/index";
 import { Header } from "./Header";
 import { useWindowSize } from "ui/src/hooks/useWindowSize";
 import { useSSE } from "@hooks/notice/useSSE";
+import { useRecoilValue } from "recoil";
+import { noticeDataState, noticeListStatsState } from "recoil/notice";
+import { SideMenu } from "./SideMenu";
 
 import { FCM_TOKEN } from "constants/firebase";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "constants/auth";
@@ -23,9 +26,14 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
   const { dynamicWidth } = useWindowSize();
-  const {} = useSSE();
+  const isMobile = dynamicWidth < 768;
+  const { totalNum } = useRecoilValue(noticeListStatsState);
+
+  const _useSSE = useCallback(useSSE, []);
+  _useSSE();
 
   const [isClose, setIsClose] = useState<boolean>(false);
+  const [isMenuClose, setIsMenuClose] = useState(true);
   const [isMyPageModal, setIsMyPageModal] = useState(false);
   const [isLogoutModal, setIsLogoutModal] = useState(false);
 
@@ -38,13 +46,13 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <div className={classes.layoutContainer}>
-        {dynamicWidth < 768 ?
+        {isMobile ?
           <Header
-            isClose={isClose}
-            setClose={setIsClose}
-            navInfo={navInfo}
-            Logo={MeetmeetLogo}
+            isClose={isMenuClose}
+            setClose={setIsMenuClose}
             onClickUsername={() => setIsMyPageModal(true)}
+            Logo={MeetmeetLogo}
+            navInfo={navInfo}
             onClickLogout={() => setIsLogoutModal(true)}
           />
           :
@@ -55,15 +63,21 @@ export const Layout = ({ children }: LayoutProps) => {
             Logo={MeetmeetLogo}
             onClickUsername={() => setIsMyPageModal(true)}
             onClickLogout={() => setIsLogoutModal(true)}
+            totalNum={totalNum}
           />
         }
-
         <div
-          className={classNames(classes.pageBody, isClose ? classes.close : "")}
+          className={classNames(
+            classes.pageBody,
+            isClose ? classes.close : "",
+          )}
         >
           {children}
         </div>
       </div>
+      <div className={isMobile && !isMenuClose ? classes.overlay : classes.transparent}
+        onClick={() => setIsMenuClose(true)}
+      ></div>
       {isMyPageModal && <MyPageModal isModal={isMyPageModal} setIsModal={setIsMyPageModal} />}
       {isLogoutModal && (
         <Modal setIsOpen={setIsLogoutModal}>

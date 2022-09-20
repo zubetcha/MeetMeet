@@ -8,15 +8,16 @@ export type NavItemType = {
   rightElement?: JSX.Element;
   path: string;
   isModal: boolean;
-  Modal?: (isOpen: boolean) => JSX.Element;
+  Modal?: (isOpen: boolean) => JSX.Element; 
 };
 
 interface Props {
   headerLabel?: string;
   itemList: NavItemType[];
+  totalNum: number;
 }
 
-export const NavSection = ({ headerLabel, itemList }: Props) => {
+export const NavSection = ({ headerLabel, itemList, totalNum }: Props) => {
   return (
     <div className={classes.NavSectionBox}>
       {headerLabel && (
@@ -26,7 +27,7 @@ export const NavSection = ({ headerLabel, itemList }: Props) => {
         </div>
       )}
       {itemList.map((item, idx) => {
-        return <NavItem item={item} key={`NavItem'_${idx}`} />;
+        return <NavItem item={item} key={`NavItem'_${idx}`} totalNum={totalNum} />;
       })}
     </div>
   );

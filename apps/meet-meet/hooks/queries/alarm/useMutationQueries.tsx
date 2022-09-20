@@ -53,9 +53,16 @@ export const useReadAlarm = () => {
  * 모든 알람을 읽음 처리
  * 
  */
-export const useReadAllAlarms = () => {
+export const useReadAllAlarms = (setIsModal: (is: boolean) => void) => {
+  const { handleSuccess } = useHandleSuccess();
+  const title = "모두 읽음 완료";
   return useMutation(
     ["alarm", "readAll"],
     () => AlarmAPI.readAllAlarms(),
+    {
+      onSuccess: () => {
+        handleSuccess({ title, setIsModal });
+      }
+    }
   )
 }

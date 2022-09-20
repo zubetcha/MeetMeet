@@ -14,6 +14,7 @@ interface NavbarProps {
   Logo: React.ElementType;
   onClickUsername: () => void;
   onClickLogout: () => void;
+  totalNum: number;
 }
 
 export const Navbar = ({
@@ -23,6 +24,7 @@ export const Navbar = ({
   Logo,
   onClickUsername,
   onClickLogout,
+  totalNum
 }: NavbarProps) => {
 
   return (
@@ -57,6 +59,7 @@ export const Navbar = ({
               headerLabel={info.headerLabel && info.headerLabel}
               itemList={info.itemList}
               key={`navSection_${idx}`}
+              totalNum={totalNum}
             />
           );
         })}

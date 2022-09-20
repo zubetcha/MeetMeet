@@ -153,6 +153,7 @@ html[data-theme="light"] {
     --toastify-color-progress-warning: var(--toastify-color-warning);
     --toastify-color-progress-error: var(--toastify-color-error);
     --toastify-close-button-color: #{$neutral-color-99};
+    --toastify-z-index: 11000;
   }
   
 html[data-theme="dark"] {
@@ -306,4 +307,5 @@ html[data-theme="dark"] {
     --toastify-color-progress-warning: var(--toastify-color-warning);
     --toastify-color-progress-error: var(--toastify-color-error);
     --toastify-close-button-color: #{$neutral-color-10};
+    --toastify-z-index: 11000;
 }

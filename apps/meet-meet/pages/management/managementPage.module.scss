@@ -10,6 +10,9 @@
 
   .meetroomCard-container {
     height: calc(100vh - 48px);
+    @include mobile() {
+      height: calc(100vh - 105px);
+    }
 
     .meetroomCards-wrapper {
       display: grid;

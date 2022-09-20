@@ -1,7 +1,11 @@
 import { atom } from "recoil";
-import { NoticeListState } from "./types";
+import { EventSourcePolyfill } from "event-source-polyfill";
+import { NoticeDataState } from "./types";
 
-export const noticeListState = atom<NoticeListState>({
+export const noticeDataState = atom<NoticeDataState>({
   key: "notice",
-  default: [],
+  default: {
+    noticeList: [],
+    lastEvnetId: "",
+  },
 })
