@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ApolloProvider client={client}>
           <RecoilRoot>
             {/* <RecoilObserver /> */}
-            {/* <RouterGuard> */}
+            <RouterGuard>
             {exceptionList.includes(router.pathname) ? (
               <Component {...pageProps} />
             ) : (
@@ -72,7 +72,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               </Layout>
             )}
             <SuccessModal />
-            {/* </RouterGuard> */}
+            </RouterGuard>
           </RecoilRoot>
         </ApolloProvider>
       </QueryClientProvider>

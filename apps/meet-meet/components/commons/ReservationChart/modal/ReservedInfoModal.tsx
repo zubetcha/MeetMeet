@@ -11,11 +11,13 @@ interface Props {
     startTime: string;
     endTime: string;
   };
+  onClickConfirm: () => void;
 }
 
 export default function ReservedInfoModal({
   onClickCancle,
   reservedDate,
+  onClickConfirm
 }: Props) {
   const { date, meetingRoom, host, department, startTime, endTime } =
     reservedDate;
@@ -45,6 +47,7 @@ export default function ReservedInfoModal({
           label="상세 예약 정보 확인하기"
           configuration="filled"
           size="large"
+          onClick={onClickConfirm}
         />
       </Modal.Buttons>
     </Modal>

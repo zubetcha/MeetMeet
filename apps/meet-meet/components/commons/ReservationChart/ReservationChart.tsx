@@ -11,6 +11,7 @@ import {
   selectedDataType,
 } from "./@types/reservationChart.types";
 import { getTimeList } from "ui/src/utils";
+import { ReservationInfoModal } from "@components/reservation/ui/modal/ReservationInfoModal";
 
 /**
  *
@@ -48,6 +49,7 @@ export const ReservationChart = ({
     department: "",
     startTime: "",
     endTime: "",
+    reservationId: -1
   });
 
   // DESCRIBE: 간트 차트 날짜 리스트
@@ -64,6 +66,10 @@ export const ReservationChart = ({
 
   // DESCRIBE: 예약 상세정보 확인 모달 open 여부
   const [isOpenReservedModal, setIsOpenReservedModal] = useState(false);
+
+  const [isReservationInfoModal, setIsReservationInfoModal] = useState(false);
+
+
 
   // DESCRIBE: 빈 영역 클릭했을 때
   const onClickEmptyCells = (selectedInfo: selectedDataType) => {
@@ -124,8 +130,20 @@ export const ReservationChart = ({
           <ReservedInfoModal
             reservedDate={reservedDate}
             onClickCancle={() => setIsOpenReservedModal(false)}
+            onClickConfirm={() => {
+              setIsOpenReservedModal(false);
+              setIsReservationInfoModal(true);
+            }}
           />
         )}
+        {isReservationInfoModal && (
+          <ReservationInfoModal
+            reservationId={reservedDate.reservationId}
+            setIsOpen={setIsReservationInfoModal}
+          />
+        )
+
+        }
       </div>
     </>
   );

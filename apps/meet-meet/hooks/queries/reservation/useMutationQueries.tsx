@@ -8,3 +8,9 @@ export const useAddReservation = () => {
 
   })
 }
+
+export const useDeleteReservation = () => {
+  return useMutation((reservationId:number) => ReservationAPI.deleteReservation(reservationId), {
+    
+  })
+}

@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { ReservationChart } from "components";
 import { SingleCalendar, Button, Text, Radio } from "@components/ui";
 import { formatDate, addThreeDateFromNow } from "ui/src/utils";
+import { useRecoilState } from "recoil";
 import { ReservationAPI } from "@api/api";
 import {
   UnAvailableListType,
@@ -10,6 +11,7 @@ import {
 } from "@components/commons/ReservationChart/@types/reservationChart.types";
 import classes from "./home.module.scss";
 import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
+import { refetchState } from "recoil/reservation/atom";
 
 // TODO: 1. 처음 조회 시간을 2022-08-21로 되어있는데, 오늘을 기준으로 조회하는 로직으로 바꿔야함. (완료)
 // TODO: 2. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함. 
@@ -17,6 +19,7 @@ import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 const Home: NextPage = () => {
   const [btnState, setBtnState] = useState<boolean>(false);
   const [reservationList, setReservationList] = useState<any>({});
+  const [refetch, setRefetch] = useRecoilState(refetchState);
 
   // TODO: 나중에 오늘 시간을 가져오는 것으로 바꿔야함.
   const [date, setDate] = useState<Date>(new Date());
@@ -41,6 +44,10 @@ const Home: NextPage = () => {
   );
 
   useEffect(() => {
+    if(!refetch) {
+      return;
+    }
+
     let reservationAPI: any = {
       total: ReservationAPI.getAllReservationInfo,
       userHost: ReservationAPI.getReservationInfobyHost,
@@ -53,7 +60,7 @@ const Home: NextPage = () => {
     )
       .then((res: any) => handleResult(res))
       .catch((err: any) => console.log(err));
-  }, [selectedValue]);
+  }, [selectedValue, refetch]);
 
   // DESCRIBE: 결과값 ReservationChart 에 맞게 수정 하는 로직 (각 정보를 key 값으로 접근할 수 있도록 변경하는 작업)
   const handleResult = (result: any) => {

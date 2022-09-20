@@ -71,3 +71,31 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.infoModal-description-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 340px;
+
+  .description-section {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      font-size: 15px;
+
+      .section-key {
+          width: 30%;
+          color: var(--color-outline);
+      }
+
+      .section-value {
+          width: 70%;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          font-weight: bold;
+      }
+  }
+}
