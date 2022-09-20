@@ -52,6 +52,8 @@ export default function useReservation({
       let flag = true;
       // 2. 예약 불가능한(이미 예약되어 있는 방) 과 비교하는 로직
       // 조건: 예약이 가능한 cell (예약 내역이 없는 셀)과 병합 cell (disabled cell) 의 시작시간만을 newTimeList 에 저장함.
+      // console.log(slotTime);
+      
       unavailableRoomList?.map((selected: any) => {
         const startTime = changeDateToMinute(selected.startTime);
         const endTime = changeDateToMinute(selected.endTime);
@@ -60,12 +62,14 @@ export default function useReservation({
         // newItem 에 start:${widthListindex} 로 명시해서 넣어줌
         // (나중에 병합된 셀로 집어넣기 위해서, widthListindex 는 병합된 cell의 width를 저장해놓은 리스트의 인덱스로 사용하기 위해 저장)
         if (slotTime === startTime) {
-          newItem = `start:${widthListindex++}`;
+          newItem = `start:${widthListindex}`;
+          widthListindex ++;
           return;
         }
 
         // 4. 만약 사이에있는 시간이면, 병합된 셀로 넣어줘야 하기 때문에 추가하지 않고 건너뜀.
-        if (slotTime > startTime && slotTime <= endTime) {
+        if (slotTime > startTime && slotTime < endTime) {
+          // console.log('dfdfdf', slotTime)
           flag = false;
           return;
         }
@@ -93,12 +97,13 @@ export default function useReservation({
 
   // DESCRIBE: 병합 셀의 width 를 구하는 로직
   const handleMeetingCellWidth = (unavailableList: any) => {
+    // console.log(unavailableList);
     let widthList: number[] = [];
     unavailableList?.map((item: any) => {
       const startTime = changeDateToMinute(item.startTime);
       const endTime = changeDateToMinute(item.endTime);
 
-      const slots = (endTime - startTime) / 30 + 1;
+      const slots = (endTime - startTime) / 30;
       widthList.push(50 * slots);
     });
     setUnavailableSlotWidthList(widthList);

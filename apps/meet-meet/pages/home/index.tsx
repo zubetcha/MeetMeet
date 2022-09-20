@@ -9,17 +9,17 @@ import {
   MeetingRoomObjectType,
 } from "@components/commons/ReservationChart/@types/reservationChart.types";
 import classes from "./home.module.scss";
-// import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
+import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 
-// TODO: 1. 처음 조회 시간을 2022-08-21로 되어있는데, 오늘을 기준으로 조회하는 로직으로 바꿔야함.
-// TODO: 2. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함.
+// TODO: 1. 처음 조회 시간을 2022-08-21로 되어있는데, 오늘을 기준으로 조회하는 로직으로 바꿔야함. (완료)
+// TODO: 2. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함. 
 // TODO: 3. 가능하다면, 병합된 미팅룸은 다른 색으로 표시해서 병합된 회의실임을 명시해줄 수 있어야 함.
 const Home: NextPage = () => {
   const [btnState, setBtnState] = useState<boolean>(false);
   const [reservationList, setReservationList] = useState<any>({});
 
   // TODO: 나중에 오늘 시간을 가져오는 것으로 바꿔야함.
-  const [date, setDate] = useState<Date>(new Date("2022-09-05"));
+  const [date, setDate] = useState<Date>(new Date());
   // DESCRIBE: 회의실 조회 옵션 선택 (radio button) 과 관련된 상태값들.
   const [selectedValue, setSelectedValue] = useState("total");
   const radioInfo = useMemo(
@@ -32,13 +32,13 @@ const Home: NextPage = () => {
   );
 
   // TODO: 미팅룸 전체 리스트 가져오는 부분입니다. 나중에 아 주석 풀고, 위 주석 처리하면 됩니다. (meetingRoomList)
-  const meetingRoomList = useMemo(() => ["청파", "마당", "성지", "백범"], []);
+  // const meetingRoomList = useMemo(() => ["청파", "마당", "성지", "백범"], []);
 
-  // const { data } = useGetMeetrooms();
-  // const meetingRoomList = useMemo(
-  //   () => data?.meetrooms.map((meetRoom: any) => meetRoom.name) || [],
-  //   [data]
-  // );
+  const { data } = useGetMeetrooms();
+  const meetingRoomList = useMemo(
+    () => data?.meetrooms.map((meetRoom: any) => meetRoom.name) || [],
+    [data]
+  );
 
   useEffect(() => {
     let reservationAPI: any = {

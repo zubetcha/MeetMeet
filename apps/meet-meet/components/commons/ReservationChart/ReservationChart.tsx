@@ -25,7 +25,7 @@ import { getTimeList } from "ui/src/utils";
 export const ReservationChart = ({
   width = "100%",
   startDate,
-  startTime = "08:30",
+  startTime = "08:00",
   endTime = "20:00",
   meetingRoomList,
   unavailableList,

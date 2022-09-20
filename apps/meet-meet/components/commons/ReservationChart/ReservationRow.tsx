@@ -28,6 +28,8 @@ export default function ReservationRow({
     date: date,
   });
 
+  console.log(unavailableSlotWidthList);
+
   const { ref } = useOutsideAlerter(onCancleAllSlot);
 
   const onClickDisabledCell = (reservedInfo: any) => {
@@ -69,6 +71,7 @@ export default function ReservationRow({
                         width: `${unavailableSlotWidthList[widthIndex]}px`,
                         backgroundColor: "var(--color-primary)",
                         color: "var(--color-onPrimary)",
+                        fontSize: '13px',
                       }}
                       onClick={() =>
                         onClickDisabledCell(unavailableRoomList[widthIndex])
