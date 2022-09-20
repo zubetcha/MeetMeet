@@ -26,6 +26,7 @@
 
 .images-container {
   @include flex-direction(column, 8);
+  width: 100%;
 }
 
 .images-wrapper {
@@ -38,16 +39,11 @@
 
 .imagePlaceholder-container {
   @include flexbox(center, center);
-  width: 120px;
-  height: 120px;
+  // width: 120px;
+  // height: 120px;
   border-radius: 16px;
   border: 3px dashed var(--color-surfaceVariant);
   transition: all 0.3s ease-in-out;
-
-  @include mobile() {
-    max-width: 120px;
-    max-height: 120px;
-  }
 
   &.onDrop {
     cursor: pointer;  

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Alarm } from "./Alarm.types";
+import { handleConvertDiff } from "ui/src/utils";
 
 import classes from "./alarm.module.scss";
 import { Text, SVG, IconButton } from "ui/src/pages";
@@ -14,6 +15,8 @@ interface Props {
 export default function AlarmItem({ isTune, isToRead, onClickRadio, alarm }: Props) {
 
   const { id, title, location, date, createdAt } = alarm;
+  const now = +new Date();
+  const diff = handleConvertDiff(+new Date() - +new Date(createdAt))
 
   return (
     <div className={classes.alarmItem}>
@@ -24,8 +27,8 @@ export default function AlarmItem({ isTune, isToRead, onClickRadio, alarm }: Pro
       )}
       <div className={classes.notification}>
         <Text style={{ fontWeight: "bold" }}>{title}</Text>
-        <Text>{location}<br/>{date}</Text>
-        <Text>{createdAt}</Text>
+        <Text type="label-medium">{location}<br/>{date}</Text>
+        <Text type="label-small" style={{ textAlign: "end" }}>{diff} 전</Text>
       </div>
     </div>
   );

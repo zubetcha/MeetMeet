@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { noticeDataState } from "recoil/notice";
 import { useReadAlarm, useReadAllAlarms } from "@hooks/queries/alarm/useMutationQueries";
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function AlarmList({ onClickButton, setIsOpen }: Props) {
-  const [{ noticeList }, setNoticeData] = useRecoilState(noticeDataState);
+  const [{ noticeList, lastEventId }, setNoticeData] = useRecoilState(noticeDataState);
   const [isTune, setIsTune] = useState(false);
   const [isToRead, setIsToRead] = useState(Object.fromEntries(new Map(noticeList.map(({ id }) => { 
     return [ id, false ]
@@ -44,31 +44,41 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
     }
   };
 
-  const { mutateAsync: read } = useReadAlarm();
-  const { mutateAsync: readAll } = useReadAllAlarms(setIsConfirmModal);
+  const read = useReadAlarm();
+  const readAll = useReadAllAlarms(setIsConfirmModal);
 
   const onClickRead = () => {
     // TODO: mutateAsync
     if (!selectedId) return;
 
-    read(Number(selectedId));
-
-    // TODO: isToRead에서 읽음 처리한 알람 제거 
-    const filteredList = noticeList.filter(({id}) => String(id) !== selectedId);
-    setSelectedId(null);
-    setIsToRead(Object.fromEntries(new Map(filteredList.map(({id}) => { 
-      return [String(id), false];
-   }))))
-
-   // TODO: Recoil에서도 읽음 처리한 알람 제거
+    read.mutateAsync(Number(selectedId));
   };
 
   const onClickReadAll = () => {
-    readAll();
-    setSelectedId(null);
-    setIsToRead({});
-    setNoticeData({ lastEventId: "", noticeList: [] });
+    readAll.mutateAsync();
   }
+
+  // DESCRIBE: 특정 알람 읽음 성공 시 기존 상태에서 필터링 
+  useEffect(() => {
+    if (read.isSuccess) {
+      const filteredList = noticeList.filter(({id}) => String(id) !== selectedId);
+      console.log(filteredList);
+      setSelectedId(null);
+      setIsTune(false);
+      setNoticeData({ lastEventId, noticeList: filteredList });
+    }
+  }, [read.isSuccess]);
+
+  // DESCRIBE: 알람 모두 읽음 성공 시 컴포넌트 및 recoil 상태 초기화 
+  useEffect(() => {
+    if (readAll.isSuccess) {
+      setSelectedId(null);
+      setIsTune(false);
+      setNoticeData({ lastEventId: "", noticeList: [] });
+    };
+  }, [readAll.isSuccess]);
+
+  console.log(noticeList);
 
   return (
     <>
@@ -76,7 +86,7 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
         <CardDepth1.TitleBar>
           <CardDepth1.Title>알림 내역</CardDepth1.Title>
           {isTune && (
-            selectedId ? <Button label="읽음" size="medium" configuration="text" />
+            selectedId ? <Button label="읽음" size="medium" configuration="text" onClick={onClickRead} />
             : <Button label="모두 읽음" size="medium" configuration="text" onClick={() => setIsConfirmModal(true)} />
           )}
           <IconButton
@@ -122,7 +132,7 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
               configuration="textGray"
               size="large"
               state="default"
-              // onClick={() => }
+              onClick={() => setIsConfirmModal(false)}
             />
             <Button
               label="모두 읽기"

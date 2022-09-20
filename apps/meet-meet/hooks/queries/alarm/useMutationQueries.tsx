@@ -46,6 +46,9 @@ export const useReadAlarm = () => {
   return useMutation(
     ["alarm", "read"],
     (reservationId: number) => AlarmAPI.readAlarm(reservationId),
+    {
+      onSuccess: res => console.log("특정 알람 읽음", res),
+    }
   )
 };
 
@@ -60,7 +63,8 @@ export const useReadAllAlarms = (setIsModal: (is: boolean) => void) => {
     ["alarm", "readAll"],
     () => AlarmAPI.readAllAlarms(),
     {
-      onSuccess: () => {
+      onSuccess: (res) => {
+        console.log("모든 알람 읽음", res)
         handleSuccess({ title, setIsModal });
       }
     }

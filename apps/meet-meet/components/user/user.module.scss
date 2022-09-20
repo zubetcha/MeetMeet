@@ -4,4 +4,8 @@
 .textFields-wrapper {
     @include flex-direction(column, 40);
     width: 360px;
+
+    @include mobile() {
+        width: 100%;
+    }
 }
