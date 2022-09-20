@@ -28,7 +28,6 @@ export default function ReservationRow({
     date: date,
   });
 
-  console.log(unavailableSlotWidthList);
 
   const { ref } = useOutsideAlerter(onCancleAllSlot);
 
@@ -52,6 +51,12 @@ export default function ReservationRow({
             disableIndex={disabledIndex}
           >
             {newTimeList.map((item, idx) => {
+              if(idx === newTimeList.length - 1) {
+                return (
+                  <></>
+                )
+              }
+
               if (item.includes("start") && unavailableRoomList) {
                 const widthIndex = parseInt(item.split(":")[1]);
                 const { department, host } = unavailableRoomList[

@@ -37,14 +37,21 @@ export const SelectTime = ({
       else setDefaultIndex(selectedTimeId);
     }
   }, [selectedTimeId])
+
+  const getTitle = () => {
+    let start = '시작 시간';
+    let end = '종료 시간';
+
+    if(typeof(selectedTimeId.start) === 'number') start = timeList[selectedTimeId.start];
+    if(typeof(selectedTimeId.end) === 'number') end = timeList[selectedTimeId.end + 1];
+
+    return start + ' ~ ' + end
+  }
   
   return (
     <TitleLayout 
         title="이용시간 선택" 
-        subTitle={(typeof(selectedTimeId.start) === 'number' && typeof(selectedTimeId.end) === 'number') 
-          ? (timeList[selectedTimeId.start] + '~' + timeList[selectedTimeId.end + 1]) 
-          : ''
-      }>
+        subTitle={getTitle()}>
           <CellGroup 
             disableIndex={disabledIndex}
             onChange={(timeId) => setSelectedTimeId(timeId)}

@@ -59,6 +59,8 @@ const Home: NextPage = () => {
   const handleResult = (result: any) => {
     if (result.status === 200) {
       let dateObject: UnAvailableListType = {};
+
+      console.log(result.data);
       result.data.map((item: any) => {
         let meetRoomObject: MeetingRoomObjectType = {};
         item.meetroomList.map((meetRoomItem: any) => {

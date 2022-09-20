@@ -30,6 +30,9 @@ export const ReservationChart = ({
   meetingRoomList,
   unavailableList,
 }: ReservationProps) => {
+  console.log(unavailableList);
+
+
   // DESCRIBE: 빈 영역 클릭헀을 때 세팅되는 상태값 (새로운 예약 정보)
   const [selectedData, setSelectedData] = useState({
     meetingRoom: "",
