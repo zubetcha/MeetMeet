@@ -1,5 +1,6 @@
 import { TitleLayout } from "./TitleLayout";
 import { TimePicker, SingleCalendar } from "@components/ui";
+import { useRouter } from "next/router";
 import { formatDate } from "ui/src/utils";
 
 interface Props {
@@ -11,7 +12,7 @@ export const SelectDate = ({
   date,
   setDate
 }:Props) => {
-
+  const router = useRouter();
 
   return (
     <TitleLayout title="날짜 선택" subTitle={formatDate(date, true)} >
@@ -19,7 +20,12 @@ export const SelectDate = ({
             <SingleCalendar
               date={date}
               onClickSubmitBtn={(date:Date) => {  
-                setDate(date);
+                router.push({
+                  query: {
+                    ...router.query,
+                    date: formatDate(date)
+                  }
+                })
               }}
               timeType='futureCurrent'
             />

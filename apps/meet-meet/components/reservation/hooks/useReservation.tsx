@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getDisabledIndex } from "../utils/getDisabledIndex";
 import { formatDate } from "ui/src/utils";
 import { ReservationInfo } from "graphql/reservation/types";
+import { useRouter } from "next/router";
 import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 
 
@@ -37,6 +38,7 @@ export const useReservation = () => {
 
   const addReservation = useAddReservation();
   const {data: reservedTime, refetch: refetchReservedTime} = useGetReservationByRoomAndDate(mergedRoomId > 0 ? [selectedRoomId, mergedRoomId] : [selectedRoomId], formatDate(date));
+  const router = useRouter();
 
   const timeList = Array.from({length: 22}, (_, idx:number) => {
     const hour = Math.floor((idx + 16)/2);
@@ -51,7 +53,14 @@ export const useReservation = () => {
   }, [reservedTime])
 
   useEffect(() => {
-    setIsChecked(false);
+    if(selectedRoomId >= 0) {
+      router.push({
+        query:{
+          ...router.query,
+          isChecked: false
+        }
+      })
+    }
   }, [selectedRoomId])
 
   useEffect(() => { 
@@ -72,6 +81,38 @@ export const useReservation = () => {
     meetingAgenda,
     selectedMembers
   ])
+
+  useEffect(() => {
+    if(router.query.roomId) {
+      setSelectedRoomId(parseInt(router.query.roomId as string))
+    }
+  }, [router.query.roomId])
+
+  useEffect(() => {
+    if(router.query.date) {
+      setDate(new Date(router.query.date as string))
+    }
+  }, [router.query.date])
+
+  useEffect(() => {
+    if(router.query.startTimeId && !router.query.endTimeId) {
+      setSelectedTimeId({ 
+        start: parseInt(router.query.startTimeId as string), 
+        end: null
+      })
+    } else if (router.query.startTimeId && router.query.endTimeId) {
+      setSelectedTimeId({ 
+        start: parseInt(router.query.startTimeId as string),
+        end: parseInt(router.query.endTimeId as string) 
+      })
+    } 
+  }, [router.query.startTimeId, router.query.endTimeId])
+
+  useEffect(() => {
+    if(router.query.isChecked){
+      setIsChecked((router.query.isChecked as string) === '1' ? true : false);
+    }
+  }, [router.query.isChecked])
 
   const submitReservation = async() => {
     if(

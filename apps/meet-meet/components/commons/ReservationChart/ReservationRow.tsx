@@ -35,7 +35,7 @@ export default function ReservationRow({
     if (onClickReservedCell) {
       onClickReservedCell({
         date: date,
-        meetingRoom: meetingRoom,
+        meetingRoom: meetingRoom.name,
         ...reservedInfo,
       });
     }

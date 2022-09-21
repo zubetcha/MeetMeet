@@ -39,7 +39,7 @@ const Home: NextPage = () => {
 
   const { data } = useGetMeetrooms();
   const meetingRoomList = useMemo(
-    () => data?.meetrooms.map((meetRoom: any) => meetRoom.name) || [],
+    () => data?.meetrooms.map((meetRoom: any) => meetRoom) || [],
     [data]
   );
 

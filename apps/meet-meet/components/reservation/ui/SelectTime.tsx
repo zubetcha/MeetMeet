@@ -1,6 +1,7 @@
 import { TitleLayout } from "./TitleLayout"
 import { timeIdType } from "../hooks/useReservation"
 import { CellGroup, Cell } from "@components/ui"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
 
@@ -18,7 +19,7 @@ export const SelectTime = ({
   timeList,
   disabledIndex
 }:Props) => {
-
+  const router = useRouter();
   const [defaultIndex, setDefaultIndex] = useState<timeIdType>({
     start: null,
     end: null
@@ -47,6 +48,28 @@ export const SelectTime = ({
 
     return start + ' ~ ' + end
   }
+
+  const setRouteQuery = (timeId:timeIdType) => {
+    console.log(timeId)
+
+    if(typeof(timeId.start) === 'number' && typeof(timeId.end) !== 'number'){
+      console.log(timeId, '어라라라라ㅏㄹ')
+      router.push({
+        query: {
+          ...router.query,
+          startTimeId: timeId.start
+        }
+      })
+    } else if(typeof(timeId.start) === 'number' && typeof(timeId.end) === 'number') {
+      router.push({
+        query: {
+          ...router.query,
+          startTimeId: timeId.start,
+          endTimeId: timeId.end
+        }
+      })
+    }
+  }
   
   return (
     <TitleLayout 
@@ -54,7 +77,7 @@ export const SelectTime = ({
         subTitle={getTitle()}>
           <CellGroup 
             disableIndex={disabledIndex}
-            onChange={(timeId) => setSelectedTimeId(timeId)}
+            onChange={(timeId:timeIdType) => setRouteQuery(timeId)}
             defaultIndex={defaultIndex}
           >
             {timeList.map((time, idx) => {

@@ -36,8 +36,11 @@ export const ReservationChart = ({
 
   // DESCRIBE: 빈 영역 클릭헀을 때 세팅되는 상태값 (새로운 예약 정보)
   const [selectedData, setSelectedData] = useState({
-    meetingRoom: "",
-    date: "",
+    meetingRoom: {
+      name:'',
+      id: -1
+    },
+    date: [''],
     startTime: "",
     endTime: "",
   });
@@ -57,6 +60,8 @@ export const ReservationChart = ({
     () => getThreeDateFromNow(startDate as Date),
     [startDate]
   );
+
+  console.log(dateList);
 
   // DESCRIBE: 간트 차트 시간 리스트
   const timeList = useMemo(() => getTimeList(startTime, endTime), []);
@@ -100,7 +105,7 @@ export const ReservationChart = ({
         {/* 고정된 영역 (날짜, 회의실 표시) */}
         <ReservationSection
           dateList={dateList}
-          meetingRoomList={meetingRoomList}
+          meetingRoomList={meetingRoomList.map(room => room.name)}
         />
 
         <div
