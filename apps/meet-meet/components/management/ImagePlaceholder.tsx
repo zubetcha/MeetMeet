@@ -7,10 +7,12 @@ export const ImagePlaceholder = ({ onChange }: Props) => {
   if (onChange) {
     return (
     <>
-      <label className={classNames(classes["imagePlaceholder-container"], classes.onDrop)} htmlFor="image-upload">
-        <SVG width="32px" height="32px" name="add" />
-      </label>
-      <input className={classes.input} type="file" id="image-upload" accept=".jpg, .jpeg, .png, .heic" multiple onChange={(e) => onChange && onChange(e)}/>
+      <div className={classes["imagePlaceholder-container"]}>
+        <label className={classNames(classes["imagePlaceholder-wrapper"], classes.onDrop)} htmlFor="image-upload">
+          <SVG width="32px" height="32px" name="add" />
+        </label>
+        <input className={classes.input} type="file" id="image-upload" accept=".jpg, .jpeg, .png, .heic" multiple onChange={(e) => onChange && onChange(e)}/>
+      </div>
     </>
     )
   }
@@ -18,6 +20,7 @@ export const ImagePlaceholder = ({ onChange }: Props) => {
   return (
     <>
       <div className={classes["imagePlaceholder-container"]}>
+        <div className={classes["imagePlaceholder-wrapper"]}></div>
       </div>
     </>
   )

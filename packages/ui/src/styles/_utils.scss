@@ -3,8 +3,14 @@
 
 
 // DESCRIBE 브라우저 크기별 반응형 분기점 mixins
+@mixin mobile-verti {
+  @media (max-width: $mobile-verti){
+    @content;
+  }
+}
+
 @mixin mobile {
-  @media (max-width: $mobile){
+  @media (min-width: ($mobile-verti+1)) and (max-width: $mobile){
     @content;
   }
 }

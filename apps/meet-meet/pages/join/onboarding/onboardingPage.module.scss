@@ -6,10 +6,24 @@
   width: 100%;
   height: 100vh;
 
+  @include mobile-verti () {
+    min-width: 375px;
+  }
+  @include mobile () {
+    min-width: 375px;
+  }
+
   .card-contents-wrapper {
     @include flexbox(center, center);
     @include flex-direction(column, 36);
     padding: 32px;
+
+    @include mobile-verti() {
+      height: 100%;
+    }
+    @include mobile() {
+      height: 100%;
+    }
 
     .card-title-wrapper {
       @include flexbox(center, start);
@@ -21,6 +35,16 @@
     .card-textFields-wrapper {
       @include flex-direction(column, 20);
       width: 100%;
+    }
+  }
+  .onboardingCard-wrapper {
+    @include mobile-verti() {
+      width: 100%;
+      height: 100%;
+    }
+    @include mobile() {
+      width: 100%;
+      height: 100%;
     }
   }
 }

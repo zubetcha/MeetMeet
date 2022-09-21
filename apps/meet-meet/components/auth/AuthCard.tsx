@@ -3,6 +3,9 @@ import Link from "next/link";
 import { GOOGLE_AUTH_URL } from "constants/auth";
 import classes from "./auth.module.scss";
 
+import Image from "next/image";
+import MeetmeetLogo from "../../public/svg/meetmeet_horizontal.svg";
+// import Logo
 import { CardDepth1, Text, Button } from 'ui/src/pages';
 
 export const AuthCard = ({type}: Props) => {
@@ -27,15 +30,15 @@ export const AuthCard = ({type}: Props) => {
         <CardDepth1.Contents>
           <div className={classes["card-contents-wrapper"]}>
             <div className={classes["card-title-wrapper"]}>
-              <Text type="display-medium" style={{ fontWeight: "700" }}>MEETMEET</Text>
-              <Text type="title-medium">간편한 회의실 예약 관리</Text>
+              <MeetmeetLogo width="240px" />
+              <Text type="title-medium" color="on-surface-variant" style={{ fontWeight: "500" }}>젠틀에너지 회의실 예약 관리</Text>
             </div>
             <Link href={GOOGLE_AUTH_URL} passHref>
               <Button
                 label={`구글로 ${byType[type].korean}하기`}
                 size="large"
                 configuration="filled"
-                style={{width: "360px", justifyContent: "center"}}
+                style={{width: "100%", justifyContent: "center"}}
                 showIcon
                 icon="google"
               />

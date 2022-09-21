@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { noticeDataState } from "recoil/notice";
 import { useReadAlarm, useReadAllAlarms } from "@hooks/queries/alarm/useMutationQueries";
 
+import { Notice } from "recoil/notice";
 import classes from "./alarm.module.scss";
 import { Button, CardDepth1, IconButton, Modal } from "ui/src/pages";
 import AlarmItem from "./AlarmItem";
@@ -58,23 +59,25 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
     readAll.mutateAsync();
   }
 
+  const handleInitState = (lastEventId: string, noticeList: Notice[]) => {
+    setSelectedId(null);
+    setIsTune(false);
+    setNoticeData({ lastEventId, noticeList })
+  }
+
   // DESCRIBE: 특정 알람 읽음 성공 시 기존 상태에서 필터링 
   useEffect(() => {
     if (read.isSuccess) {
       const filteredList = noticeList.filter(({id}) => String(id) !== selectedId);
       console.log(filteredList);
-      setSelectedId(null);
-      setIsTune(false);
-      setNoticeData({ lastEventId, noticeList: filteredList });
+      handleInitState(lastEventId, filteredList)
     }
   }, [read.isSuccess]);
 
   // DESCRIBE: 알람 모두 읽음 성공 시 컴포넌트 및 recoil 상태 초기화 
   useEffect(() => {
     if (readAll.isSuccess) {
-      setSelectedId(null);
-      setIsTune(false);
-      setNoticeData({ lastEventId: "", noticeList: [] });
+      handleInitState("", []);
     };
   }, [readAll.isSuccess]);
 
@@ -114,7 +117,6 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
         <CardDepth1.Contents>
           <div className={classes.alarmInnerContainer}>
             {noticeList.map(({ title, body, createdAt, id }, i) => {
-              // const { title, id, createdAt } = data;
               const [location, date] = body?.split(", ");
               const alarm = { location, date, title, id, createdAt };
               return <AlarmItem key={i} isTune={isTune} isToRead={isToRead[id]} onClickRadio={onClickRadio} alarm={alarm}/>

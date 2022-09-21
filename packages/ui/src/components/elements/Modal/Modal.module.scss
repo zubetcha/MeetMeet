@@ -25,11 +25,10 @@
     padding: $toast-modal-container-padding;
   }
 
-  @include mobile() {
-    width: 320px;
+  @include mobile-verti() {
+    width: fit-content;
     height: fit-content;
-    max-height: 600px;
-    overflow: hidden;
+    max-height: 480px;
   }
 }
 
@@ -45,8 +44,10 @@
 
 .modal-contents {
   @include flex-direction(column, 16);
-  @include flexbox(center, start);
-  overflow-y: auto;
+  @include flexbox(start, center);
+  @include mobile-verti() {
+    overflow: auto;
+  }
 }
 
 .modal-buttons {

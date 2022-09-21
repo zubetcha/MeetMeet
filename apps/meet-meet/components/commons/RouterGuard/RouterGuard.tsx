@@ -2,11 +2,14 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useGetUserInfo } from "@hooks/queries/user/useGetQueries";
 import { getCookie } from "@utils/cookies";
+import userState from "recoil/user";
+import { useRecoilValue } from "recoil";
 
 import { ACCESS_TOKEN } from "constants/auth";
 
 export const RouterGuard = ({ children }: Props) => {
   const router = useRouter();
+  const { id: accountId } = useRecoilValue(userState);
   const exceptionList = [
     "/login",
     "/join",
@@ -41,11 +44,20 @@ export const RouterGuard = ({ children }: Props) => {
   };
 
   useEffect(() => {
-    // DESCRIBE: 토큰 확인이 필요 없는 페이지의 경우에만 checkAuth 함수 실행
-    if (!exceptionList.includes(router.pathname)) {
+    // DESCRIBE: 토큰이 필요한 페이지로 이동하려고 하는 경우 checkAuth 함수 실행 
+    router.events.on("routeChangeStart", (nextPath) => {
+      if (!exceptionList.includes(nextPath)) {
+        checkAuth();
+      }
+    });
+  }, []);
+
+  // DESCRIBE: 새로고침해서 recoil에 있는 유저 정보 초기화된 경우 checkAuth 함수 실행 
+  useEffect(() => {
+    if (!accountId) {
       checkAuth();
     }
-  }, []);
+  }, [])
 
   return <>{children}</>;
 };

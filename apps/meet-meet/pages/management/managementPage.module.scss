@@ -10,6 +10,10 @@
 
   .meetroomCard-container {
     height: calc(100vh - 48px);
+
+    @include mobile-verti() {
+      height: calc(100vh - 81px);
+    }
     @include mobile() {
       height: calc(100vh - 105px);
     }
@@ -20,6 +24,10 @@
       overflow: hidden auto;
       @include scroll-bar();
 
+
+      @include mobile-verti() {
+        grid-template-columns: 1fr;
+      };
       @include mobile() {
         grid-template-columns: 1fr;
       };
