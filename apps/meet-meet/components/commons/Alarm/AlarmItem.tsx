@@ -15,7 +15,6 @@ interface Props {
 export default function AlarmItem({ isTune, isToRead, onClickRadio, alarm }: Props) {
 
   const { id, title, location, date, createdAt } = alarm;
-  const now = +new Date();
   const diff = handleConvertDiff(+new Date() - +new Date(createdAt))
 
   return (

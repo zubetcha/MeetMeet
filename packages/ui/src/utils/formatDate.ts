@@ -21,24 +21,31 @@ export const handleConvertDiff = (duration: number) => {
   let HH = 0;
   let MM = 0;
   let SS = 0;
+  const oneDay = 1000 * 60 * 60 * 24;
 
   if (duration < 1000 * 60) {
     SS = Math.round(duration / 1000);
 
     return `${SS}초`;
-  } else if (duration < 1000 * 60 * 60) {
+  }
+  else if (duration < 1000 * 60 * 60) {
     MM = Math.floor(duration / 1000 / 60);
     SS = Math.round((duration / 1000) % 60);
 
     return `${MM}분 ${SS}초`;
-  } else if (duration < 1000 * 60 * 60 * 24) {
+  }
+  else if (duration < 1000 * 60 * 60 * 24) {
     HH = Math.floor(duration / 1000 / 60 / 60);
     MM = Math.round((duration / 1000 / 60) % 60);
     SS = Math.round((duration / 1000 / 60 / 60) % 24);
 
     return `${HH}시간 ${MM}분 ${SS}초`;
   }
+  else if (duration >= oneDay) {
+    return `${Math.floor(duration/oneDay)}일`
+  }
 };
+
 
 // DESCRIBE: 날짜 형식을 YYYY-MM-DD HH:00 형식으로 포매팅해주는 함수
 export const formatDateHour = (newDate: Date): string => {

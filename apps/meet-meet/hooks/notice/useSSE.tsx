@@ -36,7 +36,7 @@ export const useSSE = () => {
         if (!e.data?.includes(connectionStartMessage)) {
           console.log("Server-Sent Event", e)
 
-          setNoticeData({...noticeData, lastEventId});
+          // setNoticeData({...noticeData, lastEventId});
           setMessages((prev: any) => [...prev, JSON.parse(data)]);
         }
       }, { once: true })
@@ -51,7 +51,6 @@ export const useSSE = () => {
 
   useEffect(() => {
     if (messages.length) {
-      console.log(messages)
       const newMessages = [...noticeData.noticeList, ...messages];
       const uniqueIdList = new Set(newMessages.map((message) => message.id));
       const filteredList = [...uniqueIdList].map((id) => {
@@ -61,7 +60,7 @@ export const useSSE = () => {
         }
       })
 
-      setNoticeData({ ...noticeData, noticeList: filteredList });
+      setNoticeData({ ...noticeData, noticeList: [...filteredList].reverse() });
       setMessages([]);
     }
   }, [messages])
