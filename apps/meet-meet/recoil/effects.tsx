@@ -3,9 +3,9 @@ import { NoticeDataState } from "./notice";
 import localforage from "localforage";
 
 // DESCRIBE: recoil 상태 업데이트 로그 
-export const loggingEffect = (state: string): AtomEffect<any> => ({ onSet }) => {
+export const loggingEffect = (key: string): AtomEffect<any> => ({ onSet }) => {
     onSet(state => {
-      console.log(`[Recoil] Current ${state} state:`, state);
+      console.log(`[Recoil] Current ${key} state:`, state);
   });
 };
 
