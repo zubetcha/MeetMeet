@@ -83,8 +83,10 @@ export const Layout = ({ children }: LayoutProps) => {
         <Modal setIsOpen={setIsLogoutModal}>
           <Modal.Icon name="error" color="warning" />
           <Modal.Contents>
-            <Modal.Title>로그아웃 하시겠습니까?</Modal.Title>
-            <Modal.Description>로그아웃 시 로그인 페이지로 이동합니다.</Modal.Description>
+            <div className={classes["modal-contents-wrapper"]}>
+              <Modal.Title>로그아웃 하시겠습니까?</Modal.Title>
+              <Modal.Description>로그아웃 시 로그인 페이지로 이동합니다.</Modal.Description>
+            </div>
           </Modal.Contents>
           <Modal.Buttons>
             <Button

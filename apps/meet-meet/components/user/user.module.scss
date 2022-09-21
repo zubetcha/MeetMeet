@@ -12,10 +12,15 @@
     }
     @include mobile() {
         width: 100%;
-        padding-top: 24px;
+        // padding-top: 24px;
     }
 }
 
 .userForm_wrapper {
-    
+    @include mobile-verti() {
+        width: 240px;
+    }
+    @include mobile() {
+        width: 360px;
+    }
 }
