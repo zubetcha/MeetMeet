@@ -35,5 +35,4 @@ export const localForageEffect = (key: string): AtomEffect<NoticeDataState> => (
       ? localforage.removeItem(key)
       : localforage.setItem(key, JSON.stringify(newValue));
   });
-
 }

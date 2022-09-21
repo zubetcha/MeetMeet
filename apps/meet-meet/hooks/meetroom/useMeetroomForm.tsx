@@ -46,6 +46,7 @@ export const useMeetroomForm = (
       const droppedImages = images.filter((image) => image.url !== "");
       const { files } = e.target;
       const fileList = Object.values(files as FileList);
+      let overSizeFlag = false;
 
       // DESCRIBE: 파일 개수 3개 제한
       if (droppedImages.length + fileList.length > 3) {
@@ -63,14 +64,17 @@ export const useMeetroomForm = (
         const isOver = checkBiteValid(file.size, "MB", 10);
 
         if (isOver) {
+          overSizeFlag = true;
           setIsOverSize(true);
           setTimeout(() => {
             setIsOverSize(false);
           }, 1300);
 
-          return;
+          return false;
         }
       });
+
+      if (overSizeFlag) return;
 
       // DESCRIBE: 이미지 확장자 확인 및 heic -> jpg 변환
       const newFiles = await Promise.all(
