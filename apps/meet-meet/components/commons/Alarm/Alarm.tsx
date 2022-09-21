@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classes from "./alarm.module.scss";
+
 import AlarmSetting from "./AlarmSetting";
 import AlarmList from "./AlarmList";
 

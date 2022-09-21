@@ -111,7 +111,6 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
               <TextField.Label>수용 인원</TextField.Label>
               <TextField.Input type="text" value={values.seat} placeholder="수용 가능한 인원을 선택해주세요." onChange={onChangeTextField}>
                 <TextField.Unit>명</TextField.Unit>
-                <TextField.Icon name="dropdown" />
               </TextField.Input>
             </TextField>
 

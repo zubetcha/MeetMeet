@@ -6,6 +6,9 @@
 
   .text-wrapper {
     @include flex-direction(column, 8);
+    @include mobile-verti() {
+      @include flex-direction(column, 4);
+    };
   }
 }
 
@@ -26,6 +29,7 @@
 
 .images-container {
   @include flex-direction(column, 8);
+  width: 100%;
 }
 
 .images-wrapper {
@@ -34,19 +38,32 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+  @include mobile-verti() {
+    gap: 8px;
+  }
 }
 
 .imagePlaceholder-container {
+  width: 100%;
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+
+.imagePlaceholder-wrapper {
   @include flexbox(center, center);
-  width: 120px;
-  height: 120px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 16px;
   border: 3px dashed var(--color-surfaceVariant);
   transition: all 0.3s ease-in-out;
 
-  @include mobile() {
-    max-width: 120px;
-    max-height: 120px;
+  @include mobile-verti() {
+    border-radius: 8px;
   }
 
   &.onDrop {
@@ -88,5 +105,12 @@
 
 .meetroom-form-wrapper {
   @include flex-direction(column, 40);
-  width: 100%;
+  width: 480px;
+  @include mobile-verti() {
+    width: 271px;
+    padding: 24px 2px 0;
+  }
+  @include mobile() {
+    width: 360px;
+  }
 }

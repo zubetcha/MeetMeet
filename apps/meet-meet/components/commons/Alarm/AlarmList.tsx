@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { noticeDataState } from "recoil/notice";
 import { useReadAlarm, useReadAllAlarms } from "@hooks/queries/alarm/useMutationQueries";
-import { Alarm as AlarmType } from "./Alarm.types";
 
+import { Notice } from "recoil/notice";
 import classes from "./alarm.module.scss";
 import { Button, CardDepth1, IconButton, Modal } from "ui/src/pages";
 import AlarmItem from "./AlarmItem";
@@ -12,21 +14,10 @@ interface Props {
 }
 
 export default function AlarmList({ onClickButton, setIsOpen }: Props) {
-  const alarmList: Array<AlarmType> = new Array(20).fill(0).map((_, i) => {
-    return {
-      notification: {
-        title: "[회의명]회의에 초대됐습니다.",
-        description: "08.15(화) 10:00-11:00 / 2층 백범"
-      },
-      data: {
-        reservationId: i,
-        createdAt: new Date().toISOString()
-      }
-    }
-  });
+  const [{ noticeList, lastEventId }, setNoticeData] = useRecoilState(noticeDataState);
   const [isTune, setIsTune] = useState(false);
-  const [isToRead, setIsToRead] = useState(Object.fromEntries(new Map(alarmList.map(alarm => { 
-    return [ alarm.data.reservationId, false ]
+  const [isToRead, setIsToRead] = useState(Object.fromEntries(new Map(noticeList.map(({ id }) => { 
+    return [ id, false ]
    }))));
   const [selectedId, setSelectedId] = useState<null | string>(null);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
@@ -54,28 +45,43 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
     }
   };
 
-  const { mutateAsync: read } = useReadAlarm();
-  const { mutateAsync: readAll } = useReadAllAlarms();
+  const read = useReadAlarm();
+  const readAll = useReadAllAlarms(setIsConfirmModal);
 
   const onClickRead = () => {
     // TODO: mutateAsync
     if (!selectedId) return;
 
-    read(Number(selectedId));
-
-    // TODO: isToRead에서 읽음 처리한 알람 제거 
-    const filteredList = alarmList.filter(alarm => alarm.data.reservationId !== selectedId);
-    setSelectedId(null);
-    setIsToRead(Object.fromEntries(new Map(filteredList.map(alarm => { 
-      return [alarm.data.reservationId, false];
-   }))))
+    read.mutateAsync(Number(selectedId));
   };
 
   const onClickReadAll = () => {
-    readAll();
-    setSelectedId(null);
-    setIsToRead({});
+    readAll.mutateAsync();
   }
+
+  const handleInitState = (lastEventId: string, noticeList: Notice[]) => {
+    setSelectedId(null);
+    setIsTune(false);
+    setNoticeData({ lastEventId, noticeList })
+  }
+
+  // DESCRIBE: 특정 알람 읽음 성공 시 기존 상태에서 필터링 
+  useEffect(() => {
+    if (read.isSuccess) {
+      const filteredList = noticeList.filter(({id}) => String(id) !== selectedId);
+      console.log(filteredList);
+      handleInitState(lastEventId, filteredList)
+    }
+  }, [read.isSuccess]);
+
+  // DESCRIBE: 알람 모두 읽음 성공 시 컴포넌트 및 recoil 상태 초기화 
+  useEffect(() => {
+    if (readAll.isSuccess) {
+      handleInitState("", []);
+    };
+  }, [readAll.isSuccess]);
+
+  console.log(noticeList);
 
   return (
     <>
@@ -83,7 +89,7 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
         <CardDepth1.TitleBar>
           <CardDepth1.Title>알림 내역</CardDepth1.Title>
           {isTune && (
-            selectedId ? <Button label="읽음" size="medium" configuration="text" />
+            selectedId ? <Button label="읽음" size="medium" configuration="text" onClick={onClickRead} />
             : <Button label="모두 읽음" size="medium" configuration="text" onClick={() => setIsConfirmModal(true)} />
           )}
           <IconButton
@@ -110,8 +116,10 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
         </CardDepth1.TitleBar>
         <CardDepth1.Contents>
           <div className={classes.alarmInnerContainer}>
-            {alarmList.map((alarm, i) => {
-              return <AlarmItem key={i} isTune={isTune} isToRead={isToRead[alarm.data.reservationId]} onClickRadio={onClickRadio} alarm={alarm}/>
+            {noticeList.map(({ title, body, createdAt, id }, i) => {
+              const [location, date] = body?.split(", ");
+              const alarm = { location, date, title, id, createdAt };
+              return <AlarmItem key={i} isTune={isTune} isToRead={isToRead[id]} onClickRadio={onClickRadio} alarm={alarm}/>
             })}
           </div>
         </CardDepth1.Contents>
@@ -126,14 +134,14 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
               configuration="textGray"
               size="large"
               state="default"
-              // onClick={() => }
+              onClick={() => setIsConfirmModal(false)}
             />
             <Button
               label="모두 읽기"
               configuration="filled"
               size="large"
               state="default"
-              onClick={() => {}}
+              onClick={onClickReadAll}
             />
           </Modal.Buttons>
         </Modal>

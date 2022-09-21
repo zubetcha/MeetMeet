@@ -24,6 +24,12 @@
   &.toast {
     padding: $toast-modal-container-padding;
   }
+
+  @include mobile-verti() {
+    width: fit-content;
+    height: fit-content;
+    max-height: 480px;
+  }
 }
 
 .modal-icon {
@@ -38,7 +44,10 @@
 
 .modal-contents {
   @include flex-direction(column, 16);
-  @include flexbox(center, start);
+  @include flexbox(start, center);
+  @include mobile-verti() {
+    overflow: auto;
+  }
 }
 
 .modal-buttons {

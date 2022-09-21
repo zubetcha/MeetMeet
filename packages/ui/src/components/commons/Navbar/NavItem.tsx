@@ -8,9 +8,10 @@ import { useOutsideAlerter } from "ui/src/hooks/useOutsideAlerter";
 
 interface Props {
   item: NavItemType;
+  totalNum: number;
 }
 
-export const NavItem = ({ item }: Props) => {
+export const NavItem = ({ item, totalNum }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -42,6 +43,9 @@ export const NavItem = ({ item }: Props) => {
               name={item.icon}
               color="onSurfaceVariant"
             />
+            {item.icon === "alert" && (
+              <div className={classes.numOfAlarm}>{totalNum}</div>
+            )}
           </div>
           <div className={classes.label}>{item.label}</div>
           <div className={classes.rightElement}>{item.rightElement}</div>

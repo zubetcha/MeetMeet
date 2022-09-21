@@ -39,7 +39,6 @@ export const AlarmAPI = {
   deleteDeviceInfo: (fcmToken: string) => api.delete("/accounts/device", { params: { fcmToken }}),
 
   setAlarmConfig: (noticeTime: number | null) => api.patch(`/account/notice-time?noticeTime=${noticeTime}`),
-  getAllAlarms: () => api.get(""),
-  readAlarm: (reservationId: number) => api.post(``, { reservationId }),
-  readAllAlarms: () => api.post(``)
+  readAlarm: (noticeId: number) => api.delete(`/notices/${noticeId}`),
+  readAllAlarms: () => api.delete("/notices")
 }
