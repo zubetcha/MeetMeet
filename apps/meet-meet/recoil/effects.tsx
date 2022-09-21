@@ -1,11 +1,11 @@
 import { AtomEffect } from "recoil";
+import { NoticeDataState } from "./notice";
 import localforage from "localforage";
-import { NoticeDataState } from "./types";
 
 // DESCRIBE: recoil 상태 업데이트 로그 
-export const loggingEffect = (): AtomEffect<NoticeDataState> => ({ onSet }) => {
-    onSet(({ noticeList }) => {
-    console.log("[Recoil] Current notice state:", noticeList);
+export const loggingEffect = (state: string): AtomEffect<any> => ({ onSet }) => {
+    onSet(state => {
+      console.log(`[Recoil] Current ${state} state:`, state);
   });
 };
 
