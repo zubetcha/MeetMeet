@@ -1,15 +1,19 @@
 @import '../../../../../packages/ui/src/styles/utils';
 
 .reservationContainer{
-    display: grid;
-    grid-template-columns: 200px 1fr;
+    @include flexbox(start, start);
     width:100%;
     height: fit-content;
+    overflow: hidden;
 
     .reservationFixedSection{
         .emptySection{
-            width: 200px;
+            // width: 200px;
             height:40px;
+
+            @include mobile() {
+                width: 120px;
+            }
         }
     }
 
@@ -77,6 +81,13 @@
         align-items: center;
         justify-content: center;
         border-bottom: 1px solid #fff;
+
+        @include mobile-verti() {
+            width: 48px;
+        }
+        @include mobile() {
+            width: 80px;
+        }
     }
 
     .slotRoom{

@@ -19,7 +19,7 @@ import { SuccessModal } from "@components/commons/Modal/SuccessModal";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const exceptionList = ["/", "/login", "/join", "/join/onboarding"];
+  const exceptionList = ["/login", "/join", "/join/onboarding"];
   const queryClient = new QueryClient();
   queryClient.setDefaultOptions({
     queries: {

@@ -81,16 +81,8 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div
-      style={{
-        height: "fit-content",
-        width: "fit-content",
-        display: "grid",
-        rowGap: "30px",
-        position: "relative",
-      }}
-    >
-      <div>
+    <div className={classes.container}>
+      <div className={classes.title_wrapper}>
         <Text
           type="headline-large"
           color="primary"
@@ -98,24 +90,25 @@ const Home: NextPage = () => {
         >
           젠틀에너지 회의실 예약 현황
         </Text>
-        <div>
-          <Button
-            configuration="outlined"
-            size="large"
-            label={formatDate(date)}
-            onClick={() => setBtnState(true)}
-          />
-        </div>
+        <Button
+          configuration="outlined"
+          size="large"
+          label={formatDate(date)}
+          onClick={() => setBtnState(true)}
+          style={{ width: "fit-content" }}
+        />
         {btnState && (
-          <SingleCalendar
-            setCalendar={setBtnState}
-            onClickSubmitBtn={(startDate: any) => {
-              setDate(startDate);
-              setBtnState(false);
-            }}
-            date={date}
-            timeType="futureCurrent"
-          />
+          <div className={classes.calendar_wrapper}>
+            <SingleCalendar
+              setCalendar={setBtnState}
+              onClickSubmitBtn={(startDate: any) => {
+                setDate(startDate);
+                setBtnState(false);
+              }}
+              date={date}
+              timeType="futureCurrent"
+            />
+          </div>
         )}
       </div>
       <div className={classes.checkboxFlex}>

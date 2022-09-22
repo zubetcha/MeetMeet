@@ -51,6 +51,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-align: center;
+    @include flexbox(center, center);
   }
 
   .stateLayer {

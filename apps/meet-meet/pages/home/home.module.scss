@@ -1,3 +1,22 @@
+@import "ui/src/styles/variables";
+@import "ui/src/styles/utils";
+
+.container {
+    @include flex-direction(column, 32);
+    width: 100%;
+    position: relative;
+    height: calc(100vh - 48px);
+
+    @include mobile-verti() {
+        height: calc(100vh - 81px);
+        @include flex-direction(column, 16);
+    }
+
+    @include mobile() {
+      height: calc(100vh - 105px);
+    }
+}
+
 .checkboxFlex{
     width: 100%;
     justify-content: left;
@@ -6,3 +25,18 @@
     column-gap: 20px;
 }
 
+.title_wrapper {
+    position: relative;
+    @include flex-direction(column, 16);
+
+    @include mobile-verti() {
+        @include flex-direction(column, 8);
+    }    
+    .calendar_wrapper {
+        position: absolute;
+        top: 96px;
+        @include mobile-verti() {
+            top: 80px;
+        }
+    }
+}

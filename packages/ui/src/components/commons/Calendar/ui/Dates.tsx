@@ -118,8 +118,6 @@ const Dates = ({
                         : 'default'))}
             label={dateInfo.date}
             style={{ 
-                width: '48px', 
-                height: '48px', 
                 color:  getDateColor(),
                 cursor: getDateCursor()
             }}

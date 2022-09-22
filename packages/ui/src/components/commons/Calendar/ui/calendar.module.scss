@@ -8,8 +8,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 999;
     background-color: transparent;
     cursor: pointer;
@@ -23,6 +23,10 @@
     padding: 40px 40px 24px 40px;
     box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.25);
     background-color: var(--color-surface);
+
+    @include mobile-verti() {
+        padding: 24px 24px 16px 24px;
+    }
 
     &.singleDate {
         position: fixed !important;
@@ -89,13 +93,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 400px;
+    height: fit-content;
     .title{
         display: flex;
         justify-content: center;
         align-items: center;
         width: 214px;
         margin-bottom: 24px;
+        @include mobile-verti() {
+            margin-bottom: 16px;
+        }
     }
     
     .calendar_layout {
@@ -103,6 +110,9 @@
             box-sizing: border-box;
             display: flex;
             margin-bottom: 12px;
+            @include mobile-verti() {
+                margin-bottom: 0;
+            }
             .date{
                 width: 48px;
                 height: 48px;
@@ -111,6 +121,12 @@
                 align-items: center;
                 @include font-style(body-large);
                 color: var(--color-onSurface-opacity-38);
+
+                @include mobile-verti() {
+                    @include font-style(body-medium);
+                    width: 36px;
+                    height: 36px;
+                }
             }
             
         }
@@ -121,30 +137,16 @@
             border-top: none;
             // border-collapse: collapse;
             box-sizing: border-box;
-            .date {
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                @include font-style(body-large);
-                color: var(--color-onSurface);
+            div {
+                width: 48px;
+                height: 48px;  
+            }
+            @include mobile-verti() {
                 div {
-                    display: inline-flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    width: 48px;
-                    height: 48px;
-                    box-sizing:border-box;
-
-                    span {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 40px;
-                        height: 40px;
-                    }
+                    @include font-style(body-medium);
+                    width: 36px;
+                    height: 36px;
                 }
-                
             }
             .date:last-child {
                 border-right: none ;
