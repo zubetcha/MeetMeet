@@ -1,0 +1,101 @@
+.page-container{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 28px;
+  width: 645px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .title-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .title-box {
+      display: flex;
+      padding: 0px 0px 0px 5px;
+      gap: 28px;
+      align-items: flex-end;
+      margin-bottom:-8px;
+    }
+
+    .title-divider {
+      width: 100%;
+      height: 0px;
+      border: 1px solid var(--color-outline);
+    }
+  }
+
+  .children-wrapper {
+    display: flex;
+    align-items: center;
+
+    &.space-between {
+      justify-content: space-between;
+    }
+
+    .team-select {
+      width: 30%;
+    }
+
+    .member-select {
+      width: 60%;
+      position: relative;
+
+      .selected-member-list {
+        position: absolute;
+        bottom: -35px;
+        left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+    }
+
+    .room-select {
+      width: 45%;
+    }
+
+    .mergeRoom-checkbox {
+      margin-left: 20px;
+    }
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.infoModal-description-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 340px;
+
+  .description-section {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      font-size: 15px;
+
+      .section-key {
+          width: 30%;
+          color: var(--color-outline);
+      }
+
+      .section-value {
+          width: 70%;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          font-weight: bold;
+      }
+  }
+}

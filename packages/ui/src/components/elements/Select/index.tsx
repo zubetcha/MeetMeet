@@ -9,4 +9,4 @@ export const Select = Object.assign(SelectMain, {
   Trigger: SelectTriggerButton,
   Search: SelectSearchField,
   List: SelectOptionList,
-});
+});      

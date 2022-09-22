@@ -20,7 +20,7 @@ interface ButtonProps {
 
 export const Button = forwardRef(({
   label,
-  size,
+  size ='large',
   configuration,
   state,
   negativeMood = false,

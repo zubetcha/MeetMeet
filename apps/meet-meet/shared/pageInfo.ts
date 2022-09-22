@@ -18,7 +18,7 @@ export const navInfo = [
       {
         icon: "calendar",
         label: "회의실 예약",
-        path: "reservation",
+        path: "reservation/create",
         isModal: false,
       },
       {

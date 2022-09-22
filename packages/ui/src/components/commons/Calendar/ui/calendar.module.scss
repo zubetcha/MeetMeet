@@ -1,7 +1,7 @@
-@use "../../../shared/colors.scss" as *;
-@use "../../../shared/font.scss" as *;
-@use "../../../shared/common.module.scss" as *;
-@use "../../../styles/utils" as *;
+@use "../../../../shared/colors.scss" as *;
+@use "../../../../shared/font.scss" as *;
+@use "../../../../shared/common.module.scss" as *;
+@use "../../../../styles/utils" as *;
 
 .calendar_outer_box {
     position: fixed;
@@ -11,13 +11,13 @@
     width: 100%;
     height: 100%;
     z-index: 999;
-    background-color: $dark-low;
+    background-color: transparent;
     cursor: pointer;
 }
 
 .calendar_container {
     position: absolute;
-    top:10px;
+    top:0;
     left:0;
     z-index: 1000;
     padding: 40px 40px 24px 40px;
@@ -100,6 +100,9 @@
         align-items: center;
         width: 214px;
         margin-bottom: 24px;
+        @include mobile-verti() {
+            margin-bottom: 16px;
+        }
     }
     
     .calendar_layout {
@@ -107,6 +110,9 @@
             box-sizing: border-box;
             display: flex;
             margin-bottom: 12px;
+            @include mobile-verti() {
+                margin-bottom: 0;
+            }
             .date{
                 width: 48px;
                 height: 48px;
@@ -141,35 +147,6 @@
                     width: 36px;
                     height: 36px;
                 }
-            }
-            .date {
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                @include font-style(body-large);
-                color: var(--color-onSurface);
-
-
-                div {
-                    display: inline-flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    width: 48px;
-                    height: 48px;
-                    box-sizing:border-box;
-
-
-
-                    span {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 40px;
-                        height: 40px;
-                    }
-                }
-                
             }
             .date:last-child {
                 border-right: none ;

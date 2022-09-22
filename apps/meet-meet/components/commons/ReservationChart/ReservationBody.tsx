@@ -1,10 +1,10 @@
 import React from "react";
 import ReservationRow from "./ReservationRow";
-import { selectedDataType } from "./@types/reservationChart.types";
+import { meetRoomType, selectedDataType } from "./@types/reservationChart.types";
 interface Props {
   dates: string[][];
   timeList: string[];
-  meetingRoomList: string[];
+  meetingRoomList: meetRoomType[];
   unavailableRoomList: any;
   onChange: (e: selectedDataType) => void;
   onClickReservedCell: (e: any) => void;
@@ -37,10 +37,10 @@ export default function ReservationBody({
                   key={`reservation-row-${index}`}
                   meetingRoom={room}
                   timeList={timeList}
-                  date={date[0]}
+                  date={date}
                   onChange={onChange}
                   onClickReservedCell={onClickReservedCell}
-                  unavailableRoomList={getUnavailableRoomList(date[1], room)}
+                  unavailableRoomList={getUnavailableRoomList(date[1], room.name)}
                 />
               ))}
             </div>

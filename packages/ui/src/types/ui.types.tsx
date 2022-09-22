@@ -1,4 +1,3 @@
-import { StringNullableChain } from "lodash";
 import React, { SetStateAction, Dispatch } from "react";
 export interface customerPageInfo {
   element: {
