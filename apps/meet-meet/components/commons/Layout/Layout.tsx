@@ -12,11 +12,10 @@ import { useWindowSize } from "ui/src/hooks/useWindowSize";
 import { useSSE } from "@hooks/notice/useSSE";
 import { useRecoilValue } from "recoil";
 import { noticeDataState, noticeListStatsState } from "recoil/notice";
-import { SideMenu } from "./SideMenu";
 
 import { FCM_TOKEN } from "constants/firebase";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "constants/auth";
-import localforage from "localforage";
+import { noticeStorage } from "@utils/localforage";
 import { removeCookie } from "@utils/cookies";
 
 interface LayoutProps {
@@ -40,7 +39,7 @@ export const Layout = ({ children }: LayoutProps) => {
   const handleLogout = async () => {
     removeCookie(ACCESS_TOKEN);
     removeCookie(REFRESH_TOKEN);
-    await localforage.removeItem(FCM_TOKEN).then(() => router.push("/login"));
+    await noticeStorage.removeItem(FCM_TOKEN).then(() => router.push("/login"));
   }
   
   return (

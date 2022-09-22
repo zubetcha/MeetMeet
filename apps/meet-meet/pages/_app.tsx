@@ -8,7 +8,6 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import client from "../apollo-client";
 import { RecoilRoot } from "recoil";
-import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserver";
 import { PushNotificationLayout } from "@components/commons/Layout/PushNotificationLayout";
 import { initFirebaseApp } from "@utils/firebase";
 
@@ -52,7 +51,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <ApolloProvider client={client}>
             <RecoilRoot>
-              {/* <RecoilObserver /> */}
               <RouterGuard>
               {exceptionList.includes(router.pathname) ? (
                 <Component {...pageProps} />
