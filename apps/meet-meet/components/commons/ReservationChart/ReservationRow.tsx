@@ -28,13 +28,14 @@ export default function ReservationRow({
     date: date,
   });
 
+
   const { ref } = useOutsideAlerter(onCancleAllSlot);
 
   const onClickDisabledCell = (reservedInfo: any) => {
     if (onClickReservedCell) {
       onClickReservedCell({
         date: date,
-        meetingRoom: meetingRoom,
+        meetingRoom: meetingRoom.name,
         ...reservedInfo,
       });
     }
@@ -50,6 +51,12 @@ export default function ReservationRow({
             disableIndex={disabledIndex}
           >
             {newTimeList.map((item, idx) => {
+              if(idx === newTimeList.length - 1) {
+                return (
+                  <></>
+                )
+              }
+
               if (item.includes("start") && unavailableRoomList) {
                 const widthIndex = parseInt(item.split(":")[1]);
                 const { department, host } = unavailableRoomList[
@@ -69,6 +76,7 @@ export default function ReservationRow({
                         width: `${unavailableSlotWidthList[widthIndex]}px`,
                         backgroundColor: "var(--color-primary)",
                         color: "var(--color-onPrimary)",
+                        fontSize: '13px',
                       }}
                       onClick={() =>
                         onClickDisabledCell(unavailableRoomList[widthIndex])

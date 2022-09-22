@@ -1,15 +1,19 @@
 @import '../../../../../packages/ui/src/styles/utils';
 
 .reservationContainer{
-    display: grid;
-    grid-template-columns: 200px 1fr;
+    @include flexbox(start, start);
     width:100%;
     height: fit-content;
+    overflow: hidden;
 
     .reservationFixedSection{
         .emptySection{
-            width: 200px;
+            // width: 200px;
             height:40px;
+
+            @include mobile() {
+                width: 120px;
+            }
         }
     }
 
@@ -41,12 +45,14 @@
             height:40px;
             background-color: var(--color-onSurfaceVariant-opacity-12);
             border-right: 1px solid var(--color-onSurfaceVariant-opacity-16);
-
+            // padding: 0px 25px;
+            // margin-left: -50px;
             .time{
                 width:50px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                flex-direction: column;
             }
         }
     }
@@ -75,6 +81,13 @@
         align-items: center;
         justify-content: center;
         border-bottom: 1px solid #fff;
+
+        @include mobile-verti() {
+            width: 48px;
+        }
+        @include mobile() {
+            width: 80px;
+        }
     }
 
     .slotRoom{
@@ -132,3 +145,4 @@
     display: flex;
     column-gap: 20px;
 }
+

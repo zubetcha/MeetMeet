@@ -11,6 +11,7 @@ import {
   selectedDataType,
 } from "./@types/reservationChart.types";
 import { getTimeList } from "ui/src/utils";
+import { ReservationInfoModal } from "@components/reservation/ui/modal/ReservationInfoModal";
 
 /**
  *
@@ -25,15 +26,21 @@ import { getTimeList } from "ui/src/utils";
 export const ReservationChart = ({
   width = "100%",
   startDate,
-  startTime = "08:30",
+  startTime = "08:00",
   endTime = "20:00",
   meetingRoomList,
   unavailableList,
 }: ReservationProps) => {
+  console.log(unavailableList);
+
+
   // DESCRIBE: 빈 영역 클릭헀을 때 세팅되는 상태값 (새로운 예약 정보)
   const [selectedData, setSelectedData] = useState({
-    meetingRoom: "",
-    date: "",
+    meetingRoom: {
+      name:'',
+      id: -1
+    },
+    date: [''],
     startTime: "",
     endTime: "",
   });
@@ -45,6 +52,7 @@ export const ReservationChart = ({
     department: "",
     startTime: "",
     endTime: "",
+    reservationId: -1
   });
 
   // DESCRIBE: 간트 차트 날짜 리스트
@@ -52,6 +60,8 @@ export const ReservationChart = ({
     () => getThreeDateFromNow(startDate as Date),
     [startDate]
   );
+
+  console.log(dateList);
 
   // DESCRIBE: 간트 차트 시간 리스트
   const timeList = useMemo(() => getTimeList(startTime, endTime), []);
@@ -61,6 +71,10 @@ export const ReservationChart = ({
 
   // DESCRIBE: 예약 상세정보 확인 모달 open 여부
   const [isOpenReservedModal, setIsOpenReservedModal] = useState(false);
+
+  const [isReservationInfoModal, setIsReservationInfoModal] = useState(false);
+
+
 
   // DESCRIBE: 빈 영역 클릭했을 때
   const onClickEmptyCells = (selectedInfo: selectedDataType) => {
@@ -91,7 +105,7 @@ export const ReservationChart = ({
         {/* 고정된 영역 (날짜, 회의실 표시) */}
         <ReservationSection
           dateList={dateList}
-          meetingRoomList={meetingRoomList}
+          meetingRoomList={meetingRoomList.map(room => room.name)}
         />
 
         <div
@@ -121,8 +135,20 @@ export const ReservationChart = ({
           <ReservedInfoModal
             reservedDate={reservedDate}
             onClickCancle={() => setIsOpenReservedModal(false)}
+            onClickConfirm={() => {
+              setIsOpenReservedModal(false);
+              setIsReservationInfoModal(true);
+            }}
           />
         )}
+        {isReservationInfoModal && (
+          <ReservationInfoModal
+            reservationId={reservedDate.reservationId}
+            setIsOpen={setIsReservationInfoModal}
+          />
+        )
+
+        }
       </div>
     </>
   );

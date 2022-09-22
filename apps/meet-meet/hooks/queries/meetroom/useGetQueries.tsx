@@ -3,6 +3,7 @@ import { useSetRecoilState } from "recoil"
 import { meetroomState } from "recoil/meetroom"
 import { GET_MEETROOMS, GET_MEETROOM_BY_ID, GET_MEETROOM_IMAGES, GET_MEETROOM_MERGE_INFO } from "graphql/meetroom/query"
 import { MeetRoom, MeetRoomData, MeetroomImageData, MeetRoomMergeInfoData } from "graphql/meetroom/types"
+import { GET_RESERVATION_BY_MEETROOM_AND_DATE } from "graphql/reservation/query"
 
 export const useGetMeetrooms = () => {
     const setMeetrooms = useSetRecoilState(meetroomState);
@@ -25,6 +26,9 @@ export const useGetMeetroomImages = (id: number) => {
 }
 
 export const useGetMeetroomMergeInfo = (id: number) => {
-    const result = useQuery<MeetRoomMergeInfoData>(GET_MEETROOM_MERGE_INFO, { variables: { meetroomId: id } });
+    const result = useQuery<MeetRoomMergeInfoData>(GET_MEETROOM_MERGE_INFO, { 
+        variables: { meetroomId: id },
+    });
     return { ...result };
 }
+

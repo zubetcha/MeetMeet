@@ -2,6 +2,7 @@ import { useUserForm } from "@hooks/user/useUserForm";
 import { useRecoilValue } from "recoil";
 import { usePostUserInfo } from "@hooks/queries/user/useMutationQueries";
 import userState from "recoil/user";
+import classes from "./user.module.scss";
 
 import { UserForm } from "./UserForm";
 import { Modal, Button, Text } from "ui/src/pages"
@@ -24,10 +25,12 @@ export const MyPageModal = ({ isModal, setIsModal }: Props) => {
     }
 
     return (
-        <Modal isOpen={isModal}>
+        <Modal setIsOpen={setIsModal}>
             <Modal.Title type="title-large" weight="700">회원 정보</Modal.Title>
             <Modal.Contents>
-                <UserForm values={values} onChangeTextField={onChangeTextField} onChangeDepartmentId={onChangeDepartmentId} departmentId={department.id} />
+                <div className={classes.userForm_wrapper}>
+                    <UserForm values={values} onChangeTextField={onChangeTextField} onChangeDepartmentId={onChangeDepartmentId} departmentId={department.id} />
+                </div>
             </Modal.Contents>
             <Modal.Buttons>
                 <Button label="취소" size="large" configuration="textGray" onClick={() => setIsModal(false)} />

@@ -111,7 +111,6 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
               <TextField.Label>수용 인원</TextField.Label>
               <TextField.Input type="text" value={values.seat} placeholder="수용 가능한 인원을 선택해주세요." onChange={onChangeTextField}>
                 <TextField.Unit>명</TextField.Unit>
-                <TextField.Icon name="dropdown" />
               </TextField.Input>
             </TextField>
 
@@ -171,7 +170,9 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
         <Modal>
           <Modal.Icon name="error" color="warning" />
           <Modal.Contents>
-            <Modal.Title>이미지는 3개까지 업로드할 수 있습니다.</Modal.Title>
+            <div className={classes["modal-contents-wrapper"]}>
+              <Modal.Title>이미지는 3개까지 업로드할 수 있습니다.</Modal.Title>
+            </div>
           </Modal.Contents>
         </Modal>
       )}
@@ -179,7 +180,9 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
         <Modal>
           <Modal.Icon name="error" color="warning" />
           <Modal.Contents>
-            <Modal.Title>이미지는 한 개당 10MB까지 업로드할 수 있습니다.</Modal.Title>
+            <div className={classes["modal-contents-wrapper"]}>
+              <Modal.Title>이미지는 한 개당 10MB까지 업로드할 수 있습니다.</Modal.Title>
+            </div>
           </Modal.Contents>
         </Modal>
       )}
@@ -187,8 +190,10 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
         <Modal>
           <Modal.Icon name="error" color="error"/>
           <Modal.Contents>
-            <Modal.Title>회의실을 삭제하시겠습니까?</Modal.Title>
-            <Modal.Description>삭제된 회의실 정보는 다시 되돌릴 수 없습니다.</Modal.Description>
+            <div className={classes["modal-contents-wrapper"]}>
+              <Modal.Title>회의실을 삭제하시겠습니까?</Modal.Title>
+              <Modal.Description>삭제된 회의실 정보는 다시 되돌릴 수 없습니다.</Modal.Description>
+            </div>
           </Modal.Contents>
           <Modal.Buttons>
             <Button

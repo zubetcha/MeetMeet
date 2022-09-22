@@ -19,22 +19,27 @@ export interface ReservationProps {
   startDate?: Date;
   startTime?: string;
   endTime?: string;
-  meetingRoomList: string[];
+  meetingRoomList: meetRoomType[];
   unavailableList: UnAvailableListType;
 }
 
 export interface selectedDataType {
-  date: string;
-  meetingRoom: string;
+  date: string[];
+  meetingRoom: meetRoomType;
   startTime: string;
   endTime: string;
 }
 
 export interface RservationRowProps {
-  meetingRoom: string;
+  meetingRoom: meetRoomType;
   timeList: string[];
   onChange: (e: selectedDataType) => void;
   unavailableRoomList: any;
-  date: string;
+  date: string[];
   onClickReservedCell?: (e: any) => void;
+}
+
+export type meetRoomType = {
+  id: number;
+  name: string;
 }

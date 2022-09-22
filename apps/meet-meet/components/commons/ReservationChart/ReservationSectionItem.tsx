@@ -21,7 +21,7 @@ export default function ReservationSectionItem({
     <div className={classes.roomList}>
       <div className={classes.infoContainer}>
         <div className={classes.dateContainer}>
-          <Text color="on-primary" style={{ weight: "bold" }}>
+          <Text color="on-primary" style={{ weight: "bold", textAlign: "center" }}>
             {date}
           </Text>
         </div>

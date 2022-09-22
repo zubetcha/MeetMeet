@@ -10,7 +10,7 @@ interface SelectProps {
   onChange: (e: SelectItemType) => void;
   style?: any;
   label?: string;
-  children: React.ReactElement[];
+  children: React.ReactElement[] | undefined;
 }
 
 /**

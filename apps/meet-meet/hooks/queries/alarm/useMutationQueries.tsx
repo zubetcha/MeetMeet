@@ -46,6 +46,9 @@ export const useReadAlarm = () => {
   return useMutation(
     ["alarm", "read"],
     (reservationId: number) => AlarmAPI.readAlarm(reservationId),
+    {
+      onSuccess: res => console.log("특정 알람 읽음", res),
+    }
   )
 };
 
@@ -53,9 +56,17 @@ export const useReadAlarm = () => {
  * 모든 알람을 읽음 처리
  * 
  */
-export const useReadAllAlarms = () => {
+export const useReadAllAlarms = (setIsModal: (is: boolean) => void) => {
+  const { handleSuccess } = useHandleSuccess();
+  const title = "모두 읽음 완료";
   return useMutation(
     ["alarm", "readAll"],
     () => AlarmAPI.readAllAlarms(),
+    {
+      onSuccess: (res) => {
+        console.log("모든 알람 읽음", res)
+        handleSuccess({ title, setIsModal });
+      }
+    }
   )
 }

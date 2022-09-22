@@ -22,5 +22,11 @@ export const useWindowSize = () => {
     }
   }, [screenSize])
 
+  useEffect(() => {
+    if (window) {
+      setDimension();
+    }
+  }, [])
+
   return screenSize;
 }

@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import classNames from "classnames";
 
 import classes from './calendar.module.scss';
-import { Cell } from '../../elements/Cells/Cell';
-import { DateType } from '../../../types/ui.types';
+import { Cell } from '../../../elements/Cells/Cell';
+import { DateType } from '../../../../types/ui.types';
 
 export interface Props {
     dateInfo: {
@@ -40,7 +40,6 @@ const Dates = ({
     timeType,
     weekendIncluded
 }:Props) => {
-
     const checkBtwDates = (d:Date) => {
         
         if(!availableDates) return false;
@@ -60,15 +59,15 @@ const Dates = ({
                             ? new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            new Date().getDate() - 2)
+                            new Date().getDate() - 1)
                             : new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            new Date().getDate() - 1)
+                            new Date().getDate() - 0)
                         : new Date(
                             new Date().getFullYear(),
                             new Date().getMonth(),
-                            new Date().getDate() - 1);
+                            new Date().getDate() - 0);
 
     const checkDisableDate = () =>{
         return timeType === 'pastCurrent' 
@@ -119,8 +118,6 @@ const Dates = ({
                         : 'default'))}
             label={dateInfo.date}
             style={{ 
-                width: '48px', 
-                height: '48px', 
                 color:  getDateColor(),
                 cursor: getDateCursor()
             }}

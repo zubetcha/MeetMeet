@@ -1,10 +1,7 @@
 export interface Alarm {
-  notification: {
-    title: string;
-    description: string;
-  };
-  data: {
-    reservationId: string | number;
-    createdAt: string;
-  }
+  id: number;
+  title: string;
+  location: string;
+  date: string;
+  createdAt: string;
 }

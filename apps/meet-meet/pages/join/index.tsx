@@ -7,7 +7,7 @@ const JoinPage = () => {
 
   return (
     <div className={classes["joinPage-container"]}>
-      <div>
+      <div className={classes["authCard-wrapper"]}>
         <AuthCard type="join" />
       </div>
     </div>

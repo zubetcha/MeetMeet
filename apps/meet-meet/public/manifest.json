@@ -5,7 +5,7 @@
     "scope": "/",
     "start_url": "/",
     "name": "MeetMeet",
-    "description": "Progressive Web App",
+    "description": "젠틀 에너지 회의실 예약 관리",
     "short_name": "MeetMeet",
     "icons": [
         {

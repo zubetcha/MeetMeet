@@ -8,7 +8,6 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import client from "../apollo-client";
 import { RecoilRoot } from "recoil";
-import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserver";
 import { PushNotificationLayout } from "@components/commons/Layout/PushNotificationLayout";
 import { initFirebaseApp } from "@utils/firebase";
 
@@ -20,7 +19,7 @@ import { SuccessModal } from "@components/commons/Modal/SuccessModal";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const exceptionList = ["/", "/login", "/join", "/join/onboarding"];
+  const exceptionList = ["/login", "/join", "/join/onboarding"];
   const queryClient = new QueryClient();
   queryClient.setDefaultOptions({
     queries: {
@@ -45,12 +44,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
+        <meta property="og:title" content="MeetMeet" />
+        <meta property="og:description" content="젠틀에너지 회의실 예약 관리" />
       </Head>
       
         <QueryClientProvider client={queryClient}>
           <ApolloProvider client={client}>
             <RecoilRoot>
-              {/* <RecoilObserver /> */}
               <RouterGuard>
               {exceptionList.includes(router.pathname) ? (
                 <Component {...pageProps} />
