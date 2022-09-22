@@ -50,10 +50,7 @@ export const SelectTime = ({
   }
 
   const setRouteQuery = (timeId:timeIdType) => {
-    console.log(timeId)
-
     if(typeof(timeId.start) === 'number' && typeof(timeId.end) !== 'number'){
-      console.log(timeId, '어라라라라ㅏㄹ')
       router.push({
         query: {
           ...router.query,

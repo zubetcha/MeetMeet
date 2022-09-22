@@ -25,15 +25,15 @@ const config = {
   eslint: {
     dirs: ["pages", "components", "hooks", "shared", "store", "types"],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/:path*',
-        destination: 'http://localhost:8001/:path*',
-        basePath: false,
-      },
-    ]
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/:path*',
+  //       destination: 'http://localhost:8001/:path*',
+  //       basePath: false,
+  //     },
+  //   ]
+  // },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

@@ -7,9 +7,17 @@ import { SelectTime } from './SelectTime'
 import { WriteMeetingInfo } from './WriteMeetingInfo'
 import { SelectMemeber } from './SelectMember'
 import { ConfirmModal } from './ConfirmModal'
+import { ReservationInfoType } from 'graphql/reservation/types'
+
+interface Props {
+  reservationInfo?: ReservationInfoType
+}
 
 
-export const Reservation = () => {
+export const Reservation = ({
+  reservationInfo
+}:Props) => {
+
   const {
     date,
     setDate,
@@ -33,8 +41,9 @@ export const Reservation = () => {
     disabledIndex,
     isModal,
     setIsModal,
-    reservedInfo
-  } = useReservation();
+    reservedInfo,
+    updateReservation
+  } = useReservation({reservationInfo});
 
 
   return (
@@ -77,10 +86,10 @@ export const Reservation = () => {
       <footer>
         <div className={classes['button-wrapper']} >
           <Button
-            label='회의실 예약하기'
+            label={reservationInfo ? '회의 수정하기' : '회의 예약하기'}
             configuration='filled'
             state={btnState ? 'default' : 'disable'}
-            onClick={submitReservation}
+            onClick={reservationInfo ? updateReservation : submitReservation}
           />
         </div>
       </footer>

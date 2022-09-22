@@ -34,12 +34,12 @@ export default function ReservationModal({
     console.log(startTimeIdx, endTimeIdx);
 
     router.push({
-      pathname:'/reservation',
+      pathname:'/reservation/create',
       query: {
         roomId: meetingRoom.id,
         date: date[1],
         startTimeId: startTimeIdx,
-        endTimeId: endTimeIdx,
+        endTimeId: endTimeIdx -1,
       }
     })
   }

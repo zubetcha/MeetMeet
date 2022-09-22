@@ -4,6 +4,8 @@ import classes from './reservation.module.scss'
 import { Button, Select } from "@components/ui"
 import { useGetAccountsByDepartment, useGetDepartments } from "@hooks/queries/user/useGetQueries"
 import { useEffect, useState } from "react"
+import { useRecoilState } from "recoil"
+import userState from "recoil/user"
 import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types"
 
 interface Props {
@@ -20,11 +22,14 @@ export const SelectMemeber = ({
 }:Props) => {
   const [selectedDepartment, setSelectedDepartment] = useState<number>(-1);
   const [members, setMemebers] = useState<any[]>([]);
+  const [userInfo, setUserInfo] = useRecoilState(userState);
   const {data: departmentList } = useGetDepartments()
   const {data: accountList} = useGetAccountsByDepartment(selectedDepartment);
 
   useEffect(() => {
-    if (accountList?.accountByDepartment) setMemebers(accountList?.accountByDepartment);
+    if (accountList?.accountByDepartment) {
+      setMemebers(accountList?.accountByDepartment.filter(account => account.id !== userInfo.id));
+    }
     else setMemebers([]);
   }, [accountList])
 

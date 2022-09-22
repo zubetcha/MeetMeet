@@ -1,4 +1,4 @@
-export type reservationInfoType = {
+export type reservationCreateInfoType = {
   meetRoomIdList: number[],
   startDateTime: string,
   endDateTime: string,
@@ -6,3 +6,14 @@ export type reservationInfoType = {
   content: string,
   participantIdList: number[]
 }
+
+export type reservationUpdateInfoType = {
+  meetRoomId: number,
+  mergeRoomId: number | null,
+  startDateTime: string,
+  title: string,
+  content: string,
+  exceptParticipantList: number[],
+  newParticipantList: number[],
+}
+

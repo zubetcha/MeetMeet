@@ -33,22 +33,24 @@ export type ReservationInfo = {
 }
 
 export type ReservationById = {
-  reservationById: {
-    id: number;
-    meetRoomList: MeetRoomInReservation[];
-    title: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-    content:string;
-    participantList: Participant[];
-  }
+  reservationById: ReservationInfoType;
 }
 
 type MeetRoomInReservation = {
   id: number;
   name: string;
   hasMonitor: boolean;
+}
+
+export type ReservationInfoType = {
+  id: number;
+  meetRoomList: MeetRoomInReservation[];
+  title: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  content:string;
+  participantList: Participant[];
 }
 
 type Participant = {

@@ -1,9 +1,9 @@
 import { useGetReservationByRoomAndDate } from "@hooks/queries/reservation/useGetQueries";
-import { useAddReservation } from "@hooks/queries/reservation/useMutationQueries";
+import { useAddReservation, useUpdateReservation } from "@hooks/queries/reservation/useMutationQueries";
 import { useEffect, useState } from "react";
 import { getDisabledIndex } from "../utils/getDisabledIndex";
 import { formatDate } from "ui/src/utils";
-import { ReservationInfo } from "graphql/reservation/types";
+import { ReservationInfo, ReservationInfoType } from "graphql/reservation/types";
 import { useRouter } from "next/router";
 import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 
@@ -15,39 +15,55 @@ export type timeIdType = {
 
 
 interface Props {
-
+  reservationInfo?: ReservationInfoType
 }
 
-export const useReservation = () => {
+export const useReservation = ({
+  reservationInfo
+}:Props) => {
 
-  const [date, setDate] = useState<Date>(new Date());
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [selectedRoomId, setSelectedRoomId] = useState<number>(-1);
-  const [mergedRoomId, setMergedRoomId] = useState(-1);
-  const [selectedTimeId, setSelectedTimeId] = useState<timeIdType>({
-    start:null,
-    end:null
-  });
-  const [meetingTitle, setMeetingTitle] = useState<string>('');
-  const [meetingAgenda, setMeetingAgenda] = useState<string>('');
-  const [selectedMembers, setSelectedMembers] = useState<any[]>([]);
-  const [btnState, setBtnState] = useState<boolean>(false);
-  const [disabledIndex, setDisabledIndex] = useState<any[]>([]);
-  const [isModal, setIsModal] = useState<boolean>(false);
-  const [reservedInfo, setReservedInfo] = useState<ReservationInfo>();
-
-  const addReservation = useAddReservation();
-  const {data: reservedTime, refetch: refetchReservedTime} = useGetReservationByRoomAndDate(mergedRoomId > 0 ? [selectedRoomId, mergedRoomId] : [selectedRoomId], formatDate(date));
-  const router = useRouter();
+  console.log(reservationInfo);
 
   const timeList = Array.from({length: 22}, (_, idx:number) => {
     const hour = Math.floor((idx + 16)/2);
     return `${hour < 10 ? '0' + hour : hour}:${idx%2*3}0`
   })
 
+  const startTimeIdx = timeList.findIndex(time => time === reservationInfo?.startTime);
+  const endTimeIdx = timeList.findIndex(time => time === reservationInfo?.endTime) - 1;
+  const reservationParticipants = reservationInfo?.participantList.filter(participant => !participant.isHost).map(participant => {return {id :participant.account.id, name: participant.account.name}})
+
+  const [date, setDate] = useState<Date>(new Date());
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [selectedRoomId, setSelectedRoomId] = useState<number>(-1);
+  const [mergedRoomId, setMergedRoomId] = useState(-1);
+  const [selectedTimeId, setSelectedTimeId] = useState<timeIdType>({
+    start: startTimeIdx >= 0 ? startTimeIdx : null,
+    end: endTimeIdx >=0 ? startTimeIdx : null
+  });
+  const [meetingTitle, setMeetingTitle] = useState<string>(reservationInfo ? reservationInfo.title : '');
+  const [meetingAgenda, setMeetingAgenda] = useState<string>(reservationInfo ? reservationInfo.content : '');
+  const [selectedMembers, setSelectedMembers] = useState<any[]>(reservationParticipants ? reservationParticipants : []);
+  const [btnState, setBtnState] = useState<boolean>(false);
+  const [disabledIndex, setDisabledIndex] = useState<any[]>([]);
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const [reservedInfo, setReservedInfo] = useState<ReservationInfo>();
+
+  const addReservation = useAddReservation();
+  const updateReservationMutation = useUpdateReservation()
+  const {data: reservedTime, refetch: refetchReservedTime} = useGetReservationByRoomAndDate(mergedRoomId > 0 ? [selectedRoomId, mergedRoomId] : [selectedRoomId], formatDate(date));
+  const router = useRouter();
+
+  
+
   useEffect(() => {
     if(reservedTime){
-      const indexedList = getDisabledIndex(timeList, reservedTime?.reservationByMeetRoomAndDate);
+      let indexedList = getDisabledIndex(timeList, reservedTime?.reservationByMeetRoomAndDate);
+
+      if(reservationInfo && reservationInfo.date === formatDate(date) && reservationInfo.meetRoomList.map(room => room.id).includes(selectedRoomId)){
+        indexedList = indexedList.filter((index) => index < startTimeIdx || index > endTimeIdx);
+      }
+      
       setDisabledIndex(indexedList);
     }
   }, [reservedTime])
@@ -143,6 +159,41 @@ export const useReservation = () => {
     }
   }
 
+  const updateReservation = async() => {
+    if(
+      selectedMembers.length > 0 &&
+      typeof(selectedTimeId.start) === 'number' && 
+      typeof(selectedTimeId.end) === 'number' &&
+      reservationParticipants &&
+      reservationInfo
+    ){
+      const selectedMembersId = selectedMembers.map(m => parseInt(m.id));
+      const reservationParticipantsId = reservationParticipants.map(p => p.id)
+
+      const request = {
+        meetRoomId: selectedRoomId,
+        mergeRoomId: mergedRoomId > 0 ? mergedRoomId : null,
+        startDateTime: `${formatDate(date)} ${timeList[selectedTimeId.start]}`,
+        endDateTime: `${formatDate(date)} ${timeList[selectedTimeId.end + 1]}`,
+        title: meetingTitle,
+        content: meetingAgenda,
+        exceptParticipantList: reservationParticipantsId.filter(id => !selectedMembersId.includes(id)),
+        newParticipantList: selectedMembersId.filter(id => !reservationParticipantsId.includes(id)),
+      }
+      console.log(request);
+
+      const result = await updateReservationMutation.mutateAsync({reservationId: reservationInfo.id, reservationInfo: request})
+      setReservedInfo(result.data);
+      setIsModal(true);
+      refetchReservedTime();
+      setSelectedTimeId({
+        start:null,
+        end:null
+      })
+    }
+
+  }
+
   return {
     date,
     setDate,
@@ -166,6 +217,7 @@ export const useReservation = () => {
     disabledIndex,
     isModal,
     setIsModal,
-    reservedInfo
+    reservedInfo,
+    updateReservation
   }
 } 

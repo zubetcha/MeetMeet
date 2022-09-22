@@ -6,6 +6,8 @@ import userState from "recoil/user";
 import { useGetReservationById } from "@hooks/queries/reservation/useGetQueries";
 import classes from '../reservation.module.scss';
 import { useDeleteReservation } from "@hooks/queries/reservation/useMutationQueries";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { refetchState } from "recoil/reservation/atom";
 
 interface Props {
@@ -22,8 +24,9 @@ export const ReservationInfoModal = ({
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const {data:reservationInfo} = useGetReservationById(reservationId);
   const deleteReservationMutation = useDeleteReservation();
+  const router = useRouter();
 
-  console.log(userInfo, reservationId);
+  console.log(reservationInfo);
 
   const getMeetRoomNames = () => {
     const names = reservationInfo?.reservationById.meetRoomList.map((room) => {
@@ -51,11 +54,9 @@ export const ReservationInfoModal = ({
   }
 
   const getParticipantIdList = () => {
-    const idList = reservationInfo?.reservationById.participantList.map((account) => {
-      return account.account.id;
-    })
-
-    return idList;
+    const hostAccount = reservationInfo?.reservationById.participantList.filter(account => account.isHost)
+    if(hostAccount) return [hostAccount[0].account.id];
+    else return [];
   }
 
   const deleteReservation = () => {
@@ -77,6 +78,27 @@ export const ReservationInfoModal = ({
       setRefetch({refetch:false});
       setIsOpen(false);
     }, 1300)
+  }
+
+  const timeList = Array.from({length: 22}, (_, idx:number) => {
+    const hour = Math.floor((idx + 16)/2);
+    return `${hour < 10 ? '0' + hour : hour}:${idx%2*3}0`
+  })
+
+  const routeToUpdate = () => {
+    const startTimeIdx = timeList.findIndex(time => time === reservationInfo?.reservationById.startTime);
+    const endTimeIdx = timeList.findIndex(time => time === reservationInfo?.reservationById.endTime);
+
+    router.push({
+      pathname:`reservation/update/${reservationId}`,
+      query: {
+        roomId: reservationInfo?.reservationById.meetRoomList[0].id,
+        date: reservationInfo?.reservationById.date,
+        startTimeId: startTimeIdx,
+        endTimeId: endTimeIdx -1,
+        isChecked: reservationInfo?.reservationById.meetRoomList.length === 2 ? 1 : 0
+      }
+    })
   }
 
   return (
@@ -118,7 +140,7 @@ export const ReservationInfoModal = ({
           configuration='textGray'
           onClick={() => setIsOpen(false)}
         />
-        {(userInfo.id && getParticipantIdList()?.includes(userInfo.id)) 
+        {(userInfo.id && getParticipantIdList().includes(userInfo.id)) 
           ?
             <>
               <Button
@@ -126,10 +148,11 @@ export const ReservationInfoModal = ({
                 configuration='outlined'
                 onClick={deleteReservation}
               />
-              <Button
-                label='예약 수정하기'
-                configuration='filled'
-              />
+                <Button
+                  label='예약 수정하기'
+                  configuration='filled'
+                  onClick={routeToUpdate}
+                />
             </>
           : 
             <>

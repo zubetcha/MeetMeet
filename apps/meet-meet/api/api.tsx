@@ -1,6 +1,6 @@
 import { api } from "./axios";
 import { MeetRoom } from "graphql/meetroom/types";
-import { reservationInfoType } from "./types";
+import { reservationCreateInfoType, reservationUpdateInfoType,  } from "./types";
 
 export const AuthAPI = {
   addUserInfo: (userInfo: { [key: string]: string | number }) =>
@@ -34,11 +34,14 @@ export const ReservationAPI = {
       `participant/reservations?startDateStr=${startDate}&endDateStr=${endDate}`
     ),
   
-  addReservation: (reservationInfo:reservationInfoType) => 
+  addReservation: (reservationInfo:reservationCreateInfoType) => 
     api.post(`/reservation`, reservationInfo),
   
   deleteReservation: (reservationId:number) => 
-      api.delete(`/reservations/${reservationId}`),
+    api.delete(`/reservations/${reservationId}`),
+  
+  updateReservation: (reservationId:number, reservationInfo:reservationUpdateInfoType) =>
+    api.put(`/reservations/${reservationId}`, reservationInfo)
 };
 
 

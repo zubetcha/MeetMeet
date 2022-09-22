@@ -27,7 +27,7 @@ export default function ReservedInfoModal({
       <Modal.Contents>
         <Modal.Icon name="error" color="primary" />
         <Modal.Title>
-          {date} <br></br>
+          {date[0]} <br></br>
           {startTime.slice(0, 5)} - {endTime.slice(0, 5)} [{meetingRoom}] 예약
           현황입니다.
         </Modal.Title>
