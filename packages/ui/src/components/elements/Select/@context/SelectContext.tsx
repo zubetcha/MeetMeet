@@ -17,7 +17,7 @@ export const SelectContext = createContext({
   // values ADD dispatch 함수
   setValues: (e: SelectItemType) => {},
   // 현재 선택된 요소 setState 함수
-  setSelected: (e: SelectItemType) => {},
+  setSelected: (e: SelectItemType | undefined) => {},
   // 검색 결과 setState 함수
   setSearchResult: (e: SelectItemType[] | undefined) => {},
   // isOpen setState 함수
@@ -68,6 +68,10 @@ export const SelectProvider = ({
       setValue(selected);
     }
   }, [selected]);
+
+  useEffect(()=>{
+    setSelected(undefined);
+  },[state])
 
   return (
     <>

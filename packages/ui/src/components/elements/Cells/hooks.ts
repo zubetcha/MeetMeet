@@ -121,6 +121,7 @@ export const useCellGroup = ({
 
     if (typeof selectedIndex.start !== "number") {
       _selectedIndex.start = index;
+      // _selectedIndex.end = index;
     } else {
       if (selectedIndex.start > index || selectedIndex.end === index) {
         _selectedIndex.start = index;

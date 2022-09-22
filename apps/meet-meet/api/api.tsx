@@ -1,5 +1,6 @@
 import { api } from "./axios";
 import { MeetRoom } from "graphql/meetroom/types";
+import { reservationCreateInfoType, reservationUpdateInfoType,  } from "./types";
 import { DeviceInfo } from "@hooks/queries/alarm/alarm.types";
 
 export const AuthAPI = {
@@ -23,14 +24,25 @@ export const MeetroomAPI = {
 export const ReservationAPI = {
   getAllReservationInfo: (startDate: string, endDate: string) =>
     api.get(`reservations?startDateStr=${startDate}&endDateStr=${endDate}`),
+  
   getReservationInfobyHost: (startDate: string, endDate: string) =>
     api.get(
       `host/reservations?startDateStr=${startDate}&endDateStr=${endDate}`
     ),
+  
   getReservationInfobyParticipant: (startDate: string, endDate: string) =>
     api.get(
       `participant/reservations?startDateStr=${startDate}&endDateStr=${endDate}`
     ),
+  
+  addReservation: (reservationInfo:reservationCreateInfoType) => 
+    api.post(`/reservation`, reservationInfo),
+  
+  deleteReservation: (reservationId:number) => 
+    api.delete(`/reservations/${reservationId}`),
+  
+  updateReservation: (reservationId:number, reservationInfo:reservationUpdateInfoType) =>
+    api.put(`/reservations/${reservationId}`, reservationInfo)
 };
 
 

@@ -1,0 +1,13 @@
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  // overflow-y: scroll;
+  // padding-right: 60px;
+  scrollbar-width: none;
+  box-sizing: content-box;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
