@@ -41,6 +41,8 @@ export const Layout = ({ children }: LayoutProps) => {
     removeCookie(REFRESH_TOKEN);
     await noticeStorage.removeItem(FCM_TOKEN).then(() => router.push("/login"));
   }
+  console.log(dynamicWidth)
+  console.log(isMobile)
   
   return (
     <>
