@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
-import userState from "recoil/user";
 import { useGetUserInfo } from "@hooks/queries/user/useGetQueries";
 import { getCookie } from "@utils/cookies";
 import userState from "recoil/user";
