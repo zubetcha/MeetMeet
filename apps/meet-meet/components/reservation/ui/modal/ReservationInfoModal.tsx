@@ -7,7 +7,6 @@ import { useGetReservationById } from "@hooks/queries/reservation/useGetQueries"
 import classes from '../reservation.module.scss';
 import { useDeleteReservation } from "@hooks/queries/reservation/useMutationQueries";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { refetchState } from "recoil/reservation/atom";
 
 interface Props {
@@ -25,8 +24,6 @@ export const ReservationInfoModal = ({
   const {data:reservationInfo} = useGetReservationById(reservationId);
   const deleteReservationMutation = useDeleteReservation();
   const router = useRouter();
-
-  console.log(reservationInfo);
 
   const getMeetRoomNames = () => {
     const names = reservationInfo?.reservationById.meetRoomList.map((room) => {

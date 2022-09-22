@@ -63,7 +63,7 @@ export const useReservation = ({
       if(reservationInfo && reservationInfo.date === formatDate(date) && reservationInfo.meetRoomList.map(room => room.id).includes(selectedRoomId)){
         indexedList = indexedList.filter((index) => index < startTimeIdx || index > endTimeIdx);
       }
-      
+
       setDisabledIndex(indexedList);
     }
   }, [reservedTime])
@@ -180,7 +180,6 @@ export const useReservation = ({
         exceptParticipantList: reservationParticipantsId.filter(id => !selectedMembersId.includes(id)),
         newParticipantList: selectedMembersId.filter(id => !reservationParticipantsId.includes(id)),
       }
-      console.log(request);
 
       const result = await updateReservationMutation.mutateAsync({reservationId: reservationInfo.id, reservationInfo: request})
       setReservedInfo(result.data);
