@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import { firebaseConfig, FCM_TOKEN, VAPID_KEY } from "constants/firebase";
-import localforage from 'localforage';
+import { noticeStorage } from "./localforage";
 
 /**
  * firebase 콘솔에 등록한 웹앱 정보로 초기화 및
@@ -27,7 +27,7 @@ export const initFirebaseApp = () => {
 export const getFcmToken = async () => {
   initFirebaseApp();
   const messaging = getMessaging();
-  const storedFcmToken: string | null = await localforage.getItem(FCM_TOKEN);
+  const storedFcmToken: string | null = await noticeStorage.getItem(FCM_TOKEN);
 
   if (storedFcmToken !== null) {
     return storedFcmToken;
@@ -42,7 +42,7 @@ export const getFcmToken = async () => {
         const derivedFcmToken = await getToken(messaging, { vapidKey: VAPID_KEY })
         console.log(derivedFcmToken)
         if (derivedFcmToken) {
-          await localforage.setItem(FCM_TOKEN, derivedFcmToken);
+          await noticeStorage.setItem(FCM_TOKEN, derivedFcmToken);
           return derivedFcmToken;
         }
       }

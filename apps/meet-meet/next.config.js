@@ -55,7 +55,7 @@ module.exports = withPlugins(
         skipWaiting: true,
         runtimeCaching,
         sw: 'firebase-messaging-sw.js',
-        // disable: process.env.NODE_ENV === "development",
+        disable: process.env.NODE_ENV === "development",
       },
     },
   ],

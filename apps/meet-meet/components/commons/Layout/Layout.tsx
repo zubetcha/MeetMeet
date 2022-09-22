@@ -12,11 +12,10 @@ import { useWindowSize } from "ui/src/hooks/useWindowSize";
 import { useSSE } from "@hooks/notice/useSSE";
 import { useRecoilValue } from "recoil";
 import { noticeDataState, noticeListStatsState } from "recoil/notice";
-import { SideMenu } from "./SideMenu";
 
 import { FCM_TOKEN } from "constants/firebase";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "constants/auth";
-import localforage from "localforage";
+import { noticeStorage } from "@utils/localforage";
 import { removeCookie } from "@utils/cookies";
 
 interface LayoutProps {
@@ -40,7 +39,7 @@ export const Layout = ({ children }: LayoutProps) => {
   const handleLogout = async () => {
     removeCookie(ACCESS_TOKEN);
     removeCookie(REFRESH_TOKEN);
-    await localforage.removeItem(FCM_TOKEN).then(() => router.push("/login"));
+    await noticeStorage.removeItem(FCM_TOKEN).then(() => router.push("/login"));
   }
   
   return (
@@ -83,8 +82,10 @@ export const Layout = ({ children }: LayoutProps) => {
         <Modal setIsOpen={setIsLogoutModal}>
           <Modal.Icon name="error" color="warning" />
           <Modal.Contents>
-            <Modal.Title>로그아웃 하시겠습니까?</Modal.Title>
-            <Modal.Description>로그아웃 시 로그인 페이지로 이동합니다.</Modal.Description>
+            <div className={classes["modal-contents-wrapper"]}>
+              <Modal.Title>로그아웃 하시겠습니까?</Modal.Title>
+              <Modal.Description>로그아웃 시 로그인 페이지로 이동합니다.</Modal.Description>
+            </div>
           </Modal.Contents>
           <Modal.Buttons>
             <Button

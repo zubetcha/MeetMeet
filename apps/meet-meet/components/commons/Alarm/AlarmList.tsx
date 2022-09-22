@@ -92,13 +92,15 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
             selectedId ? <Button label="읽음" size="medium" configuration="text" onClick={onClickRead} />
             : <Button label="모두 읽음" size="medium" configuration="text" onClick={() => setIsConfirmModal(true)} />
           )}
-          <IconButton
-            configuration="text"
-            size="medium"
-            state="default"
-            icon="tune"
-            onClick={() => setIsTune(prev => !prev)}
-          />
+          {noticeList.length > 0 && (
+            <IconButton
+              configuration="text"
+              size="medium"
+              state="default"
+              icon="tune"
+              onClick={() => setIsTune(prev => !prev)}
+            />
+          )}
           <IconButton
             configuration="text"
             size="medium"
@@ -127,7 +129,9 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
       {isConfirmModal && (
         <Modal>
           <Modal.Icon name="error" color="warning" />
-          <Modal.Title>알림을 모두 읽으시겠습니까?</Modal.Title>
+          <div className={classes["modal-contents-wrapper"]}>
+            <Modal.Title>알림을 모두 읽으시겠습니까?</Modal.Title>
+          </div>
           <Modal.Buttons>
             <Button
               label="취소"

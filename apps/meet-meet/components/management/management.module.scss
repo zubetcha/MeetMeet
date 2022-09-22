@@ -114,3 +114,9 @@
     width: 360px;
   }
 }
+
+.modal-contents-wrapper {
+  @include mobile-verti() {
+    width: 271px;
+  }
+}

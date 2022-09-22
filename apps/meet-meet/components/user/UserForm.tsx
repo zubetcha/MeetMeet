@@ -11,7 +11,6 @@ export const UserForm = ({ values, onChangeTextField, onChangeDepartmentId, depa
 
   const { data } = useQuery<DepartmentData>(GET_DEPARTMENTS);
   const index = data?.departments.findIndex((department: Department) => department.id === departmentId)
-  console.log(values)
 
   return (
     <div className={classes["textFields-wrapper"]}>
