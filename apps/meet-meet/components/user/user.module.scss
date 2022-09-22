@@ -4,4 +4,23 @@
 .textFields-wrapper {
     @include flex-direction(column, 40);
     width: 360px;
+    padding: 0 2px;
+
+    @include mobile-verti() {
+        width: 100%;
+        padding-top: 24px;
+    }
+    @include mobile() {
+        width: 100%;
+        // padding-top: 24px;
+    }
+}
+
+.userForm_wrapper {
+    @include mobile-verti() {
+        width: 240px;
+    }
+    @include mobile() {
+        width: 360px;
+    }
 }

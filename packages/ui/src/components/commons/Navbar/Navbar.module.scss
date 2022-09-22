@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+
     .topBtnLayout {
         position: relative;
         display: flex;
@@ -70,6 +71,11 @@
                 white-space: nowrap;
                 background-color: transparent;
                 @include button-state-layer(primary, error);
+                .numOfAlarm {
+                    width: fit-content;
+                    @include pos-center-y(absolute);
+                    right: 16px;
+                }
 
                 .stateLayer {
                     border-radius: 100px !important;
@@ -100,7 +106,7 @@
         top: 8px;
         left: 180px;
         z-index: 100;
-        transition: left 0.3s ease-in-out;
+        transition: left right 0.3s ease-in-out;
     }
 
     &.close{
@@ -129,6 +135,12 @@
                     }
                 }
                 .NavItem {
+                    position: relative;
+                    .numOfAlarm {
+                        position: absolute;
+                        left: 28px;
+                        top: 16px;
+                    }
                     .label {
                         opacity: 0;
                     }
@@ -144,5 +156,15 @@
             left: 80px;
         }
     }
+}
 
+.numOfAlarm {
+    width: fit-content;
+    background-color: var(--color-error);
+    padding: 2px 4px;
+    border-radius: 100px;
+    color: var(--color-onError);
+    z-index: 10;
+    @include font-style(label-small, 500);
+    @include flexbox (center, center);
 }

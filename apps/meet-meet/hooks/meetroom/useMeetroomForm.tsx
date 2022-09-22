@@ -2,8 +2,15 @@ import { useState, useEffect, ChangeEvent, useCallback } from "react";
 import { checkBiteValid, convertHeicToJpg } from "ui/src/utils";
 
 import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types";
-import { StateType } from "ui/src/components/elements/Buttons/types/button.types";
+import { StateType } from "ui/src/components/elements/Buttons/types/button.types"
 
+/**
+ * 회의실을 생성하거나 수정할 때 사용하는 커스텀 훅
+ * 
+ * @param {meetroomFormType} initialValues 
+ * @param {meetroomImagesType} initialImages 
+ * @returns 
+ */
 export const useMeetroomForm = (
   initialValues: meetroomFormType,
   initialImages: meetroomImagesType[]
@@ -30,15 +37,16 @@ export const useMeetroomForm = (
     setValues({ ...values, [name]: _value });
   };
 
-  const onChangeHasEquipment = (checked: boolean) => {
-    setValues({ ...values, hasMonitor: !values.hasMonitor });
-  };
+    const onChangeHasEquipment = (e: ChangeEvent<HTMLInputElement>) => {
+        setValues({ ...values, hasMonitor: !values.hasMonitor });
+    }
 
   const onDropImages = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const droppedImages = images.filter((image) => image.url !== "");
       const { files } = e.target;
       const fileList = Object.values(files as FileList);
+      let overSizeFlag = false;
 
       // DESCRIBE: 파일 개수 3개 제한
       if (droppedImages.length + fileList.length > 3) {
@@ -56,14 +64,17 @@ export const useMeetroomForm = (
         const isOver = checkBiteValid(file.size, "MB", 10);
 
         if (isOver) {
+          overSizeFlag = true;
           setIsOverSize(true);
           setTimeout(() => {
             setIsOverSize(false);
           }, 1300);
 
-          return;
+          return false;
         }
       });
+
+      if (overSizeFlag) return;
 
       // DESCRIBE: 이미지 확장자 확인 및 heic -> jpg 변환
       const newFiles = await Promise.all(

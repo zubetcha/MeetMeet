@@ -8,12 +8,11 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import client from "../apollo-client";
 import { RecoilRoot } from "recoil";
-import { RecoilObserver } from "@components/commons/RecoilObserver/RecoilObserver";
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-import Script from "next/script";
+import { PushNotificationLayout } from "@components/commons/Layout/PushNotificationLayout";
+import { initFirebaseApp } from "@utils/firebase";
 
 import "../styles/globals.scss";
+import "react-toastify/dist/ReactToastify.css";
 import { Layout } from "@components/commons/Layout/Layout";
 import { RouterGuard } from "@components/commons/RouterGuard/RouterGuard";
 import { SuccessModal } from "@components/commons/Modal/SuccessModal";
@@ -32,19 +31,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     document.documentElement.setAttribute("data-theme", "light");
   }, []);
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyB5MsSaVHen868J6lRWD1R4bQX0jH5K7qE",
-    authDomain: "meetmeet-a49ad.firebaseapp.com",
-    projectId: "meetmeet-a49ad",
-    storageBucket: "meetmeet-a49ad.appspot.com",
-    messagingSenderId: "831729942382",
-    appId: "1:831729942382:web:4aa84d00b6d73b28ad4b7f",
-    measurementId: "G-41K21FTLLR",
-  };
-
-  // Initialize Firebase
-  // const app = initializeApp(firebaseConfig);
-  // const analytics = getAnalytics(app);
+  useEffect(() => {
+    initFirebaseApp();
+  }, [])
 
   return (
     <>
@@ -55,27 +44,28 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
+        <meta property="og:title" content="MeetMeet" />
+        <meta property="og:description" content="젠틀에너지 회의실 예약 관리" />
       </Head>
-      <Script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></Script>
-      <Script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></Script>
-      <Script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-messaging.js"></Script>
-      <QueryClientProvider client={queryClient}>
-        <ApolloProvider client={client}>
-          <RecoilRoot>
-            {/* <RecoilObserver /> */}
-            <RouterGuard>
-            {exceptionList.includes(router.pathname) ? (
-              <Component {...pageProps} />
-            ) : (
-              <Layout>
+      
+        <QueryClientProvider client={queryClient}>
+          <ApolloProvider client={client}>
+            <RecoilRoot>
+              <RouterGuard>
+              {exceptionList.includes(router.pathname) ? (
                 <Component {...pageProps} />
-              </Layout>
-            )}
-            <SuccessModal />
-            </RouterGuard>
-          </RecoilRoot>
-        </ApolloProvider>
-      </QueryClientProvider>
+              ) : (
+                <PushNotificationLayout>
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </PushNotificationLayout>
+              )}
+              <SuccessModal />
+              </RouterGuard>
+            </RecoilRoot>
+          </ApolloProvider>
+        </QueryClientProvider>
     </>
   );
 }

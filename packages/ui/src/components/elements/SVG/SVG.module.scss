@@ -34,6 +34,10 @@
   @include path-fill(var(--color-onPrimary));
 }
 
+.primaryContainer {
+  @include path-fill((var(--color-primaryContainer)));
+}
+
 .error {
   @include path-fill(var(--color-error));
 }

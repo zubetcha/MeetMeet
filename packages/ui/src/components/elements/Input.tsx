@@ -55,7 +55,7 @@ export const Input = ({
   onClickInput,
   autoFocus,
   autoComplete
-}: InputProps) => {
+}: any) => {
   const [focused, setFocused] = useState<boolean>(false);
 
   const handleOnFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -163,12 +163,7 @@ export const Input = ({
               <div
                 style={{display:"flex", alignItems:"center", marginBottom: unitMarginBottom, marginRight: unitMarginRight}}
               >
-                <Text
-                  text={unit}
-                  type={unitType}
-                  weight="regular"
-                  color="darkMedium"
-                />
+                <Text>{unit}</Text>
               </div>
             </div>
           }

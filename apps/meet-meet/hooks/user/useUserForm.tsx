@@ -4,6 +4,11 @@ import { getPhoneFormat } from "ui/src/utils/getPhoneFormat";
 import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types";
 import { StateType } from "ui/src/components/elements/Buttons/types/button.types"
 
+/**
+ * 
+ * @param initialValues 
+ * @returns 
+ */
 export const useUserForm = (initialValues: UserFormType) => {
     const [values, setValues] = useState(initialValues);
     const [btnState, setBtnState] = useState<StateType>("disable");
