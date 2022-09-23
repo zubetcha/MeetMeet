@@ -4,17 +4,20 @@
 .page-container{
   display: flex;
   flex-direction: column;
+  max-height: 95vh;
   height: fit-content;
   gap: 40px;
   padding: 20px 20px ;
   width: 645px;
-  
+
   @include mobile() {
+    max-height: 90vh;
     padding: 16px;
     width: 100%;
   }
 
   @include mobile-verti() {
+    max-height: 90vh;
     padding: 13px;
     width: 100%;
   }
@@ -25,16 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  height: 75vh;
   overflow-y: overlay;
-
-  @include mobile() {
-    height: 70vh;
-  }
-
-  @include mobile-verti() {
-    height: 72vh;
-  }
 }
 
 .title-container {
