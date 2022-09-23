@@ -11,7 +11,8 @@ import { Header } from "./Header";
 import { useWindowSize } from "ui/src/hooks/useWindowSize";
 import { useSSE } from "@hooks/notice/useSSE";
 import { useRecoilValue } from "recoil";
-import { noticeDataState, noticeListStatsState } from "recoil/notice";
+import { noticeListStatsState } from "recoil/notice";
+import userState from "recoil/user";
 
 import { FCM_TOKEN } from "constants/firebase";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "constants/auth";
@@ -27,9 +28,9 @@ export const Layout = ({ children }: LayoutProps) => {
   const { dynamicWidth } = useWindowSize();
   const isMobile = dynamicWidth < 768;
   const { totalNum } = useRecoilValue(noticeListStatsState);
+  const userInfo = useRecoilValue(userState);
 
-  const _useSSE = useCallback(useSSE, []);
-  _useSSE();
+  useCallback(useSSE, [])();
 
   const [isClose, setIsClose] = useState<boolean>(false);
   const [isMenuClose, setIsMenuClose] = useState(true);
@@ -41,8 +42,6 @@ export const Layout = ({ children }: LayoutProps) => {
     removeCookie(REFRESH_TOKEN);
     await noticeStorage.removeItem(FCM_TOKEN).then(() => router.push("/login"));
   }
-  console.log(dynamicWidth)
-  console.log(isMobile)
   
   return (
     <>
@@ -64,7 +63,9 @@ export const Layout = ({ children }: LayoutProps) => {
             Logo={MeetmeetLogo}
             onClickUsername={() => setIsMyPageModal(true)}
             onClickLogout={() => setIsLogoutModal(true)}
+            onClickLogo={() => router.push("/")}
             totalNum={totalNum}
+            userInfo={userInfo}
           />
         }
         <div
@@ -86,7 +87,7 @@ export const Layout = ({ children }: LayoutProps) => {
           <Modal.Contents>
             <div className={classes["modal-contents-wrapper"]}>
               <Modal.Title>로그아웃 하시겠습니까?</Modal.Title>
-              <Modal.Description>로그아웃 시 로그인 페이지로 이동합니다.</Modal.Description>
+              <Modal.Description>로그아웃 시 로그인 화면으로 이동합니다.</Modal.Description>
             </div>
           </Modal.Contents>
           <Modal.Buttons>

@@ -6,12 +6,9 @@ import { useRecoilValue } from "recoil";
 import { noticeListStatsState } from "recoil/notice";
 import { NavItemType } from "ui/src/pages";
 
-
 import { Alarm } from "../Alarm/Alarm";
 import { SideMenu } from "./SideMenu";
-import { MenuItem } from "./MenuItem";
-import { SVG, Button, ButtonGroup, Text } from "ui/src/pages";
-import { navInfo } from "@shared/pageInfo";
+import { SVG } from "ui/src/pages";
 
 interface Props {
   isClose: boolean;
@@ -47,9 +44,9 @@ export const Header = ({
           <div className={classes.rightBtnBox}>
             <div className={classes.iconWrapper} onClick={() => setIsOpenAlarm(!isOpenAlarm)}>
               <SVG name="alert" color="onSurfaceVariant" width="24" height="24" />
-              {/* {totalNum > 0 && ( */}
+              {totalNum > 0 && (
                 <div className={classes.numOfAlarm}>{totalNum}</div>
-              {/* )} */}
+              )}
             </div>
             <div className={classes.iconWrapper} onClick={onClickUsername}>
               <SVG name="user" color="onSurfaceVariant" width="24" height="24" />

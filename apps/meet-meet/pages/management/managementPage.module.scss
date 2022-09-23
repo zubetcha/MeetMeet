@@ -2,20 +2,23 @@
 @import "ui/src/styles/utils";
 
 .container {
-  // @include flex-direction(column, 24);
+  @include flex-direction(column, 16);
+  @include mobile-verti() {
+    @include flex-direction(column, 8);
+  }  
 
   .button-wrapper {
     @include flexbox(end, center);
   }
 
   .meetroomCard-container {
-    height: calc(100vh - 48px);
+    height: calc(100vh - 104px);
 
     @include mobile-verti() {
-      height: calc(100vh - 81px);
+      height: calc(100vh - 129px);
     }
     @include mobile() {
-      height: calc(100vh - 105px);
+      height: calc(100vh - 161px);
     }
 
     .meetroomCards-wrapper {

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import classes from "./Layout.module.scss";
 import classNames from "classnames";
 
@@ -23,6 +24,7 @@ export const SideMenu = ({
   Logo,
   onClickLogout,
 }: Props) => {
+  const router = useRouter();
   const menuList = navInfo[0].itemList.filter(info => info.icon !== "alert");
 
   return (
@@ -36,7 +38,12 @@ export const SideMenu = ({
             <Button size="medium" label="로그아웃" configuration="text" onClick={onClickLogout} />
           </div>
           <div className={classes.logoLayout}>
-            <Logo width="140px" />
+            <div onClick={() => {
+              router.push("/")
+              setClose(true)
+            }} style={{ cursor: "pointer" }}>
+              <Logo width="140px" />
+            </div>
             <Text type="title-medium" color="primary">젠틀에너지</Text>
           </div>
           <div className={classes.menuList_wrapper}>
