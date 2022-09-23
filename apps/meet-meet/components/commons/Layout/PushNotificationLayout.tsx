@@ -29,11 +29,12 @@ export const PushNotificationLayout = ({ children }: Props) => {
     }
 
     getFcmToken().then(fcmToken => {
+      console.log(fcmToken)
       if (fcmToken) {
         getMessage();
       }
     })
-  })
+  }, [])
 
   const getMessage = () => {
     const messaging: Messaging = getMessaging();

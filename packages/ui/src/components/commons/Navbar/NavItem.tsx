@@ -43,7 +43,7 @@ export const NavItem = ({ item, totalNum }: Props) => {
               name={item.icon}
               color="onSurfaceVariant"
             />
-            {item.icon === "alert" && (
+            {item.icon === "alert" && totalNum > 0 && (
               <div className={classes.numOfAlarm}>{totalNum}</div>
             )}
           </div>
@@ -52,7 +52,7 @@ export const NavItem = ({ item, totalNum }: Props) => {
           <div className={classes.stateLayer}></div>
         </div>
         <div className={classes.modalItem}>
-          {item.isModal && item.Modal && item.Modal(isOpen)}{" "}
+          {item.isModal && item.Modal && item.Modal({ isOpen, setIsOpen })}{" "}
         </div>
       </div>
     </>

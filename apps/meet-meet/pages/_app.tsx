@@ -39,13 +39,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>MeetMeet</title>
-        <meta charSet="utf-8"></meta>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-        <meta property="og:title" content="MeetMeet" />
-        <meta property="og:description" content="젠틀에너지 회의실 예약 관리" />
       </Head>
       
         <QueryClientProvider client={queryClient}>

@@ -24,14 +24,16 @@ export const MeetroomCard = ({meetroom}: Props) => {
         <CardDepth2>
           <CardDepth2.TitleBar>
             <CardDepth2.Title>{name}</CardDepth2.Title>
-            <IconButton 
-              configuration="text"
-              size="small"
-              state="default"
-              negativeMood={false}
-              icon="settings"
-              onClick={() => setIsEditModal(true)}
-            />
+            <CardDepth2.TitleButtons>
+              <IconButton 
+                configuration="text"
+                size="small"
+                state="default"
+                negativeMood={false}
+                icon="settings"
+                onClick={() => setIsEditModal(true)}
+              />
+            </CardDepth2.TitleButtons>
           </CardDepth2.TitleBar>
           <CardDepth2.Contents>
             <div className={classes["images-wrapper"]}>

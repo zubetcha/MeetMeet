@@ -12,10 +12,14 @@ export const ImagePreview = ({ url, setImages }: Props) => {
   }
   return (
       <div className={classes["preview-container"]}>
-        <Image src={url} className={classes.preview} width={120} height={120} alt="preview"/>
+        <div className={classes["preview-wrapper"]}>
+          <Image src={url} className={classes.preview} layout="fill" alt="preview"/>
+        </div>
         {setImages && (
-          <IconButton icon="close" configuration="filled" size="small" state="default" onClick={onClickCancel} />
-        )}
+          <div className={classes["button-wrapper"]}>
+            <IconButton icon="close" configuration="filled" size="small" state="default" onClick={onClickCancel} />
+          </div>
+        )} 
       </div>
   )
 }

@@ -3,13 +3,15 @@
 
 // navBar component 스타일
 .navbarContainer {
+    position: fixed;
     padding: 16px 12px;
     width: 256px;
     transition: width 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     height: 100vh;
-
+    z-index: 100;
+    
     .topBtnLayout {
         position: relative;
         display: flex;

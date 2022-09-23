@@ -1,5 +1,7 @@
 import { TitleLayout } from "./TitleLayout"
 import { TextField } from "@components/ui"
+import classes from './reservation.module.scss';
+import classNames from "classnames"
 
 
 interface Props {
@@ -18,6 +20,7 @@ export const WriteMeetingInfo = ({
 
   return (
     <TitleLayout title="회의 정보 입력" >
+      <div className={classes['write-info']} >
           <TextField status='default' name='meetingTitle' >
             <TextField.Label>회의 제목</TextField.Label>
             <TextField.Input
@@ -27,6 +30,8 @@ export const WriteMeetingInfo = ({
               onChange={(e) => setMeetingTitle(e.target.value)}
             />
           </TextField>
+      </div>
+      <div className={classes['write-info']} >
           <TextField status='default' name='meetingAgenda' >
             <TextField.Label>회의 안건</TextField.Label>
             <TextField.Textarea
@@ -35,6 +40,7 @@ export const WriteMeetingInfo = ({
               onChange={(e) => setMeetingAgenda(e.target.value)}
             />
           </TextField>
+      </div>
       </TitleLayout>
   )
 }

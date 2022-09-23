@@ -27,7 +27,7 @@ export const ReservationInfoModal = ({
 
   const getMeetRoomNames = () => {
     const names = reservationInfo?.reservationById.meetRoomList.map((room) => {
-      return room.name
+      return ' ' + room.name
     })
     return names;
   }
@@ -43,7 +43,7 @@ export const ReservationInfoModal = ({
 
     reservationInfo?.reservationById.participantList.map((account) => {
       if(!account.isHost) {
-        names.push(account.account.name);
+        names.push(` ${account.account.name}`);
       }
     })
 

@@ -14,7 +14,20 @@ interface NavbarProps {
   Logo: React.ElementType;
   onClickUsername: () => void;
   onClickLogout: () => void;
+  onClickLogo: () => void;
   totalNum: number;
+  userInfo: {
+  department: {
+    id: number | null
+    name: string;
+    },
+    id: number | null;
+    email: string;
+    name: string;
+    noticeTime: number | null;
+    phone: string;
+    role: string;
+  }
 }
 
 export const Navbar = ({
@@ -24,8 +37,11 @@ export const Navbar = ({
   Logo,
   onClickUsername,
   onClickLogout,
-  totalNum
+  onClickLogo,
+  totalNum,
+  userInfo
 }: NavbarProps) => {
+  const { name } = userInfo;
 
   return (
     <div
@@ -41,7 +57,7 @@ export const Navbar = ({
         <div className={classes.rightBtnBox}>
           <Button
             size="small"
-            label="홍길동"
+            label={name}
             configuration="text"
             onClick={onClickUsername}
           />
@@ -49,7 +65,9 @@ export const Navbar = ({
         </div>
       </div>
       <div className={classes.logoLayout}>
-        <Logo width="140px" />
+        <div onClick={onClickLogo} style={{ cursor: "pointer" }}>
+          <Logo width="140px" />
+        </div>
         <div className={classes.customerName}>젠틀에너지</div>
       </div>
       <div className={classes.menuLayout}>

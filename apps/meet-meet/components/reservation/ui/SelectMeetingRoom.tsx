@@ -22,7 +22,6 @@ export const SelectMeetingRoom = ({
   isChecked,
   setIsChecked
 }:Props) => {
-  console.log(isChecked);
   const router = useRouter();
   const {data: meetRoomList} = useGetMeetrooms();
   const {data: meetRoomMergeInfo} = useGetMeetroomMergeInfo(selectedRoomId);

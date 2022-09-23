@@ -88,19 +88,40 @@
 }
 
 .preview-container {
-  @include flexbox(center, center);
   border-radius: 16px;
+  width: 100%;
   position: relative;
-
-  div {
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 100%;
+  
+  .preview-wrapper {
+    @include flexbox(center, center);
     position: absolute;
-    top: -8px;
-    right: -8px;
-  }
-
-  .preview {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
     border-radius: 16px;
+    transition: all 0.3s ease-in-out;
+
+    @include mobile-verti() {
+      border-radius: 8px;
+    }
+
+
+    .preview {
+      border-radius: 16px;
+    }
   }
+      .button-wrapper {
+      position: absolute;
+      z-index: 100;
+      top: 4px;
+      right: 4px;
+    }
+
 }
 
 .meetroom-form-wrapper {

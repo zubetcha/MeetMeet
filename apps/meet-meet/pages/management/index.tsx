@@ -4,7 +4,7 @@ import { useGetMeetrooms } from "@hooks/queries/meetroom/useGetQueries";
 
 import { MeetroomCard } from "@components/management/MeeroomCard";
 import { MeetroomAddModal } from "@components/management/MeetroomAddModal";
-import { CardDepth1, Button, IconButton } from "ui/src/pages"
+import { CardDepth1, Button, IconButton, Text } from "ui/src/pages"
 
 import { MeetRoom } from "graphql/meetroom/types";
 
@@ -15,20 +15,18 @@ const ManagementPage = () => {
   return (
     <>
       <div className={classes.container}>
-        {/* <div className={classes["button-wrapper"]}>
-          <Button
-            label="회의실 생성하기"
-            size="large"
-            configuration="filled"
-            showIcon
-            icon="add"
-            onClick={() => setIsAddModal(true)}
-          />
-        </div> */}
+        <Text
+          type="headline-large"
+          color="primary"
+          style={{ fontWeight: "bold" }}
+        >
+          젠틀에너지 회의실 관리
+        </Text>
         <div className={classes["meetroomCard-container"]}>
           <CardDepth1>
             <CardDepth1.TitleBar>
               <CardDepth1.Title>회의실 목록</CardDepth1.Title>
+              <CardDepth1.TitleButtons>
                 <IconButton 
                   configuration="text"
                   size="small"
@@ -37,6 +35,7 @@ const ManagementPage = () => {
                   icon="add"
                   onClick={() => setIsAddModal(true)}
                 />
+              </CardDepth1.TitleButtons>
             </CardDepth1.TitleBar>
             <CardDepth1.Contents>
               <div className={classes["meetroomCards-wrapper"]}>

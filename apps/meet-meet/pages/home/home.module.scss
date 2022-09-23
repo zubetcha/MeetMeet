@@ -35,8 +35,5 @@
     .calendar_wrapper {
         position: absolute;
         top: 96px;
-        @include mobile-verti() {
-            top: 80px;
-        }
     }
 }
