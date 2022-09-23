@@ -35,13 +35,15 @@ export default function AlarmSetting({ onClickButton }: Props) {
       <CardDepth1>
         <CardDepth1.TitleBar>
           <CardDepth1.Title>알림 세팅</CardDepth1.Title>
-          <IconButton
-            configuration="text"
-            size="medium"
-            state="default"
-            icon="close"
-            onClick={onClickButton}
-          />
+          <CardDepth1.TitleButtons>
+            <IconButton
+              configuration="text"
+              size="medium"
+              state="default"
+              icon="close"
+              onClick={onClickButton}
+            />
+          </CardDepth1.TitleButtons>
         </CardDepth1.TitleBar>
         <CardDepth1.Contents>
           <div className={classes.alarmInnerContainer}>

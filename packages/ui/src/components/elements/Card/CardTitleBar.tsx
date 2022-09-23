@@ -13,13 +13,14 @@ export const CardDepth1TitleBar = ({children}: Props) => {
       classes["depth1"]
       )}
     >
-      <div>
+      {children}
+      {/* <div>
         {cardTitle && cardTitle}
       </div>
       <div className={classes["title-buttons"]}>
         {cardButtons && cardButtons}
         {cardIconButtons && cardIconButtons}
-      </div>
+      </div> */}
     </div>
   )
 }
@@ -34,12 +35,13 @@ export const CardDepth2TitleBar = ({children}: Props) => {
       classes["depth2"]
       )}
     >
-      <div>
+      {children}
+      {/* <div>
         {cardTitle && cardTitle}
       </div>
       <div className={classes["title-buttons"]}>
         {cardIconButtons && cardIconButtons}
-      </div>
+      </div> */}
     </div>
   )
 }

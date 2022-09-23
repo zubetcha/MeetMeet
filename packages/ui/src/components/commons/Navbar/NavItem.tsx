@@ -52,7 +52,7 @@ export const NavItem = ({ item, totalNum }: Props) => {
           <div className={classes.stateLayer}></div>
         </div>
         <div className={classes.modalItem}>
-          {item.isModal && item.Modal && item.Modal(isOpen)}{" "}
+          {item.isModal && item.Modal && item.Modal({ isOpen, setIsOpen })}{" "}
         </div>
       </div>
     </>

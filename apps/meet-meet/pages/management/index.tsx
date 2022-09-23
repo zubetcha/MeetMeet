@@ -26,6 +26,7 @@ const ManagementPage = () => {
           <CardDepth1>
             <CardDepth1.TitleBar>
               <CardDepth1.Title>회의실 목록</CardDepth1.Title>
+              <CardDepth1.TitleButtons>
                 <IconButton 
                   configuration="text"
                   size="small"
@@ -34,6 +35,7 @@ const ManagementPage = () => {
                   icon="add"
                   onClick={() => setIsAddModal(true)}
                 />
+              </CardDepth1.TitleButtons>
             </CardDepth1.TitleBar>
             <CardDepth1.Contents>
               <div className={classes["meetroomCards-wrapper"]}>
