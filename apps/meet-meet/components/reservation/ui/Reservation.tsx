@@ -48,42 +48,43 @@ export const Reservation = ({
 
   return (
     <div className={classes["page-container"]} >
-      <Text type={'title-large'} style={{fontWeight: 'bold'}} >회의실 예약</Text>
-      
-      <SelectMeetingRoom
-        selectedRoomId={selectedRoomId}
-        setSelectedRoomId={setSelectedRoomId}
-        mergedRoomId={mergedRoomId}
-        setMergedRoomId={setMergedRoomId}
-        isChecked={isChecked}
-        setIsChecked={setIsChecked}
-      />
+      <Text type={'title-large'} style={{fontWeight: 'bold', height:'fit-content' }} >{reservationInfo ? '회의 수정' : '회의 예약'}</Text>
 
-      <SelectDate
-        date={date}
-        setDate={setDate}
-      />
+      <div className={classes["page-body"]} >
+        <SelectMeetingRoom
+          selectedRoomId={selectedRoomId}
+          setSelectedRoomId={setSelectedRoomId}
+          mergedRoomId={mergedRoomId}
+          setMergedRoomId={setMergedRoomId}
+          isChecked={isChecked}
+          setIsChecked={setIsChecked}
+        />
 
-      <SelectTime
-        selectedTimeId={selectedTimeId}
-        setSelectedTimeId={setSelectedTimeId}
-        timeList={timeList}
-        disabledIndex={disabledIndex}
-      />
+        <SelectDate
+          date={date}
+          setDate={setDate}
+        />
 
-      <WriteMeetingInfo
-        meetingTitle={meetingTitle}
-        meetingAgenda={meetingAgenda}
-        setMeetingAgenda={setMeetingAgenda}
-        setMeetingTitle={setMeetingTitle}
-      />
+        <SelectTime
+          selectedTimeId={selectedTimeId}
+          setSelectedTimeId={setSelectedTimeId}
+          timeList={timeList}
+          disabledIndex={disabledIndex}
+        />
 
-      <SelectMemeber
-        selectedMembers={selectedMembers}
-        setSelectedMembers={setSelectedMembers}
-      />
+        <WriteMeetingInfo
+          meetingTitle={meetingTitle}
+          meetingAgenda={meetingAgenda}
+          setMeetingAgenda={setMeetingAgenda}
+          setMeetingTitle={setMeetingTitle}
+        />
 
-      <footer>
+        <SelectMemeber
+          selectedMembers={selectedMembers}
+          setSelectedMembers={setSelectedMembers}
+        />
+      </div>
+
         <div className={classes['button-wrapper']} >
           <Button
             label={reservationInfo ? '회의 수정하기' : '회의 예약하기'}
@@ -92,7 +93,6 @@ export const Reservation = ({
             onClick={reservationInfo ? updateReservation : submitReservation}
           />
         </div>
-      </footer>
       {(isModal && reservedInfo) &&
         <ConfirmModal
           setIsModal={setIsModal}

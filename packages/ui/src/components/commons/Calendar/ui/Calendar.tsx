@@ -196,8 +196,8 @@ export const Calendar = ({
                                         dateInfo={d} 
                                         onClickDate={onClickDate}
                                         btwDates={d.value.getTime() >= start.getTime() && d.value.getTime() <= end.getTime()? true:false} 
-                                        startDate={d.value.getTime() === start.getTime()}  
-                                        endDate={d.value.getTime() === end.getTime()}  
+                                        startDate={d.value.getTime() === new Date(start.getFullYear(), start.getMonth(), start.getDate()).getTime()}  
+                                        endDate={d.value.getTime() === new Date(end.getFullYear(), end.getMonth(), end.getDate()).getTime()}  
                                         hoverDate={hoverDates[0]?.getTime() <= d.value.getTime() && d.value.getTime() <= hoverDates[hoverDates.length -1]?.getTime()}
                                         onMouseOverDate={onMouseOverDate}
                                         onMouseLeaveDate={onMouseLeaveDate}
