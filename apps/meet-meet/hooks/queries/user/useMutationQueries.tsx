@@ -16,7 +16,7 @@ export const usePostUserInfo = (setIsModal?: (is: boolean) => void) => {
     {
       onSuccess: ({ data }) => {
         if (pathname.includes("/join/onboarding")) {
-          replace("/");
+          replace("/home");
         }
         else if (setIsModal) {
           handleSuccess({ title: "회원 정보 수정 성공", setIsModal });
