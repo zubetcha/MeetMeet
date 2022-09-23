@@ -42,7 +42,6 @@ export const Navbar = ({
   userInfo
 }: NavbarProps) => {
   const { name } = userInfo;
-  console.log(userInfo)
 
   return (
     <div

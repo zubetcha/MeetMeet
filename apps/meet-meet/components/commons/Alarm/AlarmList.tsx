@@ -81,40 +81,40 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
     };
   }, [readAll.isSuccess]);
 
-  console.log(noticeList);
-
   return (
     <>
       <CardDepth1>
         <CardDepth1.TitleBar>
           <CardDepth1.Title>알림 내역</CardDepth1.Title>
-          {isTune && (
-            selectedId ? <Button label="읽음" size="medium" configuration="text" onClick={onClickRead} />
-            : <Button label="모두 읽음" size="medium" configuration="text" onClick={() => setIsConfirmModal(true)} />
-          )}
-          {noticeList.length > 0 && (
+          <CardDepth1.TitleButtons>
+            {isTune ? (
+              selectedId ? <Button label="읽음" size="medium" configuration="text" onClick={onClickRead} />
+              : <Button label="모두 읽음" size="medium" configuration="text" onClick={() => setIsConfirmModal(true)} />
+            ) : <></>}
+            {noticeList.length > 0 ? (
+              <IconButton
+                configuration="text"
+                size="medium"
+                state="default"
+                icon="tune"
+                onClick={() => setIsTune(prev => !prev)}
+              />
+            ): <></>}
             <IconButton
               configuration="text"
               size="medium"
               state="default"
-              icon="tune"
-              onClick={() => setIsTune(prev => !prev)}
+              icon="settings"
+              onClick={onClickButton}
             />
-          )}
-          <IconButton
-            configuration="text"
-            size="medium"
-            state="default"
-            icon="settings"
-            onClick={onClickButton}
-          />
-          <IconButton
-            configuration="text"
-            size="medium"
-            state="default"
-            icon="close"
-            onClick={() => setIsOpen && setIsOpen(false)}
-          />
+            <IconButton
+              configuration="text"
+              size="medium"
+              state="default"
+              icon="close"
+              onClick={() => setIsOpen && setIsOpen(false)}
+            />
+          </CardDepth1.TitleButtons>
         </CardDepth1.TitleBar>
         <CardDepth1.Contents>
           <div className={classes.alarmInnerContainer}>
