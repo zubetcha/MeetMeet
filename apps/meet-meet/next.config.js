@@ -36,6 +36,11 @@ const config = {
   eslint: {
     dirs: ["pages", "components", "hooks", "shared", "store", "types"],
   },
+  compiler: isProduction && {
+    removeConsole: {
+      exclude: ['error'],
+    },
+  },
   // async rewrites() {
   //   return [
   //     {

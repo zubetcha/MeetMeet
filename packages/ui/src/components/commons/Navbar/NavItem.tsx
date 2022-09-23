@@ -43,7 +43,7 @@ export const NavItem = ({ item, totalNum }: Props) => {
               name={item.icon}
               color="onSurfaceVariant"
             />
-            {item.icon === "alert" && (
+            {item.icon === "alert" && totalNum > 0 && (
               <div className={classes.numOfAlarm}>{totalNum}</div>
             )}
           </div>
