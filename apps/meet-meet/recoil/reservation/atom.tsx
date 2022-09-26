@@ -4,6 +4,6 @@ import { RefetchType } from "./types";
 export const refetchState = atom<RefetchType>({
   key: 'reservationRefetch',
   default: {
-    refetch: false
+    refetch: 0
   }
 })

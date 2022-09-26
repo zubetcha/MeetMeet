@@ -17,9 +17,9 @@ import { refetchState } from "recoil/reservation/atom";
 // TODO: 2. reservation id 로 상세 예약 정보 조회하는 로직 추가해야함. 
 // TODO: 3. 가능하다면, 병합된 미팅룸은 다른 색으로 표시해서 병합된 회의실임을 명시해줄 수 있어야 함.
 const Home: NextPage = () => {
-  const [btnState, setBtnState] = useState<boolean>(false);
+  const [calendar, setCalendar] = useState<boolean>(false);
   const [reservationList, setReservationList] = useState<any>({});
-  const [refetch, setRefetch] = useRecoilState(refetchState);
+  const [refetch] = useRecoilState(refetchState);
 
   // TODO: 나중에 오늘 시간을 가져오는 것으로 바꿔야함.
   const [date, setDate] = useState<Date>(new Date());
@@ -44,10 +44,7 @@ const Home: NextPage = () => {
   );
 
   useEffect(() => {
-    if(!refetch) {
-      return;
-    }
-
+    
     let reservationAPI: any = {
       total: ReservationAPI.getAllReservationInfo,
       userHost: ReservationAPI.getReservationInfobyHost,
@@ -60,7 +57,7 @@ const Home: NextPage = () => {
     )
       .then((res: any) => handleResult(res))
       .catch((err: any) => console.log(err));
-  }, [selectedValue, refetch]);
+  }, [selectedValue, refetch, date]);
 
   // DESCRIBE: 결과값 ReservationChart 에 맞게 수정 하는 로직 (각 정보를 key 값으로 접근할 수 있도록 변경하는 작업)
   const handleResult = (result: any) => {
@@ -94,16 +91,16 @@ const Home: NextPage = () => {
           configuration="outlined"
           size="large"
           label={formatDate(date)}
-          onClick={() => setBtnState(true)}
+          onClick={() => setCalendar(true)}
           style={{ width: "fit-content" }}
         />
-        {btnState && (
+        {calendar && (
           <div className={classes.calendar_wrapper}>
             <SingleCalendar
-              setCalendar={setBtnState}
+              setCalendar={setCalendar}
               onClickSubmitBtn={(startDate: any) => {
                 setDate(startDate);
-                setBtnState(false);
+                setCalendar(false);
               }}
               date={date}
               timeType="futureCurrent"
