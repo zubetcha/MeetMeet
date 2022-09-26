@@ -112,14 +112,14 @@ export default function useReservation({
   // DESCRIBE: Cell 클릭 했을 떄 동작하는 로직과 관련된 부분
   useEffect(() => {
     const { startIndex, endIndex } = selectedInfo;
-    console.log(startIndex, endIndex);
+    // console.log(startIndex, endIndex);
 
     if (startIndex === -1 || endIndex === -1 ) {
       return;
     }
 
     if (handleBetweenMeetingCancel()) {
-      console.log('dd')
+      // console.log('dd')
       return;
     }
 

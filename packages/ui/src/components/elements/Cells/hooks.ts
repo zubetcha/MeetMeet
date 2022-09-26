@@ -38,6 +38,7 @@ export const useCellGroup = ({
   }, [hoverIndex, selectedIndex]);
 
   useEffect(() => {
+    console.log(defaultIndex);
     setSelectedIndex(defaultIndex);
   }, [defaultIndex]);
 

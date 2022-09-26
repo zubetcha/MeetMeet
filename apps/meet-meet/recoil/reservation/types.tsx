@@ -1,5 +1,5 @@
 
 
 export type RefetchType = {
-  refetch: boolean
+  refetch: number
 }

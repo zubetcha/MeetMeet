@@ -31,9 +31,6 @@ export const ReservationChart = ({
   meetingRoomList,
   unavailableList,
 }: ReservationProps) => {
-  console.log(unavailableList);
-
-
   // DESCRIBE: 빈 영역 클릭헀을 때 세팅되는 상태값 (새로운 예약 정보)
   const [selectedData, setSelectedData] = useState({
     meetingRoom: {
@@ -60,8 +57,6 @@ export const ReservationChart = ({
     () => getThreeDateFromNow(startDate as Date),
     [startDate]
   );
-
-  console.log(dateList);
 
   // DESCRIBE: 간트 차트 시간 리스트
   const timeList = useMemo(() => getTimeList(startTime, endTime), []);

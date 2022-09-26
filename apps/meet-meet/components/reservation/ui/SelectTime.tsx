@@ -26,7 +26,7 @@ export const SelectTime = ({
   })
 
   useEffect(() => {
-    if(selectedTimeId.start && selectedTimeId.end){
+    if(typeof(selectedTimeId.start) === 'number' && typeof(selectedTimeId.end) === 'number'){
       const start = selectedTimeId.start;
       const end = selectedTimeId.end;
       const found = disabledIndex?.find(idx => idx > start && end > idx);
@@ -35,8 +35,12 @@ export const SelectTime = ({
         if(selectedTimeId.start === defaultIndex.start) setDefaultIndex({start:end, end:end});
         else setDefaultIndex({start:start, end:start});
       }
-      else setDefaultIndex(selectedTimeId);
+      else setDefaultIndex({...selectedTimeId});
+    } else {
+      setDefaultIndex({...selectedTimeId})
     }
+
+    
   }, [selectedTimeId])
 
   const getTitle = () => {

@@ -19,6 +19,23 @@
 
 .cellGroupBox {
   display: flex;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    position: absolute;
+    width: 4px !important;
+    height: 4px !important;
+  }
+
+  &::-webkit-scrollbar * {
+    background:transparent !important; 
+  }
+  &::-webkit-scrollbar-track {
+      background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+      background-color: var(--color-onSurface-opacity-12);
+      border-radius: 5px;
+  }
 }
 
 .cellContainer {
@@ -51,7 +68,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-align: center;
-    @include flexbox(center, center);
+    // @include flexbox(center, center);
   }
 
   .stateLayer {
