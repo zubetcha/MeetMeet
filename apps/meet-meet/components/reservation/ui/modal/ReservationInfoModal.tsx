@@ -70,9 +70,8 @@ export const ReservationInfoModal = ({
 
   const handleOnSuccess = () => {
     setIsConfirmModal(true);
-    setRefetch({refetch:true});
+    setRefetch({refetch: refetch.refetch + 1});
     setTimeout(() => {
-      setRefetch({refetch:false});
       setIsOpen(false);
     }, 1300)
   }
