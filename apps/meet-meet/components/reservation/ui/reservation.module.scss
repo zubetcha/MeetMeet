@@ -30,6 +30,22 @@
   gap: 30px;
   overflow-y: overlay;
   padding: 10px 15px;
+  &::-webkit-scrollbar {
+    position: absolute;
+    width: 4px !important;
+    height: 4px !important;
+  }
+
+  &::-webkit-scrollbar * {
+    background:transparent !important; 
+  }
+  &::-webkit-scrollbar-track {
+      background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+      background-color: var(--color-onSurface-opacity-12);
+      border-radius: 5px;
+  }
 }
 
 .title-container {

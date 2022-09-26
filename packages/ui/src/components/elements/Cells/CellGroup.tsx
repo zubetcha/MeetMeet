@@ -22,7 +22,6 @@ export const CellGroup = ({
   onChange = () => {},
   disableIndex = [],
 }: Props) => {
-
   const { btnState, onClick, onMouseLeave, onMouseOver, btnHoverState } =
     useCellGroup({
       defaultIndex: defaultIndex,

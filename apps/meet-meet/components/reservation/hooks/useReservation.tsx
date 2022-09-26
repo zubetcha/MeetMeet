@@ -22,7 +22,7 @@ export const useReservation = ({
   reservationInfo
 }:Props) => {
 
-  console.log(reservationInfo);
+  // console.log(reservationInfo);
 
   const timeList = Array.from({length: 22}, (_, idx:number) => {
     const hour = Math.floor((idx + 16)/2);
@@ -62,6 +62,11 @@ export const useReservation = ({
 
       if(reservationInfo && reservationInfo.date === formatDate(date) && reservationInfo.meetRoomList.map(room => room.id).includes(selectedRoomId)){
         indexedList = indexedList.filter((index) => index < startTimeIdx || index > endTimeIdx);
+      }
+
+      console.log(indexedList);
+      if(indexedList.includes(selectedTimeId.start) || indexedList.includes(selectedTimeId.end)) {
+        setSelectedTimeId({start: null, end: null});
       }
 
       setDisabledIndex(indexedList);
@@ -151,11 +156,14 @@ export const useReservation = ({
       const result = await addReservation.mutateAsync(request);
       setReservedInfo(result.data);
       setIsModal(true);
-      refetchReservedTime();
-      setSelectedTimeId({
-        start: null,
-        end: null
-      });
+      setTimeout(() => {
+        router.push('/home');
+      }, 1300)
+      // refetchReservedTime();
+      // setSelectedTimeId({
+      //   start: null,
+      //   end: null
+      // });
     }
   }
 
@@ -184,11 +192,14 @@ export const useReservation = ({
       const result = await updateReservationMutation.mutateAsync({reservationId: reservationInfo.id, reservationInfo: request})
       setReservedInfo(result.data);
       setIsModal(true);
-      refetchReservedTime();
-      setSelectedTimeId({
-        start:null,
-        end:null
-      })
+      setTimeout(() => {
+        router.push('/home');
+      }, 1300)
+      // refetchReservedTime();
+      // setSelectedTimeId({
+      //   start:null,
+      //   end:null
+      // })
     }
 
   }

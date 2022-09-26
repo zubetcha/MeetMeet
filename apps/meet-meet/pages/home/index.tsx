@@ -28,8 +28,8 @@ const Home: NextPage = () => {
   const radioInfo = useMemo(
     () => [
       { id: "total", label: "전체 리스트" },
-      { id: "userHost", label: "내가 호스트인 회의실" },
-      { id: "userParticipate", label: "내가 참여하는 회의실" },
+      { id: "userHost", label: "내가 호스트인 회의" },
+      { id: "userParticipate", label: "내가 참여하는 회의" },
     ],
     []
   );
@@ -44,7 +44,7 @@ const Home: NextPage = () => {
   );
 
   useEffect(() => {
-    
+
     let reservationAPI: any = {
       total: ReservationAPI.getAllReservationInfo,
       userHost: ReservationAPI.getReservationInfobyHost,

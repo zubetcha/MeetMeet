@@ -70,3 +70,4 @@ export const useReadAllAlarms = (setIsModal: (is: boolean) => void) => {
     }
   )
 }
+
