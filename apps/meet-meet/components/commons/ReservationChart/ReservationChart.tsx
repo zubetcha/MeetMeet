@@ -105,7 +105,7 @@ export const ReservationChart = ({
 
         <div
           className={classes.reservationScrollSection}
-          style={{ width: width }}
+          // style={{ width: width }}
         >
           {/* 시간 표시하는 header 영역 */}
           <ReservationHeader timeList={timeList} />
