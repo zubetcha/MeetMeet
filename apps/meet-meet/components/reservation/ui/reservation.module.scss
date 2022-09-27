@@ -4,22 +4,21 @@
 .page-container{
   display: flex;
   flex-direction: column;
-  max-height: 95vh;
-  height: fit-content;
+  height: 100%;
   gap: 40px;
   padding: 20px 20px ;
   width: 645px;
 
   @include mobile() {
-    max-height: 90vh;
-    padding: 16px;
+    padding: 0px;
     width: 100%;
+    gap: 20px;
   }
 
   @include mobile-verti() {
-    max-height: 90vh;
-    padding: 13px;
+    padding: 0px;
     width: 100%;
+    gap: 20px;
   }
 }
 
@@ -30,6 +29,11 @@
   gap: 30px;
   overflow-y: overlay;
   padding: 10px 15px;
+
+  @include mobile-verti() {
+    margin-bottom: 50px;
+  }
+
   &::-webkit-scrollbar {
     position: absolute;
     width: 4px !important;
@@ -82,15 +86,31 @@
       justify-content: space-between;
     }
 
-    .team-select {
-      width: 45%;
+    &.flex-column {
+      @include flex-direction(column);
+      align-items: baseline;
+    }
+
+    .team-select-box {
+      width: 100%;
       margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .team-select {
+        width: 40%;
+      }
+
+      .selectAll-checkbox {
+        
+      }
     }
 
     .member-select {
-      width: 45%;
+      width: 100%;
       position: relative;
-      margin-top: 15px;
+      margin-top: 40px;
 
       .selected-member-list {
         position: absolute;
@@ -124,6 +144,19 @@
   margin-bottom: auto;
   display: flex;
   justify-content: flex-end;
+  @include mobile-verti() {
+    width: 100%;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    button {
+      width: 100%;
+      justify-content: center;
+      height: 45px;
+      border-radius: 0px !important;
+    }
+  }
 }
 
 .infoModal-description-container {

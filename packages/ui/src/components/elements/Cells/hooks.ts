@@ -118,6 +118,7 @@ export const useCellGroup = ({
   };
 
   const onClick = (index: number) => {
+
     let _selectedIndex = { ...selectedIndex };
 
     if (typeof selectedIndex.start !== "number") {

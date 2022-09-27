@@ -36,7 +36,7 @@ export const WriteMeetingInfo = ({
             <TextField.Label>회의 안건</TextField.Label>
             <TextField.Textarea
               value={meetingAgenda}
-              placeholder='회의 안건을 적어주세요.'
+              placeholder='회의 안건을 적어주세요. (필수 입력 내용 아님)'
               onChange={(e) => setMeetingAgenda(e.target.value)}
             />
           </TextField>
