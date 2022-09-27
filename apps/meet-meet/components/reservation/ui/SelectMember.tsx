@@ -13,12 +13,20 @@ interface Props {
   setSelectedMembers: (st:any) => void
 }
 
-type selectedMemberType = SelectItemType;
-
-type memberType = {
+type selectedMemberType = {
   id: string;
   name: string;
+  noticeTime:number;
+  role: string;
+  __typename: string;
+  department: {
+    __typename: string;
+    id: number;
+    name: string;
+  }
 }
+
+type memberType = SelectItemType
 
 
 export const SelectMemeber = ({
@@ -132,7 +140,7 @@ export const SelectMemeber = ({
               })}
             </Select>
             <div className={classes['selected-member-list']} >
-              {selectedMembers.map((member:memberType, idx:number) => {
+              {selectedMembers.map((member:selectedMemberType, idx:number) => {
                 return (
                   <Button 
                     key={`selectedMember-${idx}`}
