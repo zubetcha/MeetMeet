@@ -55,7 +55,9 @@ export const SelectMemeber = ({
   }, [isChecked])
 
   const getDepartmentName = () => {
-    if(accountList?.accountByDepartment.length !== 0){
+
+    console.log(accountList?.accountByDepartment)
+    if(accountList?.accountByDepartment){
       const name = departmentList?.departments.filter(team => team.id === selectedDepartment)[0].name;
       return name;
     }
