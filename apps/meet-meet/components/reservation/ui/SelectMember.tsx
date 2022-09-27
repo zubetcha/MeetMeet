@@ -14,9 +14,9 @@ interface Props {
 }
 
 type selectedMemberType = {
-  id: string;
+  id: number;
   name: string;
-  noticeTime:number;
+  noticeTime?:number;
   role: string;
   __typename: string;
   department: {
@@ -54,7 +54,9 @@ export const SelectMemeber = ({
   }, [isChecked])
 
   const getDepartmentName = () => {
-    if(accountList?.accountByDepartment.length !== 0){
+
+    console.log(accountList?.accountByDepartment);
+    if(accountList?.accountByDepartment.length !== 0 ){
       const name = departmentList?.departments.filter(team => team.id === selectedDepartment)[0].name;
       return name;
     }
@@ -69,8 +71,8 @@ export const SelectMemeber = ({
     setSelectedMembers(_selectedMembers);
   }
   
-  const deleteMemeber = (member:memberType) => {
-    const _selectedMemeber = selectedMembers.filter((value:memberType, index:number) => {
+  const deleteMemeber = (member:selectedMemberType) => {
+    const _selectedMemeber = selectedMembers.filter((value:selectedMemberType, index:number) => {
       return value.id !== member.id;
     })
 
@@ -89,11 +91,14 @@ export const SelectMemeber = ({
   }
 
   const deleteAllMembers = () => {
-    const _selectedMembers = selectedMembers.filter((value:selectedMemberType, index:number) => {
-      return value.department.id !== selectedDepartment
-    })
+    if(departmentList?.departments.length !== 0 && selectedMembers){
 
-    setSelectedMembers(_selectedMembers);
+      const _selectedMembers = selectedMembers.filter((value:selectedMemberType, index:number) => {
+        return value.department.id !== selectedDepartment
+      })
+      setSelectedMembers(_selectedMembers);
+    }
+
   }
 
 

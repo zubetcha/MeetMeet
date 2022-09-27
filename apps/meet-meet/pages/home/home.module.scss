@@ -4,7 +4,9 @@
 .container {
     @include flex-direction(column, 32);
     width: 100%;
+    min-width: 100%;
     position: relative;
+    padding: 10px;
     height: calc(100vh - 48px);
 
     @include mobile-verti() {

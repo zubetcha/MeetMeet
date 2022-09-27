@@ -31,7 +31,7 @@ export const useReservation = ({
 
   const startTimeIdx = timeList.findIndex(time => time === reservationInfo?.startTime);
   const endTimeIdx = timeList.findIndex(time => time === reservationInfo?.endTime) - 1;
-  const reservationParticipants = reservationInfo?.participantList.filter(participant => !participant.isHost).map(participant => {return {id :participant.account.id, name: participant.account.name}})
+  const reservationParticipants = reservationInfo?.participantList.filter(participant => !participant.isHost).map(participant => participant.account)
 
   const [date, setDate] = useState<Date>(new Date());
   const [isChecked, setIsChecked] = useState<boolean>(false);
