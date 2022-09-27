@@ -86,15 +86,31 @@
       justify-content: space-between;
     }
 
-    .team-select {
-      width: 45%;
+    &.flex-column {
+      @include flex-direction(column);
+      align-items: baseline;
+    }
+
+    .team-select-box {
+      width: 100%;
       margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .team-select {
+        width: 40%;
+      }
+
+      .selectAll-checkbox {
+        
+      }
     }
 
     .member-select {
-      width: 45%;
+      width: 100%;
       position: relative;
-      margin-top: 15px;
+      margin-top: 40px;
 
       .selected-member-list {
         position: absolute;
