@@ -83,7 +83,7 @@ export const SelectTime = ({
           >
             {timeList.map((time, idx) => {
               if(idx + 1 === timeList.length) {
-                return;
+                return <></>;
               }
               return <Cell label={time} key={`reservation-time-${idx}`} />
             })}
