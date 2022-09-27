@@ -10,13 +10,15 @@
   width: 645px;
 
   @include mobile() {
-    padding: 16px;
+    padding: 0px;
     width: 100%;
+    gap: 20px;
   }
 
   @include mobile-verti() {
-    padding: 13px;
+    padding: 0px;
     width: 100%;
+    gap: 20px;
   }
 }
 
@@ -27,7 +29,11 @@
   gap: 30px;
   overflow-y: overlay;
   padding: 10px 15px;
-  
+
+  @include mobile-verti() {
+    margin-bottom: 50px;
+  }
+
   &::-webkit-scrollbar {
     position: absolute;
     width: 4px !important;
@@ -122,6 +128,19 @@
   margin-bottom: auto;
   display: flex;
   justify-content: flex-end;
+  @include mobile-verti() {
+    width: 100%;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    button {
+      width: 100%;
+      justify-content: center;
+      height: 45px;
+      border-radius: 0px !important;
+    }
+  }
 }
 
 .infoModal-description-container {
