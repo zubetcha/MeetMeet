@@ -138,8 +138,7 @@ export const useReservation = ({
       selectedRoomId > 0 && 
       typeof(selectedTimeId.start) === 'number' && 
       typeof(selectedTimeId.end) === 'number' && 
-      meetingTitle && 
-      meetingAgenda && 
+      meetingTitle &&  
       selectedMembers.length > 0
     ){
       const request = {
