@@ -49,14 +49,13 @@ export const SelectMemeber = ({
   }, [accountList])
 
   useEffect(() => {
+    console.log(isChecked)
     if(isChecked) addAllMemebers();
     else deleteAllMembers();
   }, [isChecked])
 
   const getDepartmentName = () => {
-
-    console.log(accountList?.accountByDepartment);
-    if(accountList?.accountByDepartment.length !== 0 ){
+    if(accountList?.accountByDepartment.length !== 0){
       const name = departmentList?.departments.filter(team => team.id === selectedDepartment)[0].name;
       return name;
     }
@@ -126,6 +125,7 @@ export const SelectMemeber = ({
                   id='meetingRoomMerged-checkbox'
                   checked={isChecked}
                   onChange={() => setIsChecked(!isChecked)}
+                  forceClick={true}
                 >
                   <Checkbox.Label>{`${getDepartmentName()} 전원 선택 ${isChecked ? '해제' : ''}`}</Checkbox.Label>
                 </Checkbox>
