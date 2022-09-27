@@ -13,7 +13,8 @@
     transition: margin-left 0.3s ease-out;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     overflow: auto;
 
     @include desktop()  {
@@ -32,11 +33,13 @@
 
     @include mobile-verti() {
         margin-top: 57px;
+        height: calc(100vh - 57px);
         padding: 12px;
     }
 
     @include mobile() {
         margin-top: 57px;
+        height: calc(100vh - 57px);
         padding: 24px;
     }
 }
