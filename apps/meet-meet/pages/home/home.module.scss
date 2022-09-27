@@ -7,15 +7,16 @@
     min-width: 100%;
     position: relative;
     padding: 10px;
-    height: calc(100vh - 48px);
+    height: 100%;
+    // height: calc(100vh - 48px);
 
     @include mobile-verti() {
-        height: calc(100vh - 81px);
+        // height: calc(100vh - 81px);
         @include flex-direction(column, 16);
     }
 
     @include mobile() {
-      height: calc(100vh - 105px);
+    //   height: calc(100vh - 105px);
     }
 }
 
