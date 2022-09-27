@@ -3,7 +3,7 @@
 .reservationContainer{
     @include flexbox(start, start);
     overflow-y: overlay;
-    overflow-x: overlay;
+    overflow-x: hidden;
 
     &::-webkit-scrollbar {
         position: absolute;
@@ -34,9 +34,8 @@
     }
 
     .reservationScrollSection{
-        width: 100%;
-        min-width: 1200px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x: overlay;
         position: relative;
 
         &::-webkit-scrollbar {
