@@ -37,9 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   useEffect(() => {
-
     window.scrollTo(0, 1);
-
     debounceInnerHeight();
     window.addEventListener('resize', debounceInnerHeight);
 
