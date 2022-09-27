@@ -24,7 +24,7 @@ export const useReservation = ({
 
   // console.log(reservationInfo);
 
-  const timeList = Array.from({length: 22}, (_, idx:number) => {
+  const timeList = Array.from({length: 23}, (_, idx:number) => {
     const hour = Math.floor((idx + 16)/2);
     return `${hour < 10 ? '0' + hour : hour}:${idx%2*3}0`
   })
@@ -90,7 +90,6 @@ export const useReservation = ({
       typeof(selectedTimeId.start) === 'number' && 
       typeof(selectedTimeId.end) === 'number' && 
       meetingTitle && 
-      meetingAgenda && 
       selectedMembers.length > 0
     ) setBtnState(true);
 
@@ -99,7 +98,6 @@ export const useReservation = ({
     selectedRoomId,
     selectedTimeId,
     meetingTitle,
-    meetingAgenda,
     selectedMembers
   ])
 

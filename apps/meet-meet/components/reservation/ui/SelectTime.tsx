@@ -82,6 +82,9 @@ export const SelectTime = ({
             defaultIndex={defaultIndex}
           >
             {timeList.map((time, idx) => {
+              if(idx + 1 === timeList.length) {
+                return <></>;
+              }
               return <Cell label={time} key={`reservation-time-${idx}`} />
             })}
           </CellGroup>
