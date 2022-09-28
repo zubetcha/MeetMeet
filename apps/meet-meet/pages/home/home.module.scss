@@ -3,25 +3,27 @@
 
 .container {
     @include flex-direction(column, 32);
-    width: 100%;
-    min-width: 100%;
-    position: relative;
-    padding: 10px;
-    height: 100%;
-    // height: calc(100vh - 48px);
+    position: absolute;
+    top: 24px;
+    right: 40px;
+    bottom: 24px;
+    left: 24px;
 
     @include mobile-verti() {
-        // height: calc(100vh - 81px);
         @include flex-direction(column, 16);
+        top: 12px;
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
     }
 
     @include mobile() {
-    //   height: calc(100vh - 105px);
+        right: 24px;
     }
 }
 
 .checkboxFlex{
-    width: 100%;
+    // width: 100%;
     justify-content: left;
     display: flex;
     flex-wrap: wrap;

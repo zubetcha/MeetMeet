@@ -69,7 +69,6 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
   useEffect(() => {
     if (read.isSuccess) {
       const filteredList = noticeList.filter(({id}) => String(id) !== selectedId);
-      console.log(filteredList);
       handleInitState(lastEventId, filteredList)
     }
   }, [read.isSuccess]);

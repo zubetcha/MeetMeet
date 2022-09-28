@@ -3,7 +3,7 @@
 .reservationContainer{
     @include flexbox(start, start);
     overflow-y: overlay;
-    overflow-x: overlay;
+    overflow-x: hidden;
 
     &::-webkit-scrollbar {
         position: absolute;
@@ -24,7 +24,6 @@
 
     .reservationFixedSection{
         .emptySection{
-            // width: 200px;
             height:40px;
 
             @include mobile() {
@@ -34,10 +33,9 @@
     }
 
     .reservationScrollSection{
-        width: 100%;
-        min-width: 1200px;
-        overflow: hidden;
         position: relative;
+        overflow-y: hidden;
+        overflow-x: overlay;
 
         &::-webkit-scrollbar {
             position: absolute;
@@ -71,6 +69,11 @@
                 flex-direction: column;
             }
         }
+
+        // .reservationBody {
+        //     overflow-y: hidden;
+        //     overflow-x: overlay;
+        // }
     }
 }
 
@@ -120,7 +123,7 @@
 
 .slotList{
     height: 40px;
-    width: 100%;
+    // width: 100%;
     display: grid;
     // grid-template-columns: repeat(25, 50px);
 
