@@ -53,14 +53,18 @@ export const useSSE = () => {
     if (messages.length) {
       const newMessages = [...noticeData.noticeList, ...messages];
       const uniqueIdList = new Set(newMessages.map((message) => message.id));
-      const filteredList = [...uniqueIdList].map((id) => {
+      const filteredList = [...uniqueIdList]
+      .map((id) => {
         const index = newMessages.findIndex(message => message.id === id);
         if (index !== -1) {
           return newMessages[index];
         }
       })
+      .sort((a, b) => {
+        return +new Date(b.createdAt) - +new Date(a.createdAt);
+      })
 
-      setNoticeData({ ...noticeData, noticeList: [...filteredList].reverse() });
+      setNoticeData({ ...noticeData, noticeList: filteredList });
       setMessages([]);
     }
   }, [messages])

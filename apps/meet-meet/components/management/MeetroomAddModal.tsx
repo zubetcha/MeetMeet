@@ -6,6 +6,7 @@ import { availableMergeState } from "recoil/meetroom";
 import classes from "./management.module.scss";
 
 import { MeetRoom } from "graphql/meetroom/types";
+import { CLIENT_BASE_URL } from "constants/common";
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { ImagePreview } from "./ImagePreview";
@@ -42,12 +43,21 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
 
   const onClickCreate = () => {
     if (btnState === "disable") return;
-    
-    upload.mutateAsync(images).then(res => {
-      const meetroom = { ...values, images: res.data };
+
+    let meetroom = { ...values, images: [] };
+    const imagesToS3 = images.filter(image => image.url.includes(CLIENT_BASE_URL));
+
+    if (imagesToS3.length) {
+      upload.mutateAsync(images).then(res => {
+        meetroom = { ...values, images: res.data };
+        create.mutateAsync(meetroom);
+      })
+    }
+
+    else if (!imagesToS3.length) {
       create.mutateAsync(meetroom);
-    })
-  }
+    }
+  };
 
     useEffect(() => {
     const { isError, error }: { isError: boolean, error: any } = create;

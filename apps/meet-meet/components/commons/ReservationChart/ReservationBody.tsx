@@ -1,4 +1,4 @@
-import React from "react";
+import classes from "./reservation.module.scss";
 import ReservationRow from "./ReservationRow";
 import { meetRoomType, selectedDataType } from "./@types/reservationChart.types";
 interface Props {
@@ -27,25 +27,24 @@ export default function ReservationBody({
   };
 
   return (
-    <>
+    <div className={classes.reservationBody}>
       {unavailableRoomList &&
         dates?.map((date: string[], index: number) => (
-          <>
-            <div key={`reservation-row-group-${index}`}>
-              {meetingRoomList.map((room, index) => (
-                <ReservationRow
-                  key={`reservation-row-${index}`}
-                  meetingRoom={room}
-                  timeList={timeList}
-                  date={date}
-                  onChange={onChange}
-                  onClickReservedCell={onClickReservedCell}
-                  unavailableRoomList={getUnavailableRoomList(date[1], room.name)}
-                />
-              ))}
-            </div>
-          </>
-        ))}
-    </>
+          <div key={`reservation-row-group-${index}`}>
+            {meetingRoomList.map((room, index) => (
+              <ReservationRow
+                key={`reservation-row-${index}`}
+                meetingRoom={room}
+                timeList={timeList}
+                date={date}
+                onChange={onChange}
+                onClickReservedCell={onClickReservedCell}
+                unavailableRoomList={getUnavailableRoomList(date[1], room.name)}
+              />
+            ))}
+          </div>
+        ))
+      }
+    </div>
   );
 }

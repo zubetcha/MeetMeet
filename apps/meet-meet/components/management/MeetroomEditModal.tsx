@@ -6,7 +6,7 @@ import { availableMergeState } from "recoil/meetroom";
 import classes from "./management.module.scss";
 
 import { MeetRoom, MeetRoomImage, MeetRoomMergeInfo } from "graphql/meetroom/types";
-import { S3_BASE_URL } from '../../constants/common';
+import { S3_BASE_URL, CLIENT_BASE_URL } from '../../constants/common';
 
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { ImagePreview } from "./ImagePreview";
@@ -53,7 +53,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
     if (btnState === "disable") return;
 
     const newImages = images.filter(image => image.url.includes(S3_BASE_URL)).map(image => image.url);
-    const imagesToS3 = images.filter(image => image.url.includes("http://localhost:"));
+    const imagesToS3 = images.filter(image => image.url.includes(CLIENT_BASE_URL));
 
     if (imagesToS3.length) {
       upload.mutateAsync(imagesToS3)
@@ -65,6 +65,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
 
     else if (!imagesToS3.length) {
       const info = { ...values, seat: parseInt(values.seat), oldImages, newImages };
+    console.log(info)
       updateMeetroom.mutateAsync({ meetroomId: id, info });
     }
   }
@@ -100,7 +101,7 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
             <TextField name="mergeRoom" status="default">
               <TextField.Label>합칠 수 있는 회의실</TextField.Label>
               <Select isSearch defaultValue={mergeInfo?.mergeRoom?.name} onChange={onChangeMerge} style={{ width: "100%" }}>
-                {availableMergeList.map((meetroom: MeetRoom) => {
+                {availableMergeList.filter(({ id: meetroomId }) => meetroomId !== id).map((meetroom: MeetRoom) => {
                   const { id, name } = meetroom;
                   return <Select.Option key={id} id={String(id)} name={name} />;
                 })}
