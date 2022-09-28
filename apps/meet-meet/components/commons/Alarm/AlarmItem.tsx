@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Alarm } from "./Alarm.types";
 import { handleConvertDiff } from "ui/src/utils";
-
 import classes from "./alarm.module.scss";
+
+import { Alarm } from "./Alarm.types";
+import { WEEK_DAY } from "constants/date";
 import { Text, SVG, IconButton } from "ui/src/pages";
 
 interface Props {
@@ -16,6 +16,8 @@ export default function AlarmItem({ isTune, isToRead, onClickRadio, alarm }: Pro
 
   const { id, title, location, date, createdAt } = alarm;
   const diff = handleConvertDiff(+new Date() - +new Date(createdAt))
+  const [_, meetingDate, startTime, __, endTime] = date.split(" ");
+  const meetingDay = WEEK_DAY[new Date(meetingDate).getDay()];
 
   return (
     <div className={classes.alarmItem}>
@@ -26,7 +28,7 @@ export default function AlarmItem({ isTune, isToRead, onClickRadio, alarm }: Pro
       )}
       <div className={classes.notification}>
         <Text style={{ fontWeight: "bold" }}>{title}</Text>
-        <Text type="label-medium">{location}<br/>{date}</Text>
+        <Text type="label-medium" style={{ fontWeight: '500' }}>{location}<br/>일시: {meetingDate} {meetingDay}<br/>시작 시간: {startTime}<br/>종료 시간: {endTime}</Text>
         <Text type="label-small" style={{ textAlign: "end" }}>{diff} 전</Text>
       </div>
     </div>
