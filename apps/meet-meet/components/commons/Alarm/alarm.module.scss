@@ -15,6 +15,7 @@
     overflow-x:hidden;
     display: grid;
     row-gap: 10px;
+    @include scroll-bar();
 
     .readButtons_wrapper {
         @include flex-direction(row, 4);

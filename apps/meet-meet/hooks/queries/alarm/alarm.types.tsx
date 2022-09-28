@@ -1,5 +1,5 @@
 
 export interface DeviceInfo {
-  fcmToken: string;
+  fcmToken: string | null;
   device: string;
 }

@@ -43,10 +43,8 @@ const Oauth2RedirectHandler = () => {
       setCookie(REFRESH_TOKEN, refreshToken, 60 * 60 * 24)
 
       getFcmToken().then(fcmToken => {
-        if (fcmToken) {
-          const deviceInfo: DeviceInfo = { device: osName, fcmToken };
-          mutateAsync(deviceInfo);
-        }
+        const deviceInfo: DeviceInfo = { device: osName, fcmToken: fcmToken !== undefined ? fcmToken : null };
+        mutateAsync(deviceInfo);
       })
     }
     else if (!accessToken) {

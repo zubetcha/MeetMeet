@@ -24,7 +24,6 @@
 
     .reservationFixedSection{
         .emptySection{
-            // width: 200px;
             height:40px;
 
             @include mobile() {
@@ -34,9 +33,9 @@
     }
 
     .reservationScrollSection{
+        position: relative;
         overflow-y: hidden;
         overflow-x: overlay;
-        position: relative;
 
         &::-webkit-scrollbar {
             position: absolute;
@@ -70,6 +69,11 @@
                 flex-direction: column;
             }
         }
+
+        // .reservationBody {
+        //     overflow-y: hidden;
+        //     overflow-x: overlay;
+        // }
     }
 }
 
@@ -119,7 +123,7 @@
 
 .slotList{
     height: 40px;
-    width: 100%;
+    // width: 100%;
     display: grid;
     // grid-template-columns: repeat(25, 50px);
 
