@@ -6,5 +6,6 @@ export const CLIENT_URL = 'https://www.meetmeet.me'
 // export const SERVER_URL = "https://meetmeet-server-spring.eunji-jjang.com";
 
 export const isProduction = process.env.NODE_ENV === 'production';
-export const API_BASE_URL = isProduction ? SERVER_URL : SERVER_LOCAL_URL;
+// export const API_BASE_URL = isProduction ? SERVER_URL : SERVER_LOCAL_URL;
+export const API_BASE_URL = SERVER_URL;
 export const CLIENT_BASE_URL = isProduction ? CLIENT_URL : CLIENT_LOCAL_URL;
