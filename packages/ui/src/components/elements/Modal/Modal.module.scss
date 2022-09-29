@@ -29,7 +29,7 @@
   }
 
   @include mobile-verti() {
-    width: 100%;
+    // width: 100%;
     // max-width: 351px;
     height: fit-content;
     max-height: 500px;
