@@ -123,9 +123,28 @@
 
 .slotList{
     height: 40px;
-    // width: 100%;
     display: grid;
-    // grid-template-columns: repeat(25, 50px);
+
+    .cell-box {
+        
+        div {
+            @include mobile-verti(){
+                font-size: 11px;
+                justify-content: flex-start;
+                padding: 0;
+                white-space:initial;
+                line-height: 12px;
+            }
+
+            @include mobile(){
+                font-size: 11px;
+                justify-content: flex-start;
+                padding: 0;
+                white-space:initial;
+                line-height: 12px;
+            }
+        }
+    }
 
     .slotItem{
         color: #fff;
