@@ -1,6 +1,7 @@
 import classes from "./reservation.module.scss";
 import ReservationRow from "./ReservationRow";
 import { meetRoomType, selectedDataType } from "./@types/reservationChart.types";
+import { changeDateToMinute } from "ui/src/utils";
 interface Props {
   dates: string[][];
   timeList: string[];
@@ -20,7 +21,13 @@ export default function ReservationBody({
 }: Props) {
   const getUnavailableRoomList = (date: string, room: string) => {
     try {
-      return unavailableRoomList[date][room];
+      const _unavailableRoomList = unavailableRoomList[date][room].filter((selected:any) => {
+        const startTime = changeDateToMinute(selected.startTime);
+        const endTime = changeDateToMinute(selected.endTime);
+
+        return (startTime%30 === 0) && (endTime%30 === 0)
+      })
+      return _unavailableRoomList;
     } catch {
       return [];
     }
