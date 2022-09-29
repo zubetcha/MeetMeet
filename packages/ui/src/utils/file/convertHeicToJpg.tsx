@@ -1,6 +1,9 @@
 export const convertHeicToJpg = async (file: any) => {
     const heic2any = require('heic2any')
-    const isHeic = file.type.toLowerCase() === "image/heic" || file.name.toLowerCase().includes(".heic");
+    const isHeic = file.type.toLowerCase() === "image/heic"
+        || file.type.toLowerCase() === "image/heif"
+        || file.name.toLowerCase().includes("heic")
+        || file.name.toLowerCase().includes("heif");
     let newFile;
 
     if (isHeic) {
