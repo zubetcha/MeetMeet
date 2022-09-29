@@ -4,22 +4,23 @@ export const convertHeicToJpg = async (file: any) => {
     let newFile;
 
     if (isHeic) {
-        heic2any({
+        console.log('format of this image is heic')
+        const converted = await heic2any({
             blob: file,
             toType: "image/jpeg",
         })
         .then((result: any) => {
             const url = URL.createObjectURL(result as Blob);
-            const convertedFile = new File([result as Blob], file.name.split(".")[0] + "jpg",{type:"image/jpeg", lastModified:new Date().getTime()});
+            const convertedFile = new File([result as Blob], file.name.split(".")[0] + ".jpg",{type:"image/jpeg", lastModified:new Date().getTime()});
 
-            newFile =  { file: convertedFile, url };
+            return { file: convertedFile, url };
         })
         .catch((error: any) => console.log(error));
+
+        return converted
     }
     else if (!isHeic) {
         const url = URL.createObjectURL(file);
-        newFile = { file, url };
+        return { file, url };
     }
-
-    return newFile;
 }
