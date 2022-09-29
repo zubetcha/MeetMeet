@@ -184,3 +184,7 @@
     width: 271px;
   }
 }
+
+.m_iconButtonsWrapper {
+    @include flexbox(start, center);
+}

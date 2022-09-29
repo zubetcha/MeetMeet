@@ -6,7 +6,11 @@ export default function Document() {
     <Html>
       <Head>
         <meta charSet="utf-8"></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"></meta>
+        <meta name="mobile-web-app-capable" content="yes"></meta>
+        <meta name="apple-mobile-web-app-title" content="MeetMeet"></meta>
+        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
         <meta property="og:title" content="MeetMeet"></meta>
         <meta property="og:description" content="젠틀에너지 회의실 예약 관리"></meta>
         <meta name="msapplication-TileColor" content="#ffffff"></meta>
