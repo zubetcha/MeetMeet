@@ -9,8 +9,10 @@
 
 .alarmInnerContainer{
     position: relative;
-    // width: 250px;
-    height: 200px;
+    min-width: fit-content;
+    max-width: 240px;
+    min-height: fit-content;
+    max-height: 200px;
     overflow-y:auto;
     overflow-x:hidden;
     display: grid;

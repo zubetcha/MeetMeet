@@ -79,7 +79,7 @@ export const useMeetroomForm = (
       // DESCRIBE: 이미지 확장자 확인 및 heic -> jpg 변환
       const newFiles = await Promise.all(
         fileList.map((file: File) => convertHeicToJpg(file))
-      );
+      )
 
       setImages([...droppedImages, ...newFiles]);
     },

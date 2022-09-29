@@ -90,8 +90,10 @@ export const RouterGuard = ({ children }: Props) => {
         <Modal>
           <Modal.Icon name="error" color="warning" />
           <Modal.Contents>
+            <div style={{ width: '220px', display: 'flex', flexDirection: 'column', rowGap: '16px' }}>
               <Modal.Title>로그인이 만료되었습니다.</Modal.Title>
               <Modal.Description><b>{sec}초</b> 후 로그인 화면으로 이동합니다.</Modal.Description>
+            </div>
           </Modal.Contents>
         </Modal>
       )}
