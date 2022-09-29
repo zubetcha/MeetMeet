@@ -32,14 +32,9 @@ export const SideMenu = ({
       <div className={classNames(classes.m_menuContainer, isClose ? classes.close : classes.open)}>
         <div className={classes.m_menuWrapper}>
           <div className={classes.m_topBtnWrapper}>
-            <div className={classes.m_iconButtonsWrapper}>
-              <div className={classes.iconWrapper} onClick={() => setClose(!isClose)}>
-                <SVG name="menuOpened" color="primary" width="24" height="24" />
-              </div>
-              <div className={classes.iconWrapper} onClick={() => setClose(!isClose)}>
-                <SVG name="refresh" color="primary" width="24" height="24" />
-              </div>
-            </div>  
+            <div className={classes.iconWrapper} onClick={() => setClose(!isClose)}>
+              <SVG name="menuOpened" color="primary" width="24" height="24" />
+            </div>
             <Button size="medium" label="로그아웃" configuration="text" onClick={onClickLogout} />
           </div>
           <div className={classes.logoLayout}>

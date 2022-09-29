@@ -16,6 +16,11 @@
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
     // overflow: auto;
+    z-index: 1;
+
+    div {
+        z-index: 10;
+    }
 
     @include desktop()  {
         margin-left:256px;
@@ -183,8 +188,4 @@
   @include mobile-verti() {
     width: 271px;
   }
-}
-
-.m_iconButtonsWrapper {
-    @include flexbox(start, center);
 }
