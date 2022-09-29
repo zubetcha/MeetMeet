@@ -42,6 +42,14 @@ export const Navbar = ({
   userInfo
 }: NavbarProps) => {
   const { name } = userInfo;
+  const THEME_COLOR: {[key: string]: string} = {
+    light: '#FBFDF7',
+    dark: '#1A1C19'
+  };
+  const onChangeTheme = (theme: string) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    document.getElementById('theme-color')?.setAttribute('content', THEME_COLOR[theme]);
+  }
 
   return (
     <div
@@ -90,8 +98,8 @@ export const Navbar = ({
           label="화면 모드"
           onChange={(selectedIndex) => {
             selectedIndex === 0
-              ? document.documentElement.setAttribute("data-theme", "light")
-              : document.documentElement.setAttribute("data-theme", "dark");
+              ? onChangeTheme('light')
+              : onChangeTheme('dark');
           }}
         >
           <Button label="라이트" key={`button-group-라이트`} />

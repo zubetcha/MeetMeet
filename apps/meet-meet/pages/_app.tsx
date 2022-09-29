@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -11,6 +11,7 @@ import client from "../apollo-client";
 import { RecoilRoot } from "recoil";
 import { PushNotificationLayout } from "@components/commons/Layout/PushNotificationLayout";
 import { initFirebaseApp } from "@utils/firebase";
+import { THEME_COLOR } from "constants/theme";
 
 import "../styles/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
@@ -55,11 +56,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     () => debounce(setVhProperty, 300)
   , []);
 
-
   return (
     <>
       <Head>
         <title>MeetMeet</title>
+        <meta id="theme-color" name="theme-color" content={THEME_COLOR.light}></meta>
       </Head>
       
         <QueryClientProvider client={queryClient}>
