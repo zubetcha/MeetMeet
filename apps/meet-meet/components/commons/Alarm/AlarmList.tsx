@@ -5,7 +5,7 @@ import { useReadAlarm, useReadAllAlarms } from "@hooks/queries/alarm/useMutation
 
 import { Notice } from "recoil/notice";
 import classes from "./alarm.module.scss";
-import { Button, CardDepth1, IconButton, Modal } from "ui/src/pages";
+import { Button, CardDepth1, IconButton, Modal, Text } from "ui/src/pages";
 import AlarmItem from "./AlarmItem";
 
 interface Props {
@@ -21,6 +21,7 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
    }))));
   const [selectedId, setSelectedId] = useState<null | string>(null);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
+  const iconButtonProps = { configuration: "text", size: "medium", state: "default" };
   
   // DESCRIBE: 알림의 라디오 버튼 클릭 함수 
   const onClickRadio = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -91,37 +92,19 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
               : <Button label="모두 읽음" size="medium" configuration="text" onClick={() => setIsConfirmModal(true)} />
             ) : <></>}
             {noticeList.length > 0 ? (
-              <IconButton
-                configuration="text"
-                size="medium"
-                state="default"
-                icon="tune"
-                onClick={() => setIsTune(prev => !prev)}
-              />
+              <IconButton {...iconButtonProps} icon="tune" onClick={() => setIsTune(prev => !prev)} />
             ): <></>}
-            <IconButton
-              configuration="text"
-              size="medium"
-              state="default"
-              icon="settings"
-              onClick={onClickButton}
-            />
-            <IconButton
-              configuration="text"
-              size="medium"
-              state="default"
-              icon="close"
-              onClick={() => setIsOpen && setIsOpen(false)}
-            />
+            <IconButton {...iconButtonProps} icon="settings" onClick={onClickButton} />
+            <IconButton {...iconButtonProps} icon="close" onClick={() => setIsOpen && setIsOpen(false)} />
           </CardDepth1.TitleButtons>
         </CardDepth1.TitleBar>
         <CardDepth1.Contents>
           <div className={classes.alarmInnerContainer}>
-            {noticeList.map(({ title, body, createdAt, id }, i) => {
+            {noticeList.length > 0 ? noticeList.map(({ title, body, createdAt, id }, i) => {
               const [location, date] = body?.split(", ");
               const alarm = { location, date, title, id, createdAt };
               return <AlarmItem key={i} isTune={isTune} isToRead={isToRead[id]} onClickRadio={onClickRadio} alarm={alarm}/>
-            })}
+            }) : <Text>알림 내역이 없습니다.</Text>}
           </div>
         </CardDepth1.Contents>
       </CardDepth1>
