@@ -31,8 +31,8 @@ export const getFcmToken = async () => {
 
   if (storedFcmToken) return storedFcmToken;
 
-  if (!('Notification' in window)) {
-    alert("이 브라우저는 알림을 지원하지 않습니다.")
+  if (window && !('Notification' in window)) {
+    alert("이 브라우저는 푸시 알림을 지원하지 않습니다.")
     return;
   } else if (Notification.permission === 'granted') {
     try {

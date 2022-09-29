@@ -1,0 +1,15 @@
+@import "ui/src/styles/variables";
+@import "ui/src/styles/utils";
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.container {
+  padding: 24px 0 0;
+  svg {
+    animation: spin 0.8s infinite linear;
+  }
+}

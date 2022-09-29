@@ -65,7 +65,6 @@ export const MeetroomEditModal = ({setIsEditModal, meetroom, imageList, mergeInf
 
     else if (!imagesToS3.length) {
       const info = { ...values, seat: parseInt(values.seat), oldImages, newImages };
-    console.log(info)
       updateMeetroom.mutateAsync({ meetroomId: id, info });
     }
   }
