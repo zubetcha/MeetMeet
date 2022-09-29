@@ -63,10 +63,11 @@ export default function ReservationRow({
                   widthIndex
                 ] || { department: "", host: "" };
                 return (
-                  <span
+                  <div
                     onClick={() =>
                       onClickDisabledCell(unavailableRoomList[widthIndex])
                     }
+                    className={classes['cell-box']}
                   >
                     <Cell
                       label={`${department} (${host})`}
@@ -82,7 +83,7 @@ export default function ReservationRow({
                         onClickDisabledCell(unavailableRoomList[widthIndex])
                       }
                     />
-                  </span>
+                  </div>
                 );
               }
               return (
