@@ -60,7 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>MeetMeet</title>
-        <meta id="theme-color" name="theme-color" content={THEME_COLOR.light}></meta>
+        <meta name="theme-color" content={THEME_COLOR.light}></meta>
       </Head>
       
         <QueryClientProvider client={queryClient}>

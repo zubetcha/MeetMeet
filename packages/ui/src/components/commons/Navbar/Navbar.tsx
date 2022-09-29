@@ -48,7 +48,7 @@ export const Navbar = ({
   };
   const onChangeTheme = (theme: string) => {
     document.documentElement.setAttribute("data-theme", theme);
-    document.getElementById('theme-color')?.setAttribute('content', THEME_COLOR[theme]);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[theme]);
   }
 
   return (
