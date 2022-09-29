@@ -4,7 +4,6 @@ export const convertHeicToJpg = async (file: any) => {
         || file.type.toLowerCase() === "image/heif"
         || file.name.toLowerCase().includes("heic")
         || file.name.toLowerCase().includes("heif");
-    let newFile;
 
     if (isHeic) {
         console.log('format of this image is heic')
