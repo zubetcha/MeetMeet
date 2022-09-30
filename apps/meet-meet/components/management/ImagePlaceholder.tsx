@@ -1,8 +1,15 @@
+import { useState } from "react";
 import classNames from "classnames";
 import classes from "./management.module.scss";
 import { SVG } from "ui/src/pages"
 
 export const ImagePlaceholder = ({ onChange }: Props) => {
+  const [fileValue, setFileValue] = useState('')
+  console.log(onChange)
+  const onClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    console.log(e.target)
+    setFileValue('')
+  }
 
   if (onChange) {
     return (
@@ -11,7 +18,7 @@ export const ImagePlaceholder = ({ onChange }: Props) => {
         <label className={classNames(classes["imagePlaceholder-wrapper"], classes.onDrop)} htmlFor="image-upload">
           <SVG width="32px" height="32px" name="add" />
         </label>
-        <input className={classes.input} type="file" id="image-upload" accept=".jpg, .jpeg, .png, .heic" multiple onChange={(e) => onChange && onChange(e)}/>
+        <input className={classes.input} onClick={(e) => onClick(e)} type="file" id="image-upload" value={fileValue} accept=".jpg, .jpeg, .png, .heic" multiple onChange={(e) => onChange && onChange(e)}/>
       </div>
     </>
     )

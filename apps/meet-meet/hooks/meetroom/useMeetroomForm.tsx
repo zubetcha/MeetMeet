@@ -22,6 +22,8 @@ export const useMeetroomForm = (
   const [isSameName, setIsSameName] = useState(false);
   const [btnState, setBtnState] = useState<StateType>("disable");
 
+  console.log(images)
+
   const onChangeMerge = (e: SelectItemType) => {
     setValues({ ...values, mergeRoomId: parseInt(e.id) });
   };
@@ -82,6 +84,7 @@ export const useMeetroomForm = (
       )
 
       setImages([...droppedImages, ...newFiles]);
+      e.target.files = null;
     },
     [images]
   );

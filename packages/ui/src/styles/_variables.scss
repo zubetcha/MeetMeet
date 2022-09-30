@@ -218,3 +218,14 @@ $flex-map: (
   stretch: stretch,
   center: center,
 );
+
+// DESCRIBE: z-index
+$z-index-nav-bar: 100;
+$z-index-header: 9600;
+$z-index-alarm: 9700;
+$z-index-calendar-outer: 9800;
+$z-index-calendar-container: 9900;
+$z-index-side-bar-overlay: 10000;
+$z-index-side-bar: 10100;
+$z-index-modal-overlay: 11000;
+$z-index-modal-container: 11100;

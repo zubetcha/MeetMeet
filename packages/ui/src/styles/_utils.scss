@@ -338,8 +338,11 @@
 @mixin scroll-bar() {
   &::-webkit-scrollbar {
     width: 10px;
-    // background-color: transparent;
   }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+}
 
   &::-webkit-scrollbar-thumb {
     background: var(--color-onSurface-opacity-16);
