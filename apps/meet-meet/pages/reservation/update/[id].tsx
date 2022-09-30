@@ -26,7 +26,7 @@ const ReservationUpdatePage = () => {
 
     return (
         <div className={classes["pageContainer"]} >
-            <Reservation reservationInfo={reservationInfo?.reservationById} />
+            <Reservation reservationId={parseInt(id as string)} />
         </div>
     )
 }

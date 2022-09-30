@@ -39,6 +39,11 @@ export function SelectMain({
     onChange(selected);
   }, [selected]);
 
+  //overflow-y auto to bottom
+  useEffect(() => {
+      ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [isOpen])
+
   const isShowTriggerButton = !isOpen || (isOpen && !isSearch);
   const isShowSearchField = isOpen && isSearch;
 
