@@ -17,9 +17,10 @@
 }
 
 .userForm_wrapper {
-    @include mobile-verti() {
-        width: 240px;
-    }
+    width: 100%;
+    // @include mobile-verti() {
+    //     width: 240px;
+    // }
     @include mobile() {
         width: 360px;
     }

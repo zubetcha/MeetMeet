@@ -22,6 +22,8 @@ export const useMeetroomForm = (
   const [isSameName, setIsSameName] = useState(false);
   const [btnState, setBtnState] = useState<StateType>("disable");
 
+  console.log(images)
+
   const onChangeMerge = (e: SelectItemType) => {
     setValues({ ...values, mergeRoomId: parseInt(e.id) });
   };
@@ -43,6 +45,7 @@ export const useMeetroomForm = (
 
   const onDropImages = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.target.value = '';
       const droppedImages = images.filter((image) => image.url !== "");
       const { files } = e.target;
       const fileList = Object.values(files as FileList);
