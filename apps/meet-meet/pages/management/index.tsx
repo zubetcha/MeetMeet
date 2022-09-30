@@ -15,13 +15,7 @@ const ManagementPage = () => {
   return (
     <>
       <div className={classes.container}>
-        <Text
-          type="headline-large"
-          color="primary"
-          style={{ fontWeight: "bold" }}
-        >
-          젠틀에너지 회의실 관리
-        </Text>
+        <p className={classes.title}>젠틀에너지 회의실 관리</p>
         <div className={classes["meetroomCard-container"]}>
           <CardDepth1>
             <CardDepth1.TitleBar>

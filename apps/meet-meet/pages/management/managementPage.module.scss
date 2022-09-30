@@ -5,7 +5,16 @@
   @include flex-direction(column, 16);
   @include mobile-verti() {
     @include flex-direction(column, 8);
-  }  
+  }
+  .title {
+    @include font-style(headline-large, primary, 700);
+    @include mobile() {
+        @include font-style(headline-medium, primary, 700);
+    };
+    @include mobile-verti() {
+        @include font-style(headline-small, primary, 700);
+    }
+  }
 
   .button-wrapper {
     @include flexbox(end, center);
