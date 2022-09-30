@@ -39,6 +39,16 @@
     position: relative;
     @include flex-direction(column, 16);
 
+    .title {
+        @include font-style(headline-large, primary, 700);
+        @include mobile() {
+            @include font-style(headline-medium, primary, 700);
+        };
+        @include mobile-verti() {
+            @include font-style(headline-small, primary, 700);
+        }
+    }
+
     @include mobile-verti() {
         @include flex-direction(column, 8);
     }    

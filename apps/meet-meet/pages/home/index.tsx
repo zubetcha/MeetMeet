@@ -80,13 +80,7 @@ const Home: NextPage = () => {
   return (
     <div className={classes.container}>
       <div className={classes.title_wrapper}>
-        <Text
-          type="headline-large"
-          color="primary"
-          style={{ fontWeight: "bold" }}
-        >
-          젠틀에너지 회의실 예약 현황
-        </Text>
+        <p className={classes.title}>젠틀에너지 회의실 예약 현황</p>
         <Button
           configuration="outlined"
           size="large"
