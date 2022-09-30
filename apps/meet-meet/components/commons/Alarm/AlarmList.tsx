@@ -57,6 +57,7 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
   };
 
   const onClickReadAll = () => {
+    console.log('read all')
     readAll.mutateAsync();
   }
 
@@ -89,7 +90,7 @@ export default function AlarmList({ onClickButton, setIsOpen }: Props) {
           <CardDepth1.TitleButtons>
             {isTune ? (
               selectedId ? <Button label="읽음" size="medium" configuration="text" onClick={onClickRead} />
-              : <Button label="모두 읽음" size="medium" configuration="text" onClick={() => setIsConfirmModal(true)} />
+              : <Button label="모두 읽음" size="medium" configuration="text" onClick={onClickReadAll} />
             ) : <></>}
             {noticeList.length > 0 ? (
               <IconButton {...iconButtonProps} icon="tune" onClick={() => setIsTune(prev => !prev)} />
