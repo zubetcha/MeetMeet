@@ -45,7 +45,6 @@ export const useMeetroomForm = (
 
   const onDropImages = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
-      e.target.value = '';
       const droppedImages = images.filter((image) => image.url !== "");
       const { files } = e.target;
       const fileList = Object.values(files as FileList);
@@ -85,6 +84,7 @@ export const useMeetroomForm = (
       )
 
       setImages([...droppedImages, ...newFiles]);
+      e.target.files = null;
     },
     [images]
   );
