@@ -41,7 +41,9 @@ export function SelectMain({
 
   //overflow-y auto to bottom
   useEffect(() => {
+    if(isOpen){
       ref.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [isOpen])
 
   const isShowTriggerButton = !isOpen || (isOpen && !isSearch);
