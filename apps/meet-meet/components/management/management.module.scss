@@ -94,6 +94,9 @@
   height: 0;
   overflow: hidden;
   padding-bottom: 100%;
+  @include mobile-verti() {
+    border-radius: 8px;
+  }
   
   .preview-wrapper {
     @include flexbox(center, center);
@@ -112,6 +115,11 @@
 
     .preview {
       border-radius: 16px;
+
+      @include mobile-verti() {
+        border-radius: 8px;
+      }
+      
     }
   }
 
@@ -128,7 +136,7 @@
   @include flex-direction(column, 40);
   width: 480px;
   @include mobile-verti() {
-    width: 271px;
+    width: 100%;
     padding: 24px 2px 0;
   }
   @include mobile() {

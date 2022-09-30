@@ -16,11 +16,6 @@
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
     // overflow: auto;
-    z-index: 1;
-
-    div {
-        z-index: 10;
-    }
 
     @include desktop()  {
         margin-left:256px;
@@ -69,7 +64,7 @@
     right: 0;
     background-color: var(--color-background);
     border-bottom: 1px solid var(--color-outline-opacity-16);
-    z-index: 10000;
+    z-index: $z-index-header;
     @include flexbox(between, center);
 
     .rightBtnBox {
@@ -102,7 +97,7 @@
     position: fixed;
     top: 62px;
     right: 16px;
-    z-index: 9000;
+    z-index: $z-index-alarm;
 
     @include mobile-verti() {
         right: 12px;
@@ -118,7 +113,7 @@
     left: 0;
     right: 0;
     background-color: var(--color-background);
-    z-index: 10001;
+    z-index: $z-index-side-bar;
     -webkit-transition: transform 0.3s ease-in-out;
 	-moz-transition: transform 0.3s ease-in-out;
 	-o-transition: transform 0.3s ease-in-out;
@@ -175,7 +170,7 @@
     right: 0;
     bottom: 0;
     background-color: var(--color-onSurface-opacity-38);
-    z-index: 10000;
+    z-index: $z-index-side-bar-overlay;
     transition: background-color 0.5s ease;
 }
 
@@ -185,7 +180,5 @@
 }
 
 .modal-contents-wrapper {
-  @include mobile-verti() {
     width: 271px;
-  }
 }

@@ -22,7 +22,7 @@ import { noticeStorage } from "@utils/localforage";
 import { removeCookie } from "@utils/cookies";
 
 interface LayoutProps {
-  children: JSX.Element[] | JSX.Element;
+  children: JSX.Element;
 }
 
 export const Layout = ({ children }: LayoutProps) => {
@@ -52,7 +52,6 @@ export const Layout = ({ children }: LayoutProps) => {
   if (isMobile) {
     return (
       <>
-        <PullToRefresh onRefresh={handleRefresh} pullDownThreshold={65} pullingContent={<></>} refreshingContent={<LoadingSpinner />}>
           <div className={classes.layoutContainer}>
             <Header
               isClose={isMenuClose}
@@ -68,10 +67,11 @@ export const Layout = ({ children }: LayoutProps) => {
                 isClose ? classes.close : "",
               )}
             >
-              {children}
+              <PullToRefresh onRefresh={handleRefresh} pullDownThreshold={65} pullingContent={<></>} refreshingContent={<LoadingSpinner />}>
+                {children}
+              </PullToRefresh>
             </div>
           </div>
-        </PullToRefresh>
         <div className={!isMenuClose ? classes.overlay : classes.transparent} onClick={() => setIsMenuClose(true)}></div>
         {isMyPageModal && <MyPageModal isModal={isMyPageModal} setIsModal={setIsMyPageModal} />}
         {isLogoutModal && (
