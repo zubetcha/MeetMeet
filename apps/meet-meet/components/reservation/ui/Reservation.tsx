@@ -10,12 +10,12 @@ import { ConfirmModal } from './ConfirmModal'
 import { ReservationInfoType } from 'graphql/reservation/types'
 
 interface Props {
-  reservationId?: number
+  reservationInfo?: ReservationInfoType
 }
 
 
 export const Reservation = ({
-  reservationId
+  reservationInfo
 }:Props) => {
 
   const {
@@ -43,12 +43,12 @@ export const Reservation = ({
     setIsModal,
     reservedInfo,
     updateReservation
-  } = useReservation({reservationId : reservationId ? reservationId : -1});
+  } = useReservation({reservationInfo});
 
 
   return (
     <div className={classes["page-container"]} >
-      <Text type={'title-large'} style={{fontWeight: 'bold', height:'fit-content' }} >{reservationId ? '회의 수정' : '회의 예약'}</Text>
+      <Text type={'title-large'} style={{fontWeight: 'bold', height:'fit-content' }} >{reservationInfo ? '회의 수정' : '회의 예약'}</Text>
 
       <div className={classes["page-body"]} >
         <SelectMeetingRoom
@@ -87,10 +87,10 @@ export const Reservation = ({
 
         <div className={classes['button-wrapper']} >
           <Button
-            label={reservationId ? '회의 수정하기' : '회의 예약하기'}
+            label={reservationInfo ? '회의 수정하기' : '회의 예약하기'}
             configuration='filled'
             state={btnState ? 'default' : 'disable'}
-            onClick={reservationId ? updateReservation : submitReservation}
+            onClick={reservationInfo ? updateReservation : submitReservation}
           />
         </div>
       {(isModal && reservedInfo) &&

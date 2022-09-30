@@ -13,10 +13,8 @@ export const useGetReservationByRoomAndDate = (idList:number[], date:string) => 
 }
 
 export const useGetReservationById = (id:number) => {
-  console.log(id);
   const result = useQueryGql<ReservationById>(GET_RESERVATION_BY_ID, {
-    variables: {id: id},
-    fetchPolicy: 'network-only'
+    variables: {id: id}
   })
 
   return { ...result }
