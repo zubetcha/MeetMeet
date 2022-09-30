@@ -124,6 +124,7 @@ export const SelectMemeber = ({
                   id='meetingRoomMerged-checkbox'
                   checked={isChecked}
                   onChange={() => setIsChecked(!isChecked)}
+                  forceClick={true}
                 >
                   <Checkbox.Label>{`${getDepartmentName()} 전원 선택 ${isChecked ? '해제' : ''}`}</Checkbox.Label>
                 </Checkbox>

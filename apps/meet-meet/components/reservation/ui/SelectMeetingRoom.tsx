@@ -67,6 +67,7 @@ export const SelectMeetingRoom = ({
                 name="함께 사용할 회의실"
                 id='meetingRoomMerged-checkbox'
                 checked={isChecked}
+                forceClick={true}
                 onChange={() => {
                   router.push({
                     query: {
