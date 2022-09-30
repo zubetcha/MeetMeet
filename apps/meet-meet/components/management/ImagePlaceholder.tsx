@@ -5,9 +5,7 @@ import { SVG } from "ui/src/pages"
 
 export const ImagePlaceholder = ({ onChange }: Props) => {
   const [fileValue, setFileValue] = useState('')
-  console.log(onChange)
   const onClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    console.log(e.target)
     setFileValue('')
   }
 
