@@ -41,6 +41,8 @@ export const MeetroomAddModal = ({setIsAddModal}: Props) => {
     isSameName
   } = useMeetroomForm(initialValues, initialImages);
 
+  console.log(images)
+
   const onClickCreate = () => {
     if (btnState === "disable") return;
 
