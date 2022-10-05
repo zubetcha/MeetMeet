@@ -28,6 +28,7 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "canvas": "^2.9.0",
     "classnames": "^2.3.1",
+    "compressorjs": "^1.1.1",
     "cookie": "^0.5.0",
     "echarts": "^5.3.2",
     "echarts-for-react": "^3.0.2",
