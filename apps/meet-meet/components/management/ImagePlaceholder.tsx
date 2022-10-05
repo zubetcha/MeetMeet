@@ -9,6 +9,8 @@ export const ImagePlaceholder = ({ onChange }: Props) => {
     setFileValue('')
   }
 
+  console.log(onChange)
+
   if (onChange) {
     return (
     <>
