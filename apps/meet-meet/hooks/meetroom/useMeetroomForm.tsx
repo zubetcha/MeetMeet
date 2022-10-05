@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent, useCallback } from "react";
+import Compressor from 'compressorjs';
 import { checkBiteValid, convertHeicToJpg } from "ui/src/utils";
 
 import { SelectItemType } from "ui/src/components/elements/Select/@types/select.types";
@@ -50,6 +51,8 @@ export const useMeetroomForm = (
       const fileList = Object.values(files as FileList);
       let overSizeFlag = false;
 
+      console.log(fileList)
+
       // DESCRIBE: 파일 개수 3개 제한
       if (droppedImages.length + fileList.length > 3) {
         console.log("이미지 개수 3개 넘음");
@@ -63,7 +66,7 @@ export const useMeetroomForm = (
 
       // DESCRIBE: 이미지 크기 확인
       fileList.forEach((file) => {
-        const isOver = checkBiteValid(file.size, "MB", 10);
+        const isOver = checkBiteValid(file.size, "MB", 5);
 
         if (isOver) {
           overSizeFlag = true;
@@ -83,11 +86,32 @@ export const useMeetroomForm = (
         fileList.map((file: File) => convertHeicToJpg(file))
       )
 
-      setImages([...droppedImages, ...newFiles]);
-      e.target.files = null;
+      // DESCRIBE: 이미지 용량 압축 및 프리뷰 url 생성 
+      newFiles.forEach(file => {
+        new Compressor(file, {
+          quality: 0.8,
+          width: 300,
+          height: 300,
+          resize: 'cover',
+          success: (result: File) => {
+            const resized = new File([result], result.name, { type: result.type });
+
+            setImages(prev => {
+              const dropped = prev.filter((image) => image.url !== "");
+              return [...dropped, { file: resized, url: URL.createObjectURL(result) }]
+            })
+            e.target.files = null;
+          },
+          error: (error) => {
+            console.log('image resizing', error);
+          } 
+        })
+      })
     },
     [images]
   );
+
+
 
   // DESCRIBE: 언마운트 시 상태 초기화 및 객체 url 메모리 해제
   const clearStates = () => {
