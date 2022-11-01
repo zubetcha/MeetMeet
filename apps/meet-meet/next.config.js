@@ -1,24 +1,22 @@
 /** @type {import('next').NextConfig} */
-const path = require("path");
-const withPWA = require("next-pwa");
-const withPlugins = require("next-compose-plugins");
-const runtimeCaching = require("next-pwa/cache");
-const withTM = require("next-transpile-modules")(["ui"]);
+const path = require('path');
+const withPWA = require('next-pwa');
+const withPlugins = require('next-compose-plugins');
+const runtimeCaching = require('next-pwa/cache');
+const withTM = require('next-transpile-modules')(['ui']);
 
-const isProduction = process.env.NODE_ENV === "production";
-const productionURL = "https://www.pov.dev.factoroid.com/";
+const isProduction = process.env.NODE_ENV === 'production';
 
 const config = {
-  basePath: "",
+  basePath: '',
   trailingSlash: false,
-  // DESCRIBE: path isProduction일 경우 아닐경우 url 분리
   images: {
-    loader: "akamai",
-    path: "",
-    domains: ["localhost", "https://s3.ap-northeast-2.amazonaws.com/"],
+    loader: 'akamai',
+    path: '',
+    domains: ['localhost', 'https://s3.ap-northeast-2.amazonaws.com/'],
   },
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
+    includePaths: [path.join(__dirname, 'styles')],
     reactStrictMode: true,
   },
   env: {
@@ -32,28 +30,19 @@ const config = {
     FIREBASE_VAPID_KEY: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
     SERVER_BASE_URL: process.env.NEXT_PUBLIC_SERVER_BASE_URL,
   },
-  target: "experimental-serverless-trace",
+  target: 'experimental-serverless-trace',
   eslint: {
-    dirs: ["pages", "components", "hooks", "shared", "store", "types"],
+    dirs: ['pages', 'components', 'hooks', 'shared', 'store', 'types'],
   },
   compiler: isProduction && {
     removeConsole: {
       exclude: ['error'],
     },
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/:path*',
-  //       destination: 'http://localhost:8001/:path*',
-  //       basePath: false,
-  //     },
-  //   ]
-  // },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"],
+      use: ['@svgr/webpack'],
     });
 
     return config;
@@ -66,12 +55,12 @@ module.exports = withPlugins(
     withPWA,
     {
       pwa: {
-        dest: "public",
+        dest: 'public',
         register: true,
         skipWaiting: true,
         runtimeCaching,
         sw: 'firebase-messaging-sw.js',
-        disable: process.env.NODE_ENV === "development",
+        disable: process.env.NODE_ENV === 'development',
       },
     },
   ],
